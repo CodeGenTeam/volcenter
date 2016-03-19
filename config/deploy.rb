@@ -8,7 +8,7 @@ require 'mina/git'
 set :term_mode, nil
 set :domain, 'volcenter.ru'
 set :deploy_to, '/www/volcenter'
-set :repository, 'git@bitbucket.org:team174/volcenter.git'
+set :repository, 'git@gitlab.com:team174/volcenter.git'
 set :branch, 'master'
 
 # They will be linked in the 'deploy:link_shared_paths' step.
