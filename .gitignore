@@ -1,9 +1,11 @@
+/vendor/
 /node_modules
+/public/storage
 Homestead.yaml
 Homestead.json
+*.iml
+.idea/
+*.ipr
+*.iws
 .env
-.idea
 _ide_helper.php
-releases
-storage
-vendor
