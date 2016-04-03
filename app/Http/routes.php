@@ -2,20 +2,53 @@
 
 Route::get('/', function () {
     return view('index');
+    //Auth::login($user);
 });
+
+Route::get('/events', function () {
+    return view('events');
+});
+
+Route::get('/event/{id}', function ($id) {
+    return View::make('event', [
+        'id' => $id
+    ]);
+});
+
+// only admin
+Route::get('/createEvent', function () {
+    return view('createEvent');
+});
+
+// only auth users
+Route::get('/settings', function () {
+    return view('settings');
+});
+
+//
+Route::get('/exit', function () {
+    Auth::logout();
+    return redirect('/');
+});
+
+//user profile
+Route::get('/user/{id}', function($id) { ////'Auth\AuthController@postRegister');
+    return View::make('user', [
+        'id' => $id
+    ]);
+});
+
 
 Route::group(['middleware' => 'web'], function () {
 
-    // добавляем стандартные страницы индентификации пользователей
     Route::auth();
 
-    /*
-     * Для входа на следующие страницы потребуется войти
-     */
     Route::group(['middleware' => 'auth'], function () {
 
         Route::get('/home', function () {
             return view('home');
         });
+
+
     });
 });
