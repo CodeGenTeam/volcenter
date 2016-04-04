@@ -1,82 +1,77 @@
-@extends('layouts.app')
+@extends('layouts.app',  array(
+    'title'=>'Центр волонтеров Южного Урала | Регистрация',
+    'header'=> 'header-reg'
+))
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
-                        {!! csrf_field() !!}
+    <div id="admin-wrapper">
+        <h2>Регистрация</h2>
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Name</label>
+        <div id="events-wrapepr" ng-controller="DatepickerCtrl">
+            <form class="form reg" name="form1">
 
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="name" value="{{ old('name') }}">
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input type="email" class="form-control" name="email" value="{{ old('email') }}">
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input type="password" class="form-control" name="password">
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input type="password" class="form-control" name="password_confirmation">
-
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-user"></i>Register
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                <div ng-class="{ 'has-error' : form1.login.$invalid && !form1.login.$pristine }">
+                    <label>Логин</label>
+                    <input class="form-control input1" ng-model="user.login" name="login"
+                           ng-minlength="3" ng-maxlength="15" required >
+                    <p ng-show="form1.login.$error.minlength" class="help-block">Имя слишком короткое</p>
+                    <p ng-show="form1.login.$error.maxlength" class="help-block">Имя слишком длинное</p>
                 </div>
-            </div>
+
+                <div ng-class="{ 'has-error' : form1.email.$invalid && !form1.email.$pristine }">
+                    <label>Почта</label>
+                    <input class="form-control input1" type="email"
+                           name="email" ng-model="user.email" >
+                    <p ng-show="form1.email.$invalid && !form1.email.$pristine"
+                       class="help-block">Введите корректный email</p>
+                </div>
+
+                <label>Дата рождения</label>
+                <div class="form-group ">
+                    <div class="col-xs-4 data-1">
+                        <select class=" margin-bot form-control" ng-model="dates.days.selected"
+                                ng-options="o as o for o in dates.days.options"></select>
+                    </div>
+
+                    <div class="col-xs-4 data-1">
+                        <select class=" margin-bot form-control" ng-model="dates.months.selected"
+                                ng-options="o as o for o in dates.months.options"></select>
+                    </div>
+
+                    <div class="col-xs-4 data-1">
+                        <select class=" margin-bot form-control" ng-model="dates.years.selected"
+                                ng-options="o as o for o in dates.years.options"></select>
+                    </div>
+                </div>
+                <!--
+                <div class="form-group">
+                    <input type="date" class="form-control col-xs-2" ng-model="user.data">
+                </div>-->
+
+                <label>Телефон</label>
+                <input class="form-control input1" type="tel" ng-model="user.mobile" required>
+
+                <label>Имя</label>
+                <input class="form-control input1" ng-model="user.name1" required>
+
+                <label>Фамилия</label>
+                <input class="form-control input1" ng-model="user.name2" required>
+
+                <label>Отчество</label>
+                <input class="form-control input1" ng-model="user.name3" required>
+
+                <label>Придумайте пароль</label>
+                <input type="password" class="form-control input1" ng-model="user.password"
+                       name="password" ng-minlength="7"  required>
+                <p ng-show="form1.password.$error.minlength" class="help-block">Пароль слишком короткий</p>
+
+                <input class="button button-color-2 input-button" type="submit"
+                       ng-click="checkData()" ng-disabled="form1.$invalid">
+
+            </form>
         </div>
+
     </div>
-</div>
+    <script src="<?=asset('js/controllers/DatepickerCtrl.js')?>"></script>
+    <script src="<?=asset('js/lib/angular-animate.js')?>"></script>
 @endsection
