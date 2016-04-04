@@ -43,6 +43,10 @@
                                 ng-options="o as o for o in dates.years.options"></select>
                     </div>
                 </div>
+                <!--
+                <div class="form-group">
+                    <input type="date" class="form-control col-xs-2" ng-model="user.data">
+                </div>-->
 
                 <label>Телефон</label>
                 <input class="form-control input1" type="tel" ng-model="user.mobile" required>
@@ -56,7 +60,7 @@
                 <label>Отчество</label>
                 <input class="form-control input1" ng-model="user.name3" required>
 
-                <label>Пароль</label>
+                <label>Придумайте пароль</label>
                 <input type="password" class="form-control input1" ng-model="user.password"
                        name="password" ng-minlength="7"  required>
                 <p ng-show="form1.password.$error.minlength" class="help-block">Пароль слишком короткий</p>
