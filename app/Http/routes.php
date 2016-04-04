@@ -4,6 +4,9 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/list', 'EventController@index');
+Route::get('/list{page}', 'EventController@page')->where(['page' => '\d+']);
+
 Route::group(['middleware' => 'web'], function () {
 
     // добавляем стандартные страницы индентификации пользователей
