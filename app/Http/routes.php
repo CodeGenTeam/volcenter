@@ -38,6 +38,9 @@ Route::get('/user/{id}', function($id) { ////'Auth\AuthController@postRegister')
     ]);
 });
 
+Route::get('/list', 'EventController@index');
+Route::get('/lol', 'EventController@lol');
+Route::get('/list{page}', 'EventController@page')->where(['page' => '\d+']);
 
 Route::group(['middleware' => 'web'], function () {
 
