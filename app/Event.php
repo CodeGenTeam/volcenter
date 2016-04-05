@@ -8,6 +8,7 @@ use DB;
 class Event extends Model
 {
 
+    protected $table = "events_types";
     private $foreign = [
         'event_type' => 'events_types.id'
     ];
@@ -21,9 +22,9 @@ class Event extends Model
             if (count($split) == 1) {
                 return DB::table($split[0]);
             } elseif (count($split) == 2) {
-                return DB::table($split[0])->where($split[1], parent::__get($key))->first();
+                return Event_type::all()->where('id', parent::__get($key))->first();
             } else {
-                return DB::table($split[0])->where($split[1], parent::__get($key))->select($split[2])->first()->{$split[2]};
+                return Event_type::all($split[2])->where('id', parent::__get($key))->first()->{$split[2]};
             }
         }
     }
