@@ -20,9 +20,9 @@ class Study extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id'); // пользователь
             $table->string('place_name'); // название образов. учреждения
             $table->timestamp('time_start'); // время начала
-            $table->timestamp('time_end'); // время окончания
             $table->timestamp('time_end'); // время окончания
             $table->timestamp('group'); // класс(школа) или группа(универ)
         });

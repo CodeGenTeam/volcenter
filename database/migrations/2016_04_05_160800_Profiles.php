@@ -22,7 +22,7 @@ class Profiles extends Migration
             $table->increments('id');
             $table->integer('user_id'); // пользователь
             $table->integer('profile_type_id'); // тип добавляемого профиля (телефон, соц. сеть vk, facebook..)
-            $table->string('profile_type_id'); // строка профиля(ссылка, номер телефона..)
+            $table->string('link'); // строка профиля(ссылка, номер телефона..)
         });
     }
 

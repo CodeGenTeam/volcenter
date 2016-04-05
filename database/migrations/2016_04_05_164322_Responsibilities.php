@@ -18,7 +18,6 @@ class Responsibilities extends Migration
             $table->increments('id');
             $table->string('position'); // название позиции (аташе, team leader, логистика..)
             $table->string('task'); // описание задачи позиции
-            $table->string('position'); // описание задачи позиции
             $table->string('count'); // требуемое кол-во волонтеров
         });
     }
