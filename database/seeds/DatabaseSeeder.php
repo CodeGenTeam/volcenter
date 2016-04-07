@@ -11,11 +11,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // Event types
+        foreach (
+            ['myevent' => 2, 'someevent' => 2, 'omgevent' => 1, 'test1' => 3, 'test2' => 3] as
+            $id => $name
+        ) DB::table('events_types')->insert(['id' => $id, 'name' => $name]);
 
-        $Sevents = ['myevent' => 2, 'someevent' => 2, 'omgevent' => 1, 'pizdes' => 3, 'test' => 3];
-        $Seventt = [1 => 'puck', 2 => 'hh', 3 => 'mocha'];
+        // Test events
+        foreach (
+            ['myevent' => 2, 'someevent' => 2, 'omgevent' => 1, 'eeevent' => 3, 'test' => 3] as
+            $name => $id
+        ) DB::table('events')->insert(['name' => $name, 'event_type' => $id]);
 
-        foreach ($Seventt as $id => $name) DB::table('events_types')->insert(['id' => $id, 'name' => $name]);
-        foreach ($Sevents as $name => $id) DB::table('events')->insert(['name' => $name, 'event_type' => $id]);
+        // Application types
+        foreach (
+            [1 => 'inwait', 2 => 'rejected', 3 => 'reserved',
+                4 => 'accepted', 5 => 'refuse', 6 => 'leave'] as
+            $id => $name
+        ) DB::table('Statuses')->insert(['id' => $id, 'name' => $name]);
     }
 }
