@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Event_type extends Model
 {
     protected $table = "events_types";
-    protected $fillable = ['id', 'name'];
+
+    function events() {
+        return $this->hasMany('App\Event', 'event_type', 'id');
+    }
 }
