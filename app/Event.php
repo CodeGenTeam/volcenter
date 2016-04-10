@@ -3,29 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use DB;
 
-class Event extends Model
-{
+class Event extends Model {
 
-    protected $table = "events_types";
-    private $foreign = [
-        'event_type' => 'events_types.id'
+    protected $table = "events";
+    protected $hidden = [
+        'id', 'event_start', 'event_end', 'event_type'
     ];
+    protected $appends = ['type'];
 
-    public function __get($key)
-    {
-        if (!array_key_exists($key, $this->foreign)) {
-            return $this->getAttribute($key);
-        } else {
-            $split = explode('.', $this->foreign[$key]);
-            if (count($split) == 1) {
-                return DB::table($split[0]);
-            } elseif (count($split) == 2) {
-                return Event_type::all()->where('id', parent::__get($key))->first();
-            } else {
-                return Event_type::all($split[2])->where('id', parent::__get($key))->first()->{$split[2]};
-            }
-        }
+    public function getTypeAttribute() {
+        return $this->type()->firstOrFail()->name;
+    }
+
+    public function type() {
+        return $this->hasOne('App\Event_type', 'id', 'event_type');
     }
 }
