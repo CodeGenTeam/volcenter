@@ -24,7 +24,7 @@ class ApplicationsController extends Controller {
         if (!is_null($id)) $data['user_id'] = $id;
         $val = Validator::make($data, [
             'user_id' => 'required|exists:users,id', 'event_id' => 'required|exists:events,id',
-            'status_id' => 'required|numeric'
+            'status_id' => 'required|exists:statuses,id'
         ]);
         if ($val->fails()) return Response::json(['success' => false, 'error' => $val->errors()->all()]);
         Applications::create([
@@ -37,6 +37,10 @@ class ApplicationsController extends Controller {
         $u = Applications::find($id);
         if (is_null($u)) return ['success' => false, 'error' => 'user not found'];
         // todo запилить разрешения
+        $val = Validator::make($request->all(), [
+            'status_id' => 'exists:statuses,id'
+        ]);
+        if ($val->fails()) return Response::json(['success' => false, 'error' => $val->errors()->all()]);
         $updated = [];
         foreach ($request->all() as $key => $value) {
             if (in_array($key, $this->upgradeableUserFields)) {

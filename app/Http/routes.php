@@ -2,7 +2,8 @@
 Route::group(['middleware' => 'cors'], function() {
     Route::get('/user/logout', 'UserController@logout');
     Route::get('/user/login', 'UserController@login');
-    Route::resource('/user', 'UserController', ['only' => ['create', 'show', 'update', 'destroy']]);
+    Route::get('/user/{id}', 'UserController@show')->where(['id' => '\d+']);
+    Route::resource('/user', 'UserController', ['only' => ['create', 'update', 'destroy']]);
 
     Route::get('/event', 'EventController@index');
     Route::get('/event/create', 'EventController@create');
@@ -17,4 +18,11 @@ Route::group(['middleware' => 'cors'], function() {
         'user' => '\d+', 'application' => '\d+'
     ]);
     Route::delete('/application/{application}', 'ApplicationsController@delete')->where(['application' => '\d+']);
+
+    Route::resource('/user/status', 'StatusesController', ['only' => ['index', 'create', 'update', 'destroy']]);
+
+    //    read: /user/status - получаем все статусы доступные для заявок
+    //    create: /user/status/create - создаем статус для заявки
+    //    update: /user/status/{status} - обновляем статус
+    //    delete: /user/status/{status} - удаляем статус
 });
