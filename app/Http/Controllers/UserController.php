@@ -44,14 +44,23 @@ class UserController extends Controller {
 
     private function register(Request $request) {
         $data = $request->all();
+<<<<<<< HEAD
         $user = User::create([
             'login' => $data['login'], 'email' => $data['email'], 'password' => bcrypt($data['password']),
 			'name1' => $data['name1']
+=======
+        User::create([
+            'login' => $data['login'], 'email' => $data['email'], 'password' => bcrypt($data['password'])
+>>>>>>> f581ecee149e1fbb64b0ca66ffbca56e4646575f
         ]);
         //if (!is_null($u)) {
         //    return ['success' => false, 'error' => 'null user'];
         //} else {
+<<<<<<< HEAD
         return ['success' => true, 'note' => 'registred', 'id' => $user->id]; // (про 'note') ну на всяк случай
+=======
+        return ['success' => true, 'note' => 'registred']; // (про 'note') ну на всяк случай
+>>>>>>> f581ecee149e1fbb64b0ca66ffbca56e4646575f
         //}
     }
 

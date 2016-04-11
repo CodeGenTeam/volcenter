@@ -57,6 +57,7 @@ class EventController extends Controller {
             }
             return ['success' => count($updated) != 0, 'fields' => $updated];
         }
+<<<<<<< HEAD
     }
 	
 	public function show($id) {
@@ -66,5 +67,7 @@ class EventController extends Controller {
         } else {
             return ['success' => true, 'event' => $u];
         }
+=======
+>>>>>>> f581ecee149e1fbb64b0ca66ffbca56e4646575f
     }
 }
