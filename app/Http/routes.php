@@ -9,12 +9,9 @@ Route::group(['middleware' => 'cors'], function() {
     Route::get('/event/create', 'EventController@create');
     Route::delete('/event/{event}', 'EventController@delete')->where(['event' => '\d+']);
     Route::post('/event/{event}', 'EventController@update')->where(['event' => '\d+']);
-<<<<<<< HEAD
 	
 	//my add
 	Route::get('/event/{id}', 'EventController@show')->where(['id' => '\d+']);
-=======
->>>>>>> f581ecee149e1fbb64b0ca66ffbca56e4646575f
 
     Route::resource('/event/event_type', 'EventTypeController', ['only' => ['index', 'create', 'update', 'destroy']]);
 
