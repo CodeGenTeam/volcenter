@@ -24,20 +24,27 @@ class EventController extends Controller {
 
     public function create(Request $request) {
         $data = $request->all();
-        $validator = Validator::make($data, [
-            'name' => 'required|max:255', 'descr' => 'required', 'address' => 'required',
-            'type' => 'required|event_types,id'
-        ]);
-		
-		// TODO исправить 
-        if ($validator->fails()) return Response::json(['success' => false, 'error' => $validator->errors()->all()]);
-        $params = [
-            'name' => $data['name'], 'descr' => $data['descr'], 'event_type' => $data['type']
+        /*$validator = Validator::make($data, [
+            'name' => 'required|max:255',
+            'descr' => 'required',
+            'address'=> 'required',
+            'type' => 'required|event_types,id',
+        ]);*/
+		// TODO исправить, add address
+       /* if ($validator->fails()) return Response::json(['success' => false, 'error' => $validator->errors()->all()]);*/
+        /*$params = [
+            'name' => $data['name'], 'descr' => $data['descr'], 'event_type' => $data['type'], 'address' => $data['address'],
         ];
         foreach (['event_start', 'event_end', 'address'] as $item) if (isset($data[$item]) && !is_null($data[$item])) {
             $params['event_start'] = $data[$item];
-        }
-        Event::create($params);
+        }*/
+        Event::create([
+            'name' => $data['name'],
+            'descr' => $data['descr'],
+            'address' => $data['address'],
+            'event_start' => $data['event_start'],
+            'event_end' => $data['event_end'],
+        ]);
         return Response::json(['success' => true]);
     }
 

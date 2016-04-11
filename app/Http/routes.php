@@ -6,7 +6,7 @@ Route::group(['middleware' => 'cors'], function() {
     Route::resource('/user', 'UserController', ['only' => ['create', 'update', 'destroy']]);
 
     Route::get('/event', 'EventController@index');
-    Route::get('/event/create', 'EventController@create');
+    Route::post('/event/create', 'EventController@create');
     Route::delete('/event/{event}', 'EventController@delete')->where(['event' => '\d+']);
     Route::post('/event/{event}', 'EventController@update')->where(['event' => '\d+']);
 	
