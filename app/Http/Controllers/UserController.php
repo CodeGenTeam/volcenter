@@ -49,15 +49,15 @@ class UserController extends Controller {
             'login' => $data['login'], 'email' => $data['email'], 'password' => bcrypt($data['password']),
 			'name1' => $data['name1']
 			]);
-        User::create([
-            'login' => $data['login'], 'email' => $data['email'], 'password' => bcrypt($data['password'])
-        ]);
+        //User::create([
+        //    'login' => $data['login'], 'email' => $data['email'], 'password' => bcrypt($data['password'])
+       // ]);
         //if (!is_null($u)) {
         //    return ['success' => false, 'error' => 'null user'];
         //} else {
 
         return ['success' => true, 'note' => 'registred', 'id' => $user->id]; // (про 'note') ну на всяк случай
-        return ['success' => true, 'note' => 'registred']; // (про 'note') ну на всяк случай
+        //return ['success' => true, 'note' => 'registred']; // (про 'note') ну на всяк случай
         //}
     }
 

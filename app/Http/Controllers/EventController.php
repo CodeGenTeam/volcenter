@@ -28,6 +28,8 @@ class EventController extends Controller {
             'name' => 'required|max:255', 'descr' => 'required', 'address' => 'required',
             'type' => 'required|event_types,id'
         ]);
+		
+		// TODO исправить 
         if ($validator->fails()) return Response::json(['success' => false, 'error' => $validator->errors()->all()]);
         $params = [
             'name' => $data['name'], 'descr' => $data['descr'], 'event_type' => $data['type']
