@@ -13,4 +13,8 @@ class User extends Authenticatable {
     public function applications() {
        return $this->hasMany('App\Applications', 'user_id', 'id');
     }
+
+    public function profiles() {
+        return $this->hasMany('App\Profiles', 'user_id', 'id');
+    }
 }

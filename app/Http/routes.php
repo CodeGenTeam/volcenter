@@ -21,8 +21,7 @@ Route::group(['middleware' => 'cors'], function() {
 
     Route::resource('/user/status', 'StatusesController', ['only' => ['index', 'create', 'update', 'destroy']]);
 
-    //    read: /user/status - получаем все статусы доступные для заявок
-    //    create: /user/status/create - создаем статус для заявки
-    //    update: /user/status/{status} - обновляем статус
-    //    delete: /user/status/{status} - удаляем статус
+    Route::resource('/user/{user}/profile', 'ProfileController', ['only' => ['show', 'create', 'update', 'destroy']]);
+
+    Route::resource('/user/profile', 'ProfileTypeController', ['only' => ['index', 'create', 'update', 'destroy']]);
 });
