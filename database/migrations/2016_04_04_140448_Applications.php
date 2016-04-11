@@ -22,7 +22,7 @@ class Applications extends Migration
             $table->increments('id');
             $table->integer('user_id'); // пользователь
             $table->integer('event_id'); // мероприятие
-            $table->integer('staus_id'); // статус заявки
+            $table->integer('status_id'); // статус заявки
         });
     }
 

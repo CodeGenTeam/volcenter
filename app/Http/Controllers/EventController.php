@@ -58,4 +58,13 @@ class EventController extends Controller {
             return ['success' => count($updated) != 0, 'fields' => $updated];
         }
     }
+	
+	public function show($id) {
+        $u = Event::find($id);
+        if (is_null($u)) {
+            return ['success' => false, 'error' => 'event not found'];
+        } else {
+            return ['success' => true, 'event' => $u];
+        }
+    }
 }

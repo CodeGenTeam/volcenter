@@ -11,3 +11,4 @@ Homestead.json
 _ide_helper.php
 composer.lock
 /phpmyadmin
+.env.example

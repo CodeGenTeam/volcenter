@@ -44,13 +44,14 @@ class UserController extends Controller {
 
     private function register(Request $request) {
         $data = $request->all();
-        User::create([
-            'login' => $data['login'], 'email' => $data['email'], 'password' => bcrypt($data['password'])
+        $user = User::create([
+            'login' => $data['login'], 'email' => $data['email'], 'password' => bcrypt($data['password']),
+			'name1' => $data['name1']
         ]);
         //if (!is_null($u)) {
         //    return ['success' => false, 'error' => 'null user'];
         //} else {
-        return ['success' => true, 'note' => 'registred']; // (про 'note') ну на всяк случай
+        return ['success' => true, 'note' => 'registred', 'id' => $user->id]; // (про 'note') ну на всяк случай
         //}
     }
 
@@ -118,6 +119,6 @@ class UserController extends Controller {
             'email' => $request->get('email'), 'password' => $request->get('password')
         ]);
         if (!$isLogined) return Response::json(['success' => false, 'error' => 'badlogin']);
-        return Response::json(['success' => true]);
+        return Response::json(['success' => true, 'id' => Auth::user()->id]);
     }
 }
