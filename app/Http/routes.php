@@ -1,5 +1,5 @@
 <?php
-Route::group(['middleware' => 'cors'], function() {
+//Route::group(['middleware' => 'cors'], function() {
     Route::get('/user/logout', 'UserController@logout');
     Route::get('/user/login', 'UserController@login');
     Route::get('/user/{id}', 'UserController@show')->where(['id' => '\d+']);
@@ -27,4 +27,4 @@ Route::group(['middleware' => 'cors'], function() {
     Route::resource('/user/{user}/profile', 'ProfileController', ['only' => ['show', 'create', 'update', 'destroy']]);
 
     Route::resource('/user/profile', 'ProfileTypeController', ['only' => ['index', 'create', 'update', 'destroy']]);
-});
+//});
