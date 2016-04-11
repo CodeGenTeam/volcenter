@@ -8,7 +8,7 @@ class Event extends Model {
 
     protected $table = "events";
     protected $hidden = [
-        'id', 'event_start', 'event_end', 'event_type'
+        'event_start', 'event_end', 'event_type'
     ];
     protected $appends = ['type'];
 

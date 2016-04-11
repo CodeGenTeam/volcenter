@@ -118,6 +118,6 @@ class UserController extends Controller {
             'email' => $request->get('email'), 'password' => $request->get('password')
         ]);
         if (!$isLogined) return Response::json(['success' => false, 'error' => 'badlogin']);
-        return Response::json(['success' => true]);
+        return Response::json(['success' => true, 'id' => Auth::user()->id]);
     }
 }
