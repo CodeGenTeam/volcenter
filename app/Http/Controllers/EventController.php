@@ -6,7 +6,7 @@ use App\Event;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Validation\Validator;
+use Validator;
 
 class EventController extends Controller {
 
@@ -15,11 +15,12 @@ class EventController extends Controller {
     public function index() {
         return Response::json(Event::all());
     }
+
     public function delete($event) {
         $event = Event::find($event);
-        if (!$event) return Response::json(['success' => false, 'error' => 'event not found']);
+        if (is_null($event)) return ['success' => false, 'error' => 'event not found'];
         $event->delete();
-        return Response::json(['success' => true]);
+        return ['success' => true];
     }
 
     public function create(Request $request) {
@@ -60,6 +61,7 @@ class EventController extends Controller {
                 if (in_array($key, $this->upgradeableUserFields)) {
                     try {
                         $e->{$key} = $value;
+                        $e->save();
                     } finally {
                         $updated[] = $key;
                     }
@@ -69,8 +71,8 @@ class EventController extends Controller {
         }
 
     }
-	
-	public function show($id) {
+
+    public function show($id) {
         $u = Event::find($id);
         if (is_null($u)) {
             return ['success' => false, 'error' => 'event not found'];

@@ -44,21 +44,13 @@ class UserController extends Controller {
 
     private function register(Request $request) {
         $data = $request->all();
-
+        foreach (['name1', 'name2', 'name3'] as $field) if (!isset($data[$field])) $data[$field] = '';
         $user = User::create([
             'login' => $data['login'], 'email' => $data['email'], 'password' => bcrypt($data['password']),
 			'name1' => $data['name1'], 'name2' => $data['name2'], 'name3' => $data['name3']
 			]);
-        //User::create([
-        //    'login' => $data['login'], 'email' => $data['email'], 'password' => bcrypt($data['password'])
-       // ]);
-        //if (!is_null($u)) {
-        //    return ['success' => false, 'error' => 'null user'];
-        //} else {
-
-        return ['success' => true, 'note' => 'registred', 'id' => $user->id]; // (про 'note') ну на всяк случай
-        //return ['success' => true, 'note' => 'registred']; // (про 'note') ну на всяк случай
-        //}
+        if (is_null($user)) return ['success' => false, 'error' => 'null user'];
+        else return ['success' => true, 'note' => 'registred', 'id' => $user->id]; // (про 'note') ну на всяк случай
     }
 
     public function show($id) {
@@ -72,24 +64,20 @@ class UserController extends Controller {
 
     public function update(Request $request, $id) {
         $u = User::find($id);
-        if (is_null($u)) {
-            return ['success' => false, 'user not found'];
-        } else {
-            /*if ($u != $request->user()) {
-                return ['success' => false, 'you haven\'t permission']; // todo запилить разрешения
-            } // если редачим не свой акк -- кидаем (пока)*/
-            $updated = [];
-            foreach ($request as $key => $value) {
-                if (in_array($key, $this->upgradeableUserFields)) {
-                    try {
-                        $u->{$key} = $value;
-                    } finally {
-                        $updated[] = $key;
-                    }
+        if (is_null($u)) return ['success' => false, 'user not found'];
+        // todo запилить разрешения
+        $updated = [];
+        foreach ($request->all() as $key => $value) {
+            if (in_array($key, $this->upgradeableUserFields)) {
+                try {
+                    $u->{$key} = $value;
+                    $u->save();
+                } finally {
+                    $updated[] = $key;
                 }
             }
-            return ['success' => count($updated) != 0, 'fields' => $updated];
         }
+        return ['success' => count($updated) != 0, 'fields' => $updated];
     }
 
     public function destroy($id) {
@@ -103,16 +91,13 @@ class UserController extends Controller {
         } finally {
             return Response::json(['success' => true]);
         }
-        return Response::json(['success' => false, 'error' => 'error']);
     }
 
     public function logout(Request $request) {
         $u = $request->user();
-        if (is_null($u)) {
-            return Response::json(['success' => false, 'error' => 'user not found']);
-        } else {
-            $u->logout();
-        }
+        if (is_null($u)) return ['success' => false, 'error' => 'not logined'];
+        Auth::logout();
+        return ['success' => true];
     }
 
     public function login(Request $request) {
