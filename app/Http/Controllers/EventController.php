@@ -6,7 +6,7 @@ use App\Event;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Validation\Validator;
+use Validator;
 
 class EventController extends Controller {
 
@@ -15,6 +15,7 @@ class EventController extends Controller {
     public function index() {
         return Response::json(Event::all());
     }
+
     public function delete($event) {
         $event = Event::find($event);
         if (!$event) return Response::json(['success' => false, 'error' => 'event not found']);
@@ -28,14 +29,14 @@ class EventController extends Controller {
             'name' => 'required|max:255', 'descr' => 'required', 'address' => 'required',
             'type' => 'required|event_types,id'
         ]);
-		
-		// TODO исправить 
-        if ($validator->fails()) return Response::json(['success' => false, 'error' => $validator->errors()->all()]);
+        if ($validator->fails()) return ['success' => false, 'error' => $validator->errors()->all()];
         $params = [
             'name' => $data['name'], 'descr' => $data['descr'], 'event_type' => $data['type']
         ];
         foreach (['event_start', 'event_end', 'address'] as $item) if (isset($data[$item]) && !is_null($data[$item])) {
-            $params['event_start'] = $data[$item];
+            $params[$item] = $data[$item];
+        } else {
+            $params[$item] = '';
         }
         Event::create($params);
         return Response::json(['success' => true]);
@@ -61,8 +62,8 @@ class EventController extends Controller {
         }
 
     }
-	
-	public function show($id) {
+
+    public function show($id) {
         $u = Event::find($id);
         if (is_null($u)) {
             return ['success' => false, 'error' => 'event not found'];
