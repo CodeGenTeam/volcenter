@@ -13,7 +13,8 @@
 	//my add
 	Route::get('/event/{id}', 'EventController@show')->where(['id' => '\d+']);
 
-    Route::resource('/event/event_type', 'EventTypeController', ['only' => ['index', 'create', 'update', 'destroy']]);
+    Route::resource('/event/event_type', 'EventTypeController', ['only' => ['index', 'update', 'destroy']]);
+    Route::post('/event/create', 'EventTypeController@create');
 
     Route::get('/user/{user}/application', 'ApplicationsController@index')->where(['user' => '\d+']);
     Route::get('/user/{user?}/application/create', 'ApplicationsController@create')->where(['user' => '\d+']);

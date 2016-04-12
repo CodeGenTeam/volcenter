@@ -10,7 +10,7 @@ use Illuminate\Validation\Validator;
 
 class EventController extends Controller {
 
-    private $upgradeableUserFields = ['name', 'descr', 'addres', 'event_start', 'event_end', 'event_type'];
+    private $upgradeableUserFields = ['name', 'descr', 'address', 'event_start', 'event_end', 'event_type'];
 
     public function index() {
         return Response::json(Event::all());
@@ -42,6 +42,7 @@ class EventController extends Controller {
             'name' => $data['name'],
             'descr' => $data['descr'],
             'address' => $data['address'],
+            'event_type' => $data['event_type'],
             'event_start' => $data['event_start'],
             'event_end' => $data['event_end'],
         ]);

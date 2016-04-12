@@ -27,9 +27,10 @@ class EventTypeController extends Controller {
     public function update($id, Request $request) {
         $u = Event_type::find($id);
         if (is_null($u)) return ['success' => false, 'event type not found'];
+        if($request->name == "") return ['success' => false, 'name is empty or undefined'];
         // todo запилить разрешения
         $updated = [];
-        foreach ($request as $key => $value) {
+        /*foreach ($request as $key => $value) {
             if (in_array($key, $this->upgradeableUserFields)) {
                 try {
                     $u->{$key} = $value;
@@ -37,8 +38,13 @@ class EventTypeController extends Controller {
                     $updated[] = $key;
                 }
             }
-        }
-        return ['success' => count($updated) != 0, 'fields' => $updated];
+        }*/
+        $u->name = $request->name;
+        $u->save();
+        return Response::json(
+            ['success' => true, 'event type was changed']
+        );
+        //return ['success' => count($updated) != 0, 'fields' => $updated];
     }
 
     public function destroy($id) {
