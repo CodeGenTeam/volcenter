@@ -53,6 +53,7 @@ class EventController extends Controller {
                 if (in_array($key, $this->upgradeableUserFields)) {
                     try {
                         $e->{$key} = $value;
+                        $e->save();
                     } finally {
                         $updated[] = $key;
                     }
