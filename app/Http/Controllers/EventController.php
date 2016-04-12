@@ -18,9 +18,9 @@ class EventController extends Controller {
 
     public function delete($event) {
         $event = Event::find($event);
-        if (!$event) return Response::json(['success' => false, 'error' => 'event not found']);
+        if (is_null($event)) return ['success' => false, 'error' => 'event not found'];
         $event->delete();
-        return Response::json(['success' => true]);
+        return ['success' => true];
     }
 
     public function create(Request $request) {
