@@ -6,7 +6,9 @@ use App\Event;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Validation\Validator;
+//use Illuminate\Validation\Validator;
+use \Validator;
+use DB;
 
 class EventController extends Controller {
 
@@ -15,9 +17,22 @@ class EventController extends Controller {
     public function index() {
         return Response::json(Event::all());
     }
+	
+	public function getList($id) {
+		$number = 3;
+		return Response::json(DB::table('events')->take($number)->skip((intval($id)-1) * $number)->get());
+        //return Response::json(Event::all()->skip(($id-1) * $number)->take($number));
+    }
+	
+	public function getlast() {
+		//->skip(10)->take(5)->get();
+		return Response::json(Event::all()-> take(3));
+	}
+	
     public function delete($event) {
         $event = Event::find($event);
-        if (!$event) return Response::json(['success' => false, 'error' => 'event not found']);
+        //if (!$event) return Response::json(['success' => false, 'error' => 'event not found']);
+		if (is_null($event)) return ['success' => false, 'error' => 'event not found'];
         $event->delete();
         return Response::json(['success' => true]);
     }
@@ -26,7 +41,7 @@ class EventController extends Controller {
         $data = $request->all();
         $validator = Validator::make($data, [
             'name' => 'required|max:255', 'descr' => 'required', 'address' => 'required',
-            'type' => 'required|event_types,id'
+            //'type' => 'required|event_types,id'
         ]);
 		
 		// TODO исправить 

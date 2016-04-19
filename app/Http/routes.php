@@ -12,6 +12,8 @@ Route::group(['middleware' => 'cors'], function() {
 	
 	//my add
 	Route::get('/event/{id}', 'EventController@show')->where(['id' => '\d+']);
+	Route::get('/event/last', 'EventController@getlast');
+	Route::get('/event/list/{id}', 'EventController@getList')->where(['id' => '\d+']);
 
     Route::resource('/event/event_type', 'EventTypeController', ['only' => ['index', 'create', 'update', 'destroy']]);
 

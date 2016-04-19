@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 
+use Session;
+
 class UserController extends Controller {
 
     private $upgradeableUserFields = ['email', 'name1', 'name2', 'name3', 'birthday', 'password'];
@@ -47,7 +49,7 @@ class UserController extends Controller {
 
         $user = User::create([
             'login' => $data['login'], 'email' => $data['email'], 'password' => bcrypt($data['password']),
-			'name1' => $data['name1']
+				'name1' => $data['name1'], 'name2' => $data['name2'], 'name3' => $data['name3']
 			]);
         //User::create([
         //    'login' => $data['login'], 'email' => $data['email'], 'password' => bcrypt($data['password'])
@@ -107,12 +109,17 @@ class UserController extends Controller {
     }
 
     public function logout(Request $request) {
+		/*
         $u = $request->user();
         if (is_null($u)) {
             return Response::json(['success' => false, 'error' => 'user not found']);
         } else {
             $u->logout();
         }
+		*/
+		 Auth::logout();
+		Session::flush();
+        return Response::json(['success' => true, 'error' => '']);
     }
 
     public function login(Request $request) {
