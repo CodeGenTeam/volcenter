@@ -6,17 +6,21 @@ use App\Event;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+
 //use Illuminate\Validation\Validator;
-use \Validator;
 use DB;
+
+use Validator;
+
 
 class EventController extends Controller {
 
-    private $upgradeableUserFields = ['name', 'descr', 'addres', 'event_start', 'event_end', 'event_type'];
+    private $upgradeableUserFields = ['name', 'descr', 'address', 'event_start', 'event_end', 'event_type'];
 
     public function index() {
         return Response::json(Event::all());
     }
+
 	
 	public function getList($id) {
 		$number = 3;
@@ -31,29 +35,55 @@ class EventController extends Controller {
 	
     public function delete($event) {
         $event = Event::find($event);
-        //if (!$event) return Response::json(['success' => false, 'error' => 'event not found']);
-		if (is_null($event)) return ['success' => false, 'error' => 'event not found'];
+        if (is_null($event)) return ['success' => false, 'error' => 'event not found'];
         $event->delete();
-        return Response::json(['success' => true]);
+        return ['success' => true];
     }
 
     public function create(Request $request) {
         $data = $request->all();
-        $validator = Validator::make($data, [
-            'name' => 'required|max:255', 'descr' => 'required', 'address' => 'required',
-            //'type' => 'required|event_types,id'
-        ]);
+
+       // $validator = Validator::make($data, [
+        //    'name' => 'required|max:255', 'descr' => 'required', 'address' => 'required',
+       //     //'type' => 'required|event_types,id'
+       // ]);
 		
 		// TODO исправить 
-        if ($validator->fails()) return Response::json(['success' => false, 'error' => $validator->errors()->all()]);
-        $params = [
-            'name' => $data['name'], 'descr' => $data['descr'], 'event_type' => $data['type']
+       // if ($validator->fails()) return Response::json(['success' => false, 'error' => $validator->errors()->all()]);
+       // $params = [
+       //     'name' => $data['name'], 'descr' => $data['descr'], 'event_type' => $data['type']
+		//];
+        /*$validator = Validator::make($data, [
+            'name' => 'required|max:255',
+            'descr' => 'required',
+            'address'=> 'required',
+            'type' => 'required|event_types,id',
+        ]);*/
+		// TODO исправить, add address
+       /* if ($validator->fails()) return Response::json(['success' => false, 'error' => $validator->errors()->all()]);*/
+        /*$params = [
+            'name' => $data['name'], 'descr' => $data['descr'], 'event_type' => $data['type'], 'address' => $data['address'],
+
         ];
         foreach (['event_start', 'event_end', 'address'] as $item) if (isset($data[$item]) && !is_null($data[$item])) {
             $params['event_start'] = $data[$item];
-        }
-        Event::create($params);
+        }*/
+		
+		$val = Validator::make($data, ['name' => 'required']);
+        if ($val->fails()) return Response::json(['success' => false, 'error' => $val->errors()->all()]);
+		
+        Event::create([
+            'name' => $data['name'],
+            'descr' => $data['descr'],
+            'address' => $data['address'],
+            'event_type' => $data['event_type'],
+            'event_start' => $data['event_start'],
+            'event_end' => $data['event_end'],
+        ]);
         return Response::json(['success' => true]);
+		
+		//if (is_null($event)) return ['success' => false, 'error' => 'null event'];
+        //else return ['success' => true, 'id' => 4];
     }
 
     public function update(Request $request, $id) {
@@ -67,6 +97,7 @@ class EventController extends Controller {
                 if (in_array($key, $this->upgradeableUserFields)) {
                     try {
                         $e->{$key} = $value;
+                        $e->save();
                     } finally {
                         $updated[] = $key;
                     }
@@ -76,8 +107,8 @@ class EventController extends Controller {
         }
 
     }
-	
-	public function show($id) {
+
+    public function show($id) {
         $u = Event::find($id);
         if (is_null($u)) {
             return ['success' => false, 'error' => 'event not found'];

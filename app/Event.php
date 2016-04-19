@@ -6,10 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model {
 
+    public $timestamps = false;
+
     protected $table = "events";
     protected $hidden = [
-        'event_start', 'event_end', 'event_type'
+        'event_type'
     ];
+    protected $fillable =
+        [
+            'event_start',
+            'event_end',
+            'name',
+            'descr',
+            'address',
+            'event_type'
+        ];
     protected $appends = ['type'];
 
     public function getTypeAttribute() {
