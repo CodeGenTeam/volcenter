@@ -7,7 +7,6 @@ use app\Permissions\Models\UserPermission;
 use App\User as MUser;
 use Auth;
 use Illuminate\Database\Eloquent\Collection;
-use Pex;
 
 class UserRulesSet extends RulesSet {
 
