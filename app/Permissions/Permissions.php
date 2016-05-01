@@ -5,7 +5,7 @@ namespace App\Permissions;
 use App\User;
 use Auth;
 
-class Permissions {
+class Permissions extends Permissible {
 
     public function can($permission, $inverse = false) {
         return $this->getCurrentUserPermissions()->can($permission, $inverse);
