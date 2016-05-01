@@ -71,4 +71,11 @@ abstract class RulesSet extends Permissible {
     public function clear() {
         $this->rules = [];
     }
+
+    public abstract function addRule($rule);
+
+    public abstract function removeRule($rule);
+
+    public function cleanup() {
+    }
 }

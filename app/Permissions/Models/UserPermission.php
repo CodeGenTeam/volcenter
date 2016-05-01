@@ -8,7 +8,7 @@ class UserPermission extends Model {
 
     protected $table = 'UserPermissions';
     protected $fillable = ['user_id', 'permission_id', 'created_by'];
-    protected $hidden = ['user_id', 'permission_id', 'created_by'];
+    protected $visible = ['id', 'user_id', 'permission_id', 'created_by'];
     protected $appends = ['createdBy', 'rules', 'user'];
 
     public function getCreateByAttribute() {
