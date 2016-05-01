@@ -155,7 +155,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        
+
         /*
          * IDE Laravel helper
          */
@@ -209,7 +209,9 @@ return [
         'Storage'   => Illuminate\Support\Facades\Storage::class,
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
-        'View' => Illuminate\Support\Facades\View::class, 'Pex' => App\Permissions\Pex::class,
+        'View'      => Illuminate\Support\Facades\View::class,
+        'Pex'       => App\Permissions\Pex::class,
+        'Ret'       => App\Http\Facades\Ret::class,
     ],
 
 ];
