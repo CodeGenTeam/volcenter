@@ -28,3 +28,5 @@ Route::resource('/user/status', 'StatusesController', ['only' => ['index', 'crea
 Route::resource('/user/{user}/profile', 'ProfileController', ['only' => ['show', 'create', 'update', 'destroy']]);
 
 Route::resource('/user/profile', 'ProfileTypeController', ['only' => ['index', 'create', 'update', 'destroy']]);
+
+Pex::routes();

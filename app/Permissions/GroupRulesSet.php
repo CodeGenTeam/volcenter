@@ -2,8 +2,8 @@
 namespace app\Permissions;
 
 use App\Permissions\Models\Group as MGroup;
-use app\Permissions\Models\GroupPermission;
-use Pex;
+use App\Permissions\Models\GroupPermission;
+use Auth;
 
 class GroupRulesSet extends RulesSet {
 
@@ -22,7 +22,7 @@ class GroupRulesSet extends RulesSet {
         Pex::requireRule('permissions.group.rule.add');
         $rule = Pex::getOrCreateRule($rule);
         $permission = GroupPermission::create([
-            'group_id' => $this->user->id, 'permission_id' => $rule->id,
+            'group_id' => $this->group->id, 'permission_id' => $rule->id,
             'created_by' => Auth::check() ? Auth::user()->id : -1
         ]);
         if (!is_null($permission)) return true;
@@ -31,7 +31,9 @@ class GroupRulesSet extends RulesSet {
 
     public function removeRule($rule) {
         Pex::requireRule('permissions.group.rule.remove');
-        $permission = GroupPermission::where('permission_id', Pex::getRule($rule)->first()->id);
+        $permission = GroupPermission::where([
+            'permission_id' => Pex::getRule($rule)->first()->id, 'group_id' => $this->group->id
+        ]);
         return $permission->delete() > 0; // если удалено более одного разрешения
     }
 

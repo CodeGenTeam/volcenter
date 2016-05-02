@@ -10,22 +10,20 @@ use Illuminate\Database\Eloquent\Collection;
 
 class UserRulesSet extends RulesSet {
 
-    private static $ONLY_ONE_GROUP_MODE = true;
+    public static $ONLY_ONE_GROUP_MODE = true;
     protected $user;
 
     public function __construct($user) {
         if (!($user instanceof MUser)) $user = MUser::find($user);
-        if (is_null($user)) {
-            $this->clear();
-        } else {
-            $this->user = $user;
-        }
+        $this->user = $user ?? new MUser(['id' => 0, 'login' => 'guest']);
     }
 
     public function getGroups() {
+        $groups = [];
         foreach ($this->user->belongsToMany('App\Permissions\Models\Group', 'UserGroupAccessory', 'user_id', 'group_id', 'id')->get()->all() as $group) {
             $groups[] = $group->name;
         }
+        if (count($groups) == 0 && $guest = MGroup::where('name', 'guest')->first()->name) $groups[] = $guest;
         return $groups;
     }
 
@@ -86,12 +84,14 @@ class UserRulesSet extends RulesSet {
     }
 
     private function parseUserPermission() {
+        if (Pex::isAdminMode()) $this->add('*');
         $arr = $this->user->hasMany('App\Permissions\Models\UserPermission', 'user_id', 'id')->get()->all();
         foreach ($arr as $rule) $this->add($rule->rule->rule);
     }
 
     private function parseGroupPermissions() {
         $groups = $this->user->belongsToMany('App\Permissions\Models\Group', 'UserGroupAccessory', 'user_id', 'group_id', 'id')->get()->all();
+        if (count($groups) == 0 && $guest = MGroup::where('name', 'guest')->first()) $groups[] = $guest;
         foreach ($groups as $group) {
             $this->add('group.' . $group->name);
             foreach ($group->rules()->get()->all() as $rule) $this->add($rule->rule);
