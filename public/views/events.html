@@ -1,0 +1,62 @@
+<div id="admin-wrapper">
+
+	<h2>Мероприятия</h2>
+
+	<div ng-if="role == 'admin'" class="bordered">
+		<h4 class="h4-mar-lit">Создать новое мероприятие</h4>
+		<div class="button button-color-2 href" id="bt-up"><a href="#/eventcreate">Создать</a></div>
+	</div>
+
+	<div id="events-wrapepr" >
+		<h3>Мероприятия, которые скоро пройдут</h3>
+
+		<h4 ng-show="load">Загрузка...</h4>
+
+		<div class="main-page-event admin-page-event" ng-repeat="ev in events">
+
+			<a class="page-event-a" href="#/event/{{ev.id}}" >
+				<div class="event-name">{{ev.name}}</div>
+
+				<div class="event-dateStart event-dark">С: {{ev.dateStart}}</div>
+				<div class="event-dateEnd event-dark">По: {{ev.dateEnd}}</div><br>
+				<div class="event-type event-dark">{{ev.type}}</div>
+				<div class="event-place">{{ev.place}}</div>
+
+				<div class="event-nums">
+					<div class="event-num">Подтверждено участников: {{ev.num}}</div>
+					<div class="event-numWait">Ожидает подтверждения: {{ev.numWait}}</div>
+				</div>
+
+				<div class="event-delete icons"
+					 uib-popover="Удалить" popover-trigger="mouseenter" popover-append-to-body="true"
+					 ng-if="role == 'admin'" ng-click="removeEvent(ev.id, $index, $event)">
+
+					<i class="glyphicon glyphicon-remove"></i>
+				</div>
+
+				<a class="event-edit icons"
+					 uib-popover="Редактировать" popover-trigger="mouseenter" popover-append-to-body="true"
+					 ng-if="role == 'admin'" href="#/eventedit/{{ev.id}}">
+
+					<i class="glyphicon glyphicon-pencil"></i>
+				</a>
+
+			</a>
+		</div>
+
+		<h3 ng-show="eventsLast.length != 0">Прошедшие мероприятия</h3>
+
+		<div class="main-page-event admin-page-event" ng-repeat="ev in eventsLast">
+
+			<a  href="{{ev.id}}.html" >
+				<div class="event-name">{{ev.name}}</div>
+
+				<div class="event-dateStart event-dark">С: {{ev.dateStart}}</div>
+				<div class="event-dateEnd event-dark">По: {{ev.dateEnd}}</div><br>
+				<div class="event-type event-dark">{{ev.type}}</div>
+				<div class="event-place">{{ev.place}}</div>
+			</a>
+		</div>
+
+	</h4>
+</div>

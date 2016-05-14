@@ -24,7 +24,7 @@ class Permissions extends Permissible {
     }
 
     public function getOrCreateRule($rule) {
-        return $this->getRule($rule)->first() ?? MRule::create(['rule' => $rule]);
+        return $this->getRule($rule)->first();// ?? MRule::create(['rule' => $rule]);
     }
 
     public function setupAdminMode($mode = true) {

@@ -1,4 +1,8 @@
 <?php
+Route::get('/', function () {
+    return view('frontend/layout');
+});
+
 Route::get('/user/logout', 'UserController@logout');
 Route::get('/user/login', 'UserController@login');
 Route::get('/user/{id}', 'UserController@show')->where(['id' => '\d+']);

@@ -1,0 +1,122 @@
+<div id="admin-wrapper" >
+
+
+	<h2 class="h2-big">Мероприятие '{{ev.name}}'</h2>
+
+	<div id="events-wrapepr" >
+		<div class="event-watch" >
+
+			<div class="event-watch-descr">{{ev.descr}}</div>
+
+			<p><span>Дата:</span> {{ev.dateStart}} - {{ev.dateEnd}}
+            <p><span>Место: </span>{{ev.address}}
+			<p><span>Тип мероприятия: </span>{{ev.type}}
+
+            <p><span>Подтверждено участников: </span>{{ev.users}}
+            <p><span>Ожидает подтверждения: </span>{{ev.users}}
+
+            <p><span>Стимулы: </span> <i ng-show="ev.motivations.length == 0">Не указано</i>
+            <div class="lan-obj" ng-repeat="motivate in motivations">
+
+                <p><span>Краткое описание: </span>{{motivate.users}}
+                <p><span>Полное описание: </span>{{motivate.users}}
+            </div>
+
+            <p><span>Направления: </span> <i ng-show="ev.responsibilities.length == 0"> Не указано</i>
+            <div class="lan-obj" ng-repeat="res in ev.responsibilities">
+
+                <p><span>Назвение позиции: </span>{res.position}}
+                <p><span>Описание задачи позиции: </span>{{res.task}}
+                <p><span>Требуемое кол-во участников: </span>{{res.count}}
+            </div>
+
+		</div>
+        <div ng-if="role == 'admin'" class="bordered">
+            <h4 class="h4-mar-lit">Мероприятие:</h4>
+
+            <div class="button button-color-2 href"  ng-click="go()">
+				<a href="#/eventedit/{{ev.id}}"> Редактировать</a>
+			</div>
+            <div class="button button-color-2"  ng-click="removeEvent(ev.id)">Удалить</div>
+        </div>
+
+		<div ng-if="role == 'anonymous'" class="events-anon">
+			<a ui-sref="login">Войдите</a> или <a ui-sref="reg">зарегистрируйтесь</a>,
+			чтобы принять участие в мероприятии
+		</div>
+
+		<div ng-if="role == 'isloggedin'" class="bordered">
+			<h4 class="h4-mar-lit">Принять участие в мероприятии?</h4>
+			<div class="button button-color-2" id="bt-up" ng-click="go()">ОК</div>
+		</div>
+
+
+		<div ng-if="role == 'admin'">
+			<div class="event-users-wrapper">
+				<h3>Ожидающие подтверждения ({{wait.length}})</h3>
+				<div class="person" ng-repeat="user in users | filter:{state: 'wait'} as wait">
+
+					<a  href="#/user/{{user.id}}" >
+						<div class="person-name">{{user.name}}</div>
+					</a>
+
+					<div class="person-add" ng-click="setState('confirmed', user)"
+						 uib-popover="Подтвердить участника" popover-trigger="mouseenter" popover-append-to-body="true">+</div>
+
+					<div class="person-res" ng-click="setState('reserve', user)"
+						 uib-popover="Добавить в резерв" popover-trigger="mouseenter" popover-append-to-body="true">R</div>
+
+					<div class="person-remove" ng-click="setState('rejected', user)"
+						 uib-popover="Отклонить участника" popover-trigger="mouseenter" popover-append-to-body="true">-</div>
+				</div>
+			</div>
+
+			<div class="event-users-wrapper">
+				<h3>Подтвержденные участники({{confirmed.length}})</h3>
+				<div class="person" ng-repeat="user in users | filter:{state: 'confirmed'} as confirmed">
+
+					<a  href="#/user/{{user.id}}" >
+						<div class="person-name">{{user.name}}</div>
+					</a>
+
+					<div class="person-res" ng-click="setState('reserve', user)"
+						 uib-popover="Добавить в резерв" popover-trigger="mouseenter" popover-append-to-body="true">R</div>
+
+					<div class="person-remove" ng-click="setState('rejected', user)"
+						 uib-popover="Отклонить участника" popover-trigger="mouseenter" popover-append-to-body="true">-</div>
+				</div>
+			</div>
+
+			<div class="event-users-wrapper">
+				<h3>Резервные участники({{reserve.length}})</h3>
+				<div class="person" ng-repeat="user in users | filter:{state: 'reserve'} as reserve">
+					<a  href="#/user/{{user.id}}" >
+						<div class="person-name">{{user.name}}</div>
+					</a>
+
+					<div class="person-add" ng-click="setState('confirmed', user)"
+						 uib-popover="Подтвердить участника" popover-trigger="mouseenter" popover-append-to-body="true">+</div>
+
+					<div class="person-remove" ng-click="setState('rejected', user)"
+						 uib-popover="Отклонить участника" popover-trigger="mouseenter" popover-append-to-body="true">-</div>
+				</div>
+			</div>
+
+			<div class="event-users-wrapper">
+				<h3>Отклоненные участники({{rejected.length}})</h3>
+				<div class="person" ng-repeat="user in users | filter:{state: 'rejected'} as rejected">
+					<a  href="#/user/{{user.id}}" >
+						<div class="person-name">{{user.name}}</div>
+					</a>
+
+					<div class="person-add" ng-click="setState('confirmed', user)"
+						 uib-popover="Подтвердить участника" popover-trigger="mouseenter" popover-append-to-body="true">+</div>
+
+					<div class="person-res" ng-click="setState('reserve', user)"
+						 uib-popover="Добавить в резерв" popover-trigger="mouseenter" popover-append-to-body="true">R</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
