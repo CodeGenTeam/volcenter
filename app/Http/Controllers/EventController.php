@@ -117,4 +117,9 @@ class EventController extends Controller {
         }
 
     }
+
+    // public function viewAll() {
+    //     $data = $this->index();
+    //     return view('backend/events/viewAll', ['data' => $data]);
+    // }
 }

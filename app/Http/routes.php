@@ -2,6 +2,13 @@
 Route::get('/', function () {
     return view('frontend/layout');
 });
+Route::get('/backend', function () {
+    return view('backend/dashboard/index');
+});
+Route::get('/backend/events', function () {
+    return view('backend/events/viewAll');
+});
+// Route::get('/backend', 'EventController@viewAll');
 
 Route::get('/user/logout', 'UserController@logout');
 Route::get('/user/login', 'UserController@login');
