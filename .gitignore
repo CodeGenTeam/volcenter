@@ -1,14 +1,10 @@
 /vendor/
 /node_modules
-/public/storage
-Homestead.yaml
-Homestead.json
+.phpstorm.meta.php
 *.iml
 .idea/
-*.ipr
-*.iws
 .env
 _ide_helper.php
 composer.lock
-/phpmyadmin
 .env.example
+/storage
