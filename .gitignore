@@ -6,5 +6,4 @@
 .env
 _ide_helper.php
 composer.lock
-.env.example
 /storage
