@@ -1,9 +1,11 @@
 <?php
 namespace App\Permissions;
 
-use App\Permissions\Models\Group as MGroup;
-use App\Permissions\Models\UserPermission;
 use App\Models\User as MUser;
+use App\Permissions\Models\Group as MGroup;
+use App\Permissions\Models\UserGroupAccessory as MUserGroupAccessory;
+use App\Permissions\Models\UserPermission;
+use App\Permissions\Models\UserPermission as MUserPermission;
 use Auth;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -19,7 +21,7 @@ class UserRulesSet extends RulesSet {
 
     public function getGroups() {
         $groups = [];
-        foreach ($this->user->belongsToMany('App\Permissions\Models\Group', 'UserGroupAccessory', 'user_id', 'group_id', 'id')->get()->all() as $group) {
+        foreach ($this->user->belongsToMany('App\Permissions\Models\Group', 'MUserGroupAccessory', 'user_id', 'group_id', 'id')->get()->all() as $group) {
             $groups[] = $group->name;
         }
         if (count($groups) == 0 && $guest = MGroup::where('name', 'guest')->first()->name) $groups[] = $guest;
@@ -45,7 +47,7 @@ class UserRulesSet extends RulesSet {
 
     public function setGroup($group) {
         Pex::requireRule('permissions.user.group.set');
-        $groups = UserGroupAccessory::where('user_id', $this->id)->get();
+        $groups = MUserGroupAccessory::where('user_id', $this->id)->get();
         if (UserRulesSet::$ONLY_ONE_GROUP_MODE) $this->trimGroups($groups);
         if (!($group instanceof MGroup)) $group = MGroup::find($group) ?? MGroup::where('name', $group)->first();
         if (is_null($group)) return false;
@@ -54,13 +56,13 @@ class UserRulesSet extends RulesSet {
                 $target = $groups->first();
                 if ($target->update(['group_id' => $group->id])) return true;
             } else {
-                return UserGroupAccessory::create([
+                return MUserGroupAccessory::create([
                     'user_id' => $this->id, 'group_id' => $group->id,
                     'created_by' => Auth::check() ? Auth::user()->id : -1
                 ]) ? true : false;
             }
         } else {
-            return UserGroupAccessory::create([
+            return MUserGroupAccessory::create([
                 'user_id' => $this->id, 'group_id' => $group->id, 'created_by' => Auth::check() ? Auth::user()->id : -1
             ]) ? true : false;
         }
@@ -72,9 +74,9 @@ class UserRulesSet extends RulesSet {
 
     public function removeGroup($group = null) {
         Pex::requireRule('permissions.user.group.remove');
-        if (is_null($group)) return UserGroupAccessory::where('user_id', $this->id)->delete() > 0;
+        if (is_null($group)) return MUserGroupAccessory::where('user_id', $this->id)->delete() > 0;
         if (!($group instanceof MGroup)) $group = MGroup::find($group) ?? MGroup::where('name', $group)->first();
-        return UserGroupAccessory::where(['user_id' => $this->id, 'group_id' => $group->id])->delete() > 0;
+        return MUserGroupAccessory::where(['user_id' => $this->id, 'group_id' => $group->id])->delete() > 0;
     }
 
     protected function parseRules() {
@@ -84,12 +86,12 @@ class UserRulesSet extends RulesSet {
 
     private function parseUserPermission() {
         if (Pex::isAdminMode()) $this->add('*');
-        $arr = $this->user->hasMany('App\Permissions\Models\UserPermission', 'user_id', 'id')->get()->all();
+        $arr = $this->user->hasMany(MUserPermission::calss, 'user_id', 'id')->get()->all();
         foreach ($arr as $rule) $this->add($rule->rule->rule);
     }
 
     private function parseGroupPermissions() {
-        $groups = $this->user->belongsToMany('App\Permissions\Models\Group', 'UserGroupAccessory', 'user_id', 'group_id', 'id')->get()->all();
+        $groups = $this->user->belongsToMany(MGroup::class, 'MUserGroupAccessory', 'user_id', 'group_id', 'id')->get()->all();
         if (count($groups) == 0 && $guest = MGroup::where('name', 'guest')->first()) $groups[] = $guest;
         foreach ($groups as $group) {
             $this->add('group.' . $group->name);
