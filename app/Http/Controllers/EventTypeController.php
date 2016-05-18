@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event_type;
-use \Illuminate\Http\Request;
-use \Response;
-use \Validator;
+use Illuminate\Http\Request;
+use Response;
+use Validator;
 
 class EventTypeController extends Controller {
 

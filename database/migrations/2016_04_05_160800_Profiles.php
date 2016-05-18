@@ -23,6 +23,10 @@ class Profiles extends Migration
             $table->integer('user_id'); // пользователь
             $table->integer('profile_type_id'); // тип добавляемого профиля (телефон, соц. сеть vk, facebook..)
             $table->string('link'); // строка профиля(ссылка, номер телефона..)
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade')
+				->onUpdate('cascade');
         });
     }
 

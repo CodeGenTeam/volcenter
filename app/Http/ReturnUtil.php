@@ -1,7 +1,6 @@
 <?php
 namespace App\Http;
 
-
 use Response;
 
 class ReturnUtil {

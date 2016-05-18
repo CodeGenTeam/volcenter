@@ -1,7 +1,6 @@
 <?php
 namespace App\Permissions\Models;
 
-
 use Illuminate\Database\Eloquent\Model;
 
 class GroupPermission extends Model {

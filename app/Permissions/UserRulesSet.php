@@ -1,10 +1,9 @@
 <?php
-namespace app\Permissions;
+namespace App\Permissions;
 
 use App\Permissions\Models\Group as MGroup;
-use app\Permissions\Models\UserGroupAccessory;
-use app\Permissions\Models\UserPermission;
-use App\User as MUser;
+use App\Permissions\Models\UserPermission;
+use App\Models\User as MUser;
 use Auth;
 use Illuminate\Database\Eloquent\Collection;
 

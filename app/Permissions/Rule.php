@@ -1,5 +1,5 @@
 <?php
-namespace app\Permissions;
+namespace App\Permissions;
 
 
 class Rule {

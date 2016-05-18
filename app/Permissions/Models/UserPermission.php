@@ -1,9 +1,8 @@
 <?php
 namespace App\Permissions\Models;
 
-
 use Illuminate\Database\Eloquent\Model;
-use App\User;
+use App\Models\User;
 
 class UserPermission extends Model {
 

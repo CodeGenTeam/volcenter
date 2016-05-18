@@ -1,11 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
-
 use App\Permissions\Models\Group as MGroup;
 use App\Permissions\Models\GroupPermission as MGroupPermission;
 use App\Permissions\RulesSet;
-use app\Permissions\UserRulesSet;
+use App\Permissions\UserRulesSet;
 use Auth;
 use Illuminate\Routing\Controller;
 use Pex;
