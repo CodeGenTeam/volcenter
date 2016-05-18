@@ -11,6 +11,6 @@ class GroupPermission extends Model {
     protected $fillable = ['group_id', 'permission_id', 'created_by'];
 
     public function rule() {
-        return $this->hasOne('App\Permissions\Models\Rule', 'id', 'permissions_id');
+        return $this->hasOne(Rule::class, 'id', 'permissions_id');
     }
 }

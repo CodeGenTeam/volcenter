@@ -1,8 +1,9 @@
 <?php
-namespace app\Permissions\Models;
+namespace App\Permissions\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class UserPermission extends Model {
 
@@ -18,7 +19,7 @@ class UserPermission extends Model {
     }
 
     public function createdBy() {
-        return $this->hasOne('App\User', 'id', 'created_by');
+        return $this->hasOne(User::class, 'id', 'created_by');
     }
 
     public function getRulesAttribute() {
@@ -26,7 +27,7 @@ class UserPermission extends Model {
     }
 
     public function rule() {
-        return $this->hasOne('App\Permissions\Models\Rule', 'id', 'permission_id');
+        return $this->hasOne(Rule::class, 'id', 'permission_id');
     }
 
     public function getUserAttribute() {
@@ -34,6 +35,6 @@ class UserPermission extends Model {
     }
 
     public function user() {
-        return $this->hasOne('App\User', 'id', 'user_id');
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 }

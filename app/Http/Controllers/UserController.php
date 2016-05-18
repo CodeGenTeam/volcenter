@@ -58,25 +58,23 @@ class UserController extends Controller {
         else return ['success' => true, 'note' => 'registred', 'id' => $user->id]; // (про 'note') ну на всяк случай
     }
 
-    public function show($id) {
-        $u = User::find($id);
-        if (is_null($u)) {
+    public function show(User $id) {
+        if (is_null($id)) {
             return ['success' => false, 'error' => 'user not found'];
         } else {
-            return ['success' => true, 'user' => $u];
+            return ['success' => true, 'user' => $id];
         }
     }
 
-    public function update(Request $request, $id) {
-        $u = User::find($id);
-        if (is_null($u)) return ['success' => false, 'user not found'];
+    public function update(Request $request, User $id) {
+        if (is_null($id)) return ['success' => false, 'user not found'];
         // todo запилить разрешения
         $updated = [];
         foreach ($request->all() as $key => $value) {
             if (in_array($key, $this->upgradeableUserFields)) {
                 try {
-                    $u->{$key} = $value;
-                    $u->save();
+                    $id->{$key} = $value;
+                    $id->save();
                 } finally {
                     $updated[] = $key;
                 }
@@ -85,21 +83,20 @@ class UserController extends Controller {
         return ['success' => count($updated) != 0, 'fields' => $updated];
     }
 
-    public function destroy($id) {
-        $u = User::find($id);
-        if (is_null($u)) return Response::json(['success' => false, 'error' => 'user not found']);
+    public function destroy(User $id) {
+        if (is_null($id)) return Response::json(['success' => false, 'error' => 'user not found']);
         /*if ($u != $request->user()) {
             return ['success' => false, 'you haven\'t permission']; // todo запилить разрешения
         } // если редачим не свой акк -- кидаем (пока)*/
         try {
-            $u->delete();
+            $id->delete();
         } finally {
             return Response::json(['success' => true]);
         }
     }
 
     public function logout(Request $request) {
-		/*
+		
         $u = $request->user();
 
         if (is_null($u)) {
@@ -107,8 +104,8 @@ class UserController extends Controller {
         } else {
             $u->logout();
         }
-		*/
-		 Auth::logout();
+		
+        Auth::logout();
 		Session::flush();
         return Response::json(['success' => true, 'error' => '']);
 

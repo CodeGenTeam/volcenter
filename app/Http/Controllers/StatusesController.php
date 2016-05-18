@@ -24,16 +24,15 @@ class StatusesController extends Controller {
         return ['success' => true];
     }
 
-    public function update($id, Request $request) {
-        $u = Statuses::find($id);
-        if (is_null($u)) return ['success' => false, 'status not found'];
+    public function update(Statuses $id, Request $request) {
+        if (is_null($id)) return ['success' => false, 'status not found'];
         // todo запилить разрешения
         $updated = [];
         foreach ($request->all() as $key => $value) {
             if (in_array($key, $this->upgradeableUserFields)) {
                 try {
-                    $u->{$key} = $value;
-                    $u->save();
+                    $id->{$key} = $value;
+                    $id->save();
                 } finally {
                     $updated[] = $key;
                 }
@@ -42,12 +41,11 @@ class StatusesController extends Controller {
         return ['success' => count($updated) != 0, 'fields' => $updated];
     }
 
-    public function destroy($id) {
-        $u = Statuses::find($id);
-        if (is_null($u)) return ['success' => false, 'status not found'];
+    public function destroy(Statuses $id) {
+        if (is_null($id)) return ['success' => false, 'status not found'];
         // todo запилить разрешения
         try {
-            $u->delete();
+            $id->delete();
         } finally {
             return ['success' => true];
         }

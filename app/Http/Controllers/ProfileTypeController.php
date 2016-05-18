@@ -25,9 +25,8 @@ class ProfileTypeController extends Controller {
         return ['success' => true];
     }
 
-    public function update($id, Request $request) {
-        $u = Profiles_types::find($id);
-        if (is_null($u)) return ['success' => false, 'error' => 'profile type not found'];
+    public function update(Profiles_types $id, Request $request) {
+        if (is_null($id)) return ['success' => false, 'error' => 'profile type not found'];
         // todo запилить разрешения
         $val = Validator::make($request->all(), [
             'name' => 'required'
@@ -37,8 +36,8 @@ class ProfileTypeController extends Controller {
         foreach ($request->all() as $key => $value) {
             if (in_array($key, $this->upgradeableUserFields)) {
                 try {
-                    $u->{$key} = $value;
-                    $u->save();
+                    $id->{$key} = $value;
+                    $id->save();
                 } finally {
                     $updated[] = $key;
                 }
@@ -47,10 +46,9 @@ class ProfileTypeController extends Controller {
         return ['success' => count($updated) != 0, 'fields' => $updated];
     }
 
-    public function delete($id) {
-        $u = Profiles_types::find($id);
-        if (is_null($u)) return ['success' => false, 'error' => 'profile type not found'];
-        $u->delete();
+    public function delete(Profiles_types $id) {
+        if (is_null($id)) return ['success' => false, 'error' => 'profile type not found'];
+        $id->delete();
         return ['success' => true];
     }
 }

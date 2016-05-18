@@ -33,8 +33,7 @@ class EventController extends Controller {
 		return Response::json(Event::all()-> take(3));
 	}
 	
-    public function delete($event) {
-        $event = Event::find($event);
+    public function delete(Event $event) {
         if (is_null($event)) return ['success' => false, 'error' => 'event not found'];
         $event->delete();
         return ['success' => true];
@@ -86,9 +85,8 @@ class EventController extends Controller {
         //else return ['success' => true, 'id' => 4];
     }
 
-    public function update(Request $request, $id) {
-        $e = Event::find($id);
-        if (is_null($e)) {
+    public function update(Request $request, Event $id) {
+        if (is_null($id)) {
             return ['success' => false, 'event not found'];
         } else {
             // todo запилить разрешения
@@ -96,8 +94,8 @@ class EventController extends Controller {
             foreach ($request as $key => $value) {
                 if (in_array($key, $this->upgradeableUserFields)) {
                     try {
-                        $e->{$key} = $value;
-                        $e->save();
+                        $id->{$key} = $value;
+                        $id->save();
                     } finally {
                         $updated[] = $key;
                     }
@@ -108,12 +106,11 @@ class EventController extends Controller {
 
     }
 
-    public function show($id) {
-        $u = Event::find($id);
-        if (is_null($u)) {
+    public function show(Event $id) {
+        if (is_null($id)) {
             return ['success' => false, 'error' => 'event not found'];
         } else {
-            return ['success' => true, 'event' => $u];
+            return ['success' => true, 'event' => $id];
         }
 
     }

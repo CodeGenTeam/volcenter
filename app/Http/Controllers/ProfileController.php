@@ -12,10 +12,9 @@ class ProfileController extends Controller {
 
     private $upgradeableUserFields = ['link', 'profile_type_id'];
 
-    public function show($user) {
-        $u = User::find($user);
-        if (is_null($u)) return ['success' => false, 'error' => 'user not found'];
-        return ['success' => true, 'profiles' => $u->profiles];
+    public function show(User $user) {
+        if (is_null($user)) return ['success' => false, 'error' => 'user not found'];
+        return ['success' => true, 'profiles' => $user->profiles()];
     }
 
     public function create($user) {
@@ -32,9 +31,8 @@ class ProfileController extends Controller {
         return ['success' => true];
     }
 
-    public function update($user, $id, Request $request) {
-        $u = Profiles::find($id);
-        if (is_null($u)) return ['success' => false, 'error' => 'profile not found'];
+    public function update(User $user, Profiles $id, Request $request) {
+        if (is_null($id)) return ['success' => false, 'error' => 'profile not found'];
         // todo запилить разрешения
         $val = Validator::make($request->all(), [
             'profile_type_id' => 'exists:profiles_types,id'
@@ -44,8 +42,8 @@ class ProfileController extends Controller {
         foreach ($request->all() as $key => $value) {
             if (in_array($key, $this->upgradeableUserFields)) {
                 try {
-                    $u->{$key} = $value;
-                    $u->save();
+                    $id->{$key} = $value;
+                    $id->save();
                 } finally {
                     $updated[] = $key;
                 }
@@ -54,10 +52,9 @@ class ProfileController extends Controller {
         return ['success' => count($updated) != 0, 'fields' => $updated];
     }
 
-    public function delete($id) {
-        $u = Profiles::find($id);
-        if (is_null($u)) return ['success' => false, 'error' => 'profile not found'];
-        $u->delete();
+    public function delete(Profiles $id) {
+        if (is_null($id)) return ['success' => false, 'error' => 'profile not found'];
+        $id->delete();
         return ['success' => true];
     }
 }

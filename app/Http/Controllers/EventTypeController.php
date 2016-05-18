@@ -24,10 +24,9 @@ class EventTypeController extends Controller {
         return Response::json(['success' => true]);
     }
 
-    public function update($id, Request $request) {
-        $u = Event_type::find($id);
-        if (is_null($u)) return ['success' => false, 'event type not found'];
-        if($request->name == "") return ['success' => false, 'name is empty or undefined'];
+    public function update(Event_type $id, Request $request) {
+        if (is_null($id)) return ['success' => false, 'event type not found'];
+        if($request->get("name")) return ['success' => false, 'name is empty or undefined'];
         // todo запилить разрешения
         $updated = [];
         /*foreach ($request as $key => $value) {
@@ -39,8 +38,8 @@ class EventTypeController extends Controller {
                 }
             }
         }*/
-        $u->name = $request->name;
-        $u->save();
+        $id->name = $request->get("name");
+        $id->save();
         return Response::json(
             ['success' => true, 'event type was changed']
         );

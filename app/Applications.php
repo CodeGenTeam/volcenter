@@ -16,6 +16,6 @@ class Applications extends Model {
     }
 
     public function status() {
-        return $this->hasOne('App\Statuses', 'id', 'status_id');
+        return $this->hasOne(Statuses::class, 'id', 'status_id');
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http;
 use Response;
 
 class ReturnUtil {
-
+    
     public function ret($assert, $data = null, $dataOnFail = null) {
         return $assert ? $this->success($data) : $this->fail($dataOnFail ?? $data);
     }

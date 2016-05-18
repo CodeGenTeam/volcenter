@@ -17,6 +17,6 @@ class Profiles extends Model {
     }
 
     public function type() {
-        return $this->hasOne('App\Profiles_types', 'id', 'profile_type_id');
+        return $this->hasOne(Profiles_types::class, 'id', 'profile_type_id');
     }
 }
