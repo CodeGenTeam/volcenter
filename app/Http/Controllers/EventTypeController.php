@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Event_type;
+use App\Models\Event_type;
 use \Illuminate\Http\Request;
 use \Response;
 use \Validator;
