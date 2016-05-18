@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,6 +28,6 @@ class Event extends Model {
     }
 
     public function type() {
-        return $this->hasOne('App\Event_type', 'id', 'event_type');
+        return $this->hasOne('App\Models\Event_type', 'id', 'event_type');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,6 +11,6 @@ class Event_type extends Model
     public $timestamps = false;
 
     function events() {
-        return $this->hasMany('App\Event', 'event_type', 'id');
+        return $this->hasMany('App\Models\Event', 'event_type', 'id');
     }
 }

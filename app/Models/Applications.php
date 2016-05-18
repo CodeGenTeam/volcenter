@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,6 +16,6 @@ class Applications extends Model {
     }
 
     public function status() {
-        return $this->hasOne('App\Statuses', 'id', 'status_id');
+        return $this->hasOne('App\Models\Statuses', 'id', 'status_id');
     }
 }

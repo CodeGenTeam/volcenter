@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,6 +17,6 @@ class Profiles extends Model {
     }
 
     public function type() {
-        return $this->hasOne('App\Profiles_types', 'id', 'profile_type_id');
+        return $this->hasOne('App\Models\Profiles_types', 'id', 'profile_type_id');
     }
 }

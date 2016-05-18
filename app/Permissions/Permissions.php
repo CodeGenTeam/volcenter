@@ -2,7 +2,7 @@
 namespace App\Permissions;
 
 use App\Permissions\Models\Rule as MRule;
-use App\User;
+use App\Models\User;
 use Auth;
 use Route;
 
@@ -24,7 +24,7 @@ class Permissions extends Permissible {
     }
 
     public function getOrCreateRule($rule) {
-        return $this->getRule($rule)->first() ?? MRule::create(['rule' => $rule]);
+        return $this->getRule($rule)->first();// ?? MRule::create(['rule' => $rule]);
     }
 
     public function setupAdminMode($mode = true) {
