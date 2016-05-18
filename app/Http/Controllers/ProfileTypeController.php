@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Profiles_types;
+use App\Models\Profiles_types;
 
 class ProfileTypeController extends Controller {
 

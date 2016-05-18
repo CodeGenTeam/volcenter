@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Statuses;
+use App\Models\Statuses;
 use Illuminate\Http\Request;
 use Validator;
 

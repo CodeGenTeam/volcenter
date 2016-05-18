@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,7 +15,8 @@ class Applications extends Model {
         return $this->status()->firstOrFail()->name;
     }
 
-    public function status() {
+    public function status()
+    {
         return $this->hasOne(Statuses::class, 'id', 'status_id');
     }
 }
