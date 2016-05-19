@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
+use App\Models\Events;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -18,7 +18,7 @@ class EventController extends Controller {
     private $upgradeableUserFields = ['name', 'descr', 'address', 'event_start', 'event_end', 'event_type'];
 
     public function index() {
-        return Response::json(Event::all());
+        return Response::json(Events::all());
     }
 
 	
@@ -30,10 +30,10 @@ class EventController extends Controller {
 	
 	public function getlast() {
 		//->skip(10)->take(5)->get();
-		return Response::json(Event::all()-> take(3));
+		return Response::json(Events::all()-> take(3));
 	}
 	
-    public function delete(Event $event) {
+    public function delete(Events $event) {
         if (is_null($event)) return ['success' => false, 'error' => 'event not found'];
         $event->delete();
         return ['success' => true];
@@ -71,7 +71,7 @@ class EventController extends Controller {
 		$val = Validator::make($data, ['name' => 'required']);
         if ($val->fails()) return Response::json(['success' => false, 'error' => $val->errors()->all()]);
 		
-        Event::create([
+        Events::create([
             'name' => $data['name'],
             'descr' => $data['descr'],
             'address' => $data['address'],
@@ -85,7 +85,7 @@ class EventController extends Controller {
         //else return ['success' => true, 'id' => 4];
     }
 
-    public function update(Request $request, Event $id) {
+    public function update(Request $request, Events $id) {
         if (is_null($id)) {
             return ['success' => false, 'event not found'];
         } else {
@@ -106,7 +106,7 @@ class EventController extends Controller {
 
     }
 
-    public function show(Event $id) {
+    public function show(Events $id) {
         if (is_null($id)) {
             return ['success' => false, 'error' => 'event not found'];
         } else {

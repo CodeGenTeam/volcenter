@@ -16,8 +16,8 @@ class MotivationsEvents extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('motivation_id'); // стимул/мотивация
-            $table->integer('event_id'); // мероприятие
+            $table->integer('motivation_id')->unsigned(); // стимул/мотивация
+            $table->integer('event_id')->unsigned(); // мероприятие
         });
     }
 

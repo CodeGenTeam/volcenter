@@ -20,9 +20,9 @@ class Applications extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id'); // пользователь
-            $table->integer('event_id'); // мероприятие
-            $table->integer('status_id'); // статус заявки
+            $table->integer('user_id')->unsigned(); // пользователь
+            $table->integer('event_id')->unsigned(); // мероприятие
+            $table->integer('status_id')->unsigned(); // статус заявки
         });
     }
 

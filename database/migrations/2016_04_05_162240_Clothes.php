@@ -20,7 +20,7 @@ class Clothes extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id'); // юзер
+            $table->integer('user_id')->unsigned(); // юзер
             $table->integer('size_clothes'); // размер одежды (пусть будет XXS, XS..,XL - берем из списка)
             $table->integer('size_foot'); // размер обуви
         });

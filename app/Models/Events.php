@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model {
+class Events extends Model {
 
     public $timestamps = false;
 
@@ -28,6 +28,6 @@ class Event extends Model {
     }
 
     public function type() {
-        return $this->hasOne(Event_type::class, 'id', 'event_type');
+        return $this->hasOne(Events_type::class, 'id', 'event_type');
     }
 }

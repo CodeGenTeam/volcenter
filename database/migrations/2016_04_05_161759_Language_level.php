@@ -20,10 +20,10 @@ class LanguageLevel extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id'); // пользователь
-            $table->integer('language_id'); // язык
+            $table->integer('user_id')->unsigned(); // пользователь
+            $table->integer('language_id')->unsigned(); // язык
             $table->integer('mark'); // оценка уровня владения языка (начальный, элементарный, средний, ниже среднего, средний, выше среднего, продвинутый, профессиональный)
-        });
+		});
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event_type;
+use App\Models\Events_type;
 use Illuminate\Http\Request;
 use Response;
 use Validator;
@@ -12,7 +12,7 @@ class EventTypeController extends Controller {
     private $upgradeableUserFields = ['email', 'name1', 'name2', 'name3', 'birthday', 'password'];
 
     public function index() {
-        $t = Event_type::all();
+        $t = Events_type::all();
         return Response::json(['success' => true, 'types' => $t]);
     }
 
@@ -20,11 +20,11 @@ class EventTypeController extends Controller {
         $data = $response->all();
         $val = Validator::make($data, ['name' => 'required']);
         if ($val->fails()) return Response::json(['success' => false, 'error' => $val->errors()->all()]);
-        Event_type::create(['name' => $data['name']]);
+        Events_type::create(['name' => $data['name']]);
         return Response::json(['success' => true]);
     }
 
-    public function update(Event_type $id, Request $request) {
+    public function update(Events_type $id, Request $request) {
         if (is_null($id)) return ['success' => false, 'event type not found'];
         if($request->get("name")) return ['success' => false, 'name is empty or undefined'];
         // todo запилить разрешения
@@ -47,7 +47,7 @@ class EventTypeController extends Controller {
     }
 
     public function destroy($id) {
-        $u = Event_type::find($id);
+        $u = Events_type::find($id);
         if (is_null($u)) return ['success' => false, 'event type not found'];
         // todo запилить разрешения
         try {

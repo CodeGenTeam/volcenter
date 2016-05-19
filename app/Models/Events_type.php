@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Event_type extends Model
+class Events_type extends Model
 {
-    protected $table = "Events_types";
+    protected $table = "Events_type";
     protected $fillable = ['name'];
     public $timestamps = false;
 
     function events() {
-        return $this->hasMany(Event::class, 'event_type', 'id');
+        return $this->hasMany(Events::class, 'event_type', 'id');
     }
 }

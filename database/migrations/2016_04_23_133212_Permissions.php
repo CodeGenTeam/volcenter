@@ -25,30 +25,28 @@ class Permissions extends Migration
 
         Schema::create('UserPermissions', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('permission_id');
+            $table->integer('user_id')->unsigned();
+            $table->integer('permission_id')->unsigned();
             $table->integer('created_by')->default(-1);
             $table->timestamps();
         });
 
         Schema::create('GroupPermissions', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('group_id');
-            $table->integer('permission_id');
+            $table->integer('group_id')->unsigned();
+            $table->integer('permission_id')->unsigned();
             $table->integer('created_by')->default(-1);
             $table->timestamps();
         });
 
         Schema::create('UserGroupAccessory', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('group_id');
+            $table->integer('user_id')->unsigned();
+            $table->integer('group_id')->unsigned();
             $table->integer('created_by')->default(-1);
             $table->timestamps();
         });
-
     }
-
     /**
      * Reverse the migrations.
      *
