@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Models\Profiles;
-use App\Models\User;
+use App\Models\Users;
 use Request;
 use Validator;
 
@@ -12,7 +12,7 @@ class ProfileController extends Controller {
 
     private $upgradeableUserFields = ['link', 'profile_type_id'];
 
-    public function show(User $user) {
+    public function show(Users $user) {
         if (is_null($user)) return ['success' => false, 'error' => 'user not found'];
         return ['success' => true, 'profiles' => $user->profiles()];
     }
@@ -31,7 +31,7 @@ class ProfileController extends Controller {
         return ['success' => true];
     }
 
-    public function update(User $user, Profiles $id, Request $request) {
+    public function update(Users $user, Profiles $id, Request $request) {
         if (is_null($id)) return ['success' => false, 'error' => 'profile not found'];
         // todo запилить разрешения
         $val = Validator::make($request->all(), [

@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 class EventType extends Migration
 {
 
-    private $tableName = 'events_types';
+    private $tableName = 'Events_types';
 
     /**
      * Run the migrations.

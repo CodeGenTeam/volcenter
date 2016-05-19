@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 class Events extends Migration
 {
 
-    private $tableName = 'events';
+    private $tableName = 'Events';
 
     /**
      * Run the migrations.

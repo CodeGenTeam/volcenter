@@ -3,7 +3,7 @@ namespace App\Permissions;
 
 use App\Permissions\Models\Group as MGroup;
 use App\Permissions\Models\UserPermission;
-use App\Models\User as MUser;
+use App\Models\Users as MUser;
 use Auth;
 use Illuminate\Database\Eloquent\Collection;
 

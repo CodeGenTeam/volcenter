@@ -8,7 +8,7 @@ class Profiles extends Model {
 
     public $timestamps = false;
     protected $fillable = ['user_id', 'profile_type_id', 'link'];
-    protected $table = 'profiles';
+    protected $table = 'Profiles';
     protected $hidden = ['id', 'user_id', 'profile_type_id'];
     protected $appends = ['type'];
 

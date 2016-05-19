@@ -8,7 +8,7 @@ class Event extends Model {
 
     public $timestamps = false;
 
-    protected $table = "events";
+    protected $table = "Events";
     protected $hidden = [
         'event_type'
     ];

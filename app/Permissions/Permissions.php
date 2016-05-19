@@ -2,7 +2,7 @@
 namespace App\Permissions;
 
 use App\Permissions\Models\Rule as MRule;
-use App\Models\User;
+use App\Models\Users;
 use Auth;
 use Route;
 
@@ -12,7 +12,7 @@ class Permissions extends Permissible {
 
     public function getPermissions($target = null) {
         if (is_null($target)) return $this->getCurrentUserPermissions()->getRules();
-        return RulesSet::fromUser(User::find($target))->getRules();
+        return RulesSet::fromUser(Users::find($target))->getRules();
     }
 
     public function getCurrentUserPermissions() {

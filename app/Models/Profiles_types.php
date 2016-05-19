@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Profiles_types extends Model {
 
     protected $fillable = ['name'];
-    protected $table = 'profiles_types';
+    protected $table = 'Profiles_types';
     public $timestamps = false;
 }

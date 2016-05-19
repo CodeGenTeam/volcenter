@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-class Permissions extends Migration {
-
+class Permissions extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -59,7 +59,6 @@ class Permissions extends Migration {
         Schema::dropIfExists('Permissions');
         Schema::dropIfExists('UserPermissions');
         Schema::dropIfExists('GroupPermissions');
-        Schema::dropIfExists('UserGroupPermission');
-
+        Schema::dropIfExists('UserGroupAccessory');
     }
 }
