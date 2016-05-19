@@ -1,10 +1,11 @@
 <?php
 namespace App\Permissions;
 
+use App\Models\User as MUser;
 use App\Permissions\Models\Group as MGroup;
-use App\Permissions\Models\UserPermission;
 use App\Permissions\Models\UserGroupAccessory as MUserGroupAccessory;
-use App\Models\Users as MUser;
+use App\Permissions\Models\UserPermission as MUserPermission;
+
 use Auth;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -20,6 +21,7 @@ class UserRulesSet extends RulesSet {
 
     public function getGroups() {
         $groups = [];
+
         foreach ($this->user->belongsToMany(MGroup::class, 'UserGroupAccessory', 'user_id', 'group_id', 'id')->get()->all() as $group) {
             $groups[] = $group->name;
         }
