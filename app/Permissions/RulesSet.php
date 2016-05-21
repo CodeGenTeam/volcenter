@@ -1,8 +1,8 @@
 <?php
 namespace App\Permissions;
 
-use App\Permissions\Models\Group as MGroup;
 use App\Models\User as MUser;
+use App\Permissions\Models\Group as MGroup;
 
 abstract class RulesSet extends Permissible {
 
@@ -15,7 +15,7 @@ abstract class RulesSet extends Permissible {
 
     public static function fromUser($user) {
         if ($user instanceof MUser) {
-            return RulesSet::$cache['u' . $user->id] ?? RulesSet::$cache['u' . $user->id] = new UserRulesSet($user);
+            return RulesSet::$cache['u' . $user->login] ?? RulesSet::$cache['u' . $user->login] = new UserRulesSet($user);
         } else {
             return RulesSet::$cache['u' . $user] ?? RulesSet::$cache['u' . $user] = new UserRulesSet($user);
         }
@@ -23,7 +23,7 @@ abstract class RulesSet extends Permissible {
 
     public static function fromGroup($group) {
         if ($group instanceof MGroup) {
-            return RulesSet::$cache['g' . $group->id] ?? RulesSet::$cache['g' . $group->id] = new GroupRulesSet($group);
+            return RulesSet::$cache['g' . $group->name] ?? RulesSet::$cache['g' . $group->name] = new GroupRulesSet($group);
         } else {
             return RulesSet::$cache['g' . $group] ?? RulesSet::$cache['g' . $group] = new GroupRulesSet($group);
         }
