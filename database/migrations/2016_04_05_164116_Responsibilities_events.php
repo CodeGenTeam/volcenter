@@ -16,8 +16,8 @@ class ResponsibilitiesEvents extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('event_id'); // мероприятие
-            $table->integer('responsibility_id'); // направление(-я) на мероприятие (аташе, team leader, логистика...)
+            $table->integer('event_id')->unsigned(); // мероприятие
+            $table->integer('responsibility_id')->unsigned(); // направление(-я) на мероприятие (аташе, team leader, логистика...)
         });
     }
 

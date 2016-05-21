@@ -20,13 +20,9 @@ class Profiles extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id'); // пользователь
-            $table->integer('profile_type_id'); // тип добавляемого профиля (телефон, соц. сеть vk, facebook..)
+            $table->integer('user_id')->unsigned(); // пользователь
+            $table->integer('profile_type_id')->unsigned(); // тип добавляемого профиля (телефон, соц. сеть vk, facebook..)
             $table->string('link'); // строка профиля(ссылка, номер телефона..)
-            $table->foreign('user_id')
-                ->references('id')->on('users')
-                ->onDelete('cascade')
-				->onUpdate('cascade');
         });
     }
 

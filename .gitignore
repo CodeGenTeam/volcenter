@@ -1,9 +1,9 @@
-/vendor/
-/node_modules
+vendor/
+node_modules/
 .phpstorm.meta.php
 *.iml
 .idea/
 .env
 _ide_helper.php
 composer.lock
-/storage
+storage/

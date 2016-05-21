@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-class Permissions extends Migration {
-
+class Permissions extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -25,30 +25,28 @@ class Permissions extends Migration {
 
         Schema::create('UserPermissions', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('permission_id');
+            $table->integer('user_id')->unsigned();
+            $table->integer('permission_id')->unsigned();
             $table->integer('created_by')->default(-1);
             $table->timestamps();
         });
 
         Schema::create('GroupPermissions', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('group_id');
-            $table->integer('permission_id');
+            $table->integer('group_id')->unsigned();
+            $table->integer('permission_id')->unsigned();
             $table->integer('created_by')->default(-1);
             $table->timestamps();
         });
 
         Schema::create('UserGroupAccessory', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('group_id');
+            $table->integer('user_id')->unsigned();
+            $table->integer('group_id')->unsigned();
             $table->integer('created_by')->default(-1);
             $table->timestamps();
         });
-
     }
-
     /**
      * Reverse the migrations.
      *
@@ -59,7 +57,6 @@ class Permissions extends Migration {
         Schema::dropIfExists('Permissions');
         Schema::dropIfExists('UserPermissions');
         Schema::dropIfExists('GroupPermissions');
-        Schema::dropIfExists('UserGroupPermission');
-
+        Schema::dropIfExists('UserGroupAccessory');
     }
 }

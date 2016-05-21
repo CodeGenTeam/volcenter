@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable {
+class Users extends Authenticatable {
 
     protected $hidden = ['password', 'remember_token', 'created_at', 'updated_at'];
-    protected $table = 'users';
+    protected $table = 'Users';
     protected $fillable = array('login', 'email', 'password', 'name1', 'name2', 'name3');
 
     public function applications() {

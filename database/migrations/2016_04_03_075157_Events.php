@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 class Events extends Migration
 {
 
-    private $tableName = 'events';
+    private $tableName = 'Events';
 
     /**
      * Run the migrations.
@@ -25,7 +25,7 @@ class Events extends Migration
             $table->timestamp('event_start')->useCurrent(); // дата и время начала
             $table->timestamp('event_end')->default(DB::raw('0')); // дата и время окончания
 
-            $table->integer('event_type')->default(0); // тип мероприятия
+            $table->integer('event_type')->unsigned(); // тип мероприятия
         });
     }
 

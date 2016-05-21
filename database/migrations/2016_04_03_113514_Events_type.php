@@ -3,10 +3,10 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EventType extends Migration
+class EventsType extends Migration
 {
 
-    private $tableName = 'events_types';
+    private $tableName = 'Events_type';
 
     /**
      * Run the migrations.

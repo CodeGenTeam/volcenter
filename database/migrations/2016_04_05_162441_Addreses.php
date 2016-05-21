@@ -20,7 +20,7 @@ class Addreses extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id'); // пользователь
+            $table->integer('user_id')->unsigned(); // пользователь
             $table->string('country'); // страна
             $table->string('city'); // город
             $table->string('street'); // улица

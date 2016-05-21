@@ -1,11 +1,11 @@
 <?php
 namespace App\Permissions;
 
-use App\Models\User as MUser;
+use App\Models\Users as MUser;
 use App\Permissions\Models\Group as MGroup;
 use App\Permissions\Models\UserGroupAccessory as MUserGroupAccessory;
-use App\Permissions\Models\UserPermission;
 use App\Permissions\Models\UserPermission as MUserPermission;
+
 use Auth;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -21,7 +21,8 @@ class UserRulesSet extends RulesSet {
 
     public function getGroups() {
         $groups = [];
-        foreach ($this->user->belongsToMany('App\Permissions\Models\Group', 'MUserGroupAccessory', 'user_id', 'group_id', 'id')->get()->all() as $group) {
+
+        foreach ($this->user->belongsToMany(MGroup::class, 'UserGroupAccessory', 'user_id', 'group_id', 'id')->get()->all() as $group) {
             $groups[] = $group->name;
         }
         if (count($groups) == 0 && $guest = MGroup::where('name', 'guest')->first()->name) $groups[] = $guest;
@@ -86,7 +87,7 @@ class UserRulesSet extends RulesSet {
 
     private function parseUserPermission() {
         if (Pex::isAdminMode()) $this->add('*');
-        $arr = $this->user->hasMany(MUserPermission::calss, 'user_id', 'id')->get()->all();
+        $arr = $this->user->hasMany(MUserPermission::class, 'user_id', 'id')->get()->all();
         foreach ($arr as $rule) $this->add($rule->rule->rule);
     }
 

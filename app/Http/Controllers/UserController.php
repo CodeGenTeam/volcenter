@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Models\User;
+use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
@@ -58,7 +58,7 @@ class UserController extends Controller {
         else return ['success' => true, 'note' => 'registred', 'id' => $user->id]; // (про 'note') ну на всяк случай
     }
 
-    public function show(User $id) {
+    public function show(Users $id) {
         if (is_null($id)) {
             return ['success' => false, 'error' => 'user not found'];
         } else {
@@ -66,7 +66,7 @@ class UserController extends Controller {
         }
     }
 
-    public function update(Request $request, User $id) {
+    public function update(Request $request, Users $id) {
         if (is_null($id)) return ['success' => false, 'user not found'];
         // todo запилить разрешения
         $updated = [];
@@ -83,7 +83,7 @@ class UserController extends Controller {
         return ['success' => count($updated) != 0, 'fields' => $updated];
     }
 
-    public function destroy(User $id) {
+    public function destroy(Users $id) {
         if (is_null($id)) return Response::json(['success' => false, 'error' => 'user not found']);
         /*if ($u != $request->user()) {
             return ['success' => false, 'you haven\'t permission']; // todo запилить разрешения

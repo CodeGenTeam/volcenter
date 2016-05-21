@@ -20,7 +20,7 @@ class StudyUniversity extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('study_id'); // идентификатор образовательного учреждения (предыдущая таблица)
+            $table->integer('study_id')->unsigned(); // идентификатор образовательного учреждения (предыдущая таблица)
             $table->string('faculty'); // факультет
             $table->string('chair'); // кафедра
         });

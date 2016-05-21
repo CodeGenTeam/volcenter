@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Applications;
 use App\Http\Requests;
-use App\Models\User;
+use App\Models\Users;
 use Illuminate\Http\Request;
 use Response;
 use Validator;
@@ -13,7 +13,7 @@ class ApplicationsController extends Controller {
 
     private $upgradeableUserFields = ['status_id'];
 
-    public function index(User $id) {
+    public function index(Users $id) {
         if (is_null($id)) return Response::json(['success' => false, 'error' => 'user not found']);
         return Response::json(['success' => true, 'applications' => $id->applications()]);
     }
