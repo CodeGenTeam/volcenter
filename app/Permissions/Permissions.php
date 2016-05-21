@@ -1,9 +1,10 @@
 <?php
 namespace App\Permissions;
 
-use App\Permissions\Models\Rule as MRule;
 use App\Models\User;
+use App\Permissions\Models\Rule as MRule;
 use Auth;
+use ReflectionFunction;
 use Route;
 
 class Permissions extends Permissible {
@@ -27,14 +28,6 @@ class Permissions extends Permissible {
         return $this->getRule($rule)->first() ?? MRule::create(['rule' => $rule]);
     }
 
-    public function setupAdminMode($mode = true) {
-        return $this->isAdminMode = $mode;
-    }
-
-    public function isAdminMode() {
-        return $this->isAdminMode;
-    }
-
     public function getRule($rule) {
         if ($rule instanceof MRule) {
             return $rule;
@@ -43,6 +36,21 @@ class Permissions extends Permissible {
         } else {
             return MRule::find($rule);
         }
+    }
+
+    public function sudo($function) {
+        $state = $this->isAdminMode();
+        $this->setupAdminMode(true);
+        if (is_callable($function)) return (new ReflectionFunction($function))->invoke();
+        $this->setupAdminMode($state);
+    }
+
+    public function isAdminMode() {
+        return $this->isAdminMode;
+    }
+
+    public function setupAdminMode($mode = true) {
+        return $this->isAdminMode = $mode;
     }
 
     public function requireRule($permission, $inverse = false) {
