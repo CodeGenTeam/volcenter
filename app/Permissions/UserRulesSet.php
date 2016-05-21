@@ -15,7 +15,7 @@ class UserRulesSet extends RulesSet {
     protected $user;
 
     public function __construct($user) {
-        if (!($user instanceof MUser)) $user = MUser::find($user);
+        if (!($user instanceof MUser)) $user = MUser::find($user) ?? MUser::where('login', $user)->first();
         $this->user = $user ?? new MUser(['id' => 0, 'login' => 'guest']);
     }
 
@@ -92,10 +92,21 @@ class UserRulesSet extends RulesSet {
 
     private function parseGroupPermissions() {
         $groups = $this->user->belongsToMany(MGroup::class, 'MUserGroupAccessory', 'user_id', 'group_id', 'id')->get()->all();
-        if (count($groups) == 0 && $guest = MGroup::where('name', 'guest')->first()) $groups[] = $guest;
+        if (count($groups) == 0) $this->assignGroup($groups);
         foreach ($groups as $group) {
             $this->add('group.' . $group->name);
             foreach ($group->rules()->get()->all() as $rule) $this->add($rule->rule);
+        }
+    }
+
+    private function assignGroup(&$groups) {
+        if (Auth::guest()) {
+            $groups[] = MGroup::where('name', 'guest')->firstOrCreate(['name' => 'guest']);
+        } else {
+            $groups[] = $group = MGroup::where('name', 'user')->firstOrCreate(['name' => 'user']);
+            Pex::sudo(function () {
+                $this->setGroup('user');
+            });
         }
     }
 }

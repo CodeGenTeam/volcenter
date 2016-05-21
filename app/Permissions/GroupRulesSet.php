@@ -10,7 +10,7 @@ class GroupRulesSet extends RulesSet {
     protected $group;
 
     public function __construct($group) {
-        if (!($group instanceof MGroup)) $group = MGroup::find($group);
+        if (!($group instanceof MGroup)) $group = MGroup::find($group) ?? MGroup::where('name', $group)->first();
         if (is_null($group)) {
             $this->rules = [];
         } else {
