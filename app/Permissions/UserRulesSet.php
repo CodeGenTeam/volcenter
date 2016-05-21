@@ -5,7 +5,6 @@ use App\Models\Users as MUser;
 use App\Permissions\Models\Group as MGroup;
 use App\Permissions\Models\UserGroupAccessory as MUserGroupAccessory;
 use App\Permissions\Models\UserPermission as MUserPermission;
-
 use Auth;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -21,7 +20,6 @@ class UserRulesSet extends RulesSet {
 
     public function getGroups() {
         $groups = [];
-
         foreach ($this->user->belongsToMany(MGroup::class, 'UserGroupAccessory', 'user_id', 'group_id', 'id')->get()->all() as $group) {
             $groups[] = $group->name;
         }
@@ -32,7 +30,7 @@ class UserRulesSet extends RulesSet {
     public function addRule($rule) {
         Pex::requireRule('permissions.user.rule.add');
         $rule = Pex::getOrCreateRule($rule);
-        $permission = UserPermission::create([
+        $permission = MUserPermission::create([
             'user_id' => $this->user->id, 'permission_id' => $rule->id,
             'created_by' => Auth::check() ? Auth::user()->id : -1
         ]);
@@ -42,7 +40,7 @@ class UserRulesSet extends RulesSet {
 
     public function removeRule($rule) {
         Pex::requireRule('permissions.user.rule.remove');
-        $permission = UserPermission::where('permission_id', Pex::getRule($rule)->first()->id);
+        $permission = MUserPermission::where('permission_id', Pex::getRule($rule)->first()->id);
         return $permission->delete() > 0; // если удалено более одного разрешения
     }
 
@@ -92,7 +90,7 @@ class UserRulesSet extends RulesSet {
     }
 
     private function parseGroupPermissions() {
-        $groups = $this->user->belongsToMany(MGroup::class, 'MUserGroupAccessory', 'user_id', 'group_id', 'id')->get()->all();
+        $groups = $this->user->belongsToMany(MGroup::class, 'UserGroupAccessory', 'user_id', 'group_id', 'id')->get()->all();
         if (count($groups) == 0) $this->assignGroup($groups);
         foreach ($groups as $group) {
             $this->add('group.' . $group->name);
