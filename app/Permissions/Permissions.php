@@ -1,7 +1,6 @@
 <?php
 namespace App\Permissions;
 
-use App\Models\User;
 use App\Permissions\Models\Rule as MRule;
 use Auth;
 use ReflectionFunction;
@@ -10,19 +9,6 @@ use Route;
 class Permissions extends Permissible {
 
     private $isAdminMode = false;
-
-    public function getPermissions($target = null) {
-        if (is_null($target)) return $this->getCurrentUserPermissions()->getRules();
-        return RulesSet::fromUser(User::find($target))->getRules();
-    }
-
-    public function getCurrentUserPermissions() {
-        return RulesSet::fromUser(Auth::user());
-    }
-
-    public function getGroupList() {
-        return $this->getCurrentUserPermissions()->getGroups();
-    }
 
     public function getOrCreateRule($rule) {
         return $this->getRule($rule)->first() ?? MRule::create(['rule' => $rule]);
@@ -41,8 +27,9 @@ class Permissions extends Permissible {
     public function sudo($function) {
         $state = $this->isAdminMode();
         $this->setupAdminMode(true);
-        if (is_callable($function)) return (new ReflectionFunction($function))->invoke();
+        if (is_callable($function)) $data = (new ReflectionFunction($function))->invoke();
         $this->setupAdminMode($state);
+        return $data ?? null;
     }
 
     public function isAdminMode() {
@@ -51,6 +38,14 @@ class Permissions extends Permissible {
 
     public function setupAdminMode($mode = true) {
         return $this->isAdminMode = $mode;
+    }
+
+    public function userRules($user = null) {
+        return RulesSet::fromUser($user ?? Auth::user());
+    }
+
+    public function groupRules($group) {
+        return RulesSet::fromGroup($group);
     }
 
     public function requireRule($permission, $inverse = false) {
