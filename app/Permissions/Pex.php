@@ -6,6 +6,6 @@ use Illuminate\Support\Facades\Facade;
 class Pex extends Facade {
 
     protected static function getFacadeAccessor() {
-        return 'permission';
+        return \App\Permissions\Permissions::class;
     }
 }

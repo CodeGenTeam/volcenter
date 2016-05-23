@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Responsibilities_events extends Model
 {
-    //
+	public $timestamps = false;
 }

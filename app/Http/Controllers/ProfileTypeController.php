@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Models\Profiles_types;
+use Pex;
 
 class ProfileTypeController extends Controller {
 
@@ -16,6 +17,7 @@ class ProfileTypeController extends Controller {
     }
 
     public function create() {
+        Pex::requireRule('permissions.group.*');
         $data = Request::all();
         $val = Validator::make($data, [
             'name' => 'required'

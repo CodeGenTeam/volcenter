@@ -22,7 +22,7 @@ class PermissionsProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
-        $this->app->singleton('permission', function($app) {
+        $this->app->singleton(Permissions::class, function($app) {
             return new Permissions();
         });
     }

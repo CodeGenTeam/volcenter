@@ -6,7 +6,6 @@ use App\Models\Events;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-
 //use Illuminate\Validation\Validator;
 use DB;
 
@@ -20,7 +19,6 @@ class EventController extends Controller {
     public function index() {
         return Response::json(Events::all());
     }
-
 	
 	public function getList($id) {
 		$number = 3;

@@ -22,6 +22,6 @@ class AppServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
-        $this->app->singleton('ReturnUtil', function() { return new ReturnUtil(); });
+        $this->app->singleton(ReturnUtil::class, function() { return new ReturnUtil(); });
     }
 }
