@@ -20,12 +20,12 @@ class PermissionsController extends Controller {
 
     public function rules($user = null) {
         Pex::requireRule('permissions.user.rule.get' . ($user ? '.other' : ''));
-        return Ret::success(['rules' => $user ? RulesSet::fromUser($user)->getRules() : Pex::getCurrentUserPermissions()->getRules()]);
+        return Ret::success(['rules' => $user ? RulesSet::fromUser($user)->getRules() : Pex::userRules()->getRules()]);
     }
 
     public function group($user = null) {
         Pex::requireRule('permissions.user.group.get' . ($user ? '.other' : ''));
-        $groups = $user ? RulesSet::fromUser($user)->getGroups() : Pex::getGroupList();
+        $groups = $user ? Pex::userRules($user)->getGroups() : Pex::userRules()->getGroups();
         return Ret::success(['group' => UserRulesSet::$ONLY_ONE_GROUP_MODE ? $groups[0] : $groups]);
     }
 
@@ -44,7 +44,7 @@ class PermissionsController extends Controller {
 
     public function groupInfo($group = null) {
         Pex::requireRule('permissions.group.info' . ($group ? '.other' : ''));
-        return Ret::success(['group' => !$group ? MGroup::where('name', Pex::getGroupList()[0])->first() : (MGroup::find($group) ?? MGroup::where('name', $group)->first())]);
+        return Ret::success(['group' => !$group ? MGroup::where('name', Pex::userRules()->getGroups()[0])->first() : (MGroup::find($group) ?? MGroup::where('name', $group)->first())]);
     }
 
     public function addGroupRule($permission, $group) {

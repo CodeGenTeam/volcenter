@@ -54,7 +54,7 @@ class Permissions extends Permissible {
 
     public function can($permission, $inverse = false) {
         if ($this->isAdminMode()) return !$inverse;
-        return $this->getCurrentUserPermissions()->can($permission, $inverse);
+        return $this->userRules()->can($permission, $inverse);
     }
 
     public function routes() {
