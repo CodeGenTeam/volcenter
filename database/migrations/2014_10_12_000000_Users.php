@@ -20,7 +20,7 @@ class Users extends Migration
             $table->string('firstname'); // Имя
             $table->string('lastname'); // Фамилия
             $table->string('middlename'); // Отчество
-            $table->timestamp('birthday')->default(DB::raw('0')); // др
+            $table->timestamp('birthday'); // др
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

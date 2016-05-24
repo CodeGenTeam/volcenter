@@ -22,8 +22,8 @@ class Events extends Migration
             $table->string('descr')->nullable(); // описание мероприятия
             $table->string('address')->nullable(); // где пройдет мероприятие
 
-            $table->timestamp('event_start')->useCurrent(); // дата и время начала
-            $table->timestamp('event_end')->default(DB::raw('0')); // дата и время окончания
+            $table->timestamp('event_start'); // дата и время начала
+            $table->timestamp('event_end'); // дата и время окончания
 
             $table->integer('event_type')->unsigned(); // тип мероприятия
         });

@@ -24,7 +24,7 @@ class Study extends Migration
             $table->string('place_name'); // название образов. учреждения
             $table->timestamp('time_start'); // время начала
             $table->timestamp('time_end'); // время окончания
-            $table->timestamp('group'); // класс(школа) или группа(универ)
+            $table->string('group'); // класс(школа) или группа(универ)
         });
     }
 

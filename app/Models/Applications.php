@@ -5,18 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class Applications extends Model {
-
     public $timestamps = false;
+    protected $table = 'Applications';
     protected $fillable = ['user_id', 'event_id', 'status_id'];
-    protected $hidden = ['id', 'status_id'];
-    protected $appends = ['status'];
-
-    public function getStatusAttribute() {
-        return $this->status()->firstOrFail()->name;
+    protected $hidden = ['id', 'user_id', 'event_id', 'status_id'];
+    public function getUser() {
+        return $this->belongsToMany(Users::class,'Applications','id','user_id');
     }
-
-    public function status()
-    {
-        return $this->hasOne(Statuses::class, 'id', 'status_id');
+    public function getEvent() {
+        return $this->belongsToMany(Events::class,'Applications','id','user_id');
+    }
+    public function getStatus() {
+        return $this->belongsToMany(Statuses::class,'Applications','id','user_id');
     }
 }
