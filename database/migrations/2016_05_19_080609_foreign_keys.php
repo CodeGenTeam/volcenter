@@ -82,39 +82,5 @@ class ForeignKeys extends Migration
      */
     public function down()
     {
-        Schema::dropForeign('Events_event_type_foreign');
-
-		Schema::dropForeign('Applications_user_id_foreign');
-		Schema::dropForeign('Applications_event_id_foreign');
-		Schema::dropForeign('Applications_status_id_foreign');
-
-		Schema::dropForeign('Profiles_user_id_foreign');
-		Schema::dropForeign('Profiles_profile_type_id_foreign');
-
-		Schema::dropForeign('Language_level_user_id_foreign');
-		Schema::dropForeign('Language_level_language_id_foreign');
-
-		Schema::dropForeign('Clothes_user_id_foreign');
-
-		Schema::dropForeign('Addreses_user_id_foreign');
-
-		Schema::dropForeign('Study_user_id_foreign');
-
-		Schema::dropForeign('Study_university_study_id_foreign');
-
-		Schema::dropForeign('Motivations_events_motivation_id_foreign');
-		Schema::dropForeign('Motivations_events_event_id_foreign');
-
-		Schema::dropForeign('Responsibilities_events_event_id_foreign');
-		Schema::dropForeign('Responsibilities_events_responsibility_id_foreign');
-
-		Schema::dropForeign('UserPermissions_user_id_foreign');
-		Schema::dropForeign('UserPermissions_permission_id_foreign');
-
-		Schema::dropForeign('GroupPermissions_group_id_foreign');
-		Schema::dropForeign('GroupPermissions_permission_id_foreign');
-
-		Schema::dropForeign('UserGroupAccessory_user_id_foreign');
-		Schema::dropForeign('UserGroupAccessory_group_id_foreign');
     }
 }

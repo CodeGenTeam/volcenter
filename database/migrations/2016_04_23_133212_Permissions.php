@@ -53,10 +53,11 @@ class Permissions extends Migration
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('PermissionGroups');
-        Schema::dropIfExists('Permissions');
+        Schema::dropIfExists('UserGroupAccessory');
         Schema::dropIfExists('UserPermissions');
         Schema::dropIfExists('GroupPermissions');
-        Schema::dropIfExists('UserGroupAccessory');
+        Schema::dropIfExists('PermissionGroups');
+        Schema::dropIfExists('Permissions');
+        
     }
 }

@@ -15,7 +15,7 @@ class Users extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->increments('id');
-            $table->string('login')->uneque();
+            $table->string('login')->unique();
             $table->string('email')->unique();
             $table->string('firstname'); // Имя
             $table->string('lastname'); // Фамилия
@@ -34,6 +34,8 @@ class Users extends Migration
      */
     public function down()
     {
-        Schema::drop($this->tableName);
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        Schema::dropIfExists($this->tableName);
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }
