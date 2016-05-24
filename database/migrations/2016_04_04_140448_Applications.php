@@ -23,6 +23,7 @@ class Applications extends Migration
             $table->integer('user_id')->unsigned(); // пользователь
             $table->integer('event_id')->unsigned(); // мероприятие
             $table->integer('status_id')->unsigned(); // статус заявки
+            $table->timestamp('datetime'); // дата и время заявки
         });
     }
 
