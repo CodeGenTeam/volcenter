@@ -7,11 +7,16 @@ Route::group(['middleware' => 'web'], function ()
 	{
 		return view('frontend/layout');
 	});
-    // all events
-	Route::get('/events', function ()
+    // webix
+	Route::get('/webix', function ()
 	{
-		return view('event/viewAll');
+		return view('webix');
 	});
+    //vue
+    Route::get('/vue', function ()
+    {
+        return view('vue');
+    });
 
 	/* Actions Handled By Resource Controller
 	    Verb		Path				Action		Route Name

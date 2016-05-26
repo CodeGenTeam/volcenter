@@ -13,9 +13,9 @@
 
     <link rel="stylesheet" href="http://cdn.webix.com/edge/webix.css" type="text/css">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
-
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="http://cdn.webix.com/edge/webix.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/vue/latest/vue.js"></script>
 </head>
 <body>
 @yield('content')
