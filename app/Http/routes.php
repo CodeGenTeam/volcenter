@@ -5,7 +5,7 @@ Route::group(['middleware' => 'web'], function ()
 	// main page - TODO: rewrite
 	Route::get('/', function ()
 	{
-		return view('frontend/layout');
+		return view('index');
 	});
     // webix
 	Route::get('/webix', function ()
