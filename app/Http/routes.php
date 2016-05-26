@@ -2,29 +2,18 @@
 
 Route::group(['middleware' => 'web'], function ()
 {
-	// *** PAGES *** //
-	// main page
+	// main page - TODO: rewrite
 	Route::get('/', function ()
 	{
 		return view('frontend/layout');
 	});
-
-	// admin page
-	Route::get('/backend', function ()
+    // all events
+	Route::get('/events', function ()
 	{
-		return view('backend/dashboard/index');
+		return view('event/viewAll');
 	});
-
-	Route::get('/backend/events', function ()
-	{
-		return view('backend/events/viewAll');
-	});
-
-	//----------------------------------------------------------------------------------------------------------------//
-	// *** FUNCTIONS *** //
 
 	/* Actions Handled By Resource Controller
-
 	    Verb		Path				Action		Route Name
 		GET			/photo				index		photo.index
 		GET			/photo/create		create		photo.create
@@ -33,8 +22,9 @@ Route::group(['middleware' => 'web'], function ()
 		GET			/photo/{photo}/edit	edit		photo.edit
 		PUT/PATCH	/photo/{photo}		update		photo.update
 		DELETE		/photo/{photo}		destroy		photo.destroy
-
 	 */
+    // EventTypeController
+    Route::resource('/event_type', 'EventTypeController');
 
 	// UserController
 	Route::get('/user/logout', 'UserController@logout');
@@ -51,10 +41,6 @@ Route::group(['middleware' => 'web'], function ()
 	Route::get('/event/last', 'EventController@getlast');
 	Route::get('/event/list/{id}', 'EventController@getList')->where(['id' => '\d+']);
 
-	// EventTypeController
-	Route::resource('/event_type', 'EventTypeController', ['only' => ['index', 'update', 'destroy']]);
-	Route::post('/event_type/create', 'EventTypeController@create');
-
 	// ApplicationsController
 	Route::get('/user/{user}/application', 'ApplicationsController@index')->where(['user' => '\d+']);
 	Route::get('/user/{user?}/application/create', 'ApplicationsController@create')->where(['user' => '\d+']);
@@ -68,6 +54,6 @@ Route::group(['middleware' => 'web'], function ()
 	Route::resource('/user/{user}/profile', 'ProfileController', ['only' => ['show', 'create', 'update', 'destroy']]);
 	Route::resource('/user/profile', 'ProfileTypeController', ['only' => ['index', 'create', 'update', 'destroy']]);
 
-	// PermissionsController
+	// PermissionsController - Doesn't need if you use laravel models in controller
 	Pex::routes();
 });
