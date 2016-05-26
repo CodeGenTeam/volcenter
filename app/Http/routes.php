@@ -7,11 +7,6 @@ Route::group(['middleware' => 'web'], function ()
 	{
 		return view('index');
 	});
-    // webix
-	Route::get('/webix', function ()
-	{
-		return view('webix');
-	});
     //vue
     Route::get('/vue', function ()
     {

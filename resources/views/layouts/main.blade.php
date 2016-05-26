@@ -17,9 +17,7 @@
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script src="http://cdn.webix.com/edge/webix.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/vue/latest/vue.js"></script>
-
     <script>
         $(function(){
             $(window).ready(function () {
@@ -27,7 +25,7 @@
                 if (win.width() <= 768) {
                     $('.big-logo').html('');
                 } else if (win.width() > 768) {
-                    $('.big-logo').html('<a class="navbar-brand" href="#"><img src="/brand.svg" /></a>');
+                    $('.big-logo').html('<a class="navbar-brand" href="/"><img src="/brand.svg" /></a>');
                 }
             });
             $(window).resize(function(){
@@ -35,7 +33,7 @@
                 if (win.width() <= 768) {
                     $('.big-logo').html('');
                 } else if (win.width() > 768) {
-                    $('.big-logo').html('<a class="navbar-brand" href="#"><img src="/brand.svg" /></a>');
+                    $('.big-logo').html('<a class="navbar-brand" href="/"><img src="/brand.svg" /></a>');
                 }
             });
         });
@@ -43,8 +41,8 @@
 </head>
 <body>
 <nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <a class="navbar-brand small-logo" href="#"><img src="/brand.svg" /></a>
+    <div class="container">
+        <a class="navbar-brand small-logo" href="/"><img src="/brand.svg" /></a>
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
@@ -56,7 +54,6 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="big-logo"></li>
-                <li class="active"><a href="#">Главная страница</a></li>
                 <li><a href="#">Мероприятия</a></li>
                 <li><a href="#">Контакты</a></li>
                 <li class="dropdown">
@@ -72,9 +69,9 @@
         </div><!--/.nav-collapse -->
     </div><!--/.container-fluid -->
 </nav>
-
-@yield('content')
-
+<div class="container">
+    @yield('content')
+</div>
 <div id="footer" class="center navbar-default">
     <div class="container">Карта сайта, либо еще что-то интересное.</div>
 </div>
