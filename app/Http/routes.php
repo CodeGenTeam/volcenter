@@ -2,7 +2,6 @@
 
 Route::group(['middleware' => 'web'], function ()
 {
-	// main page - TODO: rewrite
 	Route::get('/', function ()
 	{
 		return view('index');
@@ -23,6 +22,8 @@ Route::group(['middleware' => 'web'], function ()
 		PUT/PATCH	/photo/{photo}		update		photo.update
 		DELETE		/photo/{photo}		destroy		photo.destroy
 	 */
+	// API
+	Route::resource('/api/event_type', 'API\APIEventTypeController');
     // EventTypeController
     Route::resource('/event_type', 'EventTypeController');
 
