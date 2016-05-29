@@ -64,31 +64,43 @@
 			</tbody>
 		</table>
      --}}
-    <div class = "panel panel-default">
-        <div class = "panel-heading">Типы мероприятий
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Название типа мероприятия</th>
-            <th>Действия</th>
-        </tr>
-        </thead>
-        <tbody id="el_event_type">
-        <tr v-for="event_type_elem in event_type">
-            <td>@{{$index+1}}</td>
-            <td>@{{event_type_elem.name}}</td>
-            <td>
-                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div id="el_event_type" class="container">
+        <div class = "panel panel-default">
+            <div class = "panel-heading">Типы мероприятий
+                <span class="glyphicon glyphicon-plus" aria-hidden="true" rel="tooltip" title="Добавить новый тип" data-toggle="modal" data-target="#m_add"></span>
+            </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Название типа мероприятия</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+                <collection v-for="event_type_elem in event_type" :current_text="event_type_elem.name" :current_id="$index+1"></collection>
+            </tbody>
+        </table>
+        </div>
+        <module-window m_title="Добавление типа мероприятия" m_body="Введите строковое значение для типа мероприятия" m_id="m_add" :m_input_show="true"></module-window>
+        <module-window m_title="Изменение типа мероприятия" m_body="Введите новое значение для типа мероприятия" m_id="m_edit" :m_input_show="true"></module-window>
+        <module-window m_title="Удаление типа мероприятия" m_body="Удаление типа мероприятия" m_id="m_del" :m_input_show="false"></module-window>
     </div>
 @endsection
 
 @push('scripts')
-<script src="/vue/event_type.js"></script>
+<script src="/vue/event_type/event_type.js"></script>
+<script>
+    $(function() {
+        $('body').tooltip({
+            selector: "[rel=tooltip]", // можете использовать любой селектор
+            placement: "top"
+        });
+        this.current = '';
+        $('tbody').on("click", "tr", function () {
+            vm.current_id = $(this).find('td:eq(0)').text();
+            vm.current_text = $(this).find('td:eq(1)').text();
+        });
+    });
+</script>
 @endpush

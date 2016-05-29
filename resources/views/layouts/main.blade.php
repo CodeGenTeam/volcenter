@@ -12,10 +12,11 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link href="app.css" rel="stylesheet">
+    <link href="\app.css" rel="stylesheet">
 
-    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
     <script src="https://cdn.jsdelivr.net/vue/latest/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.2/vue-resource.js"></script>
     <script>
@@ -69,9 +70,7 @@
         </div><!--/.nav-collapse -->
     </div><!--/.container-fluid -->
 </nav>
-<div class="container">
     @yield('content')
-</div>
 <div id="footer" class="center navbar-default">
     <div class="container">Карта сайта, либо еще что-то интересное.</div>
 </div>

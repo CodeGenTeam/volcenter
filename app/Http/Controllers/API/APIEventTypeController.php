@@ -9,27 +9,47 @@ use Response;
 
 class APIEventTypeController extends Controller {
     
-    public function index() {
-        return Events_type::all();
+    public function index(Request $request) {
+        if ($request->ajax())
+        {
+            return Events_type::all();
+        }
+        return abort(404);
     }
     
     public function store (Request $request)
     {
-        return Events_type::create($request->all());
+        if ($request->ajax())
+        {
+            return Events_type::create($request->all());
+        }
+        return abort(404);
     }
     
-    public function show($id){
-        return Events_type::findOrFail($id);
+    public function show(Request $request, $id){
+        if ($request->ajax())
+        {
+            return Events_type::findOrFail($id);
+        }
+        return abort(404);
     }
     
     public function update(Request $request, $id)
     {
-        Events_type::findOrFail($id)->update($request->all());
-        return Response::json($request->all()); //response()->json()
+        if ($request->ajax())
+        {
+            Events_type::findOrFail($id)->update($request->all());
+            return Response::json($request->all()); //response()->json()
+        }
+        return abort(404);
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        return Events_type::destroy($id);
+        if ($request->ajax())
+        {
+            return Events_type::destroy($id);
+        }
+        return abort(404);
     }
 }
