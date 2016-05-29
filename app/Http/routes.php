@@ -2,14 +2,8 @@
 
 Route::group(['middleware' => 'web'], function ()
 {
-	Route::get('/', function ()
-	{
-		return view('index');
-	});
-    //vue
-    Route::get('/vue', function ()
-    {
-        return view('vue');
+    Route::get('/', function () {
+        return view('frontend/layout');
     });
 
 	/* Actions Handled By Resource Controller
