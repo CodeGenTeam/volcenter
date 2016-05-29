@@ -1,55 +1,22 @@
-
-    // var emailRE = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    
-
-    var collection = Vue.extend({
-        props: {
-            current_text:'',
-            current_id:''
-        },
-        template:
-        '<tr>'+
-        '<td>{{current_id}}</td>'+
-        '<td>{{current_text}}</td>'+
-        '<td>'+
-        '<span class="glyphicon glyphicon-pencil" aria-hidden="true" rel="tooltip" title="Изменить" data-toggle="modal" data-target="#m_edit"></span>'+
-        '<span class="glyphicon glyphicon-remove" aria-hidden="true" rel="tooltip" title="Удалить" data-toggle="modal" data-target="#m_del"></span>'+
-        '</td>'+
-        '</tr>'
-    });
-
-    var widget = Vue.extend({
-        data: function () {
-            return {
-                m_value:''
-            }
-        },
+    Vue.component('module-window',Vue.extend({
         props: {
             m_title:'',
             m_input_show: false,
             m_body:'',
-            m_id:''
+            m_id:'',
+            m_value:'',
+            b_name_yes:'',
+            b_name_no:''
         },
-        template:
-        '<div class="modal fade" id="{{m_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">'+
-        '<div class="modal-dialog">'+
-        '<div class="modal-content">'+
-        '<div class="modal-header">'+
-        '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-        '<h4 class="modal-title" id="myModalLabel">{{m_title}}</h4>' +
-        '</div>' +
-        '<div class="modal-body">' +
-        '{{m_body}}<br />'+
-        '<input type="text" v-if="m_input_show" v-model="m_value" placeholder="{{current_text}}">'+
-        '</div>'+
-        '<div class="modal-footer">'+
-        '<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>'+
-        '<button type="button" class="btn btn-primary" onclick="{{m_function}}">Сохранить изменения</button>'+
-        '</div>'+
-        '</div>'+
-        '</div>'+
-        '</div>'
-    });
+        template: '#collection',
+        methods: {
+            save: function () {
+                this.$dispatch('save',this.m_value,this.m_id);
+            },
+            close: function () {
+            }
+        }
+    }));
     var vm = new Vue({
         http: {
             root: '/root',
@@ -59,99 +26,66 @@
         },
         el: '#el_event_type',
         data: {
-            event_type: [{}]
-            /*
-             success: false,
-             edit: false
-            * */
+            event_type: [{}],
+            current_id:'',
+            current_text:'',
+            m_id:'',
+            event:null
         },
         methods: {
+            click_button: function(event) {
+                vm.$root.$children[0].m_value = '';
+                vm.$root.$children[1].m_value = this.current_text;
+                vm.$root.$children[2].m_value = this.current_text;
+            },
+            click: function(event) {
+                this.$els.click_button.dispatchEvent(this.event);
+            },
             fetchTypeEvent: function () {
                 this.$http.get('/api/event_type').then(function (response) {
                     this.$set('event_type', response.data);
                 });
+            },
+            updateEvent : function (id,val) {
+                var newrecord = { id: id, name: val}
+                this.$http.patch('/api/event_type/' + id, newrecord).then(function (response) {
+                    //console.log(response.data)
+                });
+                this.fetchTypeEvent();
+            },
+            removeEvent: function (id) {
+                this.$http.delete('/api/event_type/' + id);
+                this.fetchTypeEvent();
+            },
+            addEvent: function(val){
+                var newrecord = { name: val};
+                this.$http.post('/api/event_type/', newrecord);
+                self = this;
+                this.success = true;
+                setTimeout(function () {
+                    self.success = false;
+                }, 5000);
+                this.fetchTypeEvent()
             }
-            /*
-            RemoveUser: function (id) {
-             var ConfirmBox = confirm("Are you sure, you want to delete this User?")
-
-             if(ConfirmBox) this.$http.delete('/api/users/' + id)
-
-             this.fetchUser()
-             },
-
-             EditUser: function (id) {
-             var user = this.newUser
-
-             this.newUser = { id: '', name: '', email: '', address: ''}
-
-             this.$http.patch('/api/users/' + id, user, function (data) {
-             console.log(data)
-             })
-
-             this.fetchUser()
-
-             this.edit = false
-
-             },
-
-             ShowUser: function (id) {
-             this.edit = true
-
-             this.$http.get('/api/users/' + id, function (data) {
-             this.newUser.id = data.id
-             this.newUser.name = data.name
-             this.newUser.email = data.email
-             this.newUser.address = data.address
-             })
-             },
-
-             AddNewUser: function () {
-             // User input
-             var user = this.newUser
-
-             // Clear form input
-             this.newUser = { name:'', email:'', address:'' }
-
-             // Send post request
-             this.$http.post('/api/users/', user)
-
-             // Show success message
-             self = this
-             this.success = true
-             setTimeout(function () {
-             self.success = false
-             }, 5000)
-
-             // Reload page
-             this.fetchUser()
-
-             }
-            */
+        },
+        events: {
+            'save': function (msg, id) {
+                if(id=="m_del")
+                {
+                    this.removeEvent(this.current_id);
+                }else if(id=="m_edit")
+                {
+                    this.updateEvent(this.current_id,msg);
+                }else if(id=="m_add")
+                {
+                    this.addEvent(msg);
+                }
+            }
         },
         ready: function () {
-            this.fetchTypeEvent();
-        },
-        components: {
-            'module-window': widget,
-            'collection': collection
-        },
-        /*
-         computed: {
-         validation: function () {
-         return {
-         name: !!this.newUser.name.trim(),
-         email: emailRE.test(this.newUser.email),
-         address: !!this.newUser.address.trim()
-         }
-         },
-
-         isValid: function () {
-         var validation = this.validation
-         return Object.keys(validation).every(function (key) {
-         return validation[key]
-         })
-         }
-         },
-        * */
+            this.fetchTypeEvent()
+            this.event = document.createEvent("HTMLEvents");
+            this.event.initEvent("click_button", true, true);
+            this.$els.click_button.addEventListener('click', this.click_button);
+        }
     });

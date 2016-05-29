@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Events_type extends Model {
     protected $table = "Events_type";
-    protected $hidden = ['id'];
+    //protected $hidden = ['id'];
     protected $fillable = ['name'];
     public $timestamps = false;
     public function getEvents() {
