@@ -1,6 +1,7 @@
 <?php
-namespace App\Permissions;
+namespace app\Permissions;
 
-abstract class Permissible {
-    public abstract function can($permission, $inverse = false);
+abstract class Permissible
+{
+    abstract public function can($permission, $inverse = false);
 }

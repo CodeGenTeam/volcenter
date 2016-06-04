@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Permissions\Models;
+namespace app\Permissions\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Rule extends Model {
+class Rule extends Model
+{
 
     public $timestamps = false;
     protected $table = 'Permissions';

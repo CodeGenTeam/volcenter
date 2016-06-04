@@ -7,12 +7,14 @@ var app = angular.module('app')
 	};
 
 	$scope.eventsType = {
-		options: ['Медицинское волонтёрство',
-		'Событийное волонтёрство',
-		'Социальное волонтёрство',
-		'Спортивное волонтёрство',
-		'Другое'],
-		selected: 'Другое'
+		options: [
+			{id:'1',name:'Медицинское волонтёрство'},
+			{id:'2',name:'Событийное волонтёрство'},
+			{id:'3',name:'Социальное волонтёрство'},
+			{id:'4',name:'Спортивное волонтёрство'},
+			{id:'5',name:'Другое'}
+			],
+		    selected: {id:'5',name:'Другое'}
 	};
 
 	//responsibilities
@@ -51,18 +53,17 @@ var app = angular.module('app')
 
 	$scope.checkData =function() {
 		if ( $scope.form1.$valid ) {
-
-
+            
 			$scope.event.motivations = $scope.motivations;
 			$scope.event.responsibilities = $scope.responsibilities;
-			$scope.event.type = 1//$scope.eventsType.selected;
+			$scope.event.type = $scope.eventsType.selected;
 
 			console.log($scope.event);
 
-			$http({
-				method: 'POST',
+			$.ajax({
+				type: "POST",
 				url: URL + '/event/create',
-				params: $scope.event
+				data: $scope.event
 			}).then(function(response) {
 
 				var data = response.data;

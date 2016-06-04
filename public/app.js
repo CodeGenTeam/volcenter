@@ -1,7 +1,7 @@
 var app = angular.module('app', ['ui.bootstrap', 'ngRoute', 'ui.router', 'permission'])
 
 .factory('URL', function(){
-	return '';
+	return 'http://localhost';
 	// return 'http://api.volcenter:8080';
 	// return 'http://alexphost.ru:8080';
 })

@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers;
+namespace app\Http\Controllers;
 
 use App\Permissions\Models\Group as MGroup;
 use App\Permissions\Models\GroupPermission as MGroupPermission;
@@ -11,65 +11,77 @@ use Pex;
 use Ret;
 use Validator;
 
-class PermissionsController extends Controller {
+class PermissionsController extends Controller
+{
 
-    public function can($permission, $user = null) {
+    public function can($permission, $user = null)
+    {
         Pex::requireRule('permissions.user.rule.check' . ($user ? '.other' : ''));
         return Ret::success(['can' => ($user ? RulesSet::fromUser($user)->can($permission) : Pex::can($permission))]);
     }
 
-    public function rules($user = null) {
+    public function rules($user = null)
+    {
         Pex::requireRule('permissions.user.rule.get' . ($user ? '.other' : ''));
         return Ret::success(['rules' => $user ? RulesSet::fromUser($user)->getRules() : Pex::userRules()->getRules()]);
     }
 
-    public function group($user = null) {
+    public function group($user = null)
+    {
         Pex::requireRule('permissions.user.group.get' . ($user ? '.other' : ''));
         $groups = $user ? Pex::userRules($user)->getGroups() : Pex::userRules()->getGroups();
         return Ret::success(['group' => UserRulesSet::$ONLY_ONE_GROUP_MODE ? $groups[0] : $groups]);
     }
 
-    public function addUserRule($permission, $user) {
+    public function addUserRule($permission, $user)
+    {
         Pex::requireRule('permissions.user.rule.add');
         $rules = RulesSet::fromUser($user);
         //if ($rules->can($permission)) return Ret::fail('user already have that permission');
         return Ret::ret($rules->addRule($permission));
     }
 
-    public function removeUserRule($permission, $user) {
+    public function removeUserRule($permission, $user)
+    {
         Pex::requireRule('permissions.user.rule.remove');
         $rules = RulesSet::fromUser($user);
         return Ret::ret($rules->removeRule($permission));
     }
 
-    public function groupInfo($group = null) {
+    public function groupInfo($group = null)
+    {
         Pex::requireRule('permissions.group.info' . ($group ? '.other' : ''));
         return Ret::success(['group' => !$group ? MGroup::where('name', Pex::userRules()->getGroups()[0])->first() : (MGroup::find($group) ?? MGroup::where('name', $group)->first())]);
     }
 
-    public function addGroupRule($permission, $group) {
+    public function addGroupRule($permission, $group)
+    {
         Pex::requireRule('permissions.group.rule.add');
         return Ret::ret(RulesSet::fromGroup($group)->addRule($permission));
     }
 
-    public function removeGroupRule($permission, $group) {
+    public function removeGroupRule($permission, $group)
+    {
         Pex::requireRule('permissions.group.rule.remove');
         return Ret::ret(RulesSet::fromGroup($group)->removeRule($permission));
     }
 
-    public function createGroup($name) {
+    public function createGroup($name)
+    {
         Pex::requireRule('permissions.group.create');
         $v = Validator::make(['name' => $name], ['name' => 'required|max:255']);
-        if ($v->fails()) return Ret::fail($v->errors());
+        if ($v->fails()) {
+            return Ret::fail($v->errors());
+        }
         return Ret::ret(MGroup::create(['name' => $name, 'created_by' => Auth::check() ? Auth::user()->id : -1]));
     }
 
-    public function removeGroup($name) {
+    public function removeGroup($name)
+    {
         Pex::requireRule('permissions.group.remove');
         $group = MGroup::find($name) ?? MGroup::where('name', $name)->first();
         MGroupPermission::where('group_id', $group->id)->delete();
         $group->delete();
         return Ret::success();
     }
-
 }

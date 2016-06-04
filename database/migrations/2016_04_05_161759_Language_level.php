@@ -23,7 +23,7 @@ class LanguageLevel extends Migration
             $table->integer('user_id')->unsigned(); // пользователь
             $table->integer('language_id')->unsigned(); // язык
             $table->integer('mark'); // оценка уровня владения языка (начальный, элементарный, средний, ниже среднего, средний, выше среднего, продвинутый, профессиональный)
-		});
+        });
     }
 
     /**

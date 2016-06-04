@@ -1,11 +1,13 @@
 <?php
-namespace App\Http\Facades;
+namespace app\Http\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Ret extends Facade {
+class Ret extends Facade
+{
 
-    protected static function getFacadeAccessor() {
+    protected static function getFacadeAccessor()
+    {
         return \App\Http\ReturnUtil::class;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace app\Http\Controllers\Auth;
 
 use App\Models\Users;
 use Validator;
@@ -39,7 +39,7 @@ class AuthController extends Controller
 
     public function postRegister(array $data)
     {
-       /* $validator = $this->validator($request->all());
+        /* $validator = $this->validator($request->all());
         if ($validator->fails()) {
             throwValidationException($request, $validator);
         };

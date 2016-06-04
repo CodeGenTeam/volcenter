@@ -1,18 +1,20 @@
 <?php
 
-namespace App\Providers;
+namespace app\Providers;
 
 use App\Permissions\Permissions;
 use Illuminate\Support\ServiceProvider;
 
-class PermissionsProvider extends ServiceProvider {
+class PermissionsProvider extends ServiceProvider
+{
 
     /**
      * Bootstrap the application services.
      *
      * @return void
      */
-    public function boot() {
+    public function boot()
+    {
         //
     }
 
@@ -21,8 +23,9 @@ class PermissionsProvider extends ServiceProvider {
      *
      * @return void
      */
-    public function register() {
-        $this->app->singleton(Permissions::class, function($app) {
+    public function register()
+    {
+        $this->app->singleton(Permissions::class, function ($app) {
             return new Permissions();
         });
     }

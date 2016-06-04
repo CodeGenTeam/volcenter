@@ -1,18 +1,20 @@
 <?php
 
-namespace App\Providers;
+namespace app\Providers;
 
 use App\Http\ReturnUtil;
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider {
+class AppServiceProvider extends ServiceProvider
+{
 
     /**
      * Bootstrap any application services.
      *
      * @return void
      */
-    public function boot() {
+    public function boot()
+    {
         //
     }
 
@@ -21,7 +23,8 @@ class AppServiceProvider extends ServiceProvider {
      *
      * @return void
      */
-    public function register() {
-        $this->app->singleton(ReturnUtil::class, function() { return new ReturnUtil(); });
+    public function register()
+    {
+        $this->app->singleton(ReturnUtil::class, function () { return new ReturnUtil(); });
     }
 }

@@ -38,9 +38,10 @@
             </div>
 
             <div class="lan-wrapper" ng-controller="createEventCtrl">
-                <label>Тип мероприятия</label>
-                <select class="form-control margin-bot" ng-model="event_type_selected"
-                        ng-options="item as item.name for item in eventsType track by item.id"></select>
+                <label for="eventsType">Тип мероприятия</label>
+                <select name="eventsType" id="eventsType"
+                        ng-options="option.name for option in eventsType.options track by option.id"
+                        ng-model="eventsType.selected"></select>
                 <label>Описание мероприятия </label>
                 <textarea class="form-control margin-bot-not" name="descr" ng-model="$parent.event.descr" required></textarea>
             </div>

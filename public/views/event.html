@@ -8,16 +8,15 @@
 
 			<div class="event-watch-descr">{{ev.descr}}</div>
 
-			<p><span>Дата:</span> {{ev.dateStart}} - {{ev.dateEnd}}
+			<p><span>Дата:</span> {{ev.event_start}} - {{ev.event_end}}
             <p><span>Место: </span>{{ev.address}}
-			<p><span>Тип мероприятия: </span>{{ev.type}}
+			<p><span>Тип мероприятия: </span>{{ev.event_type}}
 
             <p><span>Подтверждено участников: </span>{{ev.users}}
             <p><span>Ожидает подтверждения: </span>{{ev.users}}
 
             <p><span>Стимулы: </span> <i ng-show="ev.motivations.length == 0">Не указано</i>
             <div class="lan-obj" ng-repeat="motivate in motivations">
-
                 <p><span>Краткое описание: </span>{{motivate.users}}
                 <p><span>Полное описание: </span>{{motivate.users}}
             </div>

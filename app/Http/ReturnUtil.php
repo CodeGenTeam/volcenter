@@ -1,19 +1,23 @@
 <?php
-namespace App\Http;
+namespace app\Http;
 
 use Response;
 
-class ReturnUtil {
+class ReturnUtil
+{
     
-    public function ret($assert, $data = null, $dataOnFail = null) {
+    public function ret($assert, $data = null, $dataOnFail = null)
+    {
         return $assert ? $this->success($data) : $this->fail($dataOnFail ?? $data);
     }
 
-    public function success($data = null) {
+    public function success($data = null)
+    {
         return Response::json(array_merge(['success' => true], $data ? (is_array($data) ? $data : ['note' => $data]) : []));
     }
 
-    public function fail($reason = null) {
+    public function fail($reason = null)
+    {
         return Response::json(array_merge(['success' => false], $reason ? ['reason' => $reason] : []));
     }
 }

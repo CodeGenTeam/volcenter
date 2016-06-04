@@ -1,24 +1,28 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace app\Http\Controllers;
 
 use App\Models\Events;
 use App\Models\Events_type;
 use Illuminate\Http\Request;
 use Response;
+
 //use Validator;
 
-class EventTypeController extends Controller {
+class EventTypeController extends Controller
+{
 
     //private $upgradeableUserFields = ['email', 'name1', 'name2', 'name3', 'birthday', 'password'];
 
     // TODO: View со всеми записями
-    public function index() {
+    public function index()
+    {
         $event_type = Events_type::all();
-        return View('event.event_type.index',compact('event_type'));
+        return View('event.event_type.index', compact('event_type'));
     }
     // TODO: View создания новой записи
-    public function create() {
+    public function create()
+    {
         /*$data = $response->all();
         $val = Validator::make($data, ['name' => 'required']);
         if ($val->fails()) return Response::json(['success' => false, 'error' => $val->errors()->all()]);
@@ -26,21 +30,26 @@ class EventTypeController extends Controller {
         return Response::json(['success' => true]);*/
     }
     // TODO: запрос создания новой записи
-    public function store(Request $request) {
-
+    public function store(Request $request)
+    {
     }
     // TODO: страница показа записи
-    public function show (Events_type $id) {
-
+    public function show(Events_type $id)
+    {
     }
     // TODO: страница редактирования записи
-    public function edit (Events_type $id) {
-
+    public function edit(Events_type $id)
+    {
     }
     // TODO: запрос обновления записи
-    public function update(Events_type $id, Request $request) {
-        if (is_null($id)) return ['success' => false, 'event type not found'];
-        if($request->get("name")) return ['success' => false, 'name is empty or undefined'];
+    public function update(Events_type $id, Request $request)
+    {
+        if (is_null($id)) {
+            return ['success' => false, 'event type not found'];
+        }
+        if ($request->get("name")) {
+            return ['success' => false, 'name is empty or undefined'];
+        }
         // todo запилить разрешения
         $updated = [];
         /*foreach ($request as $key => $value) {
@@ -60,9 +69,12 @@ class EventTypeController extends Controller {
         //return ['success' => count($updated) != 0, 'fields' => $updated];
     }
     // TODO: запрос удаления записи
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $u = Events_type::find($id);
-        if (is_null($u)) return ['success' => false, 'event type not found'];
+        if (is_null($u)) {
+            return ['success' => false, 'event type not found'];
+        }
         // todo запилить разрешения
         try {
             $u->delete();

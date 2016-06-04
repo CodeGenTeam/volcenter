@@ -61,7 +61,7 @@ var app = angular.module('app')
             resetDate();
 
             $scope.user.action = 'register';
-
+            console.log('create');
             $http({
                 method: 'GET',
                 url: URL + '/user/create',

@@ -1,20 +1,23 @@
 <?php
-namespace App\Permissions;
+namespace app\Permissions;
 
 use App\Permissions\Models\Rule as MRule;
 use Auth;
 use ReflectionFunction;
 use Route;
 
-class Permissions extends Permissible {
+class Permissions extends Permissible
+{
 
     private $isAdminMode = false;
 
-    public function getOrCreateRule($rule) {
+    public function getOrCreateRule($rule)
+    {
         return $this->getRule($rule)->first() ?? MRule::create(['rule' => $rule]);
     }
 
-    public function getRule($rule) {
+    public function getRule($rule)
+    {
         if ($rule instanceof MRule) {
             return $rule;
         } elseif (is_string($rule)) {
@@ -24,40 +27,54 @@ class Permissions extends Permissible {
         }
     }
 
-    public function sudo($function) {
+    public function sudo($function)
+    {
         $state = $this->isAdminMode();
         $this->setupAdminMode(true);
-        if (is_callable($function)) $data = (new ReflectionFunction($function))->invoke();
+        if (is_callable($function)) {
+            $data = (new ReflectionFunction($function))->invoke();
+        }
         $this->setupAdminMode($state);
         return $data ?? null;
     }
 
-    public function isAdminMode() {
+    public function isAdminMode()
+    {
         return $this->isAdminMode;
     }
 
-    public function setupAdminMode($mode = true) {
+    public function setupAdminMode($mode = true)
+    {
         return $this->isAdminMode = $mode;
     }
 
-    public function userRules($user = null) {
+    public function userRules($user = null)
+    {
         return RulesSet::fromUser($user ?? Auth::user());
     }
 
-    public function groupRules($group) {
+    public function groupRules($group)
+    {
         return RulesSet::fromGroup($group);
     }
 
-    public function requireRule($permission, $inverse = false) {
-        if (!$this->can($permission, $inverse)) abort(403, 'permission denied. [' . $permission . ']');
+    public function requireRule($permission, $inverse = false)
+    {
+        if (!$this->can($permission, $inverse)) {
+            abort(403, 'permission denied. [' . $permission . ']');
+        }
     }
 
-    public function can($permission, $inverse = false) {
-        if ($this->isAdminMode()) return !$inverse;
+    public function can($permission, $inverse = false)
+    {
+        if ($this->isAdminMode()) {
+            return !$inverse;
+        }
         return $this->userRules()->can($permission, $inverse);
     }
 
-    public function routes() {
+    public function routes()
+    {
         Route::get('/pex/user/can/{permission}/{user?}', 'PermissionsController@can');
         Route::get('/pex/user/rules/{user?}', 'PermissionsController@rules');
         Route::get('/pex/user/addrule/{permission}/{user}', 'PermissionsController@addUserRule');
