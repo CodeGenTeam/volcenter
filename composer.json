@@ -19,13 +19,11 @@
     },
     "autoload": {
         "classmap": [
-            "database",
-            "app/Models",
-            "app/Permissions",
-            "app/Permissions/Models"
+            "database"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "app\\": "app/"
         }
     },
     "autoload-dev": {

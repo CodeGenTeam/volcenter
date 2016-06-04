@@ -29,3 +29,5 @@ Why is it important?
 Сombine volunteer centers for effective positive work on social, environment.
 
 ######Codestyle: PSR-2, PSR-4
+
+Description about project: https://workflowy.com/s/2Cl3PwT1s0
