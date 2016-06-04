@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
             ['myevent' => 2, 'someevent' => 2, 'omgevent' => 1, 'test1' => 3, 'test2' => 3] as
             $id => $name
         ) {
-            DB::table('events_types')->insert(['id' => $id, 'name' => $name]);
+            DB::table('Events_type')->insert(['id' => $id, 'name' => $name]);
         }
 
         // Test events
@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             ['myevent' => 2, 'someevent' => 2, 'omgevent' => 1, 'eeevent' => 3, 'test' => 3] as
             $name => $id
         ) {
-            DB::table('events')->insert(['name' => $name, 'event_type' => $id]);
+            DB::table('Events')->insert(['name' => $name, 'event_type' => $id]);
         }
 
         // Application types
