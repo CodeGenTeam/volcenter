@@ -2,7 +2,7 @@
 @section('content')
 	<div class="row">
 		<div class="col-md-12">
-			список
+			Общая инфа обо всём на свете с блекджеком и графиками
 		</div>
 	</div>
 @endsection

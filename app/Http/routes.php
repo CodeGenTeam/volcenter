@@ -52,5 +52,6 @@ Route::group(['middleware' => 'web'], function () {
     Pex::routes();
 
     // Admin
-    Route::get('/admin', 'AdminController@index');
+    Route::get('/admin', 'Admin\DashboardController@index');
+    Route::resource('/admin/events', 'Admin\EventController');
 });

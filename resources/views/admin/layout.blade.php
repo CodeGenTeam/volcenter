@@ -15,10 +15,10 @@
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Панель управления</a>
+				<a class="navbar-brand" href="/admin">Панель управления</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Мероприятия <span class="sr-only">(current)</span></a></li>
+				<li><a href="/admin/events">Мероприятия <span class="sr-only">(current)</span></a></li>
 				<li><a href="#">Пользователи</a></li>
 			</ul>
 		</div>
