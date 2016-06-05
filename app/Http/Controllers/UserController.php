@@ -9,18 +9,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Session;
-use DB;
 
 class UserController extends Controller
 {
-
     private $upgradeableUserFields = ['email', 'name1', 'name2', 'name3', 'birthday', 'password'];
 
     public function create(Request $request)
     {
-        // if (Auth::check()) {
-        //     return Response::json(['success' => false, 'error' => 'logined']);
-        // }
+        if (Auth::check()) {
+            return Response::json(['success' => false, 'error' => 'logined']);
+        }
+
         switch ($request->get('action')) {
             case 'check':
                 return $this->checkUser($request);
@@ -63,21 +62,14 @@ class UserController extends Controller
         }
 
         $user = Users::create([
-            'login' => $data['login'],
-            'email' => $data['email'],
+            'login'    => $data['login'],
+            'email'    => $data['email'],
             'password' => bcrypt($data['password']),
-            'name1' => $data['name1'],
-            'name2' => $data['name2'],
-            'name3' => $data['name3'],
+            'name1'    => $data['name1'],
+            'name2'    => $data['name2'],
+            'name3'    => $data['name3'],
         ]);
 
-        // $user = Users::create([
-        //     'login' => $data['login'], 'email' => $data['email'], 'password' => bcrypt($data['password']),
-
-        //         'name1' => $data['name1'], 'name2' => $data['name2'], 'name3' => $data['name3']
-
-
-        //     ]);
         if (is_null($user)) {
             return ['success' => false, 'error' => 'null user'];
         } else {
@@ -168,6 +160,7 @@ class UserController extends Controller
         if (!$isLogined) {
             return Response::json(['success' => false, 'error' => 'badlogin']);
         }
-        return Response::json(['success' => true, 'id' => Auth::Users()->id]);
+
+        return Response::json(['success' => true, 'id' => Auth::User()->id]);
     }
 }
