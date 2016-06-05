@@ -12,7 +12,6 @@ use Session;
 
 class UserController extends Controller
 {
-
     private $upgradeableUserFields = ['email', 'name1', 'name2', 'name3', 'birthday', 'password'];
 
     public function create(Request $request)
@@ -20,6 +19,7 @@ class UserController extends Controller
         if (Auth::check()) {
             return Response::json(['success' => false, 'error' => 'logined']);
         }
+
         switch ($request->get('action')) {
             case 'check':
                 return $this->checkUser($request);
@@ -40,9 +40,10 @@ class UserController extends Controller
     private function checkUser(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'login' => 'required|max:255', 'email' => 'required|email|max:255|unique:users',
+            'login' => 'required|max:255', 'email' => 'required|email|max:255|unique:Users',
             'password' => 'required|min:6'
         ]);
+
         if ($validator->fails()) {
             return ['success' => false, 'error' => $validator->errors()->all()];
         } else {
@@ -53,18 +54,22 @@ class UserController extends Controller
     private function register(Request $request)
     {
         $data = $request->all();
+
         foreach (['name1', 'name2', 'name3'] as $field) {
             if (!isset($data[$field])) {
                 $data[$field] = '';
             }
         }
+
         $user = Users::create([
-            'login' => $data['login'], 'email' => $data['email'], 'password' => bcrypt($data['password']),
+            'login'    => $data['login'],
+            'email'    => $data['email'],
+            'password' => bcrypt($data['password']),
+            'name1'    => $data['name1'],
+            'name2'    => $data['name2'],
+            'name3'    => $data['name3'],
+        ]);
 
-                'name1' => $data['name1'], 'name2' => $data['name2'], 'name3' => $data['name3']
-
-
-            ]);
         if (is_null($user)) {
             return ['success' => false, 'error' => 'null user'];
         } else {
@@ -155,6 +160,7 @@ class UserController extends Controller
         if (!$isLogined) {
             return Response::json(['success' => false, 'error' => 'badlogin']);
         }
-        return Response::json(['success' => true, 'id' => Auth::Users()->id]);
+
+        return Response::json(['success' => true, 'id' => Auth::User()->id]);
     }
 }
