@@ -4,9 +4,13 @@
 3. Download composer and put into directory of project
 4. Composer's command:<br />
 write in CMD: php composer.phar install --no-scripts<br />
-write in CMD: hp composer.phar update
+write in CMD: php composer.phar update
 5. Create following folder structure: storage -> framework -> (sessions, views)
 Where (->) - subdirectory
+6. Save env.example (notepad for example in windows)-> env.
+7. Create user and database for laravel and write it to env.
+8. Generate key for app (CMD): php artisan key:generate
+9. Deploy database from migration with seeding: php artisan migrate --seed
 
 Documentations:<br />
 https://laravel.com/docs/5.2<br />https://laracasts.com/series/laravel-5-from-scratch<br />
@@ -31,3 +35,4 @@ Why is it important?
 ######Codestyle: PSR-2, PSR-4
 
 Description about project: https://workflowy.com/s/2Cl3PwT1s0
+Description about MVP: https://workflowy.com/s/Uk0bbfwSXi
