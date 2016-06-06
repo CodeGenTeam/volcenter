@@ -10,6 +10,7 @@ Where (->) - subdirectory
 6. Save env.example (notepad for example in windows)-> env.
 7. Create user and database for laravel and write it to env.
 8. Generate key for app (CMD): php artisan key:generate
+9. Deploy database from migration with seeding: php artisan migrate --seed
 
 Documentations:<br />
 https://laravel.com/docs/5.2<br />https://laracasts.com/series/laravel-5-from-scratch<br />
