@@ -18,7 +18,7 @@ class AdminPanel {
 
     public function getModules() {
         if (!$this->modules) $this->loadModules();
-        for ($i = 0; count($this->modules) > $i; $i++) if (!$this->modules[$i]->can()) unset($this->modules[$i]);
+        foreach ($this->modules as $module) if (!$module->can()) unset($module);
         return $this->modules;
     }
 
