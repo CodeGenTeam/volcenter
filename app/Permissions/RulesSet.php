@@ -4,19 +4,25 @@ namespace app\Permissions;
 use App\Models\Users as MUser;
 use App\Permissions\Models\Group as MGroup;
 
-abstract class RulesSet extends Permissible
-{
+abstract class RulesSet extends Permissible {
 
     private static $cache = [];
     protected $rules;
 
-    public function __construct($rules = null)
-    {
+    /**
+     * RulesSet constructor.
+     * @param null $rules - список разрешений сущности.
+     */
+    public function __construct($rules = null) {
         $this->rules = $rules;
     }
 
-    public static function fromUser($user)
-    {
+    /**
+     * Возвращает обработчик правил пользователя.
+     * @param $user - идентификатор пользователя.
+     * @return UserRulesSet|mixed - обработчик правил пользователя.
+     */
+    public static function fromUser($user) {
         if ($user instanceof MUser) {
             return RulesSet::$cache['u' . $user->login] ?? RulesSet::$cache['u' . $user->login] = new UserRulesSet($user);
         } else {
@@ -24,8 +30,12 @@ abstract class RulesSet extends Permissible
         }
     }
 
-    public static function fromGroup($group)
-    {
+    /**
+     * Возвращает обработчик правил группы.
+     * @param $group - идентификатор группы.
+     * @return UserRulesSet|mixed - обработчик правил группы.
+     */
+    public static function fromGroup($group) {
         if ($group instanceof MGroup) {
             return RulesSet::$cache['g' . $group->name] ?? RulesSet::$cache['g' . $group->name] = new GroupRulesSet($group);
         } else {
@@ -33,13 +43,21 @@ abstract class RulesSet extends Permissible
         }
     }
 
-    public function formArray($array)
-    {
+    /**
+     * Создать кастомный обработчик правил.
+     * @param $array - список правил.
+     */
+    public function formArray($array) {
         $this->rules = $array;
     }
 
-    public function can($permission, $inverse = false)
-    {
+    /**
+     * Есть ли у данной сущности разрешение.
+     * @param $permission - разрешение.
+     * @param bool $inverse - инверсия.
+     * @return bool - true - может.
+     */
+    public function can($permission, $inverse = false) {
         $can = false;
         foreach ($this->getRules() as $rule) {
             if ($can = $this->matchRule($permission, $rule)) {
@@ -49,18 +67,23 @@ abstract class RulesSet extends Permissible
         return $inverse ? !$can : $can;
     }
 
-    public function getRules()
-    {
+    /**
+     * Возвращает простой массив правил-строк.
+     * @return null - простой массив правил-строк.
+     */
+    public function getRules() {
         if (is_null($this->rules)) {
             $this->parseRules();
         }
         return $this->rules;
     }
 
+    /**
+     * Получить все разрешения сущности.
+     */
     abstract protected function parseRules();
 
-    private function matchRule($matcher, $my)
-    {
+    private function matchRule($matcher, $my) {
         $my = explode('.', $my);
         $matcher = explode('.', $matcher);
         $i = 0;
@@ -79,8 +102,11 @@ abstract class RulesSet extends Permissible
         return isset($my[$i]) ? false : true;
     }
 
-    public function add($rule)
-    {
+    /**
+     * Локально добавить разрешение.
+     * @param $rule - правило
+     */
+    public function add($rule) {
         if (is_null($this->rules)) {
             $this->clear();
         }
@@ -92,16 +118,30 @@ abstract class RulesSet extends Permissible
         $this->rules[] = $rule;
     }
 
-    public function clear()
-    {
+    /**
+     * Локально очистить список правил.
+     */
+    public function clear() {
         $this->rules = [];
     }
 
+    /**
+     * Добавить правило и применить это изменение в БД.
+     * @param $rule - правило.
+     */
     abstract public function addRule($rule);
 
+    /**
+     * Удалить правило и применить это изменение в БД.
+     * @param $rule
+     */
     abstract public function removeRule($rule);
 
-    public function cleanup()
-    {
+    /**
+     * TODO
+     * Очистка базы от неиспользуемых правил.
+     */
+    public static function cleanup() {
+        Pex::requireRule('permissions.cleanup');
     }
 }
