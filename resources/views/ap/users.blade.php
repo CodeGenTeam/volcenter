@@ -1,1 +1,3 @@
-this is is user module
+@foreach($users as $user)
+    {{ $user }}
+@endforeach

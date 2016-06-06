@@ -16,7 +16,7 @@ class DefaultGroups extends Seeder
         foreach ($groups as $group) {
             Group::where('name', $group)->firstOrCreate(['name'=>$group]);
         }
-        $rules = Pex::groupRules('guest');
-        $rules->addRule('permissions.*');
+        $rules = Pex::groupRules('admin');
+        $rules->addRule('*');
     }
 }
