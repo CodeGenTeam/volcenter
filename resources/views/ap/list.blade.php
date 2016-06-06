@@ -6,8 +6,8 @@
         <link rel="stylesheet" type="text/css"
               href="/ap-bin/css/material-fullpalette.css"/> {{-- это тестовая палитра нужна ток ради подкрашивания элементов --}}
 
-        <script type="text/javascript" src="/ap-bin/js/bootstrap.js"></script>
         <script type="text/javascript" src="/ap-bin/js/jQuery.js"></script>
+        <script type="text/javascript" src="/ap-bin/js/bootstrap.js"></script>
         <script type="text/javascript" src="/ap-bin/js/material.js"></script>
         <script type="text/javascript" src="/ap-bin/js/ripples.js"></script>
     </head>
@@ -44,5 +44,6 @@
                 {!! $module->getView() !!}
             </div>
         @endforeach
+        <script>$.material.init();</script>
     </body>
 </html>
