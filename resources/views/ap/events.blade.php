@@ -4,8 +4,8 @@
     </div>
     <div class="panel-body">
         <div class="container">
-            <a href="#" class="btn btn-primary pull-right"><i class="mdi-av-my-library-add" id="add"
-                                                              style="font-size: 20px;"></i> Добавить мероприятие</a>
+            <a href="#" class="btn btn-primary pull-right">
+                <i class="mdi-av-my-library-add" id="add" data-module="events" style="font-size: 20px;"></i> Добавить мероприятие</a>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -23,9 +23,12 @@
                             <th>{{ $event->name }}</th>
                             <th>{{ $event->descr }}</th>
                             <th>{{ $event->addres }}</th>
-                            <th><span class="pull-right"><i class="mdi-editor-mode-edit" id="edit"></i><i
-                                            class="mdi-action-delete"
-                                            id="delete"></i></span></th>
+                            <th>
+                                <span class="pull-right">
+                                    <i class="mdi-editor-mode-edit" id="edit"></i>
+                                    <i class="mdi-action-delete" id="delete"></i>
+                                </span>
+                            </th>
                         </tr>
                     @endforeach
                 </tbody>
