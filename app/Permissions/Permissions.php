@@ -1,5 +1,5 @@
 <?php
-namespace app\Permissions;
+namespace App\Permissions;
 
 use App\Permissions\Models\Rule as MRule;
 use Auth;
