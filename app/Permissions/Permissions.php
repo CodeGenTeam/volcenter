@@ -6,18 +6,25 @@ use Auth;
 use ReflectionFunction;
 use Route;
 
-class Permissions extends Permissible
-{
+class Permissions extends Permissible {
 
     private $isAdminMode = false;
 
-    public function getOrCreateRule($rule)
-    {
+    /**
+     * Возвращает модель правила. Если его нет в базе -- оно будет создано
+     * @param $rule - строка-правило (ex. permission.test)
+     * @return Rule - модель правила в бд
+     */
+    public function getOrCreateRule($rule) {
         return $this->getRule($rule)->first() ?? MRule::create(['rule' => $rule]);
     }
 
-    public function getRule($rule)
-    {
+    /**
+     * Возвращает модель правила.
+     * @param $rule - строка-правило (ex. permission.test)
+     * @return static - Rule или null если правила нет в бд.
+     */
+    public function getRule($rule) {
         if ($rule instanceof MRule) {
             return $rule;
         } elseif (is_string($rule)) {
@@ -27,8 +34,12 @@ class Permissions extends Permissible
         }
     }
 
-    public function sudo($function)
-    {
+    /**
+     * Выполнить данный кусок кода без ограничений по разрешениям.
+     * @param $function - код для выполнения
+     * @return mixed|null - данные которые вернула ф-ция
+     */
+    public function sudo($function) {
         $state = $this->isAdminMode();
         $this->setupAdminMode(true);
         if (is_callable($function)) {
@@ -38,43 +49,66 @@ class Permissions extends Permissible
         return $data ?? null;
     }
 
-    public function isAdminMode()
-    {
+    /**
+     * Проверяет активность модификации обхода правил. (см setupAdminMode)
+     * @return bool - true если обход правил действует.
+     */
+    public function isAdminMode() {
         return $this->isAdminMode;
     }
 
-    public function setupAdminMode($mode = true)
-    {
+    /**
+     * Устанавливает обход правил. Тоесть все проверки Pex::can(<rule>) будут возвращать true.
+     * @param bool $mode - true включить, false - отключить
+     * @return bool - true если обход правил действует.
+     */
+    public function setupAdminMode($mode = true) {
         return $this->isAdminMode = $mode;
     }
 
-    public function userRules($user = null)
-    {
+    /**
+     * Почучить обработчик правил для пользователя.
+     * @param null $user - имя/id/модель юзера.
+     * @return UserRulesSet|mixed - обработчик правил.
+     */
+    public function userRules($user = null) {
         return RulesSet::fromUser($user ?? Auth::user());
     }
 
-    public function groupRules($group)
-    {
+    /**
+     * Почучить обработчик правил для группы.
+     * @param null $group - имя/id/модель группы.
+     * @return UserRulesSet|mixed - обработчик правил.
+     */
+    public function groupRules($group) {
         return RulesSet::fromGroup($group);
     }
 
-    public function requireRule($permission, $inverse = false)
-    {
+    /**
+     * Проверить данного пользователя данным правилом. Если оно отсутствует у него выдать 403 ошибку.
+     * @param $permission - разрешение для проверки.
+     * @param bool $inverse - инвертировать
+     */
+    public function requireRule($permission, $inverse = false) {
         if (!$this->can($permission, $inverse)) {
             abort(403, 'permission denied. [' . $permission . ']');
         }
     }
 
-    public function can($permission, $inverse = false)
-    {
+    /**
+     * Есть ли у данного пользователя разрешение.
+     * @param $permission - разрешение.
+     * @param bool $inverse - инверсия.
+     * @return bool - true -может.
+     */
+    public function can($permission, $inverse = false) {
         if ($this->isAdminMode()) {
             return !$inverse;
         }
         return $this->userRules()->can($permission, $inverse);
     }
 
-    public function routes()
-    {
+    public function routes() {
         Route::get('/pex/user/can/{permission}/{user?}', 'PermissionsController@can');
         Route::get('/pex/user/rules/{user?}', 'PermissionsController@rules');
         Route::get('/pex/user/addrule/{permission}/{user}', 'PermissionsController@addUserRule');
