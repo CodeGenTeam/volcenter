@@ -5,6 +5,7 @@ namespace app\AdminPanel;
 class AdminPanel {
 
     private $modules = [];
+    private $onIndex = [];
 
     public function routes() {
         \Route::get('/adminpanel', function () { return $this->showIndex(); });
@@ -16,7 +17,8 @@ class AdminPanel {
     }
 
     public function getModules() {
-        $this->loadModules();
+        if (!$this->modules) $this->loadModules();
+        for ($i = 0; count($this->modules) > $i; $i++) if (!$this->modules[$i]->can()) unset($this->modules[$i]);
         return $this->modules;
     }
 
@@ -31,10 +33,21 @@ class AdminPanel {
     }
 
     private function showIndex() {
-        return view('ap.list', ['modules' => $this->getModules()]);
+        if (!$this->modules) $this->loadModules();
+        $mods = [];
+        foreach ($this->onIndex as $mod) {
+            $mod = $this->getModule($mod);
+            if (!$mod) continue;
+            if ($mod->can()) $mods[] = $mod;
+        }
+        return view('ap.list', ['modules' => $mods]);
     }
 
     private function showModule($module) {
-        return view('ap.list', ['modules' => [$this->getModule($module)]]);
+        return view('ap.list', ['modules' => [$this->getModule($module)], 'selected' => $module]);
+    }
+
+    public function showOnIndexPage($modules) {
+        $this->onIndex = $modules;
     }
 }

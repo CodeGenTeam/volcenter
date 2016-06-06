@@ -3,6 +3,7 @@
 namespace app\AdminPanel;
 
 use ReflectionFunction;
+use Pex;
 
 class Module {
 
@@ -10,9 +11,9 @@ class Module {
     private $accept;
     private $view;
 
-    public function __construct($name, $accept, $view) {
+    public function __construct($name, $accept = null, $view = null) {
         $this->name = $name;
-        $this->accept = $accept;
+        $this->accept = $accept ?? true;
         $this->view = $view;
     }
 
@@ -26,5 +27,9 @@ class Module {
 
     public function getView() {
         return is_callable($this->view) ? (new ReflectionFunction($this->view))->invoke() : (is_string($this->view) ? view($this->view) : $this->view);
+    }
+
+    public function getDisplayName() {
+        return $this->getName();
     }
 }
