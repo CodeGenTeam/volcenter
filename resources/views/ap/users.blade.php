@@ -1,3 +1,8 @@
 @foreach($users as $user)
-    {{ $user }}
+    <div class="user">
+        <p>
+            Логин: {{ $user->login }} <br>
+            Почта: {{ $user->email }}
+        </p>
+    </div>
 @endforeach

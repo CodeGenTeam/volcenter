@@ -2,6 +2,7 @@
 
 namespace app\AdminPanel;
 
+use ReflectionFunction;
 
 class Module {
 

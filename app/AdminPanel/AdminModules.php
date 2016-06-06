@@ -1,4 +1,5 @@
 <?php
 use app\AdminPanel\Module;
+use app\AdminPanel\Modules\UsersModule;
 
-APanel::addModule(new Module('users', 'adminpanel.users', 'ap.users'));
+APanel::addModule(new UsersModule());
