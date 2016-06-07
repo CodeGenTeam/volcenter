@@ -5,11 +5,14 @@
         <link rel="stylesheet" type="text/css" href="/ap-bin/css/material.css"/>
         <link rel="stylesheet" type="text/css"
               href="/ap-bin/css/material-fullpalette.css"/> {{-- это тестовая палитра нужна ток ради подкрашивания элементов --}}
+        <link rel="stylesheet" type="text/css" href="/ap-bin/css/notie.css"/>
 
         <script type="text/javascript" src="/ap-bin/js/jQuery.js"></script>
         <script type="text/javascript" src="/ap-bin/js/bootstrap.js"></script>
         <script type="text/javascript" src="/ap-bin/js/material.js"></script>
         <script type="text/javascript" src="/ap-bin/js/ripples.js"></script>
+        <script type="text/javascript" src="/ap-bin/js/app.js"></script>
+        <script type="text/javascript" src="/ap-bin/js/notie.min.js"></script>
 
         <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css"
               rel="stylesheet"/>

@@ -7,7 +7,8 @@
     <div class="panel-body">
         <div class="container">
             <a href="#" class="btn btn-primary pull-right">
-                <i class="mdi-av-my-library-add" id="add" data-module="events" style="font-size: 20px;"></i> Добавить мероприятие</a>
+                <i class="mdi-av-my-library-add" id="add" style="font-size: 20px;"></i> Добавить мероприятие
+            </a>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -20,7 +21,7 @@
                 </thead>
                 <tbody>
                     @foreach($events as $event)
-                        <tr id="e{{ $event->id }}">
+                        <tr id="e{{ $event->id }}" data-id="{{ $event->id }}">
                             <th>{{ $event->id }}</th>
                             <th>{{ $event->name }}</th>
                             <th>{{ $event->descr }}</th>
@@ -38,4 +39,5 @@
         </div>
     </div>
 </div>
+<script>App.ajax_url = '/adminpanel/events';</script>
 @endsection
