@@ -59,5 +59,5 @@ Route::group(['middleware' => 'web'], function () {
     APanel::routes();
 
     // Admin panel event
-    Route::get('/adminpanel/events', '\app\AdminPanel\Controllers\EventsController@index');
+    Route::resource('/adminpanel/events', '\app\AdminPanel\Controllers\EventsController@index');
 });

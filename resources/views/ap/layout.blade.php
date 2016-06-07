@@ -12,7 +12,6 @@
         <script type="text/javascript" src="/ap-bin/js/material.js"></script>
         <script type="text/javascript" src="/ap-bin/js/ripples.js"></script>
         <script type="text/javascript" src="/ap-bin/js/app.js"></script>
-        <script type="text/javascript" src="/ap-bin/js/notie.min.js"></script>
 
         <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css"
               rel="stylesheet"/>
@@ -49,5 +48,6 @@
         </nav>
         @yield('content')
         <script>$.material.init();</script>
+        <script type="text/javascript" src="/ap-bin/js/notie.min.js"></script>
     </body>
 </html>

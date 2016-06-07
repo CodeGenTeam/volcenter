@@ -3,12 +3,42 @@ App = {
     
     init: function()
     {
-        $('#add').click(this.add);
+        $('#add').click(this.addItem);
+        this.itemListEvents();
     },
 
-    add: function()
+    itemListEvents: function()
     {
-        App.showForm();
+        var item = $('table.table tr#item');
+
+        item.find('a#delete').click(this.deleteItem);
+        //page.find('a.edit_page').click(this.editItem);
+    },
+
+    getItemId: function(o)
+    {
+        return $(o).closest("[data-item-id]").data("itemId");
+    },
+
+    deleteItem: function()
+    {
+        var id = App.getItemId(this);
+        notie.confirm('Вы действительно хотите удалить запись?', 'Да', 'Отменить', function() {
+            App.ajax({action: 'delete_item', id: id}, function(data) {
+                if (data.success) {
+                    notie.alert(1, 'Запись удалена!');
+                    $("[data-item-id='"+id+"']").remove();
+                } else {
+                    notie.alert(3, data.message, 2.5);
+                }
+            });
+        });
+    },
+
+    addItem: function()
+    {
+        console.log("add");
+        //App.showForm();
     },
 
     showForm: function(id) {
@@ -20,20 +50,22 @@ App = {
     },
 
     ajax: function(params, callback, form_selector) {
-        var data = "";
         if (form_selector) {
-            data = $(form_selector).serializeArray();
+            var data = $(form_selector).serializeArray();
+            for (var key in data) {
+                params[data[key].name] = data[key].value;
+            }
         }
 
         $.ajax({
             'url': this.ajax_url,
-            'data': data,
-            'type': 'POST',
+            'data': params,
+            'type': 'GET',
+            //'dataType': json,
             'success': callback
         });
     }
 };
-
 $(function() {
     App.init();
 });
