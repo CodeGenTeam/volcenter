@@ -2,8 +2,8 @@
 use app\AdminPanel\Widgets\EventsWidget;
 use app\AdminPanel\Widgets\UsersWidget;
 
-APanel::showOnIndexPage([
-    'users' => [
+APanel::links([
+    [
         'id' => 'users',
         'name' => 'Пользователи',
         'link' => 'users',
