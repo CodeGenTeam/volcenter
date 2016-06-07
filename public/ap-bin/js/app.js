@@ -12,7 +12,7 @@ App = {
         var item = $('table.table tr#item');
 
         item.find('a#delete').click(this.deleteItem);
-        //page.find('a.edit_page').click(this.editItem);
+        item.find('a#edit').click(this.editItem);
     },
 
     getItemId: function(o)
@@ -37,18 +37,42 @@ App = {
 
     addItem: function()
     {
-        console.log("add");
-        //App.showForm();
+        App.showForm();
     },
 
-    showForm: function(id) {
+    showForm: function(id) 
+    {
         if (!id) {
             id = 0;
         }
-        this.ajax({'id': id}, function(data) {
+        this.ajax({action: 'edit_item', 'id': id}, function(data) {
+            App.createModal('item_modal', data);
         });
     },
+    
+    editItem: function()
+    {
+        var id = App.getItemId(this);
+        if (id) {
+            App.showForm();
+        }
+        return false;
+    },
+    
+    createModal: function(id, content) 
+    {
+        var selector = '#'+id;
+        $(selector)
+            .html(content)
+            .modal({"show": true})
+        ;
+    },
 
+    closeModal: function(id) 
+    {
+        $('#'+id).modal('hide');
+    },
+    
     ajax: function(params, callback, form_selector) {
         if (form_selector) {
             var data = $(form_selector).serializeArray();

@@ -39,5 +39,8 @@
         </div>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="item_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+
 <script>App.ajax_url = '/adminpanel/events';</script>
 @endsection
