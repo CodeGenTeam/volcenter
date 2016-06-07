@@ -1,11 +1,11 @@
 <?php
 
-namespace app\AdminPanel\Modules;
+namespace app\AdminPanel\Widgets;
 
-use app\AdminPanel\Module;
+use app\AdminPanel\Widget;
 use app\Models\Events;
 
-class EventsModule extends Module {
+class EventsWidget extends Widget {
 
     public function __construct() {
         parent::__construct('events', 'adminpanel.events');

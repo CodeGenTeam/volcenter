@@ -1,11 +1,11 @@
 <?php
 
-namespace app\AdminPanel\Modules;
+namespace app\AdminPanel\Widgets;
 
-use app\AdminPanel\Module;
+use app\AdminPanel\Widget;
 use app\Models\Users;
 
-class UsersModule extends Module {
+class UsersWidget extends Widget {
 
     public function __construct() {
         parent::__construct('users', 'adminpanel.users');

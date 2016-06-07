@@ -11,7 +11,8 @@
         <script type="text/javascript" src="/ap-bin/js/material.js"></script>
         <script type="text/javascript" src="/ap-bin/js/ripples.js"></script>
 
-        <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+        <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css"
+              rel="stylesheet"/>
         <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
     </head>
     <body>
@@ -32,10 +33,13 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="admin-nav-collapse">
                         <ul class="nav navbar-nav">
-                                <li>
-                                    <a href="#">Somelink</a>
+                            @foreach (APanel::getLinks() as $link)
+                                <li{!! isset($pageId) && $pageId == $link['id'] ? ' class="active"' : '' !!}>
+                                    <a href="/adminpanel/{{ $link['link'] }}">{{ $link['name'] }}</a>
                                 </li>
-                            </ul>
+                            @endforeach
+                            {{--<li><a href="#">Somelink</a></li>--}}
+                        </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </div>

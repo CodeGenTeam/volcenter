@@ -5,7 +5,7 @@ namespace app\AdminPanel;
 use ReflectionFunction;
 use Pex;
 
-class Module {
+class Widget {
 
     private $name;
     private $accept;

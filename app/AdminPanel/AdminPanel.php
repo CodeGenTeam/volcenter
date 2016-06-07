@@ -4,50 +4,47 @@ namespace app\AdminPanel;
 
 class AdminPanel {
 
-    private $modules = [];
-    private $onIndex = [];
+    private $widgets = [];
+    private $links = [];
 
     public function routes() {
-        \Route::get('/adminpanel', function () { return $this->showIndex(); });
-        \Route::get('/adminpanel/module/{module}', function ($module) { return $this->showModule($module); });
+        \Route::get('/adminpanel', function () { return $this->showWidgets(); });
     }
 
-    public function loadModules() {
-        include 'AdminModules.php';
+    public function loadWidgets() {
+        include 'AdminWidgets.php';
     }
 
-    public function getModules() {
-        if (!$this->modules) $this->loadModules();
-        foreach ($this->modules as $module) if (!$module->can()) unset($module);
-        return $this->modules;
+    public function getWidgets() {
+        if (!$this->widgets) $this->loadWidgets();
+        foreach ($this->widgets as $widget) if (!$widget->can()) unset($widget);
+        return $this->widgets;
     }
 
-    public function getModule($module) {
-        $mods = $this->getModules();
+    public function getWidget($module) {
+        $mods = $this->getWidgets();
         foreach ($mods as $mod) if ($mod->getName() == $module) return $mod;
         return null;
     }
 
-    public function addModule(Module $module) {
-        $this->modules[] = $module;
+    public function addWidget(Widget $module) {
+        $this->widgets[] = $module;
     }
 
-    private function showIndex() {
-        if (!$this->modules) $this->loadModules();
-        $mods = [];
-        foreach ($this->onIndex as $mod) {
-            $mod = $this->getModule($mod);
-            if (!$mod) continue;
-            if ($mod->can()) $mods[] = $mod;
+    private function showWidgets() {
+        $widgets = $this->getWidgets();
+        $w = [];
+        foreach ($widgets as $widget) {
+            if ($widget->can()) $w[] = $widget;
         }
-        return view('ap.list', ['modules' => $mods]);
+        return view('ap.widgets', ['widgets' => $w]);
     }
 
-    private function showModule($module) {
-        return view('ap.list', ['modules' => [$this->getModule($module)], 'selected' => $module]);
+    public function showOnIndexPage($links) {
+        $this->links = $links;
     }
 
-    public function showOnIndexPage($modules) {
-        $this->onIndex = $modules;
+    public function getLinks() {
+        return $this->links;
     }
 }
