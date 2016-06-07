@@ -17,11 +17,26 @@ class EventsController extends Controller
 					Events::destroy($request->query('id'));
 					return Response::json(['success' => true]);
 					break;
-				case 'edit_item':
-					return view('ap.events.modal');
+				case 'save_item':
+					if ($id = $request->query('id')) {
+						var_dump($id);exit;
+						Events::findOrFail($id)->update($request->all());
+						$message = 'Обновлено';
+					} else {
+						Events::create($request->all());
+						$message = 'Сохранено';
+					}
+					return Response::json(['success' => true, 'message' => $message]);
+
 					break;
-				case 'create_item':
-					return view('ap.events.modal');
+				case 'edit_item':
+					if ($id = $request->query('id')) {
+						$event = Events::find($request->query('id'));
+					} else {
+						$event = new Events();
+					}
+
+					return view('ap.events.modal', ['event' => $event]);
 					break;
 				default:
 					return Response::json(['success' => false, 'error' => 'empty action']);

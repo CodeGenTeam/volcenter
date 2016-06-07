@@ -25,7 +25,7 @@
                             <th>{{ $event->id }}</th>
                             <th>{{ $event->name }}</th>
                             <th>{{ $event->descr }}</th>
-                            <th>{{ $event->addres }}</th>
+                            <th>{{ $event->address }}</th>
                             <th>
                                 <span class="pull-right">
                                     <a href="#" class="mdi-editor-mode-edit" id="edit"></a>
