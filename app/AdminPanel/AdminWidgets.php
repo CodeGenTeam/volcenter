@@ -8,6 +8,11 @@ APanel::links([
         'name' => 'Пользователи',
         'link' => 'users',
     ],
+    [
+        'id' => 'events',
+        'name' => 'Мероприятия',
+        'link' => 'events',
+    ],
 ]);
 
 /*APanel::addWidget(new EventsWidget());
