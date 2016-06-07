@@ -8,7 +8,16 @@ class AdminPanel {
     private $links = [];
 
     public function routes() {
+<<<<<<< HEAD
         \Route::get('/adminpanel', function () { return $this->showWidgets(); });
+=======
+        \Route::get('/adminpanel', function () { return $this->showIndex(); });
+        \Route::get('/adminpanel/module/{module}', function ($module) { return $this->showModule($module); });
+        \Route::get('/adminpanel/module/{module}/{action}', function ($module, $action) {
+            $controller_name = ucfirst(mb_strtolower($module)).'Controller';
+            app('app\AdminPanel\Controllers\\'.$controller_name)->$action();
+        });
+>>>>>>> origin/master
     }
 
     public function loadWidgets() {
