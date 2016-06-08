@@ -13,6 +13,11 @@ APanel::links([
         'name' => 'Мероприятия',
         'link' => 'events',
     ],
+    [
+        'id' => 'events_type',
+        'name' => 'Типы мероприятия',
+        'link' => 'events_type',
+    ],
 ]);
 
 /*APanel::addWidget(new EventsWidget());

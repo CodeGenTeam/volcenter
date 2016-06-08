@@ -6,7 +6,13 @@
                 <span aria-hidden="true">&times;</span>
                 <span class="sr-only">Close</span>
             </button>
-            <h4 class="modal-title" id="myModalLabel">Редактирование мероприятия</h4>
+            <h4 class="modal-title">
+                @if ($event->id)
+                    Редактирование мероприятия
+                @else
+                    Создание мероприятия
+                @endif
+            </h4>
         </div>
         <!-- Modal Body -->
         <form id="item-form" class="form-horizontal" role="form" action="#" data-toggle="popel-validator">
