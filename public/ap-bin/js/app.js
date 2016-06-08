@@ -47,20 +47,22 @@ App = {
         }
         this.ajax({action: 'edit_item', 'id': id}, function(data) {
             App.createModal('item_modal', data);
-            $('#save_item').click(App.saveItemForm);
+            $('#save_item').on('click', App.saveItemForm);
         });
     },
 
     saveItemForm: function() 
     {
-        App.ajax({action: 'save_item'}, function(data) {
-            if (data.success) {
-                App.closeModal('item_modal');
-                notie.alert(1, data.message);
-            } else {
-                notie.alert(3, data.message, 2.5);
-            }
-        }, '#item-form');
+        $.fn.popelValidator.defaults.callbackAfterValidate = function() {
+            App.ajax({action: 'save_item'}, function (data) {
+                if (data.success) {
+                    App.closeModal('item_modal');
+                    notie.alert(1, data.message);
+                } else {
+                    notie.alert(3, data.message, 2.5);
+                }
+            }, '#item-form');
+        }
     },
     
     editItem: function()
