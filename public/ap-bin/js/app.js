@@ -66,14 +66,6 @@ App = {
                     notie.alert(3, data.message, 2.5);
                 }
             }, '#item-form');
-            App.ajax({action: 'save_item'}, function (data) {
-                if (data.success) {
-                    App.closeModal('item_modal');
-                    notie.alert(1, data.message);
-                } else {
-                    notie.alert(3, data.message, 2.5);
-                }
-            }, '#item-form');
         }
     },
     
