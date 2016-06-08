@@ -8,7 +8,6 @@ class Events extends Model
 {
     public $timestamps = false;
     protected $table = "Events";
-    protected $hidden = ['event_type'];
     protected $fillable = ['id', 'event_start', 'event_end', 'name', 'descr', 'address','event_type'];
     public function getEventType()
     {

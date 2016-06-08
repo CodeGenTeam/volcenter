@@ -5,6 +5,7 @@ namespace app\AdminPanel\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Events;
+use App\Models\Events_type;
 use Illuminate\Support\Facades\Response;
 
 class EventsController extends Controller
@@ -36,7 +37,10 @@ class EventsController extends Controller
 						$event = new Events();
 					}
 
-					return view('ap.events.modal', ['event' => $event]);
+					return view('ap.events.modal', [
+						'event' => $event,
+						'events_type' => Events_type::all()
+					]);
 					break;
 				case 'items_list':
 					return view('ap.events.list', ['events' => Events::all()]);

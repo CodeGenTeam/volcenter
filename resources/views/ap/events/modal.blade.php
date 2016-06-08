@@ -12,7 +12,6 @@
         <form id="item-form" class="form-horizontal" role="form" action="#" data-toggle="popel-validator">
             <div class="modal-body">
                 <input type="hidden" name="id" value="{{ $event->id }}">
-                <input type="hidden" name="event_type" value="1">
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="name">Название</label>
                     <div class="col-sm-10">
@@ -29,6 +28,16 @@
                     <label class="col-sm-2 control-label" for="name">Адрес</label>
                     <div class="col-sm-10">
                         <textarea class="form-control" id="address" name="address" data-rules="not-empty" placeholder="Адрес">{{ $event->address }}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="event_type">Тип мероприятия</label>
+                    <div class="col-sm-10">
+                        <select name="event_type" class="form-control" >
+                            @foreach ($events_type as $type)
+                                <option value="{{ $type->id }}" @if ($type->id === $event->event_type) selected @endif>{{ $type->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
             </div>
