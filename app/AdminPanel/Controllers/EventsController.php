@@ -19,7 +19,6 @@ class EventsController extends Controller
 					break;
 				case 'save_item':
 					if ($id = $request->query('id')) {
-						// var_dump($id);exit;
 						$event = Events::findOrFail($id);
 						$event->update($request->all());
 						$message = 'Обновлено';

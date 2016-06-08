@@ -12,6 +12,7 @@
         <form id="item-form" class="form-horizontal" role="form" action="#" data-toggle="popel-validator">
             <div class="modal-body">
                 <input type="hidden" name="id" value="{{ $event->id }}">
+                <input type="hidden" name="event_type" value="1">
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="name">Название</label>
                     <div class="col-sm-10">
