@@ -57,16 +57,22 @@ App = {
             App.ajax({action: 'save_item'}, function(data) {
                 if (data.success) {
                     App.closeModal('item_modal');
-                    $event = $("[data-item-id='"+data.data.id+"']");
-                    $event.find('td.event_name').text(data.data.name);
-                    $event.find('td.event_descr').text(data.data.descr);
-                    $event.find('td.event_address').text(data.data.address);
                     notie.alert(1, data.message);
+                    App.loadItems();
                 } else {
                     notie.alert(3, data.message, 2.5);
                 }
             }, '#item-form');
         }
+    },
+
+    loadItems: function() 
+    {
+        $(".items-list").html('<div class="preloader light_bg"></div>');
+        this.ajax({action: 'items_list'}, function(data) {
+            $(".items-list").html(data);
+            this.itemListEvents();
+        });
     },
     
     editItem: function()

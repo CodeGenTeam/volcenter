@@ -35,7 +35,7 @@
             <!-- Modal Footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-                <button type="submit" class="btn btn-default" id="save_item">Сохранить</button>
+                <button type="submit" class="btn btn-primary" id="save_item">Сохранить</button>
             </div>
         </form>
     </div>

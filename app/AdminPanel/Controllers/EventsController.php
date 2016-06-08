@@ -39,6 +39,9 @@ class EventsController extends Controller
 
 					return view('ap.events.modal', ['event' => $event]);
 					break;
+				case 'items_list':
+					return view('ap.events.list', ['events' => Events::all()]);
+					break;
 				default:
 					return Response::json(['success' => false, 'error' => 'empty action']);
 					break;
