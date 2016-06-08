@@ -50,11 +50,7 @@ Route::group(['middleware' => 'web'], function () {
 
     // PermissionsController - Doesn't need if you use laravel models in controller
     Pex::routes();
-
-    // Admin
-    Route::get('/admin', 'Admin\DashboardController@index');
-    Route::resource('/admin/events', 'Admin\EventController');
-    
+   
     // Admin panel
     APanel::routes();
 
