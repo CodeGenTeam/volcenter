@@ -46,6 +46,30 @@
                         </select>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class="col-sm-4 control-label" for="name">Начало</label>
+                        <div class="col-sm-8">
+                            <div class='input-group date' id='event_start'>
+                                <input type='text' class="form-control" id="event_start" name="event_start" value="{{ $event->event_start }}" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="col-sm-4 control-label" for="name">Окончание</label>
+                        <div class="col-sm-8">
+                            <div class='input-group date' id='event_end'>
+                                <input type='text' class="form-control" name="event_end" value="{{ $event->event_end }}" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- Modal Footer -->
             <div class="modal-footer">
@@ -55,3 +79,10 @@
         </form>
     </div>
 </div>
+<script type="text/javascript">
+    $(function () {
+        $('#event_start, #event_end').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss'
+        });
+    });
+</script>
