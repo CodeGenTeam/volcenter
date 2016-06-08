@@ -22,16 +22,16 @@
                 <tbody>
                     @foreach($events as $event)
                         <tr id="item" data-item-id="{{ $event->id }}">
-                            <th>{{ $event->id }}</th>
-                            <th>{{ $event->name }}</th>
-                            <th>{{ $event->descr }}</th>
-                            <th>{{ $event->address }}</th>
-                            <th>
+                            <td class="event_id">{{ $event->id }}</td>
+                            <td class="event_name">{{ $event->name }}</td>
+                            <td class="event_descr">{{ $event->descr }}</td>
+                            <td class="event_address">{{ $event->address }}</td>
+                            <td>
                                 <span class="pull-right">
                                     <a href="#" class="mdi-editor-mode-edit" id="edit"></a>
                                     <a href="#" class="mdi-action-delete" id="delete"></a>
                                 </span>
-                            </th>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

@@ -20,13 +20,15 @@ class EventsController extends Controller
 				case 'save_item':
 					if ($id = $request->query('id')) {
 						// var_dump($id);exit;
-						Events::findOrFail($id)->update($request->all());
+						$event = Events::findOrFail($id);
+						$event->update($request->all());
 						$message = 'Обновлено';
 					} else {
+						$event = '';
 						Events::create($request->all());
 						$message = 'Сохранено';
 					}
-					return Response::json(['success' => true, 'message' => $message]);
+					return Response::json(['success' => true, 'message' => $message, 'data' => $event]);
 
 					break;
 				case 'edit_item':
