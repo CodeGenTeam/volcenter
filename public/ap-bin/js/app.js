@@ -47,25 +47,34 @@ App = {
         }
         this.ajax({action: 'edit_item', 'id': id}, function(data) {
             App.createModal('item_modal', data);
-            $('#save_item').click(App.saveItemForm);
+            $('#save_item').on('click', App.saveItemForm);
         });
     },
 
     saveItemForm: function() 
     {
-        var id = App.getItemId(this);
-        App.ajax({action: 'save_item'}, function(data) {
-            if (data.success) {
-                App.closeModal('item_modal');
-                $event = $("[data-item-id='"+data.data.id+"']");
-                $event.find('td.event_name').text(data.data.name);
-                $event.find('td.event_descr').text(data.data.descr);
-                $event.find('td.event_address').text(data.data.address);
-                notie.alert(1, data.message);
-            } else {
-                notie.alert(3, data.message, 2.5);
-            }
-        }, '#item-form');
+        $.fn.popelValidator.defaults.callbackAfterValidate = function() {
+            App.ajax({action: 'save_item'}, function(data) {
+                if (data.success) {
+                    App.closeModal('item_modal');
+                    $event = $("[data-item-id='"+data.data.id+"']");
+                    $event.find('td.event_name').text(data.data.name);
+                    $event.find('td.event_descr').text(data.data.descr);
+                    $event.find('td.event_address').text(data.data.address);
+                    notie.alert(1, data.message);
+                } else {
+                    notie.alert(3, data.message, 2.5);
+                }
+            }, '#item-form');
+            App.ajax({action: 'save_item'}, function (data) {
+                if (data.success) {
+                    App.closeModal('item_modal');
+                    notie.alert(1, data.message);
+                } else {
+                    notie.alert(3, data.message, 2.5);
+                }
+            }, '#item-form');
+        }
     },
     
     editItem: function()
