@@ -9,10 +9,10 @@ App = {
 
     itemListEvents: function()
     {
-        var item = $('table.table tr#item');
+        var item = $('.items-list tr#item');
 
-        item.find('a#delete').click(this.deleteItem);
-        item.find('a#edit').click(this.editItem);
+        item.find('a#delete').on('click', this.deleteItem);
+        item.find('a#edit').on('click', this.editItem);
     },
 
     getItemId: function(o)
@@ -26,7 +26,7 @@ App = {
         notie.confirm('Вы действительно хотите удалить запись?', 'Да', 'Отменить', function() {
             App.ajax({action: 'delete_item', id: id}, function(data) {
                 if (data.success) {
-                    notie.alert(1, 'Запись удалена!');
+                    notie.alert(1, 'Запись удалена!', 2.5);
                     $("[data-item-id='"+id+"']").remove();
                 } else {
                     notie.alert(3, data.message, 2.5);
@@ -57,7 +57,7 @@ App = {
             App.ajax({action: 'save_item'}, function(data) {
                 if (data.success) {
                     App.closeModal('item_modal');
-                    notie.alert(1, data.message);
+                    notie.alert(1, data.message, 1);
                     App.loadItems();
                 } else {
                     notie.alert(3, data.message, 2.5);
@@ -68,10 +68,10 @@ App = {
 
     loadItems: function() 
     {
-        $(".items-list").html('<div class="preloader light_bg"></div>');
+        $(".items-list").html('<img src="/ap-bin/img/ajax-loader.gif" />');
         this.ajax({action: 'items_list'}, function(data) {
             $(".items-list").html(data);
-            this.itemListEvents();
+            App.itemListEvents();
         });
     },
     

@@ -23,11 +23,10 @@ class EventsController extends Controller
 						$event->update($request->all());
 						$message = 'Обновлено';
 					} else {
-						$event = '';
 						Events::create($request->all());
 						$message = 'Сохранено';
 					}
-					return Response::json(['success' => true, 'message' => $message, 'data' => $event]);
+					return Response::json(['success' => true, 'message' => $message]);
 
 					break;
 				case 'edit_item':
