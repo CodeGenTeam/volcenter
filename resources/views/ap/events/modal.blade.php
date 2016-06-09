@@ -15,7 +15,7 @@
             </h4>
         </div>
         <!-- Modal Body -->
-        <form id="item-form" class="form-horizontal" role="form" action="#" data-toggle="popel-validator">
+        <form id="item-form" class="form-horizontal" role="form" action="#" enctype="multipart/form-data" data-toggle="popel-validator">
             <div class="modal-body">
                 <input type="hidden" name="id" value="{{ $event->id }}">
                 <div class="form-group">
@@ -70,6 +70,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group col-sm-12">
+                    <input id="image" type="file" multiple class="image file-loading" data-show-preview="false" data-show-upload="false">
+                </div>
             </div>
             <!-- Modal Footer -->
             <div class="modal-footer">
@@ -83,6 +86,20 @@
     $(function () {
         $('#event_start, #event_end').datetimepicker({
             format: 'YYYY-MM-DD HH:mm:ss'
+        });
+        $("#image").fileinput({
+            /*'allowedFileExtensions' : ['jpg', 'jpeg', 'png'],
+            'maxFileSize': 5120,
+            'maxFileCount': 1,
+            'uploadUrl': '/adminpanel/events?action=save_img',
+            'elErrorContainer': '#errorBlock',
+            'uploadAsync': false,
+            //'msgInvalidFileExtension': 'Invalid extension for file "{name}". Only "{extensions}" files are supported.',
+            showRemove: false, // hide remove button
+            minFileCount: 1*/
+            uploadUrl: "/adminpanel/events?action=save_img", // server upload action
+            uploadAsync: true,
+            maxFileCount: 1
         });
     });
 </script>

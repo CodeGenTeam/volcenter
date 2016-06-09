@@ -42,6 +42,9 @@ class EventsController extends Controller
 						'events_type' => Events_type::all()
 					]);
 					break;
+				case 'save_img':
+					print_r($request->all());exit;
+					break;
 				case 'items_list':
 					return view('ap.events.list', ['events' => Events::all()]);
 					break;
