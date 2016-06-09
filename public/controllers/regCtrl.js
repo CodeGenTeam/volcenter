@@ -65,7 +65,7 @@ var app = angular.module('app')
             $http({
                 method: 'GET',
                 url: URL + '/user/create',
-                params:  $scope.user
+                params: $scope.user
             }).then(function(response) {
                 var data = response.data;
                 console.log(response);

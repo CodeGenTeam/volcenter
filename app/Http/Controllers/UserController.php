@@ -55,19 +55,19 @@ class UserController extends Controller
     {
         $data = $request->all();
 
-        foreach (['name1', 'name2', 'name3'] as $field) {
+        foreach (['firstname', 'lastname', 'middlename'] as $field) {
             if (!isset($data[$field])) {
                 $data[$field] = '';
             }
         }
 
         $user = Users::create([
-            'login'    => $data['login'],
-            'email'    => $data['email'],
-            'password' => bcrypt($data['password']),
-            'name1'    => $data['name1'],
-            'name2'    => $data['name2'],
-            'name3'    => $data['name3'],
+            'login'      => $data['login'],
+            'email'      => $data['email'],
+            'password'   => bcrypt($data['password']),
+            'firstname'  => $data['firstname'],
+            'lastname'   => $data['lastname'],
+            'middlename' => $data['middlename'],
         ]);
 
         if (is_null($user)) {
@@ -77,48 +77,60 @@ class UserController extends Controller
         } // (про 'note') ну на всяк случай
     }
 
-    public function show(Users $id)
+    public function show(Users $user)
     {
-        if (is_null($id)) {
-            return ['success' => false, 'error' => 'user not found'];
+        if (is_null($user)) {
+            return Response::json(['success' => false, 'error' => 'User not found.']);
         } else {
-            return ['success' => true, 'user' => $id];
+            return Response::json(['success' => true, 'user' => $user]);
         }
     }
 
-    public function update(Request $request, Users $id)
+    public function update(Request $request, Users $user)
     {
-        if (is_null($id)) {
-            return ['success' => false, 'user not found'];
+        if (is_null($user)) {
+            return Response::json(['success' => false, 'error' => 'User not found.']);
         }
-        // todo запилить разрешения
-        $updated = [];
-        foreach ($request->all() as $key => $value) {
-            if (in_array($key, $this->upgradeableUserFields)) {
-                try {
-                    $id->{$key} = $value;
-                    $id->save();
-                } finally {
-                    $updated[] = $key;
-                }
-            }
-        }
-        return ['success' => count($updated) != 0, 'fields' => $updated];
+
+        $user->update($request->all());
+
+        // $user->update([
+        //     'email'         => $request->email,
+        //     'firstname'     => $request->firstname,
+        //     'lastname'      => $request->lastname,
+        //     'middlename'    => $request->middlename,
+        // ]);
+
+        return Response::json(['success' => true]);
+
+        // if (is_null($id)) {
+        //     return ['success' => false, 'user not found'];
+        // }
+        // // todo запилить разрешения
+        // $updated = [];
+        // foreach ($request->all() as $key => $value) {
+        //     if (in_array($key, $this->upgradeableUserFields)) {
+        //         try {
+        //             $id->{$key} = $value;
+        //             $id->save();
+        //         } finally {
+        //             $updated[] = $key;
+        //         }
+        //     }
+        // }
+        // return ['success' => count($updated) != 0, 'fields' => $updated];
     }
 
-    public function destroy(Users $id)
+    public function destroy(Users $user)
     {
-        if (is_null($id)) {
+        if (is_null($user)) {
             return Response::json(['success' => false, 'error' => 'user not found']);
         }
         /*if ($u != $request->user()) {
             return ['success' => false, 'you haven\'t permission']; // todo запилить разрешения
         } // если редачим не свой акк -- кидаем (пока)*/
-        try {
-            $id->delete();
-        } finally {
-            return Response::json(['success' => true]);
-        }
+        $user->delete();
+        return Response::json(['success' => true, 'user' => $user]);
     }
 
     public function logout(Request $request)

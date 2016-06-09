@@ -67,31 +67,31 @@
 			</div>
 
 
-			<div ng-class="{ 'has-error' : form1.name1.$invalid && !form1.name1.$pristine }">
+			<div ng-class="{ 'has-error' : form1.firstname.$invalid && !form1.firstname.$pristine }">
 				<label>Имя</label>
-				<input class="form-control input1" ng-model="user.name1" name="name1"
+				<input class="form-control input1" ng-model="user.firstname" name="firstname"
 					   ng-minlength="1" ng-maxlength="20" required>
 
-				<p ng-show="form1.name1.$invalid && !form1.name1.$pristine"
+				<p ng-show="form1.firstname.$invalid && !form1.firstname.$pristine"
 				   class="help-block">Введите корректное имя</p>
 			</div>
 
 
-			<div ng-class="{ 'has-error' : form1.name2.$invalid && !form1.name2.$pristine }">
+			<div ng-class="{ 'has-error' : form1.lastname.$invalid && !form1.lastname.$pristine }">
 				<label>Фамилия</label>
-				<input class="form-control input1" ng-model="user.name2" name="name2"
+				<input class="form-control input1" ng-model="user.lastname" name="lastname"
 					   ng-minlength="1" ng-maxlength="20" required>
 
-				<p ng-show="form1.name2.$invalid && !form1.name2.$pristine"
+				<p ng-show="form1.lastname.$invalid && !form1.lastname.$pristine"
 				   class="help-block">Введите корректную фамилию</p>
 			</div>
 
-			<div ng-class="{ 'has-error' : form1.name3.$invalid && !form1.name3.$pristine }">
+			<div ng-class="{ 'has-error' : form1.middlename.$invalid && !form1.middlename.$pristine }">
 				<label>Отчество</label>
-				<input class="form-control input1" ng-model="user.name3" name="name3"
+				<input class="form-control input1" ng-model="user.middlename" name="middlename"
 					   ng-minlength="1" ng-maxlength="20" required>
 
-				<p ng-show="form1.name3.$invalid && !form1.name3.$pristine"
+				<p ng-show="form1.middlename.$invalid && !form1.middlename.$pristine"
 				   class="help-block">Введите корректное отчество</p>
 
 			</div>

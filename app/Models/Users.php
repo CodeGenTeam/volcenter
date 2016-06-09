@@ -8,8 +8,8 @@ class Users extends Auth
 {
     protected $table = 'Users';
     protected $hidden = ['password', 'remember_token', 'created_at', 'updated_at','id'];
-    protected $fillable = ['login', 'email', 'password', 'firstname', 'lastname', 'middlename','birthday'];
-    protected $visible = ['faculty', 'chair'];
+    protected $fillable = ['login', 'email', 'password', 'firstname', 'lastname', 'middlename', 'birthday', 'place_of_work'];
+    
     public function applications()
     {
         return $this->hasMany(Applications::class, 'user_id');

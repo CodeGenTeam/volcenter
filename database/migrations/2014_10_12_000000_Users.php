@@ -21,6 +21,7 @@ class Users extends Migration
             $table->string('lastname'); // Фамилия
             $table->string('middlename'); // Отчество
             $table->timestamp('birthday'); // др
+            $table->string('place_of_work');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

@@ -21,11 +21,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::resource('/event_type', 'EventTypeController');
 
     // UserController
+    Route::resource('/user', 'UserController', ['only' => ['create', 'update', 'destroy']]);
     Route::get('/user/logout', 'UserController@logout');
     Route::get('/user/login', 'UserController@login');
-    Route::get('/user/{id}', 'UserController@show')->where(['id' => '\d+']);
-    Route::resource('/user', 'UserController', ['only' => ['create', 'update', 'destroy']]);
-
+    Route::get('/user/{user}', 'UserController@show')->where(['id' => '\d+']);
+    
     // EventController
     Route::get('/event', 'EventController@index');
     Route::post('/event/create', 'EventController@create');

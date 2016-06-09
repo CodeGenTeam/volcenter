@@ -249,17 +249,17 @@ var app = angular.module('app')
 				console.log($scope.user);
 
 				$http({
-					method: 'PUT', // TODO должен быть put
-					url: URL + '/'  + $rootScope.userID,
+					method: 'PUT',
+					url: URL + '/user/'  + $rootScope.userID,
 					params: $scope.user
 				}).then(function(response) {
-
 					var data = response.data;
 					console.log(response);
 
 					if (data.success) {
 						$scope.error = false;
 						$scope.success = true;
+						$scope.flash = 'Настройки успешно сохранены!';
 
 					} else {
 						$scope.error = true;
@@ -268,7 +268,6 @@ var app = angular.module('app')
 				}, function(err) {
 					console.log(err);
 				});
-
 			}
 		};
 });

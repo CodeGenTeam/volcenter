@@ -9,16 +9,16 @@
 				   value="{{user.email}}" required>
 
 			<label>Имя</label>
-			<input class="form-control input1" name="name1" ng-model="user.name1"
-				   value="{{user.name1}}" required>
+			<input class="form-control input1" name="firstname" ng-model="user.firstname"
+				   value="{{user.firstname}}" required>
 
 			<label>Фамилия</label>
-			<input class="form-control input1"  name="name2" ng-model="user.name2"
-				   value="{{user.name2}}"required>
+			<input class="form-control input1"  name="lastname" ng-model="user.lastname"
+				   value="{{user.lastname}}"required>
 
 			<label>Отчество</label>
-			<input class="form-control input1" ng-model="user.name3"
-				   value="{{user.name3}}" required>
+			<input class="form-control input1"  name="middlename" ng-model="user.middlename"
+				   value="{{user.middlename}}" required>
 
 			<label>Дата рождения</label>
 			<div class="form-group ">
@@ -37,6 +37,10 @@
 							ng-options="o as o for o in dates.years.options"></select>
 				</div>
 			</div>
+
+			<label>Место работы</label>
+			<input class="form-control input1"  name="place_of_work" ng-model="user.place_of_work"
+				   value="{{user.place_of_work}}">
 		</div>
 
 		<h3>Дополнительная информация</h3>
@@ -141,7 +145,8 @@
 		<input class="button button-color-2 input-button" type="submit" ng-click="checkData()">
 
 	</form>
-
+	
+	<p style="color: #3c763d;">{{ flash }}</p>
 	<p ng-show="error" class="help-block" style="color: #a94442">{{errorTxt}}</p>
 
 </div>
