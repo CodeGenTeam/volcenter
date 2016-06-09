@@ -9,8 +9,8 @@
     <tbody>
     @foreach($events_type as $type)
         <tr id="item" data-item-id="{{ $type->id }}">
-            <td class="event_id">{{ $type->id }}</td>
-            <td class="event_name">{{ $type->name }}</td>
+            <td>{{ $type->id }}</td>
+            <td>{{ $type->name }}</td>
             <td>
                 <span class="pull-right">
                     <a href="#" class="mdi-editor-mode-edit" id="edit"></a>

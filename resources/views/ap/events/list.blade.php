@@ -11,10 +11,10 @@
     <tbody>
     @foreach($events as $event)
         <tr id="item" data-item-id="{{ $event->id }}">
-            <td class="event_id">{{ $event->id }}</td>
-            <td class="event_name">{{ $event->name }}</td>
-            <td class="event_descr">{{ $event->descr }}</td>
-            <td class="event_address">{{ $event->address }}</td>
+            <td>{{ $event->id }}</td>
+            <td>{{ $event->name }}</td>
+            <td>{{ $event->descr }}</td>
+            <td>{{ $event->address }}</td>
             <td>
                 <span class="pull-right">
                     <a href="#" class="mdi-editor-mode-edit" id="edit"></a>
