@@ -70,6 +70,7 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group col-sm-12" id="file_uploaded" style="text-align: center;"></div>
                 <div class="form-group col-sm-12">
                     <input id="image" type="file" multiple class="image file-loading" data-show-preview="false" data-show-upload="false">
                 </div>
@@ -87,19 +88,22 @@
         $('#event_start, #event_end').datetimepicker({
             format: 'YYYY-MM-DD HH:mm:ss'
         });
-        $("#image").fileinput({
-            /*'allowedFileExtensions' : ['jpg', 'jpeg', 'png'],
+        var $input = $("#image");
+        $input.fileinput({
+            'allowedFileExtensions' : ['jpg', 'jpeg', 'png'],
             'maxFileSize': 5120,
             'maxFileCount': 1,
-            'uploadUrl': '/adminpanel/events?action=save_img',
-            'elErrorContainer': '#errorBlock',
-            'uploadAsync': false,
-            //'msgInvalidFileExtension': 'Invalid extension for file "{name}". Only "{extensions}" files are supported.',
-            showRemove: false, // hide remove button
-            minFileCount: 1*/
             uploadUrl: "/adminpanel/events?action=save_img", // server upload action
-            uploadAsync: true,
-            maxFileCount: 1
+            uploadAsync: false,
+            showUpload: false, // hide upload button
+            showRemove: false // hide remove button
+        }).on("filebatchselected", function(event, files) {
+            $input.fileinput("upload");
+        }).on('filebatchuploadsuccess', function(event, data, previewId, index) {
+            $("#file_uploaded").html(
+                "<input type='hidden' name='image' value='" + data.jqXHR.responseJSON.filename + "'/>" +
+                " <image src='/images/events/" + data.jqXHR.responseJSON.filename + "' width='200px' style='margin-top: 10px'> "
+            );
         });
     });
 </script>

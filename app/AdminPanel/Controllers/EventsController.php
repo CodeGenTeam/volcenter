@@ -4,6 +4,7 @@ namespace app\AdminPanel\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\UploadedFile;
 use App\Models\Events;
 use App\Models\Events_type;
 use Illuminate\Support\Facades\Response;
@@ -43,7 +44,15 @@ class EventsController extends Controller
 					]);
 					break;
 				case 'save_img':
-					print_r($request->all());exit;
+					/** @var \Illuminate\Http\UploadedFile $file */
+					$file = $request->file('file_data');
+					$file_name = md5(time().$file->getClientOriginalName()).'.'.$file->getClientOriginalExtension();
+					$file->move(base_path('public').'/images/events', $file_name);
+
+					return Response::json([
+						'success'   => true, 
+						'filename'  => $file_name,
+					]);
 					break;
 				case 'items_list':
 					return view('ap.events.list', ['events' => Events::all()]);

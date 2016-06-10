@@ -3,6 +3,7 @@
     <tr>
         <th>#</th>
         <th>Название</th>
+        <th>Картинка</th>
         <th>Описание</th>
         <th>Адрес</th>
         <th style="width: 100px;">Действие</th>
@@ -13,6 +14,7 @@
         <tr id="item" data-item-id="{{ $event->id }}">
             <td>{{ $event->id }}</td>
             <td>{{ $event->name }}</td>
+            <td>@if ($event->image)<img src="/images/events/{{ $event->image }}" width="150px">@endif</td>
             <td>{{ $event->descr }}</td>
             <td>{{ $event->address }}</td>
             <td>
