@@ -37,10 +37,6 @@
 							ng-options="o as o for o in dates.years.options"></select>
 				</div>
 			</div>
-
-			<label>Место работы</label>
-			<input class="form-control input1"  name="place_of_work" ng-model="user.place_of_work"
-				   value="{{user.place_of_work}}">
 		</div>
 
 		<h3>Дополнительная информация</h3>
@@ -76,6 +72,12 @@
 			<input class="form-control input1" name="streets" value="{{user.size_foot}}">
 		</div>
 
+		<h4><label>Место работы</label></h4>
+		<div class="lan-wrapper">
+			<label>Место работы</label>
+			<input class="form-control input1" name="place_of_work" ng-model="user.place_of_work.address"
+				   value="{{user.place_of_work.address}}">
+		</div>
 
 		<h4><label>Учебное заведение</label></h4>
 		<div class="lan-wrapper">

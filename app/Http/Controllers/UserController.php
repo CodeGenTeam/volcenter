@@ -12,7 +12,7 @@ use Session;
 
 class UserController extends Controller
 {
-    private $upgradeableUserFields = ['email', 'name1', 'name2', 'name3', 'birthday', 'password'];
+    private $upgradeableUserFields = ['email', 'firstname', 'lastname', 'middlename', 'birthday', 'password'];
 
     public function create(Request $request)
     {
@@ -79,6 +79,8 @@ class UserController extends Controller
 
     public function show(Users $user)
     {
+        $user->load('place_of_work');
+
         if (is_null($user)) {
             return Response::json(['success' => false, 'error' => 'User not found.']);
         } else {
@@ -92,33 +94,30 @@ class UserController extends Controller
             return Response::json(['success' => false, 'error' => 'User not found.']);
         }
 
-        $user->update($request->all());
+        // todo запилить разрешения
+        $updated = [];
+        foreach ($request->all() as $key => $value) {
+            if (in_array($key, $this->upgradeableUserFields)) {
+                try {
+                    $user->{$key} = $value;
+                    $user->save();
+                } finally {
+                    $updated[] = $key;
+                }
+            }
+        }
 
-        // $user->update([
-        //     'email'         => $request->email,
-        //     'firstname'     => $request->firstname,
-        //     'lastname'      => $request->lastname,
-        //     'middlename'    => $request->middlename,
-        // ]);
+        if ($request->place_of_work) {
+            $place_of_work = json_decode($request->place_of_work);
 
-        return Response::json(['success' => true]);
+            if (count($user->place_of_work) > 0) {
+                $user->place_of_work()->update(['address' => $place_of_work->address]);
+            } else {
+                $user->place_of_work()->create(['address' => $place_of_work->address]);
+            }
+        }
 
-        // if (is_null($id)) {
-        //     return ['success' => false, 'user not found'];
-        // }
-        // // todo запилить разрешения
-        // $updated = [];
-        // foreach ($request->all() as $key => $value) {
-        //     if (in_array($key, $this->upgradeableUserFields)) {
-        //         try {
-        //             $id->{$key} = $value;
-        //             $id->save();
-        //         } finally {
-        //             $updated[] = $key;
-        //         }
-        //     }
-        // }
-        // return ['success' => count($updated) != 0, 'fields' => $updated];
+        return Response::json(['success' => count($updated) != 0]);
     }
 
     public function destroy(Users $user)
