@@ -2,7 +2,7 @@
 
 namespace app\Providers;
 
-use app\AdminPanel\AdminPanel;
+use App\AdminPanel\AdminPanel;
 use App\Http\ReturnUtil;
 use Illuminate\Support\ServiceProvider;
 
