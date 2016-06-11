@@ -251,7 +251,7 @@ var app = angular.module('app')
 				$http({
 					method: 'PUT',
 					url: URL + '/user/'  + $rootScope.userID,
-					params: $scope.user
+					params: $scope.user,
 				}).then(function(response) {
 					var data = response.data;
 					console.log(response);
