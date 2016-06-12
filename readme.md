@@ -35,3 +35,4 @@ Why is it important?
 ######Codestyle: PSR-2, PSR-4
 
 More about project: https://goo.gl/Votx30 (working repository)
+Task manager: https://trello.com/b/zVFtWnqu/crm-volcenter
