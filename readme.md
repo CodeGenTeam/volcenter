@@ -34,5 +34,4 @@ Why is it important?
 
 ######Codestyle: PSR-2, PSR-4
 
-Description about project: https://workflowy.com/s/2Cl3PwT1s0
-Description about MVP: https://workflowy.com/s/Uk0bbfwSXi
+More about project: https://goo.gl/Votx30 (working repository)
