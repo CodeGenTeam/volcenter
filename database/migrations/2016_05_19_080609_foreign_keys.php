@@ -60,6 +60,9 @@ class ForeignKeys extends Migration
             $table->foreign('group_id')->references('id')->on('PermissionGroups')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('Users')->onDelete('cascade')->onUpdate('cascade');
         });
+		Schema::table('Places_of_work', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('Users')->onDelete('cascade')->onUpdate('cascade');
+        });
     }
 
     /**
