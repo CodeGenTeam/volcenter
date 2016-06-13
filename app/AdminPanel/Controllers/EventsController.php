@@ -8,14 +8,22 @@ use Illuminate\Http\UploadedFile;
 use App\Models\Events;
 use App\Models\Events_type;
 use Illuminate\Support\Facades\Response;
+use File;
 
 class EventsController extends Controller
 {
 	public function index(Request $request)
 	{
 		if ($request->ajax()) {
+			$img_path = base_path('public').'/images/events';
 			switch ($request->query('action')) {
 				case 'delete_item':
+					$event = Events::find($request->query('id'));
+					//remove old img
+					if (!empty($event->image)) {
+						File::delete($img_path.'/'.$event->image);
+					}
+
 					Events::destroy($request->query('id'));
 					return Response::json(['success' => true]);
 					break;
@@ -47,12 +55,20 @@ class EventsController extends Controller
 					/** @var \Illuminate\Http\UploadedFile $file */
 					$file = $request->file('file_data');
 					$file_name = md5(time().$file->getClientOriginalName()).'.'.$file->getClientOriginalExtension();
-					$file->move(base_path('public').'/images/events', $file_name);
+					$file->move($img_path, $file_name);
 
 					return Response::json([
 						'success'   => true, 
 						'filename'  => $file_name,
 					]);
+					break;
+				case 'delete_img':
+					//remove old img
+					if ($old_img = $request->query('old_img')) {
+						File::delete($img_path.'/'.$old_img);
+					}
+
+					return Response::json(['success' => true]);
 					break;
 				case 'items_list':
 					return view('ap.events.list', ['events' => Events::all()]);

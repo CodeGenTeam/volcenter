@@ -71,19 +71,23 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-12">
-                        <label class="col-sm-4 control-label" for="name">Прекращения набора в волонтёры</label>
-                        <div class="col-sm-8">
-                            <div class='input-group date' id='event_start'>
-                                <input type='text' class="form-control" id="event_stop_register_user" name="event_stop_register_user" value="{{ $event->event_stop_register_user }}" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
+                    <label class="col-sm-2 control-label" for="name">Прекращения набора в волонтёры</label>
+                    <div class="col-sm-10">
+                        <div class='input-group date' id='event_start'>
+                            <input type='text' class="form-control" id="event_stop_register_user" name="event_stop_register_user" value="{{ $event->event_stop_register_user }}" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
                         </div>
                     </div>
                 </div>
-                <div class="form-group col-sm-12" id="file_uploaded" style="text-align: center;"></div>
+                <div class="form-group col-sm-12" id="file_uploaded" style="text-align: center;">
+                    <input type="hidden" name="image" value="{{ $event->image }}" />
+                    @if ($event->image)
+                        <image src="/images/events/{{ $event->image }}" width="200px" style="margin-top: 10px" />
+                        <a href="#" id="delete_img">Удалить</a>
+                    @endif
+                </div>
                 <div class="form-group col-sm-12">
                     <input id="image" type="file" multiple class="image file-loading" data-show-preview="false" data-show-upload="false">
                 </div>
@@ -112,11 +116,34 @@
             showRemove: false // hide remove button
         }).on("filebatchselected", function(event, files) {
             $input.fileinput("upload");
+            var old_img = $("form#item-form [name=image]").val();
+            if (old_img) {
+                App.ajax({action: 'delete_img', old_img: old_img});
+            }
         }).on('filebatchuploadsuccess', function(event, data, previewId, index) {
             $("#file_uploaded").html(
                 "<input type='hidden' name='image' value='" + data.jqXHR.responseJSON.filename + "'/>" +
-                " <image src='/images/events/" + data.jqXHR.responseJSON.filename + "' width='200px' style='margin-top: 10px'> "
+                " <image src='/images/events/" + data.jqXHR.responseJSON.filename + "' width='200px' style='margin-top: 10px'> " +
+                " <a href='#' id='delete_img'>Удалить</a>"
             );
+            deleteEventImg();
         });
+
+        deleteEventImg();
     });
+
+    //delete img
+    function deleteEventImg()
+    {
+        $("#delete_img").on('click', function (_el) {
+            _el.preventDefault();
+            notie.confirm('Вы действительно хотите удалить картинку?', 'Да', 'Отменить', function() {
+                App.ajax({action: 'delete_img', old_img: $("form#item-form [name=image]").val()}, function(data) {
+                    if (data.success) {
+                        $("#file_uploaded").html("<input type='hidden' name='image' value=''>");
+                    }
+                });
+            });
+        });
+    }
 </script>
