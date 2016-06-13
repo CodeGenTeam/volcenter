@@ -19,8 +19,14 @@ class Statuses extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('id')->unique();
             $table->string('name'); // название статуса(в ожидании, отклонен, принят, в резерве, принял участие, отказался от участия, не пришел - не уведомил)
+            // Подал заявку
+            // Принято
+            // Отменил пользователь
+            // Отклонено администратором
+            // Не пришёл на мероприятие
+            // Принял участие в мероприятии
         });
     }
 

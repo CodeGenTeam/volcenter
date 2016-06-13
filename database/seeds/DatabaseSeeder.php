@@ -27,10 +27,15 @@ class DatabaseSeeder extends Seeder
             DB::table('Events')->insert(['name' => $name, 'event_type' => $id]);
         }
 
-        // Application types
+        // Подал заявку
+        // Принято
+        // Отменил пользователь
+        // Отклонено администратором
+        // Не пришёл на мероприятие
+        // Принял участие в мероприятии
         foreach (
-            [1 => 'inwait', 2 => 'rejected', 3 => 'reserved',
-                4 => 'accepted', 5 => 'refuse', 6 => 'leave'] as
+            [1 => 'Подал заявку', 2 => 'Отменил заявку', 3 => 'Принято администратором',
+                4 => 'Отклонено администратором', 5 => 'Принял участие в мероприятии', 6 => 'Не пришёл на мероприятие'] as
             $id => $name
         ) {
             DB::table('Statuses')->insert(['id' => $id, 'name' => $name]);
