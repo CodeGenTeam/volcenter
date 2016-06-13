@@ -16,7 +16,6 @@ class PlacesOfWork extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
             $table->string('address');
-            $table->timestamps();
         });
     }
 
