@@ -70,6 +70,19 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label class="col-sm-4 control-label" for="name">Прекращения набора в волонтёры</label>
+                        <div class="col-sm-8">
+                            <div class='input-group date' id='event_start'>
+                                <input type='text' class="form-control" id="event_stop_register_user" name="event_stop_register_user" value="{{ $event->event_stop_register_user }}" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group col-sm-12" id="file_uploaded" style="text-align: center;"></div>
                 <div class="form-group col-sm-12">
                     <input id="image" type="file" multiple class="image file-loading" data-show-preview="false" data-show-upload="false">
@@ -85,7 +98,7 @@
 </div>
 <script type="text/javascript">
     $(function () {
-        $('#event_start, #event_end').datetimepicker({
+        $('#event_start, #event_end, #event_stop_register_user').datetimepicker({
             format: 'YYYY-MM-DD HH:mm:ss'
         });
         var $input = $("#image");
