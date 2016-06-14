@@ -45,6 +45,7 @@ class AdminPanel {
     }
 
     public function getLinks() {
+        if (!$this->links) $this->loadWidgets();
         return $this->links;
     }
 }
