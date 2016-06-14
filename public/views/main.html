@@ -11,14 +11,14 @@
 		<h4 class="h4-mar-lit">Уже имеете учетную запись?</h4>
 		<div class="button button-color-2 href"><a  ui-sref="login">Войти</a></div>
 	</div>
-	
+
 	<div id="events-wrapepr">
 		<h3>Ближайшие мероприятия</h3>
 		<div class="main-page-event admin-page-event" ng-repeat="ev in events">
-	
+
 			<a class="page-event-a" href="#/event/{{ev.id}}" >
 				<div class="event-name">{{ev.name}}</div>
-
+				<img ng-src="{{ ev.image }}">
 				<div class="event-dateStart event-dark">
 					<i class="glyphicon glyphicon-time"></i>
 					{{ev.dateStart}} - {{ev.dateEnd}}
