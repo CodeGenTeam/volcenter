@@ -7,7 +7,7 @@
                 <span class="sr-only">Close</span>
             </button>
             <h4 class="modal-title">
-                @if ($motivations->id)
+                @if ($motivation->id)
                     Редактирование мотивации
                 @else
                     Создание мотивации
@@ -17,11 +17,11 @@
         <!-- Modal Body -->
         <form id="item-form" class="form-horizontal" role="form" action="#" data-toggle="popel-validator">
             <div class="modal-body">
-                <input type="hidden" name="id" value="{{ $motivations->id }}">
+                <input type="hidden" name="id" value="{{ $motivation->id }}">
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="name">Название</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="name" value="{{ $motivations->name }}" data-rules="not-empty" name="name" placeholder="Название"/>
+                        <input type="text" class="form-control" id="name" value="{{ $motivation->name }}" data-rules="not-empty" name="name" placeholder="Название"/>
                     </div>
                 </div>
             </div>
