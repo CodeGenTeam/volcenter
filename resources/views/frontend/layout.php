@@ -24,8 +24,6 @@
 
 	<script src="controllers/mainCtrl.js"></script>
 	<script src="controllers/eventsCtrl.js"></script>
-	<script src="controllers/editEventCtrl.js"></script>
-	<script src="controllers/createEventCtrl.js"></script>
 	<script src="controllers/loginCtrl.js"></script>
 	<script src="controllers/logoutCtrl.js"></script>
 	<script src="controllers/regCtrl.js"></script>

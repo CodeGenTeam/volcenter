@@ -11,6 +11,6 @@ class Events extends Model
     protected $fillable = ['id', 'event_start', 'event_end', 'name', 'image', 'descr', 'address','event_type'];
     public function getEventType()
     {
-        return $this->belongsToMany(Events_type::class, 'Events', 'id', 'event_type');
+        return $this->belongsTo(Events_type::class, 'id');
     }
 }

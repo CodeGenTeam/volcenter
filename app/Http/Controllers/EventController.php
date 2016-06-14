@@ -111,12 +111,13 @@ class EventController extends Controller
         }
     }
 
-    public function show(Events $id)
+    public function show(Events $event)
     {
-        if (is_null($id)) {
+        if (is_null($event)) {
             return ['success' => false, 'error' => 'event not found'];
         } else {
-            return ['success' => true, 'event' => $id];
+            $event->load('getEventType');
+            return ['success' => true, 'event' => $event];
         }
     }
 

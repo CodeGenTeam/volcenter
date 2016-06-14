@@ -31,7 +31,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/event/create', 'EventController@create');
     Route::delete('/event/{event}', 'EventController@delete')->where(['event' => '\d+']);
     Route::post('/event/{event}', 'EventController@update')->where(['event' => '\d+']);
-    Route::get('/event/{id}', 'EventController@show')->where(['id' => '\d+']);
+    Route::get('/event/{event}', 'EventController@show')->where(['id' => '\d+']);
     Route::get('/event/last', 'EventController@getlast');
     Route::get('/event/list/{id}', 'EventController@getList')->where(['id' => '\d+']);
 
@@ -58,4 +58,5 @@ Route::group(['middleware' => 'web'], function () {
     Route::resource('/adminpanel/events', '\app\AdminPanel\Controllers\EventsController@index');
     Route::resource('/adminpanel/events_type', '\app\AdminPanel\Controllers\EventsTypeController@index');
     Route::resource('/adminpanel/users', '\app\AdminPanel\Controllers\UsersController@index');
+    Route::resource('/adminpanel/motivations', '\app\AdminPanel\Controllers\MotivationsController@index');
 });

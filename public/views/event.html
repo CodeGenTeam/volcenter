@@ -1,5 +1,5 @@
 <div id="admin-wrapper" >
-
+	<!-- 'event_start', 'event_end', 'name', 'image', 'descr', 'address','event_type' -->
 
 	<h2 class="h2-big">Мероприятие '{{ev.name}}'</h2>
 
@@ -7,10 +7,9 @@
 		<div class="event-watch" >
 
 			<div class="event-watch-descr">{{ev.descr}}</div>
-
-			<p><span>Дата:</span> {{ev.event_start}} - {{ev.event_end}}
+			<p><span>Дата:</span> {{ev.event_start | date:'yyyy-MM-dd HH:mm'}} - {{ev.event_end | date:'yyyy-MM-dd HH:mm'}}
             <p><span>Место: </span>{{ev.address}}
-			<p><span>Тип мероприятия: </span>{{ev.event_type}}
+			<p><span>Тип мероприятия: </span>{{ev.get_event_type.name}}
 
             <p><span>Подтверждено участников: </span>{{ev.users}}
             <p><span>Ожидает подтверждения: </span>{{ev.users}}
