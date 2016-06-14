@@ -23,14 +23,15 @@ class EventController extends Controller
     public function getList($id)
     {
         $number = 3;
-        return Response::json(DB::table('Events')->take($number)->skip((intval($id)-1) * $number)->get());
+
+        return Response::json(Events::take($number)->skip((intval($id)-1) * $number)->get());
     }
     
     public function getlast()
     {
         $number = 3;
 
-        return Response::json(DB::table('Events')->take($number)->get());
+        return Response::json(Events::take($number)->get());
     }
     
     public function delete(Events $event)
