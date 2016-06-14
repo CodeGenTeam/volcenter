@@ -25,18 +25,6 @@ var app = angular.module('app')
 		}
 	})
 
-	.state('eventcreate', {
-		url: '/eventcreate',
-		templateUrl: 'views/createEvent.html',
-		controller:'createEventCtrl',
-		data: {
-			permissions: {
-				only: ['admin'],
-				redirectTo: '/'
-			}
-		}
-	})
-
 	.state('login', {
 		url: '/login',
 		templateUrl: 'views/login.html',
@@ -81,15 +69,6 @@ var app = angular.module('app')
 
 		}
 	})
-
-		.state('eventEdit', {
-			url: '/eventedit/:id',
-			templateUrl: 'views/editEvent.html',
-			controller:'editEventCtrl',
-			data: {
-
-			}
-		})
 
 	.state('user', {
 		url: '/user/:id',
