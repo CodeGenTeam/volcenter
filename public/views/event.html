@@ -5,7 +5,7 @@
 
 	<div id="events-wrapepr" >
 		<div class="event-watch" >
-
+			<div ng-if="ev.image!==''"><img src="images/events/{{ev.image}}" /></div>
 			<div class="event-watch-descr">{{ev.descr}}</div>
 			<p><span>Дата:</span> {{ev.event_start | date:'yyyy-MM-dd HH:mm'}} - {{ev.event_end | date:'yyyy-MM-dd HH:mm'}}
             <p><span>Место: </span>{{ev.address}}
