@@ -8,9 +8,9 @@
 		<h4 ng-show="load">Загрузка...</h4>
 
 		<div class="main-page-event admin-page-event" ng-repeat="ev in events">
-
-			<a class="page-event-a" href="#/event/{{ev.id}}" >
-				<img src="images/events/{{ev.image}}" ng-if="ev.image" />
+			
+			<a class="page-event-a" href="#/event/{{ev.id}}">
+				<img ng-src="{{ ev.image }}">
 				<div class="event-name">{{ev.name}}</div>
 				<div class="event-dateStart event-dark">С: {{ev.event_start}}</div>
 				<div class="event-dateEnd event-dark">По: {{ev.event_end}}</div><br>

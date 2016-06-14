@@ -25,8 +25,16 @@ var app = angular.module('app')
 		if (response.status == 200) {
 			$scope.load = false;
 			$scope.events = response.data;
+			angular.forEach($scope.events, function(options) {
+	 			angular.forEach(options, function(value, option) {
+		   			if (option == "image") {
+		   				if (value !== null && value !== undefined && value !== '') {
+							options[option] = "images/events/" + value;
+						}
+		   			} 
+ 				});
+ 			});
 		}
-
 	}, function(err) {
 		console.log(err);
 	});

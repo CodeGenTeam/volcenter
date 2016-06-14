@@ -10,7 +10,7 @@ var app = angular.module('app')
 	.state('main', {
 		url: '/',
 		templateUrl: 'views/main.html',
-		controller:'mainCtrl',
+		controller: 'mainCtrl',
 		data: {
 
 		}

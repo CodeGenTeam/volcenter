@@ -31,8 +31,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/event/create', 'EventController@create');
     Route::delete('/event/{event}', 'EventController@delete')->where(['event' => '\d+']);
     Route::post('/event/{event}', 'EventController@update')->where(['event' => '\d+']);
-    Route::get('/event/{event}', 'EventController@show')->where(['id' => '\d+']);
     Route::get('/event/last', 'EventController@getlast');
+    Route::get('/event/{event}', 'EventController@show')->where(['id' => '\d+']);
     Route::get('/event/list/{id}', 'EventController@getList')->where(['id' => '\d+']);
 
     // ApplicationsController

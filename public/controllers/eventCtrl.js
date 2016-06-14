@@ -14,6 +14,9 @@ var app = angular.module('app')
 				$scope.ev = response.data.event;
 				$scope.ev.event_start = Date.parse($scope.ev.event_start);
 				$scope.ev.event_end = Date.parse($scope.ev.event_end);
+				if ($scope.ev.image !== null && $scope.ev.image !== undefined && $scope.ev.image !== '') {
+					$scope.ev.image = 'images/events/' + $scope.ev.image;
+				}
 			}
 
 		}, function(err) {
