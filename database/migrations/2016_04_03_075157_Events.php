@@ -25,6 +25,7 @@ class Events extends Migration
 
             $table->timestamp('event_start'); // дата и время начала
             $table->timestamp('event_end'); // дата и время окончания
+            $table->timestamp('event_start_register_user'); // дата/время начала набора в волонтёры
             $table->timestamp('event_stop_register_user'); // дата/время прекращения набора в волонтёры
 
             $table->integer('event_type')->unsigned(); // тип мероприятия
