@@ -114,11 +114,7 @@ class EventController extends Controller
         if (is_null($event)) {
             return ['success' => false, 'error' => 'event not found'];
         } else {
-
             $event->load('getEventType')->load('getResponsibility')->load('getMotivation');
-            // return ['success' => true, 'event' => $event];
-            // dd($event);
-
             return view('admin_panel.events.responsibility',
                 compact('event')
             );

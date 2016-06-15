@@ -21,6 +21,6 @@ class Event extends Model
 
     public function getResponsibility()
     {
-        return $this->hasMany(Responsibility_event::class);
+        return $this->belongsToMany(Responsibility::class, 'responsibility_events');
     }
 }
