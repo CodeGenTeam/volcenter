@@ -33,9 +33,9 @@ class User extends Auth
     {
         return $this->hasMany(Study::class);
     }
-    public function place_of_work()
+    public function place_work()
     {
-        return $this->hasOne(Place_of_work::class);
+        return $this->hasOne(Place_work::class);
     }
     // Permissions
 }

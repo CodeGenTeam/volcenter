@@ -10,17 +10,10 @@
 
 	<script src="lib/jquery.min.js"></script>
 	<script src="lib/angular.min.js"></script>
-	<script src="lib/angular-route.js"></script>
-	<script src="lib/angular-ui-router.min.js"></script>
-	<script src="lib/angular-permission.js"></script>
 
 	<script src="lib/ui-bootstrap-1.2.5.min.js"></script>
 
 	<script src="app.js"></script>
-	<script src="routes.js"></script>
-
-	<script src="services/sessionService.js"></script>
-	<script src="services/eventRemoveService.js"></script>
 
 	<script src="controllers/mainCtrl.js"></script>
 	<script src="controllers/eventsCtrl.js"></script>

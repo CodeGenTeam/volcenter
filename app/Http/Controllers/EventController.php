@@ -117,7 +117,7 @@ class EventController extends Controller
             $event->load('getEventType')->load('getResponsibility')->load('getMotivation');
             //return ['success' => true, 'event' => $event];
             //dd($event);
-            return view('ap.events.responsibility',
+            return view('admin_panel.events.responsibility',
                 compact('event')
             );
         }

@@ -37,7 +37,7 @@ class AdminPanel {
         foreach ($widgets as $widget) {
             if ($widget->can()) $w[] = $widget;
         }
-        return view('ap.widgets', ['widgets' => $w]);
+        return view('admin_panel.widgets', ['widgets' => $w]);
     }
 
     public function links($links) {

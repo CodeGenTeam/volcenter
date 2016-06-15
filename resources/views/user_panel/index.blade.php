@@ -1,4 +1,3 @@
-
 <div id="main-page-wrapper" >
 	<h1>Центр волонтеров Южного Урала</h1>
 	<h3>Мы рады приветствовать вас</h3>
@@ -14,25 +13,26 @@
 
 	<div id="events-wrapepr">
 		<h3>Ближайшие мероприятия</h3>
-		<div class="main-page-event admin-page-event" ng-repeat="ev in events">
-
-			<a class="page-event-a" href="#/event/{{ev.id}}" >
-				<div class="event-name">{{ev.name}}</div>
-				<img ng-src="{{ ev.image }}">
+		<div class="main-page-event admin-page-event">
+		@foreach ($events as $ev)
+			<a class="page-event-a" href="#/event/{{$ev->id}}" >
+				<div class="event-name">{{$ev->name}}</div>
+				<img ng-src="{{ $ev->image }}">
 				<div class="event-dateStart event-dark">
 					<i class="glyphicon glyphicon-time"></i>
-					{{ev.event_start}} - {{ev.event_end}}
+					{{$ev->event_start}} - {{$ev->event_end}}
 				</div>
 
-				<div class="event-type event-dark">{{ev.get_event_type.name}}</div>
-				<div class="event-place">Место: {{ev.address}}</div>
+				<div class="event-type event-dark">{{$ev->get_event_type->name}}</div>
+				<div class="event-place">Место: {{$ev->address}}</div>
 
-				<div class="event-descr">{{ev.descr}}</div>
+				<div class="event-descr">{{$ev->descr}}</div>
 				<div class="event-dateStart event-dark">
 					<i class="glyphicon glyphicon-time"></i>
-					{{event_start_register_user}} - {{event_stop_register_user}}
+					{{$ev->event_start_register_user}} - {{$ev->event_stop_register_user}}
 				</div>
 			</a>
+		@endforeach
 		</div>
 	</div>
 </div>

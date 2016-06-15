@@ -35,17 +35,17 @@ class UserController extends Controller
 					} else {
 						$user = new User();
 					}
-					return view('ap.users.modal', compact('user'));
+					return view('admin_panel.users.modal', compact('user'));
 					break;
 				case 'items_list':
-					return view('ap.users.list', ['users' => User::all()]);
+					return view('admin_panel.users.list', ['users' => User::all()]);
 					break;
 				default:
 					return Response::json(['success' => false, 'error' => 'empty action']);
 					break;
 			}
 		} else {
-			return view('ap.users.index', ['users' => User::all()]);
+			return view('admin_panel.users.index', ['users' => User::all()]);
 		}
 	}
 }

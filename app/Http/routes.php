@@ -1,9 +1,7 @@
 <?php
 
 Route::group(['middleware' => 'web'], function () {
-    Route::get('/', function () {
-        return view('frontend/layout');
-    });
+    Route::get('/', 'IndexController@index');
 
     /* Actions Handled By Resource Controller
         Verb		Path				Action		Route Name

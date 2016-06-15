@@ -36,19 +36,19 @@ class MotivationController extends Controller
 						$motivation = new Motivation();
 					}
 
-					return view('ap.motivations.modal', [
+					return view('admin_panel.motivations.modal', [
 						'motivation' => $motivation,
 					]);
 					break;
 				case 'items_list':
-					return view('ap.motivations.list', ['motivations' => Motivation::all()]);
+					return view('admin_panel.motivations.list', ['motivations' => Motivation::all()]);
 					break;
 				default:
 					return Response::json(['success' => false, 'error' => 'empty action']);
 					break;
 			}
 		} else {
-			return view('ap.motivations.index', ['motivations' => Motivation::all()]);
+			return view('admin_panel.motivations.index', ['motivations' => Motivation::all()]);
 		}
 	}
 }

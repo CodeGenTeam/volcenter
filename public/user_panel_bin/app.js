@@ -1,38 +1,10 @@
-var app = angular.module('app', ['ui.bootstrap', 'ngRoute', 'ui.router', 'permission'])
+var app = angular.module('app', ['ui.bootstrap'])
 
 .factory('URL', function(){
 	return '';
 	// return 'http://api.volcenter:8080';
 	// return 'http://alexphost.ru:8080';
 })
-
-.run(function($rootScope, Permission, SessionService, $http) {
-
-	SessionService.init();
-
-	Permission
-	.defineRole('anonymous', function (stateParams) {
-		if ($rootScope.role == 'anonymous') {
-			return true;
-		};
-		return false;
-	})
-
-	.defineRole('isloggedin', function (stateParams) {
-		if ($rootScope.role == 'isloggedin') {
-			return true;
-		}
-		return false;
-	})
-
-	.defineRole('admin', function (stateParams) {
-		if ($rootScope.role == 'admin') {
-			return true;
-		}
-		return false;
-	});
-})
-
 
 .controller('headerCtrl', function($scope, $rootScope) {
 

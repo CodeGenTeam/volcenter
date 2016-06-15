@@ -79,7 +79,7 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        $user->load('place_of_work');
+        $user->load('place_work');
 
         if (is_null($user)) {
             return Response::json(['success' => false, 'error' => 'User not found.']);

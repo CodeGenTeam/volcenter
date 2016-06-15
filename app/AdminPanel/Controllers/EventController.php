@@ -15,7 +15,7 @@ class EventController extends Controller
 	public function index(Request $request)
 	{
 		if ($request->ajax()) {
-			$img_path = base_path('public').'/images/events';
+			$img_path = base_path('public').'user_panel_bin/images/events';
 			switch ($request->query('action')) {
 				case 'delete_item':
 					$event = Event::find($request->query('id'));
@@ -46,7 +46,7 @@ class EventController extends Controller
 						$event = new Event();
 					}
 
-					return view('ap.events.modal', [
+					return view('admin_panel.events.modal', [
 						'event' => $event,
 						'event_types' => Event_type::all()
 					]);
@@ -71,14 +71,14 @@ class EventController extends Controller
 					return Response::json(['success' => true]);
 					break;
 				case 'items_list':
-					return view('ap.events.list', ['events' => Event::all()]);
+					return view('admin_panel.events.list', ['events' => Event::all()]);
 					break;
 				default:
 					return Response::json(['success' => false, 'error' => 'empty action']);
 					break;
 			}
 		} else {
-			return view('ap.events.index', ['events' => Event::all()]);
+			return view('admin_panel.events.index', ['events' => Event::all()]);
 		}
 	}
 }
