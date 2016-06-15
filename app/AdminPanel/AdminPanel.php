@@ -9,6 +9,11 @@ class AdminPanel {
 
     public function routes() {
         \Route::get('/adminpanel', function () { return $this->showWidgets(); });
+        // Admin panel event
+        \Route::get('/adminpanel/events', '\app\AdminPanel\Controllers\EventController@index');
+        \Route::get('/adminpanel/event_types', '\app\AdminPanel\Controllers\EventTypeController@index');
+        \Route::get('/adminpanel/users', '\app\AdminPanel\Controllers\UserController@index');
+        \Route::get('/adminpanel/motivations', '\app\AdminPanel\Controllers\MotivationController@index');
     }
 
     public function loadWidgets() {

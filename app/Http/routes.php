@@ -52,12 +52,6 @@ Route::group(['middleware' => 'web'], function () {
     // Admin panel
     APanel::routes();
 
-    // Admin panel event
-    Route::resource('/adminpanel/events', '\app\AdminPanel\Controllers\EventController@index');
-    Route::resource('/adminpanel/event_types', '\app\AdminPanel\Controllers\EventTypeController@index');
-    Route::resource('/adminpanel/users', '\app\AdminPanel\Controllers\UserController@index');
-    Route::resource('/adminpanel/motivations', '\app\AdminPanel\Controllers\MotivationController@index');
-
     Route::auth();
     Route::get('/home', 'IndexController@index');
 });
