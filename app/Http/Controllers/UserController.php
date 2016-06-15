@@ -3,7 +3,7 @@
 namespace app\Http\Controllers;
 
 use App\Http\Requests;
-use App\Models\Users;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
@@ -61,7 +61,7 @@ class UserController extends Controller
             }
         }
 
-        $user = Users::create([
+        $user = User::create([
             'login'      => $data['login'],
             'email'      => $data['email'],
             'password'   => bcrypt($data['password']),
@@ -77,7 +77,7 @@ class UserController extends Controller
         } // (про 'note') ну на всяк случай
     }
 
-    public function show(Users $user)
+    public function show(User $user)
     {
         $user->load('place_of_work');
 
@@ -88,7 +88,7 @@ class UserController extends Controller
         }
     }
 
-    public function update(Request $request, Users $user)
+    public function update(Request $request, User $user)
     {
         if (is_null($user)) {
             return Response::json(['success' => false, 'error' => 'User not found.']);
@@ -120,7 +120,7 @@ class UserController extends Controller
         return Response::json(['success' => count($updated) != 0]);
     }
 
-    public function destroy(Users $user)
+    public function destroy(User $user)
     {
         if (is_null($user)) {
             return Response::json(['success' => false, 'error' => 'user not found']);

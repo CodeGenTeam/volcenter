@@ -2,7 +2,7 @@
 
 namespace app\Http\Controllers;
 
-use App\Models\Events;
+use App\Models\Event;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -17,22 +17,22 @@ class EventController extends Controller
 
     public function index()
     {
-        return Response::json(Events::all());
+        return Response::json(Event::all());
     }
     
     public function getList($id)
     {
         $number = 3;
-        return Response::json(Events::take($number)->skip((intval($id)-1) * $number)->get()->load('getEventType'));
+        return Response::json(Event::take($number)->skip((intval($id)-1) * $number)->get()->load('getEventType'));
     }
     
     public function getlast()
     {
         $number = 3;
-        return Response::json(Events::take($number)->get()->load('getMotivation'));
+        return Response::json(Event::take($number)->get()->load('getMotivation'));
     }
     
-    public function delete(Events $event)
+    public function delete(Event $event)
     {
         if (is_null($event)) {
             return ['success' => false, 'error' => 'event not found'];
@@ -74,7 +74,7 @@ class EventController extends Controller
         //$val = Validator::make($data, ['name' => 'required']);
         //if ($val->fails()) return Response::json(['success' => false, 'error' => $val->errors()->all()]);
 
-        Events::create([
+        Event::create([
             'name' => $data['name'],
             'descr' => $data['descr'],
             'address' => $data['address'],
@@ -88,7 +88,7 @@ class EventController extends Controller
         //else return ['success' => true, 'id' => 4];
     }
 
-    public function update(Request $request, Events $id)
+    public function update(Request $request, Event $id)
     {
         if (is_null($id)) {
             return ['success' => false, 'event not found'];
@@ -109,13 +109,12 @@ class EventController extends Controller
         }
     }
 
-    public function show(Events $event)
+    public function show(Event $event)
     {
         if (is_null($event)) {
             return ['success' => false, 'error' => 'event not found'];
         } else {
-            $event->load('getEventType')->load('getMotivation');
-            $event->load('getEventType')->load('getResponsibility');
+            $event->load('getEventType')->load('getResponsibility')->load('getMotivation');
             return ['success' => true, 'event' => $event];
         }
     }

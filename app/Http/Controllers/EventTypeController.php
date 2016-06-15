@@ -2,8 +2,8 @@
 
 namespace app\Http\Controllers;
 
-use App\Models\Events;
-use App\Models\Events_type;
+use App\Models\Event;
+use App\Models\Event_type;
 use Illuminate\Http\Request;
 use Response;
 
@@ -17,7 +17,7 @@ class EventTypeController extends Controller
     // TODO: View со всеми записями
     public function index()
     {
-        $event_type = Events_type::all();
+        $event_type = Event_type::all();
         return View('event.event_type.index', compact('event_type'));
     }
     // TODO: View создания новой записи
@@ -34,15 +34,15 @@ class EventTypeController extends Controller
     {
     }
     // TODO: страница показа записи
-    public function show(Events_type $id)
+    public function show(Event_type $id)
     {
     }
     // TODO: страница редактирования записи
-    public function edit(Events_type $id)
+    public function edit(Event_type $id)
     {
     }
     // TODO: запрос обновления записи
-    public function update(Events_type $id, Request $request)
+    public function update(Event_type $id, Request $request)
     {
         if (is_null($id)) {
             return ['success' => false, 'event type not found'];
@@ -71,7 +71,7 @@ class EventTypeController extends Controller
     // TODO: запрос удаления записи
     public function destroy($id)
     {
-        $u = Events_type::find($id);
+        $u = Event_type::find($id);
         if (is_null($u)) {
             return ['success' => false, 'event type not found'];
         }

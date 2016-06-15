@@ -4,13 +4,13 @@ namespace app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Clothes extends Model
+class Address extends Model
 {
     public $timestamps = false;
-    protected $fillable = ['user_id', 'size_clothes', 'size_foot'];
     protected $hidden = ['id', 'user_id'];
+    protected $fillable = ['user_id','country','city','street','house','ext','flat'];
     public function getUser()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(Users::class);
     }
 }

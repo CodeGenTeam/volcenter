@@ -3,7 +3,7 @@
 namespace app\Http\Controllers;
 
 use App\Http\Requests;
-use App\Models\Profiles_types;
+use App\Models\Profile_type;
 use Pex;
 
 class ProfileTypeController extends Controller
@@ -13,7 +13,7 @@ class ProfileTypeController extends Controller
 
     public function index()
     {
-        $u = Profiles_types::all();
+        $u = Profile_type::all();
         if (is_null($u)) {
             return ['success' => false, 'error' => 'types not found'];
         }
@@ -30,11 +30,11 @@ class ProfileTypeController extends Controller
         if ($val->fails()) {
             return ['success' => false, 'error' => $val->errors()->all()];
         }
-        Profiles_types::create(['name' => $data['name']]);
+        Profile_type::create(['name' => $data['name']]);
         return ['success' => true];
     }
 
-    public function update(Profiles_types $id, Request $request)
+    public function update(Profile_type $id, Request $request)
     {
         if (is_null($id)) {
             return ['success' => false, 'error' => 'profile type not found'];
@@ -60,7 +60,7 @@ class ProfileTypeController extends Controller
         return ['success' => count($updated) != 0, 'fields' => $updated];
     }
 
-    public function delete(Profiles_types $id)
+    public function delete(Profile_type $id)
     {
         if (is_null($id)) {
             return ['success' => false, 'error' => 'profile type not found'];

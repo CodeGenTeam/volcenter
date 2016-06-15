@@ -10,9 +10,9 @@
 | database. Just tell the factory how a default model should look.
 |
 */
-use App\Models\Users;
+use App\Models\User;
 
-$factory->define(Users::class, function (Faker\Generator $faker) {
+$factory->define(User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->safeEmail,

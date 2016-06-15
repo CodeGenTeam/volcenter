@@ -14,9 +14,9 @@ APanel::links([
         'link' => 'events',
     ],
     [
-        'id' => 'events_type',
+        'id' => 'event_types',
         'name' => 'Типы мероприятия',
-        'link' => 'events_type',
+        'link' => 'event_types',
     ],
     [
         'id' => 'motivations',

@@ -36,13 +36,13 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/event/list/{id}', 'EventController@getList')->where(['id' => '\d+']);
 
     // ApplicationsController
-    Route::get('/user/{user}/application', 'ApplicationsController@index')->where(['user' => '\d+']);
-    Route::get('/user/{user?}/application/create', 'ApplicationsController@create')->where(['user' => '\d+']);
-    Route::get('/application/{application}', 'ApplicationsController@update')->where(['user' => '\d+', 'application' => '\d+']);
-    Route::delete('/application/{application}', 'ApplicationsController@delete')->where(['application' => '\d+']);
+    Route::get('/user/{user}/application', 'ApplicationController@index')->where(['user' => '\d+']);
+    Route::get('/user/{user?}/application/create', 'ApplicationController@create')->where(['user' => '\d+']);
+    Route::get('/application/{application}', 'ApplicationController@update')->where(['user' => '\d+', 'application' => '\d+']);
+    Route::delete('/application/{application}', 'ApplicationController@delete')->where(['application' => '\d+']);
 
     // StatusesController
-    Route::resource('/user/status', 'StatusesController', ['only' => ['index', 'create', 'update', 'destroy']]);
+    Route::resource('/user/status', 'StatusController', ['only' => ['index', 'create', 'update', 'destroy']]);
 
     // ProfileController
     Route::resource('/user/{user}/profile', 'ProfileController', ['only' => ['show', 'create', 'update', 'destroy']]);
@@ -55,8 +55,8 @@ Route::group(['middleware' => 'web'], function () {
     APanel::routes();
 
     // Admin panel event
-    Route::resource('/adminpanel/events', '\app\AdminPanel\Controllers\EventsController@index');
-    Route::resource('/adminpanel/events_type', '\app\AdminPanel\Controllers\EventsTypeController@index');
-    Route::resource('/adminpanel/users', '\app\AdminPanel\Controllers\UsersController@index');
-    Route::resource('/adminpanel/motivations', '\app\AdminPanel\Controllers\MotivationsController@index');
+    Route::resource('/adminpanel/events', '\app\AdminPanel\Controllers\EventController@index');
+    Route::resource('/adminpanel/event_types', '\app\AdminPanel\Controllers\EventTypeController@index');
+    Route::resource('/adminpanel/users', '\app\AdminPanel\Controllers\UserController@index');
+    Route::resource('/adminpanel/motivations', '\app\AdminPanel\Controllers\MotivationController@index');
 });

@@ -3,8 +3,8 @@
 namespace app\Http\Controllers;
 
 use App\Http\Requests;
-use App\Models\Profiles;
-use App\Models\Users;
+use App\Models\Profile;
+use App\Models\User;
 use Request;
 use Validator;
 
@@ -13,7 +13,7 @@ class ProfileController extends Controller
 
     private $upgradeableUserFields = ['link', 'profile_type_id'];
 
-    public function show(Users $user)
+    public function show(User $user)
     {
         if (is_null($user)) {
             return ['success' => false, 'error' => 'user not found'];
@@ -34,13 +34,13 @@ class ProfileController extends Controller
         if ($val->fails()) {
             return ['success' => false, 'error' => $val->errors()->all()];
         }
-        Profiles::create([
+        Profile::create([
             'user_id' => $data['user_id'], 'event_id' => $data['event_id'], 'status_id' => $data['status_id']
         ]);
         return ['success' => true];
     }
 
-    public function update(Users $user, Profiles $id, Request $request)
+    public function update(User $user, Profile $id, Request $request)
     {
         if (is_null($id)) {
             return ['success' => false, 'error' => 'profile not found'];
@@ -66,7 +66,7 @@ class ProfileController extends Controller
         return ['success' => count($updated) != 0, 'fields' => $updated];
     }
 
-    public function delete(Profiles $id)
+    public function delete(Profile $id)
     {
         if (is_null($id)) {
             return ['success' => false, 'error' => 'profile not found'];
