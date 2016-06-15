@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Auth;
 class User extends Auth
 {
     protected $hidden = ['password', 'remember_token', 'created_at', 'updated_at','id'];
-    protected $fillable = ['login', 'email', 'password', 'firstname', 'lastname', 'middlename', 'birthday', 'place_of_work'];
+    protected $fillable = ['login', 'email', 'password', 'firstname', 'lastname', 'middlename', 'birthday'];
     
     public function applications()
     {

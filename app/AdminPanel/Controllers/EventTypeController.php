@@ -36,7 +36,7 @@ class EventTypeController extends Controller
 						$event_type = new Event_type();
 					}
 
-					return view('ap.event_types.modal', ['event_types' => $event_type]);
+					return view('ap.event_types.modal', ['event_type' => $event_type]);
 					break;
 				case 'items_list':
 					return view('ap.event_types.list', ['event_types' => Event_type::all()]);

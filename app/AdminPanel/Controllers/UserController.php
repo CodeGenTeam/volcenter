@@ -35,9 +35,7 @@ class UserController extends Controller
 					} else {
 						$user = new User();
 					}
-					return view('ap.user.modal', [
-						'user' => $user,
-					]);
+					return view('ap.users.modal', compact('user'));
 					break;
 				case 'items_list':
 					return view('ap.users.list', ['users' => User::all()]);

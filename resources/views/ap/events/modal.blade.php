@@ -40,7 +40,7 @@
                     <label class="col-sm-2 control-label" for="event_type">Тип мероприятия</label>
                     <div class="col-sm-10">
                         <select name="event_type" class="form-control" >
-                            @foreach ($events_type as $type)
+                            @foreach ($event_types as $type)
                                 <option value="{{ $type->id }}" @if ($type->id === $event->event_type) selected @endif>{{ $type->name }}</option>
                             @endforeach
                         </select>

@@ -14,10 +14,10 @@ class Event extends Model
     }
     public function getMotivation()
     {
-        return $this->hasManyThrough(Motivation::class,Motivation_event::class);
+        return $this->hasManyThrough(Motivation::class,Motivation_event::class,'motivation_id','id');
     }
     public function getResponsibility()
     {
-        return $this->hasManyThrough(Responsibility::class,Responsibility_event::class);
+        return $this->hasManyThrough(Responsibility::class,Responsibility_event::class,'responsibility_id','id');
     }
 }

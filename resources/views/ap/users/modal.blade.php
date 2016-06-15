@@ -42,36 +42,36 @@
                         <input class="form-control" id="lastname" name="lastname" data-rules="not-empty" value="{{ $user->lastname }}" placeholder="Фамилия" />
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="place_of_work">Место работы</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" id="place_of_work" name="place_of_work" data-rules="not-empty" value="{{ $user->place_of_work }}" placeholder="Место работы" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="name">День рождения</label>
-                    <div class="col-sm-10">
-                        <div class='input-group date' id='birthday'>
-                            <input type='text' class="form-control" data-rules="not-empty" name="birthday" value="{{ $user->birthday }}" />
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Modal Footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-                <button type="submit" class="btn btn-primary" id="save_item">Сохранить</button>
-            </div>
-        </form>
+{{--<div class="form-group">
+    <label class="col-sm-2 control-label" for="place_of_work">Место работы</label>
+    <div class="col-sm-10">
+        <input class="form-control" id="place_of_work" name="place_of_work" data-rules="not-empty" value="{{ $user->place_works }}" placeholder="Место работы" />
+    </div>
+</div>--}}
+<div class="form-group">
+    <label class="col-sm-2 control-label" for="name">День рождения</label>
+    <div class="col-sm-10">
+        <div class='input-group date' id='birthday'>
+            <input type='text' class="form-control" data-rules="not-empty" name="birthday" value="{{ $user->birthday }}" />
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
     </div>
 </div>
+</div>
+<!-- Modal Footer -->
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+<button type="submit" class="btn btn-primary" id="save_item">Сохранить</button>
+</div>
+</form>
+</div>
+</div>
 <script type="text/javascript">
-    $(function () {
-        $('#birthday').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss'
-        });
-    });
+$(function () {
+$('#birthday').datetimepicker({
+format: 'YYYY-MM-DD HH:mm:ss'
+});
+});
 </script>

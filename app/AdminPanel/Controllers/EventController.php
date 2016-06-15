@@ -48,7 +48,7 @@ class EventController extends Controller
 
 					return view('ap.events.modal', [
 						'event' => $event,
-						'event_type' => Event_type::all()
+						'event_types' => Event_type::all()
 					]);
 					break;
 				case 'save_img':
