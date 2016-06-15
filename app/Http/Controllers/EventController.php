@@ -29,8 +29,7 @@ class EventController extends Controller
     public function getlast()
     {
         $number = 3;
-
-        return Response::json(Events::take($number)->get()->load('getEventType'));
+        return Response::json(Events::take($number)->get()->load('getMotivation'));
     }
     
     public function delete(Events $event)
@@ -116,6 +115,7 @@ class EventController extends Controller
             return ['success' => false, 'error' => 'event not found'];
         } else {
             $event->load('getEventType')->load('getMotivation');
+            $event->load('getEventType')->load('getResponsibility');
             return ['success' => true, 'event' => $event];
         }
     }

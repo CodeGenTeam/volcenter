@@ -55,6 +55,7 @@ App = {
     {
         $.fn.popelValidator.defaults.callbackAfterValidate = function() {
             App.ajax({action: 'save_item'}, function(data) {
+                console.log(data.success);
                 if (data.success) {
                     App.closeModal('item_modal');
                     notie.alert(1, data.message, 1);

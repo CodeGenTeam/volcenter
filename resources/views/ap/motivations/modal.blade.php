@@ -23,6 +23,10 @@
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="name" value="{{ $motivation->name }}" data-rules="not-empty" name="name" placeholder="Название"/>
                     </div>
+                    <label class="col-sm-2 control-label" for="name">Описание</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="descr" value="{{ $motivation->descr }}" data-rules="not-empty" name="descr" placeholder="Описание"/>
+                    </div>
                 </div>
             </div>
             <!-- Modal Footer -->

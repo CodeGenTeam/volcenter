@@ -15,6 +15,10 @@ class Events extends Model
     }
     public function getMotivation()
     {
-        return $this->hasManyThrough(Motivations_events::class,Motivations::class,'id','event_id');
+        return $this->hasManyThrough(Motivations::class,Motivations_events::class,'event_id','id');
+    }
+    public function getResponsibility()
+    {
+        return $this->hasManyThrough(Responsibilities::class,Responsibilities_events::class,'event_id','id');
     }
 }
