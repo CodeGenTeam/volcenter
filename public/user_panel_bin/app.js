@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ui.bootstrap'])
+var app = angular.module('app', [])
 
 .factory('URL', function(){
 	return '';
@@ -7,7 +7,6 @@ var app = angular.module('app', ['ui.bootstrap'])
 })
 
 .controller('headerCtrl', function($scope, $rootScope) {
-
 	$scope.change = function(id) {
 		if ($rootScope.headElem) {
 			$rootScope.headElem.className = '';

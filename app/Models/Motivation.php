@@ -8,9 +8,10 @@ class Motivation extends Model
 {
     public $timestamps = false;
     protected $hidden = ['id'];
-    protected $fillable = ['name','descr'];
+    protected $fillable = ['name', 'descr'];
+
     public function getMotivationsEvents()
     {
-        return $this->hasMany(Motivation_event::class);
+        return $this->hasMany(Event::class, 'motivation_event');
     }
 }

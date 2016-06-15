@@ -1,14 +1,17 @@
+@extends('layouts.main')
+
+@section('content')
 <div id="main-page-wrapper" >
 	<h1>Центр волонтеров Южного Урала</h1>
 	<h3>Мы рады приветствовать вас</h3>
 
-	<div ng-if="role == 'anonymous'">
+	<div>
 		<h4>Хотите стать Волонтером? Вам следует пройти простую регистрацию,<br>
 		чтобы всегда быть в курсе текущих мероприятий и активно принимать в них участие</h4>
-		<div class="button button-color-2 href"><a  ui-sref="reg">Зарегистрироватсья</a></div>
+		<div class="button button-color-2 href"><a>Зарегистрироватсья</a></div>
 
 		<h4 class="h4-mar-lit">Уже имеете учетную запись?</h4>
-		<div class="button button-color-2 href"><a  ui-sref="login">Войти</a></div>
+		<div class="button button-color-2 href"><a>Войти</a></div>
 	</div>
 
 	<div id="events-wrapepr">
@@ -23,7 +26,7 @@
 					{{$ev->event_start}} - {{$ev->event_end}}
 				</div>
 
-				<div class="event-type event-dark">{{$ev->get_event_type->name}}</div>
+				
 				<div class="event-place">Место: {{$ev->address}}</div>
 
 				<div class="event-descr">{{$ev->descr}}</div>
@@ -36,3 +39,4 @@
 		</div>
 	</div>
 </div>
+@endsection
