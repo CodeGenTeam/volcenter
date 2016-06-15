@@ -16,5 +16,9 @@ class Responsibility_event extends Model
     public function getEvent()
     {
         return $this->belongsToMany(Event::class);
-    }
+    }/*
+    public function getRespEvent()
+    {
+        return $this->hasManyThrough(Responsibility_event::class,Event::class);
+    }*/
 }

@@ -115,7 +115,11 @@ class EventController extends Controller
             return ['success' => false, 'error' => 'event not found'];
         } else {
             $event->load('getEventType')->load('getResponsibility')->load('getMotivation');
-            return ['success' => true, 'event' => $event];
+            //return ['success' => true, 'event' => $event];
+            //dd($event);
+            return view('ap.events.responsibility',
+                compact('event')
+            );
         }
     }
 
