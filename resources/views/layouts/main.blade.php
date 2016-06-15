@@ -1,58 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Центр волонтеров Южного Урала</title>
-    
-    <link rel="stylesheet" href="user_panel_bin/css/bootstrap.min.css">
-    <link rel="stylesheet" href="user_panel_bin/style.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="user_panel_bin/lib/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <title>Laravel</title>
 
-    <script src="user_panel_bin/app.js"></script>
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
 
-    <script src="user_panel_bin/controllers/mainCtrl.js"></script>
-    <script src="user_panel_bin/controllers/eventsCtrl.js"></script>
-    <script src="user_panel_bin/controllers/loginCtrl.js"></script>
-    <script src="user_panel_bin/controllers/regCtrl.js"></script>
-    <script src="user_panel_bin/controllers/settingsCtrl.js"></script>
-    <script src="user_panel_bin/controllers/eventCtrl.js"></script>
-    <script src="user_panel_bin/controllers/userCtrl.js"></script>
-    
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
+
+    <style>
+        body {
+            font-family: 'Lato';
+        }
+
+        .fa-btn {
+            margin-right: 6px;
+        }
+    </style>
 </head>
-<body ng-app="app">
+<body id="app-layout">
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
 
-    <div id="header-title">
-        <img src="user_panel_bin/images/brand.svg">
-        <h4 class="title-head">Центр волонтеров Южного Урала</h4>
+            <!-- Collapsed Hamburger -->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Branding Image -->
+            <a class="navbar-brand" href="{{ url('/') }}">
+                Laravel
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="app-navbar-collapse">
+            <!-- Left Side Of Navbar -->
+            <ul class="nav navbar-nav">
+                <li><a href="{{ url('/home') }}">Home</a></li>
+            </ul>
+
+            <!-- Right Side Of Navbar -->
+            <ul class="nav navbar-nav navbar-right">
+                <!-- Authentication Links -->
+                @if (Auth::guest())
+                    <li><a href="{{ url('/login') }}">Login</a></li>
+                    <li><a href="{{ url('/register') }}">Register</a></li>
+                @else
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            {{ Auth::user()->login }} <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                        </ul>
+                    </li>
+                @endif
+            </ul>
+        </div>
     </div>
+</nav>
 
-    <header ng-controller="headerCtrl">
-        <ul>
-            <li><a href="/" id="header-main">На главную</a></li>
-            <li><a href="/event/list" id="header-events">Мероприятия</a></li>
+@yield('content')
 
-            <div>
-                <li><a id="header-login">Войти</a></li>
-                <li><a id="header-reg">Зарегистрироватсья</a></li>
-            </div>
-
-            <div>
-                <li><a id="header-set">Настройки</a></li>
-                <li><a>Выход</a></li>
-            </div>
-
-        </ul>
-    </header>
-
-    @yield('content')
-    
-    <div class="button" id="bt-up" ng-controller="scrollUpCtrl" ng-click="up($event);">Наверх</div>
-
-    <footer>
-        <div class="center">Разработанно name 2016</div>
-    </footer>
-
+<!-- JavaScripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+{{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>
