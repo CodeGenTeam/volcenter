@@ -5,6 +5,7 @@ namespace app\Providers;
 use App\AdminPanel\AdminPanel;
 use App\Http\ReturnUtil;
 use Illuminate\Support\ServiceProvider;
+use DB;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,7 +17,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        DB::listen(function($query) {
+            dump($query->sql);
+        });
     }
 
     /**

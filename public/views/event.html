@@ -11,8 +11,8 @@
             <p><span>Место: </span>{{ev.address}}
 			<p><span>Тип мероприятия: </span>{{ev.get_event_type.name}}
 
-            <p><span>Подтверждено участников: </span>{{ev.users}}
-            <p><span>Ожидает подтверждения: </span>{{ev.users}}
+            <!--<p><span>Подтверждено участников: </span>{{ev.users}}
+            <p><span>Ожидает подтверждения: </span>{{ev.users}}-->
 
             <p><span>Стимулы: </span> <i ng-show="ev.motivations.length == 0">Не указано</i>
             <div class="lan-obj" ng-repeat="motivate in motivations">

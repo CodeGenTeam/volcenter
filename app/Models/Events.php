@@ -13,4 +13,8 @@ class Events extends Model
     {
         return $this->belongsTo(Events_type::class, 'id');
     }
+    public function getMotivation()
+    {
+        return $this->hasManyThrough(Motivations_events::class,Motivations::class,'id','event_id');
+    }
 }

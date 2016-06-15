@@ -23,15 +23,14 @@ class EventController extends Controller
     public function getList($id)
     {
         $number = 3;
-
-        return Response::json(Events::take($number)->skip((intval($id)-1) * $number)->get());
+        return Response::json(Events::take($number)->skip((intval($id)-1) * $number)->get()->load('getEventType'));
     }
     
     public function getlast()
     {
         $number = 3;
 
-        return Response::json(Events::take($number)->get());
+        return Response::json(Events::take($number)->get()->load('getEventType'));
     }
     
     public function delete(Events $event)
@@ -116,7 +115,7 @@ class EventController extends Controller
         if (is_null($event)) {
             return ['success' => false, 'error' => 'event not found'];
         } else {
-            $event->load('getEventType');
+            $event->load('getEventType')->load('getMotivation');
             return ['success' => true, 'event' => $event];
         }
     }

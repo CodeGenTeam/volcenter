@@ -14,13 +14,13 @@
 				<div class="event-name">{{ev.name}}</div>
 				<div class="event-dateStart event-dark">С: {{ev.event_start}}</div>
 				<div class="event-dateEnd event-dark">По: {{ev.event_end}}</div><br>
-				<div class="event-type event-dark">{{ev.event_type}}</div>
+				<div class="event-type event-dark">{{ev.get_event_type.name}}</div>
 				<div class="event-place">{{ev.address}}</div>
 
-				<div class="event-nums">
+				<!--<div class="event-nums">
 					<div class="event-num">Подтверждено участников: {{ev.num}}</div>
 					<div class="event-numWait">Ожидает подтверждения: {{ev.numWait}}</div>
-				</div>
+				</div>-->
 			</a>
 		</div>
 

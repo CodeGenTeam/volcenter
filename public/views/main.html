@@ -21,14 +21,17 @@
 				<img ng-src="{{ ev.image }}">
 				<div class="event-dateStart event-dark">
 					<i class="glyphicon glyphicon-time"></i>
-					{{ev.dateStart}} - {{ev.dateEnd}}
+					{{ev.event_start}} - {{ev.event_end}}
 				</div>
 
-				<div class="event-type event-dark">{{ev.type}}</div>
-				<div class="event-place">Место: {{ev.place}}</div>
+				<div class="event-type event-dark">{{ev.get_event_type.name}}</div>
+				<div class="event-place">Место: {{ev.address}}</div>
 
 				<div class="event-descr">{{ev.descr}}</div>
-
+				<div class="event-dateStart event-dark">
+					<i class="glyphicon glyphicon-time"></i>
+					{{event_start_register_user}} - {{event_stop_register_user}}
+				</div>
 			</a>
 		</div>
 	</div>
