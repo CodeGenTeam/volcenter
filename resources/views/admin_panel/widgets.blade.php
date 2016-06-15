@@ -1,4 +1,4 @@
-@extends('ap.layout')
+@extends('admin_panel.layout')
 
 @section('content')
     @foreach ($widgets as $widget)

@@ -1,4 +1,4 @@
-@extends('ap/layout')
+@extends('admin_panel.layout')
 @section('content')
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -10,7 +10,7 @@
                 <i class="mdi-av-my-library-add" style="font-size: 20px;"></i> Добавить пользователя
             </a>
             <div class="items-list">
-                @include('ap.users.list', ['users' => $users])
+                @include('admin_panel.users.list', ['users' => $users])
             </div>
         </div>
     </div>

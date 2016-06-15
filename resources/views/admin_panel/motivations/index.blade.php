@@ -1,4 +1,4 @@
-@extends('ap/layout')
+@extends('admin_panel.layout')
 @section('content')
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -10,7 +10,7 @@
                 <i class="mdi-av-my-library-add" style="font-size: 20px;"></i> Добавить мотивацию
             </a>
             <div class="items-list">
-                @include('ap.motivations.list', ['motivations' => $motivations])
+                @include('admin_panel.motivations.list', ['motivations' => $motivations])
             </div>
         </div>
     </div>
