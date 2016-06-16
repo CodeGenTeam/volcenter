@@ -20,27 +20,17 @@ class UserController extends Controller
             return Response::json(['success' => false, 'error' => 'logined']);
         }
 
-        switch ($request->get('action')) {
-            case 'check':
-                return $this->checkUser($request);
-                break;
-            case 'register':
-                $check = $this->checkUser($request);
-                if (!$check['success']) {
-                    return $check;
-                }
-                return $this->register($request);
-                break;
-            default:
-                return Response::json(['success' => false, 'error' => 'empty action']);
-                break;
+        $check = $this->checkUser($request);
+        if (!$check['success']) {
+            return $check;
         }
+        return $this->register($request);
     }
 
     private function checkUser(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'login' => 'required|max:255', 'email' => 'required|email|max:255|unique:Users',
+            'login' => 'required|max:255', 'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6'
         ]);
 
@@ -68,24 +58,23 @@ class UserController extends Controller
             'firstname'  => $data['firstname'],
             'lastname'   => $data['lastname'],
             'middlename' => $data['middlename'],
+            'birthday'   => $data['birthday'],
         ]);
 
-        if (is_null($user)) {
-            return ['success' => false, 'error' => 'null user'];
-        } else {
-            return ['success' => true, 'note' => 'registred', 'id' => $user->id];
-        } // (про 'note') ну на всяк случай
+        return redirect('/');
     }
 
     public function show(User $user)
     {
-        $user->load('place_work');
+        return view('auth.register');
 
-        if (is_null($user)) {
-            return Response::json(['success' => false, 'error' => 'User not found.']);
-        } else {
-            return Response::json(['success' => true, 'user' => $user]);
-        }
+        // $user->load('place_work');
+
+        // if (is_null($user)) {
+        //     return Response::json(['success' => false, 'error' => 'User not found.']);
+        // } else {
+        //     return Response::json(['success' => true, 'user' => $user]);
+        // }
     }
 
     public function update(Request $request, User $user)

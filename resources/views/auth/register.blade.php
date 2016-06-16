@@ -24,7 +24,8 @@ $fields = [
                 'descr' => 'Отчество',
         ],
         [
-                'replace' => 'birthday.field',
+                'id' => 'birthday',
+                'descr' => 'Дата рождения'
         ],
         [
                 'id' => 'password',
@@ -46,18 +47,14 @@ $fields = [
                 <div class="panel panel-default">
                     <div class="panel-heading">Регистрация</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/user/register') }}">
                             {!! csrf_field() !!}
-
-                            @section('birthday.field')
-                                {{-- TODO запилить выбор даты рождения --}}
-                            @endsection
-
+                            
                             @foreach ($fields as $field)
-                                @if (!isset($field['replace']))
-                                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                        <label class="col-md-4 control-label">{{ $field['descr'] }}</label>
-                                        <div class="col-md-6">
+                                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                                    <label class="col-md-4 control-label">{{ $field['descr'] }}</label>
+                                    <div class="col-md-6">
+                                        @if ($field['id'] !== 'birthday')
                                             <input type="{{ $field['type'] ?? 'text' }}" class="form-control"
                                                    name="{{ $field['id'] }}"
                                                    value="{{ old('name') }}">
@@ -67,11 +64,16 @@ $fields = [
                                                 <b>{{ $errors->first($field['id']) }}</b>
                                             </span>
                                             @endif
-                                        </div>
+                                        @else
+                                            <div class='input-group date' id='{{ $field['id'] }}'>
+                                                <input type='text' class="form-control" name="{{ $field['id'] }}" value="{{ old('name') }}" id="{{ $field['id'] }}">
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        @endif
                                     </div>
-                                @else
-                                    @yield($field['replace'])
-                                @endif
+                                </div>
                             @endforeach
 
                             <div class="form-group">
@@ -87,4 +89,15 @@ $fields = [
             </div>
         </div>
     </div>
+    <script>
+        function datetimepicker() {
+            alert('Hello');
+        }
+
+        $('body').on('focus', '#birthday', function() {
+            $('#birthday').datetimepicker({
+                format: 'YYYY-MM-DD',
+            });
+        });
+    </script>
 @endsection
