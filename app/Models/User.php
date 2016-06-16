@@ -4,38 +4,36 @@ namespace app\Models;
 
 use Illuminate\Foundation\Auth\User as Auth;
 
-class User extends Auth
-{
-    protected $hidden = ['password', 'remember_token', 'created_at', 'updated_at','id'];
+class User extends Auth {
+
+    protected $hidden = ['password', 'remember_token', 'created_at', 'updated_at', 'id'];
     protected $fillable = ['login', 'email', 'password', 'firstname', 'lastname', 'middlename', 'birthday'];
-    
-    public function applications()
-    {
+
+    public function applications() {
         return $this->hasMany(Application::class);
     }
-    public function profiles()
-    {
+
+    public function profiles() {
         return $this->hasMany(Profile::class);
     }
-    public function addreses()
-    {
+
+    public function addreses() {
         return $this->hasMany(Address::class);
     }
-    public function language_level()
-    {
+
+    public function language_level() {
         return $this->hasMany(Language_level::class);
     }
-    public function clothes()
-    {
+
+    public function clothes() {
         return $this->hasMany(Clothes::class);
     }
-    public function study()
-    {
+
+    public function study() {
         return $this->hasMany(Study::class);
     }
-    public function place_work()
-    {
+
+    public function place_work() {
         return $this->hasOne(Place_work::class);
     }
-    // Permissions
 }
