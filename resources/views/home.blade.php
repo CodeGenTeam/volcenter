@@ -13,6 +13,10 @@
                         @else
                             You are logged in!
                     @endif
+                    @if(Auth::check())
+                            {{Pex::userRules(Auth::user()->id)->getGroups()}}
+                        @endif
+
                 </div>
             </div>
         </div>

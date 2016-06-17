@@ -147,9 +147,6 @@ class UserRulesSet extends RulesSet
             $groups[] = MGroup::where('name', 'guest')->firstOrCreate(['name' => 'guest']);
         } else {
             $groups[] = $group = MGroup::where('name', 'user')->firstOrCreate(['name' => 'user']);
-            Pex::sudo(function () {
-                $this->setGroup('user');
-            });
         }
     }
 }
