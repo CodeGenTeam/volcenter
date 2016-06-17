@@ -1,5 +1,5 @@
 <?php
-namespace app\Http;
+namespace App\Http;
 
 use Response;
 
