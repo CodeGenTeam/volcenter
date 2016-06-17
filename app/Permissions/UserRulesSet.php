@@ -52,7 +52,7 @@ class UserRulesSet extends RulesSet {
 
     public function setGroup($group) {
         Pex::requireRule('permissions.user.group.set');
-        $groups = MUserGroupAccessory::where('user_id', $this->id)->get();
+        $groups = MUserGroupAccessory::where('user_id', $this->user->id)->get();
         if (UserRulesSet::$ONLY_ONE_GROUP_MODE) {
             $this->trimGroups($groups);
         }
