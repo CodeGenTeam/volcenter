@@ -16,28 +16,39 @@ class UserController extends Controller
 
     public function create(Request $request)
     {
+        $rules = [
+            'login' => 'required|max:255', 
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6|confirmed',
+            'password_confirmation' => 'required|min:6',
+            'birthday' => 'required|before:now|after:-14 years',
+        ];
+
+        $messages = [
+            'before' => 'Вам должно быть минимум 14 лет!',
+            'confirmed' => 'Пароли не совпадают!',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            // redirect our user back with error messages       
+            $messages = $validator->messages();
+
+            // also redirect them back with old inputs so they dont have to fill out the form again
+            // but we wont redirect them with the password they entered
+
+            return redirect()->back()->withErrors($validator);
+        }
+
         if (Auth::check()) {
             return Response::json(['success' => false, 'error' => 'logined']);
         }
 
-        $check = $this->checkUser($request);
-        if (!$check['success']) {
-            return $check;
-        }
-        return $this->register($request);
-    }
-
-    private function checkUser(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'login' => 'required|max:255', 'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6'
-        ]);
-
-        if ($validator->fails()) {
-            return ['success' => false, 'error' => $validator->errors()->all()];
+        if ($this->register($request)) {
+            return redirect('/');
         } else {
-            return ['success' => true];
+            return redirect('/user/register');
         }
     }
 
@@ -61,7 +72,7 @@ class UserController extends Controller
             'birthday'   => $data['birthday'],
         ]);
 
-        return redirect('/');
+        return ['success' => true];
     }
 
     public function show(User $user)
