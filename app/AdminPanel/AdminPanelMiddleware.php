@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class AdminPanelMiddleware {
 
     public function handle(Request $req, Closure $next) {
-        //if (env('APP_DEBUG')) return $next($req);
+        if (env('APP_DEBUG')) return $next($req);
         $path = $req->decodedPath();
         if (!preg_match('/^adminpanel\/?.*/', $path)) return $next($req); // если это не админпанель
 
