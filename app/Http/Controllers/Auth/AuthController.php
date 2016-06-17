@@ -21,45 +21,38 @@ class AuthController extends Controller
 
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
+        $rules = [
+            'login' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
-        ]);
+            'password_confirmation' => 'required|min:6',
+            'birthday' => 'required|before:now|after:-14 years',
+            'firstname' => 'required|Alpha',
+            'lastname' => 'required|Alpha',
+            'middlename' => 'required|Alpha',
+            'birthday'=> 'required|date|date_format:d-m-Y'
+        ];
+
+        $messages = [
+            'before' => 'Вам должно быть минимум 14 лет!',
+            'confirmed' => 'Пароли не совпадают!',
+        ];
+
+        $validator = Validator::make($data, $rules, $messages);
+
+        return $validator;
     }
 
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['login'],
-            'email' => $data['email'],
-            'firstname' => $data['firstname'],
-            'lastname' => $data['lastname'],
+            'login'      => $data['login'],
+            'email'      => $data['email'],
+            'password'   => bcrypt($data['password']),
+            'firstname'  => $data['firstname'],
+            'lastname'   => $data['lastname'],
             'middlename' => $data['middlename'],
-            'password' => bcrypt($data['password']),
+            'birthday'   => $data['birthday'],
         ]);
-    }
-
-    public function postRegister(array $data)
-    {
-        /* $validator = $this->validator($request->all());
-        if ($validator->fails()) {
-            throwValidationException($request, $validator);
-        };
-        $user = $this->create($request->all());
-        //создаем код и записываем код
-        $code = CodeController::generateCode(8);
-        Code::create([
-            'user_id' => $user->id,
-            'code' => $code,
-        ]);
-        //Генерируем ссылку и отправляем письмо на указанный адрес
-        $url = url('/').'/auth/activate?id='.$user->id.'&code='.$code;
-        Mail::send('emails.registration', array('url' => $url), function($message) use ($request)
-        {
-            $message->to($request->email)->subject('Registration');
-        });*/
-
-        return 'Регистрация прошла успешно, на Ваш email отправлено письмо со ссылкой для активации аккаунта';
     }
 }

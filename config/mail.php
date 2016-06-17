@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => ['address' => env('MAIL_ADDRESS','admin@volcenter.ru'), 'name' => env('MAIL_NAME','Волонтерский центр')],
 
     /*
     |--------------------------------------------------------------------------

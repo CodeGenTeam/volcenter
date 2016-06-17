@@ -14,17 +14,12 @@ class IndexController extends Controller
 	 */
 	public function __construct()
 	{
-		// $this->middleware('auth');
+		// только не зарегистрированных пропускает
+		//$this->middleware('guest');
 	}
 
     public function index()
     {
         return view('home');
-    	/*$events = Event::all();
-    	foreach ($events as $ev) {
-    		$ev->load('getEventType');
-    	}
-
-    	return view('user_panel.index', ['events' => $events]);*/
     }
 }
