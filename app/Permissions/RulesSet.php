@@ -1,7 +1,7 @@
 <?php
 namespace App\Permissions;
 
-use App\Models\Users as MUser;
+use App\Models\User as MUser;
 use App\Permissions\Models\Group as MGroup;
 
 abstract class RulesSet extends Permissible {
