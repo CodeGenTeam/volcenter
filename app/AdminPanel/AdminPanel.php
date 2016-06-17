@@ -2,18 +2,23 @@
 
 namespace app\AdminPanel;
 
+use Route;
+
 class AdminPanel {
 
     private $widgets = [];
     private $links = [];
 
     public function routes() {
-        \Route::get('/adminpanel', function () { return $this->showWidgets(); });
+        Route::get('/adminpanel', function () { return $this->showWidgets(); });
         // Admin panel event
-        \Route::get('/adminpanel/events', '\app\AdminPanel\Controllers\EventController@index');
-        \Route::get('/adminpanel/event_types', '\app\AdminPanel\Controllers\EventTypeController@index');
-        \Route::get('/adminpanel/users', '\app\AdminPanel\Controllers\UserController@index');
-        \Route::get('/adminpanel/motivations', '\app\AdminPanel\Controllers\MotivationController@index');
+        Route::get('/adminpanel/events', '\app\AdminPanel\Controllers\EventController@index');
+        Route::get('/adminpanel/event_types', '\app\AdminPanel\Controllers\EventTypeController@index');
+        Route::get('/adminpanel/users', '\app\AdminPanel\Controllers\UserController@index');
+        Route::get('/adminpanel/motivations', '\app\AdminPanel\Controllers\MotivationController@index');
+
+        Route::get('/adminpanel/applications/{event}', '\App\AdminPanel\Controllers\ApplicationController@index')->where(['event' => '\d+']);
+        Route::get('/adminpanel/applications/approve', '\App\AdminPanel\Controllers\ApplicationController@approve');
     }
 
     public function loadWidgets() {

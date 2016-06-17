@@ -23,6 +23,7 @@ class AdminPanelMiddleware {
     }
 
     private function genPermission($path) {
-        return str_replace('/', '.', $path == 'adminpanel' ? 'adminpanel/index' : $path);
+        $path = $path == 'adminpanel' ? 'index' : explode('/', $path)[1];
+        return 'adminpanel.' . $path;
     }
 }
