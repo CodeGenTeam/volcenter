@@ -134,7 +134,7 @@ class UserRulesSet extends RulesSet {
         if (Auth::guest()) {
             $groups[] = MGroup::where('name', 'guest')->firstOrCreate(['name' => 'guest']);
         } else {
-            $groups[] = $group = MGroup::where('name', 'user')->firstOrCreate(['name' => 'user']);
+            $groups[] = $group = MGroup::where('name', 'user')->firstOrCreate(['name' => 'user'])->name;
             $state = Pex::isAdminMode();
             Pex::setupAdminMode(true);
             $this->setGroup('user');

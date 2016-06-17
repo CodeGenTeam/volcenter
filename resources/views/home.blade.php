@@ -14,8 +14,8 @@
                             You are logged in!
                     @endif
                     @if(Auth::check())
-                            {{ Pex::userRules()->getGroups()[0]}}
-                        @endif
+                        Ваша группа - {{ Pex::userRules()->getGroups()[0]}}
+                    @endif
 
                 </div>
             </div>
