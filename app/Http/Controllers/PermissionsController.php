@@ -1,5 +1,5 @@
 <?php
-namespace app\Http\Controllers;
+namespace App\Http\Controllers;
 
 use App\Permissions\Models\Group as MGroup;
 use App\Permissions\Models\GroupPermission as MGroupPermission;

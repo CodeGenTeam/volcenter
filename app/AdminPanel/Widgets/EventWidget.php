@@ -1,6 +1,6 @@
 <?php
 
-namespace app\AdminPanel\Widgets;
+namespace App\AdminPanel\Widgets;
 
 use app\AdminPanel\Widget;
 use app\Models\Event;

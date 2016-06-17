@@ -1,5 +1,5 @@
 <?php
-namespace app\Permissions;
+namespace App\Permissions;
 
 use App\Models\User as MUser;
 use App\Permissions\Models\Group as MGroup;

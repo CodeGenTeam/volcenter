@@ -1,6 +1,6 @@
 <?php
 
-namespace app\AdminPanel;
+namespace App\AdminPanel;
 
 use ReflectionFunction;
 use Pex;

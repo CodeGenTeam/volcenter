@@ -1,13 +1,12 @@
 <?php
 
-namespace app\AdminPanel;
-
+namespace App\AdminPanel;
 
 use Illuminate\Support\Facades\Facade;
 
 class APanel extends Facade {
 
     protected static function getFacadeAccessor() {
-        return 'AdminPanel';
+        return AdminPanel::class;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Providers;
+namespace App\Providers;
 
 use App\AdminPanel\AdminPanel;
 use App\Http\ReturnUtil;
@@ -28,6 +28,6 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(ReturnUtil::class, function () { return new ReturnUtil(); });
-        $this->app->singleton('AdminPanel', function () {return new AdminPanel();});
+        $this->app->singleton(AdminPanel::class, function () {return new AdminPanel();});
     }
 }

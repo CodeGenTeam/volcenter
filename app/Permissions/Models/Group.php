@@ -1,5 +1,5 @@
 <?php
-namespace app\Permissions\Models;
+namespace App\Permissions\Models;
 
 use App\Permissions\RulesSet;
 use Illuminate\Database\Eloquent\Model;
