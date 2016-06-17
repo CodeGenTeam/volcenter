@@ -17,7 +17,7 @@ class AdminPanelMiddleware {
         if (!Auth::check()) return redirect('/');
         $permission = $this->genPermission($path);
 
-        if (Pex::can($permission, true)) return redirect('/', 403, ['Msg' => 'Не, тебе сюда нелья!']);
+        if (Pex::can($permission, true)) return abort(403);
 
         return $next($req);
     }

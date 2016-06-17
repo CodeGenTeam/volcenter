@@ -14,7 +14,7 @@
                             You are logged in!
                     @endif
                     @if(Auth::check())
-                            {{Pex::userRules(Auth::user()->id)->getGroups()}}
+                            {{ Pex::userRules()->getGroups()[0]}}
                         @endif
 
                 </div>
