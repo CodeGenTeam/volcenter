@@ -91,7 +91,7 @@ class Permissions extends Permissible {
      */
     public function requireRule($permission, $inverse = false) {
         if (!$this->can($permission, $inverse)) {
-            abort(403, 'permission denied. [' . $permission . ']');
+            abort(403);
         }
     }
 
