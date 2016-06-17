@@ -70,13 +70,13 @@ class UserRulesSet extends RulesSet {
                 }
             } else {
                 return MUserGroupAccessory::create([
-                    'user_id' => $this->id, 'group_id' => $group->id,
+                    'user_id' => $this->user->id, 'group_id' => $group->id,
                     'created_by' => Auth::check() ? Auth::user()->id : -1,
                 ]) ? true : false;
             }
         } else {
             return MUserGroupAccessory::create([
-                'user_id' => $this->id, 'group_id' => $group->id, 'created_by' => Auth::check() ? Auth::user()->id : -1,
+                'user_id' => $this->user->id, 'group_id' => $group->id, 'created_by' => Auth::check() ? Auth::user()->id : -1,
             ]) ? true : false;
         }
     }
@@ -94,12 +94,12 @@ class UserRulesSet extends RulesSet {
     public function removeGroup($group = null) {
         Pex::requireRule('permissions.user.group.remove');
         if (is_null($group)) {
-            return MUserGroupAccessory::where('user_id', $this->id)->delete() > 0;
+            return MUserGroupAccessory::where('user_id', $this->user->id)->delete() > 0;
         }
         if (!($group instanceof MGroup)) {
             $group = MGroup::find($group) ?? MGroup::where('name', $group)->first();
         }
-        return MUserGroupAccessory::where(['user_id' => $this->id, 'group_id' => $group->id])->delete() > 0;
+        return MUserGroupAccessory::where(['user_id' => $this->user->id, 'group_id' => $group->id])->delete() > 0;
     }
 
     protected function parseRules() {
