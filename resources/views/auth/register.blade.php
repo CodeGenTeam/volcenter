@@ -47,9 +47,9 @@ $fields = [
                 <div class="panel panel-default">
                     <div class="panel-heading">Регистрация</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/user/register') }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('register') }}">
                             {!! csrf_field() !!}
-                            
+
                             @foreach ($fields as $field)
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                     <label class="col-md-4 control-label">{{ $field['descr'] }}</label>
@@ -60,9 +60,7 @@ $fields = [
                                                    value="{{ old('name') }}">
 
                                             @if ($errors->has($field['id']))
-                                                <span class="help-block">
-                                                <b>{{ $errors->first($field['id']) }}</b>
-                                            </span>
+                                                <span class="help-block"><b>{{ $errors->first($field['id']) }}</b></span>
                                             @endif
                                         @else
                                             <div class='input-group date' id='{{ $field['id'] }}'>
@@ -71,6 +69,9 @@ $fields = [
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </span>
                                             </div>
+                                            @if ($errors->has($field['id']))
+                                                <span class="help-block"><b>{{ $errors->first($field['id']) }}</b></span>
+                                            @endif
                                         @endif
                                     </div>
                                 </div>
@@ -90,14 +91,8 @@ $fields = [
         </div>
     </div>
     <script>
-        function datetimepicker() {
-            alert('Hello');
-        }
-
-        $('body').on('focus', '#birthday', function() {
-            $('#birthday').datetimepicker({
-                format: 'YYYY-MM-DD',
+        $('#birthday').datetimepicker({
+                format: 'DD-MM-YYYY',
             });
-        });
     </script>
 @endsection

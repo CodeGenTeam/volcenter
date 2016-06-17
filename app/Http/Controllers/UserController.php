@@ -22,6 +22,10 @@ class UserController extends Controller
             'password' => 'required|min:6|confirmed',
             'password_confirmation' => 'required|min:6',
             'birthday' => 'required|before:now|after:-14 years',
+            'firstname' => 'required|Alpha',
+            'lastname' => 'required|Alpha',
+            'middlename' => 'required|Alpha',
+            'birthday'=> 'required|date|date_format:d-m-Y'
         ];
 
         $messages = [
@@ -32,37 +36,21 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
-            // redirect our user back with error messages       
-            $messages = $validator->messages();
-
-            // also redirect them back with old inputs so they dont have to fill out the form again
-            // but we wont redirect them with the password they entered
-
-            return redirect()->back()->withErrors($validator);
+            return \Redirect::back()->withErrors($validator)->withInput();
         }
 
         if (Auth::check()) {
             return Response::json(['success' => false, 'error' => 'logined']);
         }
 
-        if ($this->register($request)) {
-            return redirect('/');
-        } else {
-            return redirect('/user/register');
-        }
+        return $this->register($request);
     }
 
     private function register(Request $request)
     {
         $data = $request->all();
-
-        foreach (['firstname', 'lastname', 'middlename'] as $field) {
-            if (!isset($data[$field])) {
-                $data[$field] = '';
-            }
-        }
-
-        $user = User::create([
+        
+        return User::create([
             'login'      => $data['login'],
             'email'      => $data['email'],
             'password'   => bcrypt($data['password']),
@@ -71,8 +59,6 @@ class UserController extends Controller
             'middlename' => $data['middlename'],
             'birthday'   => $data['birthday'],
         ]);
-
-        return ['success' => true];
     }
 
     public function show(User $user)

@@ -163,7 +163,7 @@ return [
         /*
          * Permission Provider
          */
-        App\Providers\PermissionsProvider::class,
+        App\Providers\PermissionsProvider::class
     ],
 
     /*
@@ -211,7 +211,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Pex'       => App\Permissions\Pex::class,
         'Ret'       => App\Http\Facades\Ret::class,
-        'APanel'    => App\AdminPanel\APanel::class,
+        'APanel'    => App\AdminPanel\APanel::class
     ],
 
 ];

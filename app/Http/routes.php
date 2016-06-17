@@ -22,8 +22,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::resource('/user', 'UserController', ['only' => ['create', 'update', 'destroy']]);
     Route::get('/user/logout', 'UserController@logout');
     Route::get('/user/login', 'UserController@login');
-    Route::post('/user/register', 'UserController@create');
-    Route::get('/user/register', 'UserController@show');
+    Route::post('register', 'UserController@create');
+    Route::get('register', 'UserController@show');
     Route::get('/user/{user}', 'UserController@show')->where(['id' => '\d+']);
     
     // EventController
