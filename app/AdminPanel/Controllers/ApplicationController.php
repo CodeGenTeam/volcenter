@@ -2,8 +2,8 @@
 
 namespace App\AdminPanel\Controllers;
 
-use app\Models\Application;
-use app\Models\Event;
+use App\Models\Application;
+use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
