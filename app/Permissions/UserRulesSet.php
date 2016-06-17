@@ -8,22 +8,19 @@ use App\Permissions\Models\UserPermission as MUserPermission;
 use Auth;
 use Illuminate\Database\Eloquent\Collection;
 
-class UserRulesSet extends RulesSet
-{
+class UserRulesSet extends RulesSet {
 
     public static $ONLY_ONE_GROUP_MODE = true;
     protected $user;
 
-    public function __construct($user)
-    {
+    public function __construct($user) {
         if (!($user instanceof MUser)) {
             $user = MUser::find($user) ?? MUser::where('login', $user)->first();
         }
         $this->user = $user ?? new MUser(['id' => 0, 'login' => 'guest']);
     }
 
-    public function getGroups()
-    {
+    public function getGroups() {
         $groups = [];
         foreach ($this->user->belongsToMany(MGroup::class, 'UserGroupAccessory', 'user_id', 'group_id', 'id')->get()->all() as $group) {
             $groups[] = $group->name;
@@ -34,13 +31,12 @@ class UserRulesSet extends RulesSet
         return $groups;
     }
 
-    public function addRule($rule)
-    {
+    public function addRule($rule) {
         Pex::requireRule('permissions.user.rule.add');
         $rule = Pex::getOrCreateRule($rule);
         $permission = MUserPermission::create([
             'user_id' => $this->user->id, 'permission_id' => $rule->id,
-            'created_by' => Auth::check() ? Auth::user()->id : -1
+            'created_by' => Auth::check() ? Auth::user()->id : -1,
         ]);
         if (!is_null($permission)) {
             return true;
@@ -48,15 +44,13 @@ class UserRulesSet extends RulesSet
         return false;
     }
 
-    public function removeRule($rule)
-    {
+    public function removeRule($rule) {
         Pex::requireRule('permissions.user.rule.remove');
         $permission = MUserPermission::where('permission_id', Pex::getRule($rule)->first()->id);
         return $permission->delete() > 0; // если удалено более одного разрешения
     }
 
-    public function setGroup($group)
-    {
+    public function setGroup($group) {
         Pex::requireRule('permissions.user.group.set');
         $groups = MUserGroupAccessory::where('user_id', $this->id)->get();
         if (UserRulesSet::$ONLY_ONE_GROUP_MODE) {
@@ -77,18 +71,17 @@ class UserRulesSet extends RulesSet
             } else {
                 return MUserGroupAccessory::create([
                     'user_id' => $this->id, 'group_id' => $group->id,
-                    'created_by' => Auth::check() ? Auth::user()->id : -1
+                    'created_by' => Auth::check() ? Auth::user()->id : -1,
                 ]) ? true : false;
             }
         } else {
             return MUserGroupAccessory::create([
-                'user_id' => $this->id, 'group_id' => $group->id, 'created_by' => Auth::check() ? Auth::user()->id : -1
+                'user_id' => $this->id, 'group_id' => $group->id, 'created_by' => Auth::check() ? Auth::user()->id : -1,
             ]) ? true : false;
         }
     }
 
-    private function trimGroups(Collection &$groups)
-    {
+    private function trimGroups(Collection &$groups) {
         if (UserRulesSet::$ONLY_ONE_GROUP_MODE && $groups->count() > 1) {
             for ($i = 0; $i > $groups->count(); $i++) {
                 if ($i > 0) {
@@ -98,8 +91,7 @@ class UserRulesSet extends RulesSet
         }
     }
 
-    public function removeGroup($group = null)
-    {
+    public function removeGroup($group = null) {
         Pex::requireRule('permissions.user.group.remove');
         if (is_null($group)) {
             return MUserGroupAccessory::where('user_id', $this->id)->delete() > 0;
@@ -110,14 +102,12 @@ class UserRulesSet extends RulesSet
         return MUserGroupAccessory::where(['user_id' => $this->id, 'group_id' => $group->id])->delete() > 0;
     }
 
-    protected function parseRules()
-    {
+    protected function parseRules() {
         $this->parseUserPermission();
         $this->parseGroupPermissions();
     }
 
-    private function parseUserPermission()
-    {
+    private function parseUserPermission() {
         if (Pex::isAdminMode()) {
             $this->add('*');
         }
@@ -127,8 +117,7 @@ class UserRulesSet extends RulesSet
         }
     }
 
-    private function parseGroupPermissions()
-    {
+    private function parseGroupPermissions() {
         $groups = $this->user->belongsToMany(MGroup::class, 'UserGroupAccessory', 'user_id', 'group_id', 'id')->get()->all();
         if (count($groups) == 0) {
             $this->assignGroup($groups);
@@ -141,15 +130,15 @@ class UserRulesSet extends RulesSet
         }
     }
 
-    private function assignGroup(&$groups)
-    {
+    private function assignGroup(&$groups) {
         if (Auth::guest()) {
             $groups[] = MGroup::where('name', 'guest')->firstOrCreate(['name' => 'guest']);
         } else {
             $groups[] = $group = MGroup::where('name', 'user')->firstOrCreate(['name' => 'user']);
-            Pex::sudo(function () {
-                $this->setGroup('user');
-            });
+            $state = Pex::isAdminMode();
+            Pex::setupAdminMode(true);
+            $this->setGroup('user');
+            Pex::setupAdminMode($state);
         }
     }
 }
