@@ -49,7 +49,11 @@ class UserController extends Controller
     private function register(Request $request)
     {
         $data = $request->all();
-        
+
+       // Auth::guard($this->getGuard())->login($this->create($request->all()));
+
+        //return redirect($this->redirectPath());
+
         return User::create([
             'login'      => $data['login'],
             'email'      => $data['email'],
@@ -59,6 +63,8 @@ class UserController extends Controller
             'middlename' => $data['middlename'],
             'birthday'   => $data['birthday'],
         ]);
+
+
     }
 
     public function show(User $user)
@@ -120,27 +126,15 @@ class UserController extends Controller
 
     public function logout(Request $request)
     {
-        /*
-        $u = $request->user();
-
-        if (is_null($u)) {
-            return Response::json(['success' => false, 'error' => 'user not found']);
-        } else {
-            $u->logout();
-        }*/
-        
         Auth::logout();
         Session::flush();
-        return Response::json(['success' => true, 'error' => '']);
-
-        if (is_null($u)) {
-            return ['success' => false, 'error' => 'not logined'];
-        }
-        Auth::logout();
-        return ['success' => true];
+        return \Redirect::to('login');
     }
-
     public function login(Request $request)
+    {
+        return view('auth.login');
+    }
+    public function loginin(Request $request)
     {
         if (Auth::check()) {
             return Response::json(['success' => false, 'error' => 'logined']);
@@ -151,13 +145,14 @@ class UserController extends Controller
         if ($validator->fails()) {
             return Response::json(['success' => false, 'error' => $validator->errors()->all()]);
         }
+        $data = $request->all();
         $isLogined = Auth::attempt([
-            'email' => $request->get('email'), 'password' => $request->get('password')
+            'email' => $data['email'], 'password' => $data['password']
         ]);
         if (!$isLogined) {
-            return Response::json(['success' => false, 'error' => 'badlogin']);
+            return \Redirect::to('login');
+        }else{
+            return \Redirect::to('');
         }
-
-        return Response::json(['success' => true, 'id' => Auth::User()->id]);
     }
 }

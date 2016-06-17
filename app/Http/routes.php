@@ -1,6 +1,5 @@
 <?php
 
-Route::group(['middleware' => 'web'], function () {
     Route::get('/', 'IndexController@index');
 
     /* Actions Handled By Resource Controller
@@ -20,8 +19,9 @@ Route::group(['middleware' => 'web'], function () {
 
     // UserController
     Route::resource('/user', 'UserController', ['only' => ['create', 'update', 'destroy']]);
-    Route::get('/user/logout', 'UserController@logout');
-    Route::get('/user/login', 'UserController@login');
+    Route::get('logout', 'UserController@logout');
+    Route::get('login', 'UserController@login');
+    Route::post('login', 'UserController@loginin');
     Route::post('register', 'UserController@create');
     Route::get('register', 'UserController@show');
     Route::get('/user/{user}', 'UserController@show')->where(['id' => '\d+']);
@@ -56,4 +56,3 @@ Route::group(['middleware' => 'web'], function () {
 
     // Route::auth();
     Route::get('/home', 'IndexController@index');
-});
