@@ -1,7 +1,7 @@
 <?php
 namespace app\Permissions;
 
-use App\Models\Users as MUser;
+use App\Models\User as MUser;
 use App\Permissions\Models\Group as MGroup;
 use App\Permissions\Models\UserGroupAccessory as MUserGroupAccessory;
 use App\Permissions\Models\UserPermission as MUserPermission;
