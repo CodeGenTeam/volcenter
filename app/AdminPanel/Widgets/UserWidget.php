@@ -2,17 +2,17 @@
 
 namespace App\AdminPanel\Widgets;
 
-use app\AdminPanel\Widget;
-use app\Models\Users;
+use App\AdminPanel\Widget;
+use App\Models\User;
 
-class UsersWidget extends Widget {
+class UserWidget extends Widget {
 
     public function __construct() {
         parent::__construct('users', 'adminpanel.users');
     }
 
     public function getView() {
-        return view('ap.users', ['users' => Users::all()]);
+        return view('admin_panel.users.index', ['users' => User::all()]);
     }
 
     public function getDisplayName() {

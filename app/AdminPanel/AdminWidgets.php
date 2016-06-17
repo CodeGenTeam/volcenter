@@ -1,6 +1,6 @@
 <?php
-use app\AdminPanel\Widgets\EventsWidget;
-use app\AdminPanel\Widgets\UsersWidget;
+use App\AdminPanel\Widgets\EventWidget;
+use App\AdminPanel\Widgets\UserWidget;
 
 APanel::links([
     [
@@ -25,5 +25,5 @@ APanel::links([
     ],
 ]);
 
-/*APanel::addWidget(new EventsWidget());
-APanel::addWidget(new UsersWidget());*/
+APanel::addWidget(new EventWidget());
+APanel::addWidget(new UserWidget());

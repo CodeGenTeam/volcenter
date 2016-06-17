@@ -2,17 +2,17 @@
 
 namespace App\AdminPanel\Widgets;
 
-use app\AdminPanel\Widget;
-use app\Models\Event;
+use App\AdminPanel\Widget;
+use App\Models\Event;
 
 class EventWidget extends Widget {
 
     public function __construct() {
-        parent::__construct('event', 'adminpanel.event');
+        parent::__construct('events', 'adminpanel.events');
     }
 
     public function getView() {
-        return view('ap.event', ['event' => Event::all()]);
+        return view('admin_panel.events.index', ['events' => Event::all()]);
     }
 
     public function getDisplayName() {
