@@ -25,8 +25,8 @@ class UserRulesSet extends RulesSet {
         foreach ($this->user->belongsToMany(MGroup::class, 'UserGroupAccessory', 'user_id', 'group_id', 'id')->get()->all() as $group) {
             $groups[] = $group->name;
         }
-        if (count($groups) == 0 && $guest = MGroup::where('name', 'guest')->first()->name) {
-            $groups[] = $guest;
+        if (count($groups) == 0) {
+            $this->assignGroup($groups);
         }
         return $groups;
     }
