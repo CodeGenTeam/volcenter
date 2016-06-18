@@ -115,9 +115,8 @@ class EventController extends Controller
             return ['success' => false, 'error' => 'event not found'];
         } else {
             $event->load('getEventType')->load('getResponsibility')->load('getMotivation');
-            return view('admin_panel.events.responsibility',
-                compact('event')
-            );
+            
+            return view('user_panel.events.single', ['event' => $event]);
         }
     }
 

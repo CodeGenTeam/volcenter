@@ -17,8 +17,9 @@ class AdminPanel {
 
     public function routes() {
         Route::get('/adminpanel', function () { return $this->showWidgets(); });
-        // Admin panel event
-        Route::get('/adminpanel/events', '\\' . EventController::class . '@index');
+        // заменить загрузку изображений и раскидать на функции
+        Route::resource('/adminpanel/events', '\\' . EventController::class . '@index');
+
         Route::get('/adminpanel/event_types', '\\' . EventTypeController::class . '@index');
         Route::get('/adminpanel/users', '\\' . UserController::class . '@index');
         Route::get('/adminpanel/motivations', '\\' . MotivationController::class . '@index');

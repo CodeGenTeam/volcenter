@@ -19,7 +19,7 @@ class CreateEventsTable extends Migration
             $table->increments('id');
 
             $table->string('name'); // название мероприятия
-            $table->string('descr')->nullable(); // описание мероприятия
+            $table->text('descr')->nullable(); // описание мероприятия
             $table->string('address')->nullable(); // где пройдет мероприятие
             $table->string('image')->nullable(); // Фотография мероприятия
 

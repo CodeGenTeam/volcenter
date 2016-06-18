@@ -69,7 +69,7 @@ App = {
 
     loadItems: function() 
     {
-        $(".items-list").html('<img src="/ap-bin/img/ajax-loader.gif" />');
+        $(".items-list").html('<img src="/admin_panel_bin/img/ajax-loader.gif" />');
         this.ajax({action: 'items_list'}, function(data) {
             $(".items-list").html(data);
             App.itemListEvents();

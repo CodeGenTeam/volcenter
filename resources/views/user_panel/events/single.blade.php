@@ -1,45 +1,57 @@
-<div id="admin-wrapper" >
-	<!-- 'event_start', 'event_end', 'name', 'image', 'descr', 'address','event_type' -->
+@extends('layouts.main')
 
-	<h2 class="h2-big">Мероприятие '{{ev.name}}'</h2>
+@section('content')
 
-	<div id="events-wrapepr" >
-		<div class="event-watch" >
-			<div><img ng-src="{{ ev.image }}"></div>
-			<div class="event-watch-descr">{{ev.descr}}</div>
-			<p ng-if="ev.event_start && ev.event_end"><span>Дата:</span> {{ev.event_start | date:'yyyy-MM-dd HH:mm'}} - {{ev.event_end | date:'yyyy-MM-dd HH:mm'}}
-            <p><span>Место: </span>{{ev.address}}
-			<p><span>Тип мероприятия: </span>{{ev.get_event_type.name}}
-
-            <!--<p><span>Подтверждено участников: </span>{{ev.users}}
-            <p><span>Ожидает подтверждения: </span>{{ev.users}}-->
-
-            <p><span>Стимулы </span> <i ng-show="ev.get_motivation.length == 0">Не указано</i>
-            <div class="lan-obj" ng-repeat="motivate in ev.get_motivation">
-                <p><span>Краткое описание: </span>{{motivate.name}}
-                <p><span>Полное описание: </span>{{motivate.descr}}
-            </div>
-
-            <p><span>Направления </span> <i ng-show="ev.get_responsibility.length == 0"> Не указано</i>
-            <div class="lan-obj" ng-repeat="res in ev.get_responsibility">
-                <p><span>Назвение позиции: </span>{{res.position}}
-                <p><span>Описание задачи позиции: </span>{{res.task}}
-                <p><span>Требуемое кол-во участников: </span>{{res.count}}
-            </div>
-
-		</div>
-
-		<div ng-if="role == 'anonymous'" class="events-anon">
-			<a ui-sref="login">Войдите</a> или <a ui-sref="reg">зарегистрируйтесь</a>,
-			чтобы принять участие в мероприятии
-		</div>
-
-		<div ng-if="role == 'isloggedin'" class="bordered">
-			<h4 class="h4-mar-lit">Принять участие в мероприятии?</h4>
-			<div class="button button-color-2" id="bt-up" ng-click="go()">ОК</div>
-		</div>
-		
-		</div>
-	</div>
-
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <h1 class="text-center">Мероприятие<br />@if($event->name) {{ $event->name }}@elseНазвание отсутствует@endif</h1>
+            @if ($event->image)<img class="img-rounded img-responsive center-block" src="/user_panel_bin/images/events/{{ $event->image }}" width="250px">@else<p class="lead text-center">Нет изображения</p>@endif
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <p class="lead text-center">Тип мероприятия: @if($event->geteventtype->name){{ $event->geteventtype->name }}@elseТип отсутствует@endif</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <p class="lead text-center">Пройдет<br />C @if($event->event_start){{ $event->event_start }}@elseОтсутствует@endif<br/> По @if($event->event_end){{ $event->event_end }}@elseОтсутствует@endif</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <p class="lead text-center"><i class="fa fa-map-marker"></i> @if($event->address){{ $event->address }}@elseОтсутствует@endif</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <p class="lead text-center">@if($event->descr){!! nl2br(e($event->descr)) !!}@elseОтсутствует@endif</p>
+        </div>
+    </div><br />
+    @if (!Auth::check())
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <p class="lead text-center">Хотите участвовать?<br /> Вам следует зарегистрироваться, чтобы принять участие</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-5">
+            <p class="text-center"><a href="/register"><button type="button" class="btn btn-primary">Зарегестрироваться</button></a></p>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <p class="lead text-center">Уже имеете учётную запись?</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-5">
+            <p class="text-center"><a href="/login"><button type="button" class="btn btn-primary">Войти</button></a></p>
+        </div>
+    </div>
+    @endif
 </div>
+
+@endsection

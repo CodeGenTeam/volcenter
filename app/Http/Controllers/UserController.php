@@ -44,17 +44,16 @@ class UserController extends Controller
                 }
             }
         }
-        if ($request->place_of_work) {
-            $place_of_work = json_decode($request->place_of_work);
 
-            if (count($user->place_of_work) > 0) {
-                $user->place_of_work()->update(['address' => $place_of_work->address]);
+        if ($request->place_work) {
+            if (count($user->place_work) > 0) {
+                $user->place_work()->update(['address' => $request->place_work]);
             } else {
-                $user->place_of_work()->create(['address' => $place_of_work->address]);
+                $user->place_work()->create(['address' => $request->place_work]);
             }
         }
 
-        return Response::json(['success' => count($updated) != 0]);
+        return back();
     }
 
     public function destroy(User $user)
@@ -67,5 +66,13 @@ class UserController extends Controller
         } // если редачим не свой акк -- кидаем (пока)*/
         $user->delete();
         return Response::json(['success' => true, 'user' => $user]);
+    }
+
+    public function edit()
+    {
+        $user = Auth::user();
+        $user->load('place_work');
+
+        return view('user_panel.user.settings', ['user' => $user]);
     }
 }

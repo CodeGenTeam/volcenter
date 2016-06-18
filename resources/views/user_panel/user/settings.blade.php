@@ -1,154 +1,86 @@
-<div id="events-wrapepr" name="sampleForm">
-	<form class="form reg" name="form1">
+@extends('layouts.main')
 
+@section('content')
 
-		<h3> Основная информация</h3>
-		<div class="lan-wrapper">
-			<label>Почта</label>
-			<input class="form-control input1" name="email" ng-model="user.email"
-				   value="{{user.email}}" required>
+<div class="container">
 
-			<label>Имя</label>
-			<input class="form-control input1" name="firstname" ng-model="user.firstname"
-				   value="{{user.firstname}}" required>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
 
-			<label>Фамилия</label>
-			<input class="form-control input1"  name="lastname" ng-model="user.lastname"
-				   value="{{user.lastname}}"required>
+            <form action="user/{{ $user->id }}" method="POST">
+            	{{ csrf_field() }}
+            	{{ method_field('PUT') }}
 
-			<label>Отчество</label>
-			<input class="form-control input1"  name="middlename" ng-model="user.middlename"
-				   value="{{user.middlename}}" required>
+            	<div class="form-group">
+            		<div class="col-md-6">
+	            		<label for="email">Email: </label>
+	            		<input type="email" name="email" class="form-control" id="email" placeholder="Email" value="{{ $user->email }}">
+	            	</div>
+            	</div>
 
-			<label>Дата рождения</label>
-			<div class="form-group ">
-				<div class="col-xs-4 data-1">
-					<select class=" margin-bot form-control" ng-model="user.day"
-							ng-options="o as o for o in dates.days.options"></select>
-				</div>
+            	<div class="form-group">
+            		<div class="col-md-6">
+	            		<label for="firstname">Имя: </label>
+	            		<input type="text" name="firstname" class="form-control" id="firstname" placeholder="Имя" value="{{ $user->firstname }}">
+	            	</div>
+            	</div>
 
-				<div class="col-xs-4 data-1">
-					<select class=" margin-bot form-control" ng-model="user.months"
-							ng-options="o as o for o in dates.months.options"></select>
-				</div>
+            	<div class="form-group">
+            		<div class="col-md-6">
+	            		<label for="lastname">Фамилия: </label>
+	            		<input type="text" name="lastname" class="form-control" id="lastname" placeholder="Фамилия" value="{{ $user->lastname }}">
+	            	</div>
+            	</div>
 
-				<div class="col-xs-4 data-1">
-					<select class=" margin-bot form-control" ng-model="user.years"
-							ng-options="o as o for o in dates.years.options"></select>
-				</div>
-			</div>
-		</div>
+            	<div class="form-group">
+            		<div class="col-md-6">
+	            		<label for="middlename">Отчество: </label>
+	            		<input type="text" name="middlename" class="form-control" id="middlename" placeholder="Отчество" value="{{ $user->middlename }}">
+	            	</div>
+            	</div>
 
-		<h3>Дополнительная информация</h3>
+            	<div class="form-group">
+            		<div class="col-md-6">
+	            		<label for="birthday">Дата рождения: </label>
+	            		<input type="text" name="birthday" class="form-control" id="birthday" placeholder="Отчество" value="{{ $user->birthday }}">
+            		</div>
+            	</div>
 
-		<h4><label></label></h4>
-		<div class="lan-wrapper">
-			<label>Размер одежды</label>
-			<select class="form-control" ng-model="clothes.selected" ng-options="o as o for o in clothes.options"></select>
+            	<div class="form-group">
+            		<div class="col-md-6">
+	            		<label for="place_work">Место работы: </label>
+	            		<input type="text" name="place_work" class="form-control" id="place_work" placeholder="Место работы" value="{{ $user->place_work->address ?? '' }}">
+            		</div>
+            	</div>
 
-			<label>Размер обуви</label>
-			<input class="form-control input1" name="size_foot" value="{{user.size_foot}}">
-		</div>
+				<div class="form-group">
+            		<div class="col-md-6">
+            			<button type="submit" class="btn btn-primary">Обновить</button>
+            		</div>
+            	</div>
+            </form>
 
+            <form action="/user/{{ $user->id }}" method="POST">
+				{{ csrf_field() }}
+				{{ method_field('DELETE') }}
 
-		<h4><label>Адрес</label></h4>
-		<div class="lan-wrapper">
-			<label>Страна</label>
-			<select class="form-control" ng-model="countries.selected" ng-options="o as o for o in countries.options"></select>
+				<div class="form-group">
+	        		<div class="col-md-6">
+	        			<button type="submit" class="btn btn-danger">Удалить аккаунт</button>
+	        		</div>
+        		</div>
+			</form>
 
-			<label>Город</label>
-			<select class="form-control" ng-model="cities.selected" ng-options="o as o for o in cities.options"></select>
-
-			<label>Улица</label>
-			<input class="form-control input1" name="streets" value="{{user.size_foot}}">
-
-			<label>Номер дома</label>
-			<input class="form-control input1" name="streets" value="{{user.size_foot}}">
-
-			<label>Дополнительно</label>
-			<input class="form-control input1" name="streets" value="{{user.size_foot}}">
-
-			<label>Квартира</label>
-			<input class="form-control input1" name="streets" value="{{user.size_foot}}">
-		</div>
-
-		<h4><label>Место работы</label></h4>
-		<div class="lan-wrapper">
-			<label>Место работы</label>
-			<input class="form-control input1" name="place_of_work" ng-model="user.place_of_work.address"
-				   value="{{user.place_of_work.address}}">
-		</div>
-
-		<h4><label>Учебное заведение</label></h4>
-		<div class="lan-wrapper">
-			<label>Название учебного заведения</label>
-			<input class="form-control input1" name="streets" value="{{user.size_foot}}">
-
-			<label>Год начала обучения</label>
-			<div class="form-group ">
-				<div class="col-xs-4 data-2">
-					<select class=" margin-bot form-control" ng-model="dates.years.selected"
-							ng-options="o as o for o in dates.years.options"></select>
-				</div>
-			</div>
-
-			<label>Год окончания обучения</label>
-			<div class="form-group ">
-				<div class="col-xs-4 data-2">
-					<select class=" margin-bot form-control" ng-model="dates.years.selected"
-							ng-options="o as o for o in dates.years.options"></select>
-				</div>
-			</div>
-
-			<label>Факультет/группа | Класс</label>
-			<input class="form-control input1" name="streets" value="{{user.size_foot}}">
-		</div>
-
-
-		<h4><label>Языки</label></h4>
-
-		<div class="lan-wrapper">
-			<div class="button button-color-2 button-mar-none" ng-click="addLanguage()">Добавить язык</div>
-
-			<div class="lan-obj" ng-repeat="lan in languages">
-				<label>Язык</label>
-				<input class="form-control input1" name="streets" value="{{lan.name}}">
-
-				<label>Уровень владения</label>
-				<select class="form-control" ng-model="lan.level" ng-options="o as o for o in languagesSelect.options"></select>
-
-				<div class="event-delete icons" ng-click="$event.stopPropagation();$event.preventDefault();deleteLanguage(lan, $index)">
-					<i class="glyphicon glyphicon-remove"></i>
-				</div>
-			</div>
-		</div>
-
-		<h4><label>Профили</label></h4>
-
-		<div class="lan-wrapper">
-			<div class="button button-color-2 button-mar-none" ng-click="addProfile()">Добавить профиль</div>
-
-			<div class="lan-obj" ng-repeat="pr in profiles">
-				<label>Тип профиля</label>
-				<select class="form-control" ng-model="pr.type" ng-options="o as o for o in profilesSelect.options"></select>
-
-				<label>Данные</label>
-				<input class="form-control input1" name="streets" value="{{pr.txt}}">
-
-
-				<div class="event-delete icons" ng-click="$event.stopPropagation();$event.preventDefault(); deleteProfile(pr, $index)">
-					<i class="glyphicon glyphicon-remove"></i>
-				</div>
-			</div>
-		</div>
-
-		<div class="button" ng-click="deleteUser()">Удалить аккаунт</div>
-
-		<input class="button button-color-2 input-button" type="submit" ng-click="checkData()">
-
-	</form>
-	
-	<p style="color: #3c763d;">{{ flash }}</p>
-	<p ng-show="error" class="help-block" style="color: #a94442">{{errorTxt}}</p>
+        </div>
+    </div>
 
 </div>
+<script>
+	$(document).on('focus', '#birthday', function() {
+		$('#birthday').datetimepicker({
+			'format': 'YYYY-MM-DD'
+		});
+	});
+</script>
+
+@endsection
