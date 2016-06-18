@@ -3,8 +3,7 @@ namespace App\Permissions\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserGroupAccessory extends Model
-{
+class UserGroupAccessory extends Model {
 
     protected $table = 'UserGroupAccessory';
     protected $hidden = ['created_at', 'update_at', 'created_by'];

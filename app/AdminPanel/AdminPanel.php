@@ -4,6 +4,7 @@ namespace App\AdminPanel;
 
 use App\AdminPanel\Controllers\EventController;
 use App\AdminPanel\Controllers\EventTypeController;
+use App\AdminPanel\Controllers\pex\PermissionController;
 use App\AdminPanel\Controllers\UserController;
 use App\AdminPanel\Controllers\MotivationController;
 use App\AdminPanel\Controllers\ApplicationController;
@@ -25,6 +26,9 @@ class AdminPanel {
         Route::get('/adminpanel/applications/{event}', '\\' . ApplicationController::class . '@index')->where(['event' => '\d+']);
         Route::get('/adminpanel/applications/approve', '\\' . ApplicationController::class . '@approve');
 
+        Route::get('/adminpanel/pex/', '\\' . PermissionController::class . '@groupList');
+        Route::get('/adminpanel/pex/group', '\\' . PermissionController::class . '@groupManager');
+        Route::get('/adminpanel/pex/group/users', '\\' . PermissionController::class . '@usersManager');
     }
 
     public function loadWidgets() {

@@ -13,10 +13,11 @@ class Permissions extends Permissible {
     /**
      * Возвращает модель правила. Если его нет в базе -- оно будет создано
      * @param $rule - строка-правило (ex. permission.test)
+     * @param $descr - описание правила
      * @return Rule - модель правила в бд
      */
-    public function getOrCreateRule($rule) {
-        return $this->getRule($rule)->first() ?? MRule::create(['rule' => $rule]);
+    public function getOrCreateRule($rule, $descr) {
+        return $this->getRule($rule) ?? MRule::create(['rule' => $rule, 'descr' => $descr]);
     }
 
     /**
@@ -28,7 +29,7 @@ class Permissions extends Permissible {
         if ($rule instanceof MRule) {
             return $rule;
         } elseif (is_string($rule)) {
-            return MRule::where('rule', $rule);
+            return MRule::where('rule', $rule)->first();
         } else {
             return MRule::find($rule);
         }
@@ -69,7 +70,7 @@ class Permissions extends Permissible {
     /**
      * Почучить обработчик правил для пользователя.
      * @param null $user - имя/id/модель юзера.
-     * @return UserRulesSet|mixed - обработчик правил.
+     * @return UserRulesSet|null - обработчик правил.
      */
     public function userRules($user = null) {
         return RulesSet::fromUser($user ?? Auth::user());
@@ -78,7 +79,7 @@ class Permissions extends Permissible {
     /**
      * Почучить обработчик правил для группы.
      * @param null $group - имя/id/модель группы.
-     * @return UserRulesSet|mixed - обработчик правил.
+     * @return GroupRulesSet|null - обработчик правил.
      */
     public function groupRules($group) {
         return RulesSet::fromGroup($group);

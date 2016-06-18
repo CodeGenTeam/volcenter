@@ -1,30 +1,32 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use \App\Models\Event_type;
+use \App\Models\Event;
+use \App\Models\Status;
 
-class DatabaseSeeder extends Seeder
-{
+class DatabaseSeeder extends Seeder {
+
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
         // Event types
         foreach (
-            ['myevent' => 2, 'someevent' => 2, 'omgevent' => 1, 'test1' => 3, 'test2' => 3] as
-            $id => $name
+            ['mytyoe', 'sometype', 'omgtype', 'test1', 'test2'] as
+            $name
         ) {
-            DB::table('event_types')->insert(['id' => $id, 'name' => $name]);
+            Event_type::where(['name' => $name])->firstOrCreate(['name' => $name]);
         }
 
         // Test events
         foreach (
-            ['myevent' => 2, 'someevent' => 2, 'omgevent' => 1, 'eeevent' => 3, 'test' => 3] as
+            ['myevent' => 'mytyoe', 'someevent' => 'sometype', 'omgevent' => 'omgtype', 'eeevent' => 'test1', 'test' => 'test2'] as
             $name => $id
         ) {
-            DB::table('events')->insert(['name' => $name, 'event_type' => $id]);
+            Event::where(['name' => $name, 'event_type' => Event_type::find($id)])->firstOrCreate(['name' => $name, 'event_type' => $id]);
         }
 
         // Подал заявку
@@ -38,7 +40,26 @@ class DatabaseSeeder extends Seeder
                 4 => 'Отклонено администратором', 5 => 'Принял участие в мероприятии', 6 => 'Не пришёл на мероприятие'] as
             $id => $name
         ) {
-            DB::table('statuses')->insert(['id' => $id, 'name' => $name]);
+            Status::where(['id' => $id, 'name' => $name])->firstOrCreate(['id' => $id, 'name' => $name]);
         }
+
+        $permissions = [
+            'permissions.user.rule.check' => 'проверить разрешение на себе',
+            'permissions.user.rule.check.other' => 'проверить разрешение на других',
+            'permissions.user.rule.get' => 'получить свой список разрешений',
+            'permissions.user.rule.get.other' => 'получить список рахрешений другого',
+            'permissions.user.group.get' => 'получить свои группы',
+            'permissions.user.group.get.other' => 'получить группы другого',
+            'permissions.user.rule.add' => 'добавить разрешение пользователю',
+            'permissions.user.rule.remove' => 'удалять разрешение пользователя',
+            'permissions.group.info' => 'получить инфу о соей группе',
+            'permissions.group.info.other' => 'получить инфу о конкретной группе',
+            'permissions.group.rule.add' => 'добавление разрешения для группы',
+            'permissions.group.rule.remove' => 'удаление разрешения для группы',
+            'permissions.group.create' => 'создание группы',
+            'permissions.group.remove' => 'удаление группы',
+        ];
+
+        foreach ($permissions as $rule => $descr) Pex::getOrCreateRule($rule, $descr);
     }
 }

@@ -46,7 +46,7 @@ class UserRulesSet extends RulesSet {
 
     public function removeRule($rule) {
         Pex::requireRule('permissions.user.rule.remove');
-        $permission = MUserPermission::where('permission_id', Pex::getRule($rule)->first()->id);
+        $permission = MUserPermission::where('permission_id', Pex::getRule($rule)->id);
         return $permission->delete() > 0; // если удалено более одного разрешения
     }
 
