@@ -16,7 +16,7 @@ class Permissions extends Permissible {
      * @param $descr - описание правила
      * @return Rule - модель правила в бд
      */
-    public function getOrCreateRule($rule, $descr) {
+    public function getOrCreateRule($rule, $descr = '') {
         return $this->getRule($rule) ?? MRule::create(['rule' => $rule, 'descr' => $descr]);
     }
 
