@@ -20,6 +20,12 @@ class IndexController extends Controller
 
     public function index()
     {
-        return view('home');
+    	$number = 3;
+        $events = Event::take($number)->orderBy('id', 'desc')->get();
+        foreach ($events as $event) {
+        	$event->load('getEventType');
+        }
+
+        return view('home', ['events' => $events]);
     }
 }

@@ -18,6 +18,8 @@ Route::resource('/api/event_type', 'API\APIEventTypeController');
 Route::resource('/event_type', 'EventTypeController');
 
 // UserController
+Route::get('/settings', 'UserController@edit');
+Route::put('/user/{user}', 'UserController@update');
 Route::resource('/user', 'UserController');
 
 // Auth
