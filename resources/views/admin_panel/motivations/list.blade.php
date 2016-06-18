@@ -3,7 +3,6 @@
     <tr>
         <th>#</th>
         <th>Название</th>
-        <th>Описание</th>
         <th style="width: 100px;">Действие</th>
     </tr>
     </thead>
