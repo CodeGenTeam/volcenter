@@ -75,7 +75,80 @@ class DatabaseSeeder extends Seeder {
                 'event_type'=> $value['event_type']
             ]);
         }
+        $motivations = [
+            ['name'=>'Униформа с символикой мероприятия'],
+            ['name'=>'Обеспечение питанием'],
+            ['name'=>'Благодарственные письма от организаторов мероприятия'],
+            ['name'=>'Баллы на ваш личный счёт']
+        ];
+        foreach ($motivations as $value) {
+            DB::table('motivations')->insert([
+                'name' => $value['name']
+            ]);
+        }
 
+        $motivations = [
+            ['name'=>'Униформа с символикой мероприятия'],
+            ['name'=>'Обеспечение питанием'],
+            ['name'=>'Благодарственные письма от организаторов мероприятия'],
+            ['name'=>'Баллы на ваш личный счёт']
+        ];
+        foreach ($motivations as $value) {
+            DB::table('motivations')->insert([
+                'name' => $value['name']
+            ]);
+        }
+
+        $responsibilities = [
+            ['position'=>'Аккредитация','task'=>'Помощь в изготовлении и выдаче аккредитаций и пакетов сувенирной атрибутики для всех клиентских групп мероприятия (участников, официальных лиц, судей, гостей и волонтёров)','count'=>'10'],
+            ['position'=>'Спортивная программа','task'=>'Помощь в организации и проведении спортивных соревнований','count'=>'30'],
+            ['position'=>'Логистика','task'=>'Выдача всем клиентским группам мероприятия необходимого инвентаря, контроль обеспечения объектов инфраструктуры мероприятия канцелярскими товарами, оргтехникой и прочим необходимым оборудованием.','count'=>'10'],
+            ['position'=>'Услуги для зрителей','task'=>'Помощь на объектах инфраструктуры, задействованных на мероприятии, работа на информационных стойках, рассадка зрителей, помощь в билетной программе и проведении параллельных активностей','count'=>'20']
+        ];
+        foreach ($responsibilities as $value) {
+            DB::table('responsibilities')->insert([
+                'position' => $value['position'],
+                'task' => $value['task'],
+                'count' => $value['count']
+            ]);
+        }
+        $responsibility_events = [
+            ['event_id'=>'1','responsibility_id'=>'1'],
+            ['event_id'=>'1','responsibility_id'=>'2'],
+            ['event_id'=>'1','responsibility_id'=>'3'],
+            ['event_id'=>'2','responsibility_id'=>'2'],
+            ['event_id'=>'2','responsibility_id'=>'3'],
+            ['event_id'=>'2','responsibility_id'=>'4'],
+            ['event_id'=>'3','responsibility_id'=>'3'],
+            ['event_id'=>'3','responsibility_id'=>'4'],
+            ['event_id'=>'4','responsibility_id'=>'1'],
+            ['event_id'=>'4','responsibility_id'=>'2'],
+        ];
+        foreach ($responsibility_events as $value) {
+            DB::table('responsibility_events')->insert([
+                'event_id' => $value['event_id'],
+                'responsibility_id' => $value['responsibility_id'],
+            ]);
+        }
+
+        $motivation_events = [
+            ['event_id'=>'1','motivation_id'=>'1'],
+            ['event_id'=>'1','motivation_id'=>'2'],
+            ['event_id'=>'1','motivation_id'=>'3'],
+            ['event_id'=>'2','motivation_id'=>'2'],
+            ['event_id'=>'2','motivation_id'=>'3'],
+            ['event_id'=>'2','motivation_id'=>'4'],
+            ['event_id'=>'3','motivation_id'=>'3'],
+            ['event_id'=>'3','motivation_id'=>'4'],
+            ['event_id'=>'4','motivation_id'=>'1'],
+            ['event_id'=>'4','motivation_id'=>'2'],
+        ];
+        foreach ($motivation_events as $value) {
+            DB::table('motivation_events')->insert([
+                'event_id' => $value['event_id'],
+                'motivation_id' => $value['motivation_id'],
+            ]);
+        }
         // Подал заявку
         // Принято
         // Отменил пользователь

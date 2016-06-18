@@ -17,7 +17,7 @@ class CreateResponsibilitiesTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->increments('id');
             $table->string('position'); // название позиции (аташе, team leader, логистика..)
-            $table->string('task'); // описание задачи позиции
+            $table->text('task'); // описание задачи позиции
             $table->string('count'); // требуемое кол-во волонтеров
         });
     }

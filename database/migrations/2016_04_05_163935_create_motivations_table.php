@@ -16,8 +16,7 @@ class CreateMotivationsTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name'); // короткое название стимулов и мотивации(баллы в кабинет, одежда, еда)
-            $table->string('descr'); // полное описание стимулов и мотиваций
+            $table->string('name'); // название стимулов и мотивации(баллы в кабинет, одежда, еда)
         });
     }
 

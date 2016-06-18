@@ -8,7 +8,7 @@ class Motivation extends Model
 {
     public $timestamps = false;
     protected $hidden = ['id'];
-    protected $fillable = ['name', 'descr'];
+    protected $fillable = ['name'];
 
     public function getMotivationsEvents()
     {

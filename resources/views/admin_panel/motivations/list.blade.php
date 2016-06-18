@@ -12,7 +12,6 @@
         <tr id="item" data-item-id="{{ $motivation->id }}">
             <td>{{ $motivation->id }}</td>
             <td>{{ $motivation->name }}</td>
-            <td>{{ $motivation->descr }}</td>
             <td>
                 <span class="pull-right">
                     <a href="#" class="mdi-editor-mode-edit" id="edit"></a>

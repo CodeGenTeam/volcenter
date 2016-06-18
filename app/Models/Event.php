@@ -11,7 +11,7 @@ class Event extends Model
 
     public function getEventType()
     {
-        return $this->belongsTo(Event_type::class, 'id');
+        return $this->belongsTo(Event_type::class, 'event_type');
     }
 
     public function getMotivation()

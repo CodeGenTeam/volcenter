@@ -17,11 +17,13 @@ class CreatePermissionsTable extends Migration
             $table->string('name');
             $table->integer('created_by')->default(-1);
             $table->timestamps();
+            $table->string('descr');
         });
 
         Schema::create('Permissions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('rule');
+            $table->string('descr');
         });
 
         Schema::create('UserPermissions', function (Blueprint $table) {
