@@ -33,7 +33,7 @@ abstract class RulesSet extends Permissible {
     /**
      * Возвращает обработчик правил группы.
      * @param $group - идентификатор группы.
-     * @return UserRulesSet|mixed - обработчик правил группы.
+     * @return GroupRulesSet|mixed - обработчик правил группы.
      */
     public static function fromGroup($group) {
         if ($group instanceof MGroup) {
