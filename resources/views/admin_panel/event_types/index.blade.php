@@ -10,7 +10,7 @@
                 <i class="mdi-av-my-library-add" style="font-size: 20px;"></i> Добавить тип мероприятия
             </a>
             <div class="items-list">
-                @include('admin_panel..event_types.list', ['event_types' => $event_types])
+                @include('admin_panel.event_types.list', ['event_types' => $event_types])
             </div>
         </div>
     </div>

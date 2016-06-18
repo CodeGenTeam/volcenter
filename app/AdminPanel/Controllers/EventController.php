@@ -15,13 +15,13 @@ class EventController extends Controller
 	public function index(Request $request)
 	{
 		if ($request->ajax()) {
-			$img_path = base_path('public').'user_panel_bin/images/events';
+			$img_path = base_path('public').'\user_panel_bin\images\events';
 			switch ($request->query('action')) {
 				case 'delete_item':
 					$event = Event::find($request->query('id'));
 					//remove old img
 					if (!empty($event->image)) {
-						File::delete($img_path.'/'.$event->image);
+						File::delete($img_path.'\\'.$event->image);
 					}
 
 					Event::destroy($request->query('id'));
@@ -65,7 +65,7 @@ class EventController extends Controller
 				case 'delete_img':
 					//remove old img
 					if ($old_img = $request->query('old_img')) {
-						File::delete($img_path.'/'.$old_img);
+						File::delete($img_path.'\\'.$old_img);
 					}
 
 					return Response::json(['success' => true]);

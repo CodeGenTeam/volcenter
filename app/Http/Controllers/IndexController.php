@@ -25,7 +25,6 @@ class IndexController extends Controller
         foreach ($events as $event) {
         	$event->load('getEventType');
         }
-
         return view('home', ['events' => $events]);
     }
 }

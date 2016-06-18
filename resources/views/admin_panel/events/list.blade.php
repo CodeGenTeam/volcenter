@@ -1,8 +1,8 @@
 <table class="table table-striped table-hover">
     <thead>
     <tr>
-        <th>#</th>
         <th>Название</th>
+        <th>Тип мероприятия</th>
         <th>Картинка</th>
         <th>Описание</th>
         <th>Адрес</th>
@@ -12,10 +12,10 @@
     <tbody>
     @foreach($events as $event)
         <tr id="item" data-item-id="{{ $event->id }}">
-            <td>{{ $event->id }}</td>
             <td>{{ $event->name }}</td>
-            <td>@if ($event->image)<img src="/images/events/{{ $event->image }}" width="150px">@endif</td>
-            <td>{{ $event->descr }}</td>
+            <td>{{ $event->getEventType->name }}</td>
+            <td>@if ($event->image)<img src="/user_panel_bin/images/events/{{ $event->image }}" width="150px">@endif</td>
+            <td>{!! str_limit(nl2br(e($event->descr)),150) !!}</td>
             <td>{{ $event->address }}</td>
             <td>
                 <span class="pull-right">
