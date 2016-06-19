@@ -27,6 +27,8 @@ class CreatePhonesTable extends Migration
      */
     public function down()
     {
-        Schema::drop($this->tableName);
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        Schema::dropIfExists($this->tableName);
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

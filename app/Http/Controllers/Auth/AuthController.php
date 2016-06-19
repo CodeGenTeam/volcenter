@@ -7,7 +7,6 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-use App\Permissions\Models\Permission_group;
 
 class AuthController extends Controller
 {
@@ -31,7 +30,7 @@ class AuthController extends Controller
             'firstname' => 'required|Alpha',
             'lastname' => 'required|Alpha',
             'middlename' => 'required|Alpha',
-            'birthday'=> 'required|date|date_format:d-m-Y'
+            'birthday'=> 'required|date|date_format:d-m-Y',
         ];
 
         $messages = [
@@ -54,6 +53,7 @@ class AuthController extends Controller
             'lastname'   => $data['lastname'],
             'middlename' => $data['middlename'],
             'birthday'   => $data['birthday'],
+            'role_id'    => 1
         ]);
         
     }

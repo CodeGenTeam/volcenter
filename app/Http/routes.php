@@ -57,9 +57,6 @@ Route::resource('/user/status', 'StatusController', ['only' => ['index', 'create
 Route::resource('/user/{user}/profile', 'ProfileController', ['only' => ['show', 'create', 'update', 'destroy']]);
 Route::resource('/user/profile', 'ProfileTypeController', ['only' => ['index', 'create', 'update', 'destroy']]);
 
-// PermissionsController - Doesn't need if you use laravel models in controller
-Pex::routes();
-
 // Admin panel
 APanel::routes();
 Route::get('/home', 'IndexController@index');

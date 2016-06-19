@@ -46,13 +46,6 @@
             		</div>
             	</div>
 
-            	<div class="form-group">
-            		<div class="col-md-6">
-	            		<label for="place_work">Место работы: </label>
-	            		<input type="text" name="place_work" class="form-control" id="place_work" placeholder="Место работы" value="{{ $user->place_work->address ?? '' }}">
-            		</div>
-            	</div>
-
 				<div class="form-group">
             		<div class="col-md-6">
             			<button type="submit" class="btn btn-primary">Обновить</button>

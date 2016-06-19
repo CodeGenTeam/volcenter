@@ -15,6 +15,9 @@ class CreateForeignKeys extends Migration
         Schema::table('events', function (Blueprint $table) {
             $table->foreign('event_type')->references('id')->on('event_types')->onDelete('cascade')->onUpdate('cascade');
         });
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
+        });
         Schema::table('applications', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('responsibility_event_id')->references('id')->on('responsibility_events')->onDelete('cascade')->onUpdate('cascade');
@@ -48,20 +51,6 @@ class CreateForeignKeys extends Migration
         });
         Schema::table('phones', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-        });
-        Schema::table('user_permissions', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-        });
-        Schema::table('group_permissions', function (Blueprint $table) {
-            $table->foreign('group_id')->references('id')->on('permission_groups')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade')->onUpdate('cascade');
-        });
-        Schema::table('user_group_accessories', function (Blueprint $table) {
-            $table->foreign('group_id')->references('id')->on('permission_groups')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

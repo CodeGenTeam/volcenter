@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('middlename'); // Отчество
             $table->timestamp('birthday'); // др
             $table->string('password');
-            $table->rememberToken();
+            $table->integer('role_id')->unsigned();
         });
     }
 

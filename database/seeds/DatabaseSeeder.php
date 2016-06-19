@@ -2,8 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use \App\Models\Status;
-use \App\Permissions\Pex;
-use \App\Permissions\Models\Permission_group;
+use \App\Models\Role;
 
 class DatabaseSeeder extends Seeder {
 
@@ -86,19 +85,6 @@ class DatabaseSeeder extends Seeder {
                 'name' => $value['name']
             ]);
         }
-
-        $motivations = [
-            ['name'=>'Униформа с символикой мероприятия'],
-            ['name'=>'Обеспечение питанием'],
-            ['name'=>'Благодарственные письма от организаторов мероприятия'],
-            ['name'=>'Баллы на ваш личный счёт']
-        ];
-        foreach ($motivations as $value) {
-            DB::table('motivations')->insert([
-                'name' => $value['name']
-            ]);
-        }
-
         $responsibilities = [
             ['position'=>'Аккредитация','task'=>'Помощь в изготовлении и выдаче аккредитаций и пакетов сувенирной атрибутики для всех клиентских групп мероприятия (участников, официальных лиц, судей, гостей и волонтёров)','count'=>'10'],
             ['position'=>'Спортивная программа','task'=>'Помощь в организации и проведении спортивных соревнований','count'=>'30'],
@@ -162,34 +148,18 @@ class DatabaseSeeder extends Seeder {
         ) {
             Status::where(['id' => $id, 'name' => $name])->firstOrCreate(['id' => $id, 'name' => $name]);
         }
-
-        $permissions = [
-            'permissions.user.rule.check' => 'проверить разрешение на себе',
-            'permissions.user.rule.check.other' => 'проверить разрешение на других',
-            'permissions.user.rule.get' => 'получить свой список разрешений',
-            'permissions.user.rule.get.other' => 'получить список рахрешений другого',
-            'permissions.user.rule.add' => 'добавить разрешение пользователю',
-            'permissions.user.rule.remove' => 'удалять разрешение пользователя',
-            'permissions.user.group.get' => 'получить свои группы',
-            'permissions.user.group.get.other' => 'получить группы другого',
-            'permissions.group.info' => 'получить инфу о своей группе',
-            'permissions.group.info.other' => 'получить инфу о конкретной группе',
-            'permissions.group.rule.add' => 'добавление разрешения для группы',
-            'permissions.group.rule.remove' => 'удаление разрешения для группы',
-            'permissions.group.create' => 'создание группы',
-            'permissions.group.remove' => 'удаление группы',
-        ];
-
-        foreach ($permissions as $rule => $descr) Pex::getOrCreateRule($rule, $descr);
-
-        $groups = ['guest','user','moderator','admin'];
-        foreach ($groups as $group) {
-            Permission_group::where('name', $group)->firstOrCreate(['name'=>$group,'descr'=>'']);
+        foreach (
+            [1 => 'Подал заявку', 2 => 'Отменил заявку', 3 => 'Принято администратором',
+             4 => 'Отклонено администратором', 5 => 'Принял участие в мероприятии', 6 => 'Не пришёл на мероприятие'] as
+            $id => $name
+        ) {
+            Status::where(['id' => $id, 'name' => $name])->firstOrCreate(['id' => $id, 'name' => $name]);
         }
-        // if switch on DB::listen(function($query) {dump($query->sql);}); in AppServiceProvider you will see error connected with out abort - it's normal
-        Pex::groupRules('admin')->addRules(['*']);
-        Pex::groupRules('moderator')->addRules(['permissions.user.rule.check', 'permissions.user.rule.get', 'permissions.user.group.get', 'permissions.group.info', 'permissions.group.info.other', 'adminpanel.*']);
-        Pex::groupRules('user')->addRules(['permissions.user.rule.check', 'permissions.user.rule.get', 'permissions.user.group.get', 'permissions.group.info', 'permissions.group.info.other']);
-        Pex::groupRules('user')->addRules(['permissions.user.rule.check', 'permissions.user.rule.get', 'permissions.user.group.get', 'permissions.group.info', 'permissions.group.info.other']);
+        foreach (
+            [1 => 'user', 2 => 'moderator', 3 => 'admin'] as
+            $id => $name
+        ) {
+            Role::where(['id' => $id, 'name' => $name])->firstOrCreate(['id' => $id, 'name' => $name]);
+        }
     }
 }

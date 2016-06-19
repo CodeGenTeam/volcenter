@@ -6,9 +6,6 @@ use App\Models\Event;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-//use Illuminate\Validation\Validator;
-use DB;
-use Validator;
 
 class EventController extends Controller
 {

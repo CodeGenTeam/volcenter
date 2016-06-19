@@ -3,14 +3,14 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLevelLanguagesTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    private $tableName = 'level_languages';
+      * Run the migrations.
+      *
+      * @return void
+      */
+    private $tableName = 'roles';
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
@@ -18,7 +18,6 @@ class CreateLevelLanguagesTable extends Migration
             $table->string('name');
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -30,4 +29,5 @@ class CreateLevelLanguagesTable extends Migration
         Schema::dropIfExists($this->tableName);
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
+
 }
