@@ -13,12 +13,14 @@ class UserRulesSet extends RulesSet {
 
     public static $ONLY_ONE_GROUP_MODE = true;
     protected $user;
+    protected $admin;
 
     public function __construct($user) {
         if (!($user instanceof MUser)) {
             $user = MUser::find($user) ?? MUser::where('login', $user)->first();
         }
-        $this->user = $user ?? new MUser(['id' => 0, 'login' => 'guest']);
+        $this->user = $user ?? MUser::where('login', 'guest')->first();
+        $this->admin = MUser::where('login', 'admin')->first();
     }
 
     public function getGroups() {
@@ -37,7 +39,7 @@ class UserRulesSet extends RulesSet {
         $rule = Pex::getOrCreateRule($rule);
         $permission = MUserPermission::create([
             'user_id' => $this->user->id, 'permission_id' => $rule->id,
-            'created_by' => Auth::check() ? Auth::user()->id : -1,
+            'created_by' => Auth::check() ? Auth::user()->id : $this->admin->id,
         ]);
         if (!is_null($permission)) {
             return true;
