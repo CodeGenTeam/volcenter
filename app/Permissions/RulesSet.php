@@ -132,6 +132,16 @@ abstract class RulesSet extends Permissible {
     abstract public function addRule($rule);
 
     /**
+     * Добавить массив правил.
+     * @param $rules - массив правил.
+     */
+    public function addRules($rules) {
+        if (is_array($rules)) {
+            foreach ($rules as $rule) $this->addRule($rule);
+        } else $this->addRule($rules);
+    }
+
+    /**
      * Удалить правило и применить это изменение в БД.
      * @param $rule
      */

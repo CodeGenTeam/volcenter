@@ -168,11 +168,11 @@ class DatabaseSeeder extends Seeder {
             'permissions.user.rule.check.other' => 'проверить разрешение на других',
             'permissions.user.rule.get' => 'получить свой список разрешений',
             'permissions.user.rule.get.other' => 'получить список рахрешений другого',
-            'permissions.user.group.get' => 'получить свои группы',
-            'permissions.user.group.get.other' => 'получить группы другого',
             'permissions.user.rule.add' => 'добавить разрешение пользователю',
             'permissions.user.rule.remove' => 'удалять разрешение пользователя',
-            'permissions.group.info' => 'получить инфу о соей группе',
+            'permissions.user.group.get' => 'получить свои группы',
+            'permissions.user.group.get.other' => 'получить группы другого',
+            'permissions.group.info' => 'получить инфу о своей группе',
             'permissions.group.info.other' => 'получить инфу о конкретной группе',
             'permissions.group.rule.add' => 'добавление разрешения для группы',
             'permissions.group.rule.remove' => 'удаление разрешения для группы',
@@ -187,7 +187,9 @@ class DatabaseSeeder extends Seeder {
             Permission_group::where('name', $group)->firstOrCreate(['name'=>$group,'descr'=>'']);
         }
         // if switch on DB::listen(function($query) {dump($query->sql);}); in AppServiceProvider you will see error connected with out abort - it's normal
-        $rules = Pex::groupRules('admin');
-        $rules->addRule('*');
+        Pex::groupRules('admin')->addRules(['*']);
+        Pex::groupRules('moderator')->addRules(['permissions.user.rule.check', 'permissions.user.rule.get', 'permissions.user.group.get', 'permissions.group.info', 'permissions.group.info.other', 'adminpanel.*']);
+        Pex::groupRules('user')->addRules(['permissions.user.rule.check', 'permissions.user.rule.get', 'permissions.user.group.get', 'permissions.group.info', 'permissions.group.info.other']);
+        Pex::groupRules('user')->addRules(['permissions.user.rule.check', 'permissions.user.rule.get', 'permissions.user.group.get', 'permissions.group.info', 'permissions.group.info.other']);
     }
 }
