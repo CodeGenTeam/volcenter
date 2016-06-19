@@ -2,7 +2,7 @@
 namespace App\Permissions;
 
 use App\Models\User as MUser;
-use App\Permissions\Models\Group as MGroup;
+use App\Permissions\Models\Permission_group as MGroup;
 
 abstract class RulesSet extends Permissible {
 

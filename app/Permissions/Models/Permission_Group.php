@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Permission_group extends Model {
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name','descr'];
     protected $appends = ['rules'];
 
     public function getRulesAttribute() {

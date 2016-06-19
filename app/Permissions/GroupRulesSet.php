@@ -1,8 +1,8 @@
 <?php
 namespace App\Permissions;
 
-use App\Permissions\Models\Group as MGroup;
-use App\Permissions\Models\GroupPermission;
+use App\Permissions\Models\Permission_group as MGroup;
+use App\Permissions\Models\Group_permission as GroupPermission;
 use Auth;
 
 class GroupRulesSet extends RulesSet {

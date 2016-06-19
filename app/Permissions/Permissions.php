@@ -1,7 +1,7 @@
 <?php
 namespace App\Permissions;
 
-use App\Permissions\Models\Rule as MRule;
+use App\Permissions\Models\Permission as MRule;
 use Auth;
 use ReflectionFunction;
 use Route;

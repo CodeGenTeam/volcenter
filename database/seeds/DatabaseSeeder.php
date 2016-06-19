@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use \App\Models\Event_type;
-use \App\Models\Event;
 use \App\Models\Status;
 
 class DatabaseSeeder extends Seeder {
