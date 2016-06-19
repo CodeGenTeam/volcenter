@@ -6,7 +6,7 @@ use App\Permissions\RulesSet;
 use Illuminate\Database\Eloquent\Model;
 
 class Permission_group extends Model {
-
+    public $timestamps = false;
     protected $fillable = ['name','descr'];
     protected $appends = ['rules'];
 

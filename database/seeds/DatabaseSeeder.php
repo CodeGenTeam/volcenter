@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use \App\Models\Status;
+use \App\Permissions\Pex;
+use \App\Permissions\Models\Permission_group;
 
 class DatabaseSeeder extends Seeder {
 
@@ -179,5 +181,12 @@ class DatabaseSeeder extends Seeder {
         ];
 
         foreach ($permissions as $rule => $descr) Pex::getOrCreateRule($rule, $descr);
+
+        $groups = ['guest','user','moderator','admin'];
+        foreach ($groups as $group) {
+            Permission_group::where('name', $group)->firstOrCreate(['name'=>$group,'descr'=>'']);
+        }
+        $rules = Pex::groupRules('admin');
+        $rules->addRule('*');
     }
 }

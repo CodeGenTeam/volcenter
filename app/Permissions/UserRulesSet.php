@@ -2,9 +2,10 @@
 namespace App\Permissions;
 
 use App\Models\User as MUser;
-use App\Permissions\Models\Group as MGroup;
-use App\Permissions\Models\UserGroupAccessory as MUserGroupAccessory;
-use App\Permissions\Models\UserPermission as MUserPermission;
+use App\Permissions\Models\Permission_group;
+use App\Permissions\Models\Group_permission as MGroup;
+use App\Permissions\Models\User_group_accessory as MUserGroupAccessory;
+use App\Permissions\Models\User_permission as MUserPermission;
 use Auth;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -22,7 +23,7 @@ class UserRulesSet extends RulesSet {
 
     public function getGroups() {
         $groups = [];
-        foreach ($this->user->belongsToMany(MGroup::class, 'UserGroupAccessory', 'user_id', 'group_id', 'id')->get()->all() as $group) {
+        foreach ($this->user->belongsToMany(MGroup::class, 'user_group_accessories', 'user_id', 'group_id', 'id')->get()->all() as $group) {
             $groups[] = $group->name;
         }
         if (count($groups) == 0) {
@@ -118,7 +119,7 @@ class UserRulesSet extends RulesSet {
     }
 
     private function parseGroupPermissions() {
-        $groups = $this->user->belongsToMany(MGroup::class, 'UserGroupAccessory', 'user_id', 'group_id', 'id')->get()->all();
+        $groups = $this->user->belongsToMany(MGroup::class, 'user_group_accessories', 'user_id', 'group_id', 'id')->get()->all();
         if (count($groups) == 0) {
             $this->assignGroup($groups);
         }
@@ -132,9 +133,9 @@ class UserRulesSet extends RulesSet {
 
     private function assignGroup(&$groups) {
         if (Auth::guest()) {
-            $groups[] = MGroup::where('name', 'guest')->firstOrCreate(['name' => 'guest']);
+            $groups[] = Permission_group::where('name', 'guest')->firstOrCreate(['name' => 'guest']);
         } else {
-            $groups[] = $group = MGroup::where('name', 'user')->firstOrCreate(['name' => 'user'])->name;
+            $groups[] = $group = Permission_group::where('name', 'user')->firstOrCreate(['name' => 'user'])->name;
             $state = Pex::isAdminMode();
             Pex::setupAdminMode(true);
             $this->setGroup('user');

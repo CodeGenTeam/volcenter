@@ -25,7 +25,6 @@ class GroupRulesSet extends RulesSet {
         $rule = Pex::getOrCreateRule($rule);
         $permission = GroupPermission::create([
             'group_id' => $this->group->id, 'permission_id' => $rule->id,
-            'created_by' => Auth::check() ? Auth::user()->id : -1,
         ]);
         if (!is_null($permission)) {
             return true;
