@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\User as Auth;
 
 class User extends Auth {
 
+    public $timestamps = false;
     protected $hidden = ['password', 'remember_token', 'created_at', 'updated_at', 'id'];
     protected $fillable = ['login', 'email', 'password', 'firstname', 'lastname', 'middlename', 'birthday'];
 
@@ -24,16 +25,8 @@ class User extends Auth {
     public function language_level() {
         return $this->hasMany(Language_level::class);
     }
-
-    public function clothes() {
-        return $this->hasMany(Clothes::class);
-    }
-
     public function study() {
         return $this->hasMany(Study::class);
     }
 
-    public function place_work() {
-        return $this->hasOne(Place_work::class);
-    }
 }

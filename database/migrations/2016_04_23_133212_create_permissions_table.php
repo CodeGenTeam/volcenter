@@ -12,42 +12,36 @@ class CreatePermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('PermissionGroups', function (Blueprint $table) {
+        Schema::create('permission_groups', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('created_by')->default(-1);
-            $table->timestamps();
             $table->string('descr');
         });
 
-        Schema::create('Permissions', function (Blueprint $table) {
+        Schema::create('permissions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('rule');
             $table->string('descr');
         });
 
-        Schema::create('UserPermissions', function (Blueprint $table) {
+        Schema::create('user_permissions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('permission_id')->unsigned();
-            $table->integer('created_by')->default(-1);
-            $table->timestamps();
+            $table->integer('created_by')->unsigned();
         });
 
-        Schema::create('GroupPermissions', function (Blueprint $table) {
+        Schema::create('group_permissions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('group_id')->unsigned();
             $table->integer('permission_id')->unsigned();
-            $table->integer('created_by')->default(-1);
-            $table->timestamps();
         });
 
-        Schema::create('UserGroupAccessory', function (Blueprint $table) {
+        Schema::create('user_group_accessories', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('group_id')->unsigned();
-            $table->integer('created_by')->default(-1);
-            $table->timestamps();
+            $table->integer('created_by')->unsigned();
         });
     }
     /**
@@ -57,10 +51,10 @@ class CreatePermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('UserGroupAccessory');
-        Schema::dropIfExists('UserPermissions');
-        Schema::dropIfExists('GroupPermissions');
-        Schema::dropIfExists('PermissionGroups');
-        Schema::dropIfExists('Permissions');
+        Schema::dropIfExists('user_group_accessories');
+        Schema::dropIfExists('group_permissions');
+        Schema::dropIfExists('user_permissions');
+        Schema::dropIfExists('permission_groups');
+        Schema::dropIfExists('permissions');
     }
 }

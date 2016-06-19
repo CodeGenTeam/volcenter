@@ -3,20 +3,20 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePlaceWorksTable extends Migration
+class CreatePhonesTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    private $tableName = 'place_works';
+    private $tableName = 'phones';
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->index();
-            $table->string('address');
+            $table->integer('user_id')->unsigned();
+            $table->string('phone');
         });
     }
 

@@ -29,6 +29,7 @@
             <p class="lead text-center">@if($event->descr){!! nl2br(e($event->descr)) !!}@elseОтсутствует@endif</p>
         </div>
     </div>
+    @if($event->getResponsibility != "[]")
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default" style="border: 0px;">
@@ -37,12 +38,21 @@
                 </div>
                 <ul class="list-group">
                     @foreach($event->getResponsibility as $responsibility)
-                        <div class="panel panel-default panel-heading" style="margin-bottom: 0px"><span class="badge" style="float: left;margin-right:10px">{{$responsibility->count}}</span><h3 class="panel-title">{{$responsibility->position}}</h3>{{$responsibility->task}}</div>
+                        <div class="panel panel-default panel-heading" style="margin-bottom: 0px"><span class="badge" style="float: left;margin-right:10px">{{$responsibility->count}}</span>
+                            @if(Auth::check())
+                                <form class="form-horizontal" role="form" method="POST" action="{{ url('application/create') }}">
+                                    {!! csrf_field() !!}
+                                <button class="btn btn-primary" style="float:right;">Подать заявку</button>
+                                </form>
+                                    @endif
+                            <h3 class="panel-title">{{$responsibility->position}}</h3>{{$responsibility->task}}</div>
                     @endforeach
                 </ul>
             </div>
         </div>
     </div>
+    @endif
+    @if($event->getMotivation != "[]")
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default" style="border: 0px;">
@@ -57,6 +67,7 @@
             </div>
         </div>
     </div>
+    @endif
     <br />
     @if (!Auth::check())
     <div class="row">

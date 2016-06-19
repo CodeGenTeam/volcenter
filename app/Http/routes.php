@@ -43,6 +43,7 @@ Route::get('/event/last', 'EventController@getlast');
 Route::get('/event/{event}', 'EventController@show')->where(['id' => '\d+']);
 Route::get('/event/list/{id}', 'EventController@getList')->where(['id' => '\d+']);
 
+Route::post('/application/create', 'ApplicationController@create');
 // ApplicationsController
 Route::get('/user/{user}/application', 'ApplicationController@index')->where(['user' => '\d+']);
 Route::get('/user/{user?}/application/create', 'ApplicationController@create')->where(['user' => '\d+']);

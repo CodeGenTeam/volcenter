@@ -4,10 +4,8 @@ namespace App\Permissions\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
-class UserPermission extends Model
+class User_permission extends Model
 {
-
-    protected $table = 'UserPermissions';
     protected $fillable = ['user_id', 'permission_id', 'created_by'];
     protected $visible = ['id', 'user_id', 'permission_id', 'created_by'];
     protected $appends = ['createdBy', 'rules', 'user'];
@@ -15,7 +13,7 @@ class UserPermission extends Model
     public function getCreateByAttribute()
     {
         return $this->createdBy()->firstOrCreate([
-            'id' => -1, 'login' => 'admin', 'email' => 'admin@mail.volcenter.ru'
+            'id' => -1, 'login' => env('MAIL_USERNAME','admin'), 'email' => env('MAIL_ADDRESS','admin@volcenter.ru')
         ]);
     }
 

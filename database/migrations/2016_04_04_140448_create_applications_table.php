@@ -21,7 +21,7 @@ class CreateApplicationsTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned(); // пользователь
-            $table->integer('event_id')->unsigned(); // мероприятие
+            $table->integer('responsibility_event_id')->unsigned(); // мероприятие
             $table->integer('status_id')->unsigned(); // статус заявки
             $table->timestamp('datetime')->useCurrent(); // дата и время заявки
         });

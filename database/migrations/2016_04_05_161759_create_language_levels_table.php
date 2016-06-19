@@ -22,7 +22,7 @@ class CreateLanguageLevelsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned(); // пользователь
             $table->integer('language_id')->unsigned(); // язык
-            $table->integer('mark'); // оценка уровня владения языка (начальный, элементарный, средний, ниже среднего, средний, выше среднего, продвинутый, профессиональный)
+            $table->integer('level_language_id')->unsigned(); // оценка уровня владения языка (начальный, элементарный, средний, ниже среднего, средний, выше среднего, продвинутый, профессиональный)
         });
     }
 

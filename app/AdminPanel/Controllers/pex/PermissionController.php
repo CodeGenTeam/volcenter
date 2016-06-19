@@ -3,8 +3,8 @@
 namespace App\AdminPanel\Controllers\pex;
 
 use App\Http\Controllers\Controller;
-use App\Permissions\Models\Group as MGroup;
-use App\Permissions\Models\Rule as MRule;
+use App\Permissions\Models\Group_permission as MGroup;
+use App\Permissions\Models\Permission as MRule;
 use Illuminate\Http\Request;
 use Ret;
 use Pex;

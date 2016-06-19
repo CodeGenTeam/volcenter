@@ -11,7 +11,7 @@ class Profile extends Model
     protected $hidden = ['id', 'user_id', 'profile_type_id'];
     public function getUser()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class);
     }
     public function getProfileType()
     {

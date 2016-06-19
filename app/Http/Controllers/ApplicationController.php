@@ -31,14 +31,15 @@ class ApplicationController extends Controller
         $val = Validator::make($data, [
             'user_id' => 'required|exists:users,id', 'event_id' => 'required|exists:events,id',
             'status_id' => 'required|exists:statuses,id'
-        ]);
+        ]);/*
         if ($val->fails()) {
             return Response::json(['success' => false, 'error' => $val->errors()->all()]);
-        }
+        }*/
         Application::create([
             'user_id' => $data['user_id'], 'event_id' => $data['event_id'], 'status_id' => $data['status_id']
         ]);
-        return Response::json(['success' => true]);
+        //return Response::json(['success' => true]);
+        return view('user_panel.events.applications.index');
     }
 
     public function update(Application $id, Request $request)
