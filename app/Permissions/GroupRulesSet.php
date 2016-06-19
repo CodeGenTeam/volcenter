@@ -24,7 +24,7 @@ class GroupRulesSet extends RulesSet {
         Pex::requireRule('permissions.group.rule.add');
         $rule = Pex::getOrCreateRule($rule);
         $permission = GroupPermission::create([
-            'group_id' => $this->group->id, 'permission_id' => $rule->id,
+            'group_id' => $this->group->id, 'permission_id' => $rule->id
         ]);
         if (!is_null($permission)) {
             return true;
@@ -35,7 +35,7 @@ class GroupRulesSet extends RulesSet {
     public function removeRule($rule) {
         Pex::requireRule('permissions.group.rule.remove');
         $permission = GroupPermission::where([
-            'permission_id' => Pex::getRule($rule)->id, 'group_id' => $this->group->id,
+            'permission_id' => Pex::getRule($rule)->id, 'group_id' => $this->group->id
         ]);
         return $permission->delete() > 0; // если удалено более одного разрешения
     }

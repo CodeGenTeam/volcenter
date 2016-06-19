@@ -92,7 +92,8 @@ class Permissions extends Permissible {
      */
     public function requireRule($permission, $inverse = false) {
         if (!$this->can($permission, $inverse)) {
-            abort(403);
+            // if you switch DB::listen(function($query) {dump($query->sql);}); in AppServiceProveder - will be HttpException
+            abort(403,"Permission system: You haven't requred rules");
         }
     }
 

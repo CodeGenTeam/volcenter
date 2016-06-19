@@ -186,6 +186,7 @@ class DatabaseSeeder extends Seeder {
         foreach ($groups as $group) {
             Permission_group::where('name', $group)->firstOrCreate(['name'=>$group,'descr'=>'']);
         }
+        // if switch on DB::listen(function($query) {dump($query->sql);}); in AppServiceProvider you will see error connected with out abort - it's normal
         $rules = Pex::groupRules('admin');
         $rules->addRule('*');
     }
