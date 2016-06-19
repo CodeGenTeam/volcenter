@@ -6,6 +6,7 @@ use App\Models\User;
 
 class User_permission extends Model
 {
+    public $timestamps = false;
     protected $fillable = ['user_id', 'permission_id', 'created_by'];
     protected $visible = ['id', 'user_id', 'permission_id', 'created_by'];
     protected $appends = ['createdBy', 'rules', 'user'];

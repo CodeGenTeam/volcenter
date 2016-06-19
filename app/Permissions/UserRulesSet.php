@@ -58,7 +58,7 @@ class UserRulesSet extends RulesSet {
             $this->trimGroups($groups);
         }
         if (!($group instanceof MGroup)) {
-            $group = MGroup::find($group) ?? MGroup::where('name', $group)->first();
+            $group = Permission_group::find($group) ?? Permission_group::where('name', $group)->first();
         }
         if (is_null($group)) {
             return false;
@@ -72,12 +72,12 @@ class UserRulesSet extends RulesSet {
             } else {
                 return MUserGroupAccessory::create([
                     'user_id' => $this->user->id, 'group_id' => $group->id,
-                    'created_by' => Auth::check() ? Auth::user()->id : -1,
+                    'created_by' => Auth::user()->id,
                 ]) ? true : false;
             }
         } else {
             return MUserGroupAccessory::create([
-                'user_id' => $this->user->id, 'group_id' => $group->id, 'created_by' => Auth::check() ? Auth::user()->id : -1,
+                'user_id' => $this->user->id, 'group_id' => $group->id, 'created_by' => Auth::user()->id,
             ]) ? true : false;
         }
     }
