@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Study extends Model
 {
     public $timestamps = false;
-    public $fillable = ['user_id','place_name','time_start','time_end','group'];
+    public $fillable = ['user_id','place_name','time_start','time_stop','group'];
     public $hidden = ['id','user_id'];
     public function getUser()
     {

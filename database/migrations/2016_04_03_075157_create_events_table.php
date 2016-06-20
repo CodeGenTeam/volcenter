@@ -17,17 +17,12 @@ class CreateEventsTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->increments('id');
-
             $table->string('name'); // название мероприятия
             $table->text('descr')->nullable(); // описание мероприятия
             $table->string('address')->nullable(); // где пройдет мероприятие
             $table->string('image')->nullable(); // Фотография мероприятия
-
             $table->timestamp('event_start'); // дата и время начала
-            $table->timestamp('event_end'); // дата и время окончания
-            $table->timestamp('event_start_register_user'); // дата/время начала набора в волонтёры
-            $table->timestamp('event_stop_register_user'); // дата/время прекращения набора в волонтёры
-
+            $table->timestamp('event_stop'); // дата и время окончания
             $table->integer('event_type')->unsigned(); // тип мероприятия
         });
     }

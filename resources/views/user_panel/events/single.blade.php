@@ -16,7 +16,7 @@
     </div>
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <p class="lead text-center">Пройдет<br />C @if($event->event_start){{ $event->event_start }}@elseОтсутствует@endif<br/> По @if($event->event_end){{ $event->event_end }}@elseОтсутствует@endif</p>
+            <p class="lead text-center">Пройдет<br />C @if($event->event_start){{ $event->event_start }}@elseОтсутствует@endif<br/> По @if($event->event_stop){{ $event->event_stop }}@elseОтсутствует@endif</p>
         </div>
     </div>
     <div class="row">
