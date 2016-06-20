@@ -21,6 +21,7 @@ Route::resource('/event_type', 'EventTypeController');
 Route::get('/settings', 'UserController@edit');
 Route::put('/user/{user}', 'UserController@update');
 Route::resource('/user', 'UserController');
+Route::get('/top', 'UserController@top');
 
 // Auth
 Route::get('login', 'Auth\AuthController@showLoginForm');

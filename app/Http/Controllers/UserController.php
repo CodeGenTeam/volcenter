@@ -64,4 +64,11 @@ class UserController extends Controller
         }
         return view('user_panel.user.settings', ['user' => $user]);
     }
+
+    public function top()
+    {
+        $users = User::all();
+
+        return view('top', ['users' => $users]);
+    }
 }

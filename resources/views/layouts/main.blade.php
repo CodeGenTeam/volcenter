@@ -60,6 +60,9 @@
             <ul class="nav navbar-nav">
                 <li><a href="{{ url('/home') }}">На главную</a></li>
             </ul>
+            <ul class="nav navbar-nav">
+                <li><a href="{{ url('/top') }}">Топ волонтёров</a></li>
+            </ul>
 
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
