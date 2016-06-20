@@ -73,7 +73,7 @@
                                     Уточняйте у организаторов
                                 @endif </p>
                             <p>Конец:
-                                @if($event->event_end!="0000-00-00 00:00:00") <i class="fa fa-clock-o"></i> {{ $event->event_end }}
+                                @if($event->event_stop!="0000-00-00 00:00:00") <i class="fa fa-clock-o"></i> {{ $event->event_stop }}
                                 @else Уточняйте у организаторов
                                 @endif
                             </p>

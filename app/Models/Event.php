@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Event extends Model
 {
     public $timestamps = false;
-    protected $fillable = ['id', 'event_start', 'event_end', 'name', 'image', 'descr', 'address','event_type', 'event_start_register_user','event_stop_register_user'];
+    protected $fillable = ['id', 'event_start', 'event_stop', 'name', 'image', 'descr', 'address','event_type'];
 
     public function getEventType()
     {
