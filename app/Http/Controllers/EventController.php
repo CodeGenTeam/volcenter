@@ -116,6 +116,13 @@ class EventController extends Controller
         }
     }
 
+    public function all()
+    {
+        $events = Event::all();
+
+        return view('user_panel.events.list', ['events' => $events]);
+    }
+
     // public function viewAll() {
     //     $data = $this->index();
     //     return view('backend/events/viewAll', ['data' => $data]);

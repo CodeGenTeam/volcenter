@@ -68,9 +68,7 @@ class DatabaseSeeder extends Seeder {
                 'address'=> $value['address'],
                 'image'=> $value['image'],
                 'event_start'=> $value['event_start'],
-                'event_end'=> $value['event_end'],
-                'event_start_register_user'=> $value['event_start_register_user'],
-                'event_stop_register_user'=> $value['event_stop_register_user'],
+                'event_stop'=> $value['event_end'],
                 'event_type'=> $value['event_type']
             ]);
         }

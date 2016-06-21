@@ -37,14 +37,15 @@
                     <h3 class="panel-title">Направления работ <span class="glyphicon glyphicon-wrench"></span></h3>
                 </div>
                 <ul class="list-group">
+                <span style="display: none;">{{ $i=0 }}</span>
                     @foreach($event->getResponsibility as $responsibility)
                         <div class="panel panel-default panel-heading" style="margin-bottom: 0px"><span class="badge" style="float: left;margin-right:10px">{{$responsibility->count}}</span>
                             @if(Auth::check())
-                                <form class="form-horizontal" role="form" method="POST" action="{{ url('application/create') }}">
-                                    {!! csrf_field() !!}
-                                <button class="btn btn-primary" style="float:right;">Подать заявку</button>
-                                </form>
-                                    @endif
+                                <!--<button class="btn btn-primary" style="float:right;" data-toggle="modal" data-target="#myModal">Подать заявку</button>-->
+                                @if($i++)
+                                <button class="btn btn-danger" style="float:right;" data-toggle="modal" data-target="#deModal">Отменить заявку</button>
+                                @endif
+                            @endif
                             <h3 class="panel-title">{{$responsibility->position}}</h3>{{$responsibility->task}}</div>
                     @endforeach
                 </ul>
@@ -93,5 +94,81 @@
     </div>
     @endif
 </div>
+<script>
+    function notie() {
+        alert('Заявка подана!');
+    }
 
+    $('#myModal').on('shown.bs.modal', function () {
+    });
+</script>
+<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Подтверждение заявки</h4>
+      </div>
+      <div class="modal-body">
+        <p>Подтвердите вашу заявку</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#myModal2">Подтвердить</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="myModal2">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Подтверждение заявки</h4>
+      </div>
+      <div class="modal-body">
+        <p>Заявка подтверждена!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="deModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Отмена заявки</h4>
+      </div>
+      <div class="modal-body">
+        <p>Вы действительно хотите отменить заявку?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#deModal2">Подтвердить</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="deModal2">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Отмена заявки</h4>
+      </div>
+      <div class="modal-body">
+        <p>Вы отменили заявку!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 @endsection

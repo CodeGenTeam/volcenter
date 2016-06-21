@@ -17,14 +17,15 @@
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="https://bootswatch.com/sandstone/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker.css"/>
+    <link rel="stylesheet" href="user_panel_bin/css/flexslider.css">
     
     <script type="text/javascript" src="/admin_panel_bin/js/jQuery.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 
-"></script>
+    <script type="text/javascript" src="/user_panel_bin/js/jquery.flexslider-min.js"></script>
 
     <style>
         body {
@@ -61,7 +62,13 @@
                 <li><a href="{{ url('/home') }}">На главную</a></li>
             </ul>
             <ul class="nav navbar-nav">
-                <li><a href="{{ url('/top') }}">Топ волонтёров</a></li>
+                <li><a href="{{ url('/events') }}">Мероприятия</a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li><a href="{{ url('/top') }}">Об организации</a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li><a href="{{ url('/top') }}">Как пользоваться</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -89,5 +96,20 @@
 
 @yield('content')
 {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+<style>
+    footer {
+        background: #3e3f3a;
+        color: white;
+        margin: 0 auto;
+        text-align: center;
+        padding: 5px;
+        margin-top: 10px;
+    }
+</style>
+<footer>
+    <div class="container">
+        <p>&copy; CodeGenTeam. All rights reserved.</p>
+    </div>
+</footer>
 </body>
 </html>
