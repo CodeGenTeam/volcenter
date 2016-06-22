@@ -37,22 +37,20 @@
                     <div class="col-md-6">
                         <div class="one-block">
                             <h3>Фотография</h3>
-                            @if ($user->image)
-                                <div class="form-horizontal form-group">
-                                <image src="/user_panel_bin/images/users/{{ $user->image }}" width="200px" style="margin-top: 10px" />
+                            <div class="form-group col-sm-12" id="file_uploaded" style="text-align: center;">
+                                <input type="hidden" name="image" value="{{ $user->image }}" />
+                                @if ($user->image)
+                                    <image src="/user_panel_bin/images/users/{{ $user->image }}" width="200px" style="margin-top: 10px" />
+                                    <a href="#" id="delete_img">Удалить</a>
+                                @endif
+                            </div>
+
+                            {{--@if ($user->image)
                                 <button id="delete_img" type="button" tabindex="500" title="Удалить фотографию" class="btn btn-default fileinput-remove fileinput-remove-button" style="display: block;margin: 0 auto;margin-top: 10px;">
                                     <i class="glyphicon glyphicon-remove"></i>
                                 </button>
-                                    <div class="col-xs-1">
-                                <input id="image" type="file" multiple class="image file-loading" data-show-preview="false" data-show-upload="false">
-                                        </div>
-                                    </div>
-                            @else
-                                <div class="form-group">
-                                    <image src="/user_panel_bin/images/no-image.png" width="200px" style="margin-top: 10px" />
-                                    <input id="image" type="file" multiple class="image file-loading" data-show-preview="false" data-show-upload="false">
-                                </div>
-                            @endif
+                            @endif--}}
+                            <input id="image" type="file" multiple class="image file-loading" data-show-preview="false" data-show-upload="false">
                         </div>
                         <div class="one-block">
                             <div class="form-group">
@@ -158,7 +156,7 @@
         }).on('filebatchuploadsuccess', function(event, data, previewId, index) {
             $("#file_uploaded").html(
                     "<input type='hidden' name='image' value='" + data.jqXHR.responseJSON.filename + "'/>" +
-                    " <image src='/user_panel_bin/images/users/" + data.jqXHR.responseJSON.filename + "'> " +
+                    " <image src='/user_panel_bin/images/users/" + data.jqXHR.responseJSON.filename + "' width='200px' style='margin-top: 10px'> " +
                     " <a href='#' id='delete_img'>Удалить</a>"
             );
             deleteEventImg();
