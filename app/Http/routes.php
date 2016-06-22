@@ -61,7 +61,8 @@ Route::delete('/application/{application}', 'ApplicationController@delete')->whe
 Route::resource('/user/status', 'StatusController', ['only' => ['index', 'create', 'update', 'destroy']]);
 
 // ProfileController
-Route::resource('/user/{user}', 'ProfileController@show');
+// error
+//Route::resource('/user/{user}', 'ProfileController@show');
 Route::resource('/user/profile', 'ProfileTypeController', ['only' => ['index', 'create', 'update', 'destroy']]);
 
 Route::get('/', 'IndexController@index');
