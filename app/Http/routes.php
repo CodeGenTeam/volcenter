@@ -50,12 +50,12 @@ Route::get('/event/{event}', 'EventController@show')->where(['id' => '\d+']);
 Route::get('/event/list/{id}', 'EventController@getList')->where(['id' => '\d+']);
 Route::get('/events', 'EventController@all');
 
-Route::post('/application/create', 'ApplicationController@create');
+Route::post('/events/{event}/applications/create', 'ApplicationController@initial_application');
 // ApplicationsController
-Route::get('/user/{user}/application', 'ApplicationController@index')->where(['user' => '\d+']);
-Route::get('/user/{user?}/application/create', 'ApplicationController@create')->where(['user' => '\d+']);
-Route::get('/application/{application}', 'ApplicationController@update')->where(['user' => '\d+', 'application' => '\d+']);
-Route::delete('/application/{application}', 'ApplicationController@delete')->where(['application' => '\d+']);
+// Route::get('/user/{user}/application', 'ApplicationController@index')->where(['user' => '\d+']);
+// Route::post('/user/{user?}/application/create', 'ApplicationController@create')->where(['user' => '\d+']);
+// Route::get('/application/{application}', 'ApplicationController@update')->where(['user' => '\d+', 'application' => '\d+']);
+// Route::delete('/application/{application}', 'ApplicationController@delete')->where(['application' => '\d+']);
 
 // StatusesController
 Route::resource('/user/status', 'StatusController', ['only' => ['index', 'create', 'update', 'destroy']]);

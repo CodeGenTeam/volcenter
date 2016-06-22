@@ -8,7 +8,6 @@ class Application extends Model {
 
     public $timestamps = false;
     protected $fillable = ['user_id', 'responsibility_event_id', 'status_id'];
-    protected $hidden = ['user_id', 'responsibility_event_id', 'status_id'];
 
     public function getUser() {
         return $this->hasOne(User::class, 'id', 'user_id');

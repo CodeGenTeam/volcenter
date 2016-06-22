@@ -29,6 +29,7 @@
             <p class="text-center">@if($event->descr){!! nl2br(e($event->descr)) !!}@elseОтсутствует@endif</p>
         </div>
     </div>
+    {{ dd($event) }}
     @if($event->getResponsibility != "[]")
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
