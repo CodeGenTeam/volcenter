@@ -67,8 +67,8 @@ class DatabaseSeeder extends Seeder {
                 'descr'=> $value['descr'],
                 'address'=> $value['address'],
                 'image'=> $value['image'],
-                'event_start'=> $value['event_start'],
-                'event_stop'=> $value['event_end'],
+                'event_start'=> date('Y-m-d h:i:s', strtotime($value['event_start'])),
+                'event_stop'=> date('Y-m-d h:i:s', strtotime($value['event_end'])),
                 'event_type'=> $value['event_type']
             ]);
         }
@@ -154,7 +154,7 @@ class DatabaseSeeder extends Seeder {
         }
 
         $users = [
-            ['login'=>'gek','email'=>'gek@volcenter.ru','firstname'=>'Александр','lastname'=>'Шишкин','middlename'=>'Александрович','birthday'=>'03.06.1998','password'=>bcrypt('123456'),'role_id'=>'1'],
+            ['login'=>'gek','email'=>'gek@volcenter.ru','firstname'=>'Александр','lastname'=>'Шишкин','middlename'=>'Александрович','birthday'=> '03.06.1998' ,'password'=>bcrypt('123456'),'role_id'=>'1'],
             ['login'=>'ss2','email'=>'ss2@volcenter.ru','firstname'=>'Виктор','lastname'=>'Пишкин','middlename'=>'Вкиторович','birthday'=>'05.03.1999','password'=>bcrypt('123456'),'role_id'=>'1'],
             ['login'=>'fas3','email'=>'fas3@volcenter.ru','firstname'=>'Иван','lastname'=>'Кигич','middlename'=>'Петрович','birthday'=>'02.06.2001','password'=>bcrypt('123456'),'role_id'=>'1'],
             ['login'=>'2rss','email'=>'2rss@volcenter.ru','firstname'=>'Григорий','lastname'=>'Шестин','middlename'=>'Векторович','birthday'=>'12.03.1991','password'=>bcrypt('123456'),'role_id'=>'2'],
@@ -168,7 +168,7 @@ class DatabaseSeeder extends Seeder {
                 'firstname'=> $value['firstname'],
                 'lastname'=> $value['lastname'],
                 'middlename'=> $value['middlename'],
-                'birthday'=> $value['birthday'],
+                'birthday'=> date('Y-m-d', strtotime($value['birthday'])),
                 'password'=> $value['password'],
                 'role_id'=> $value['role_id']
             ]);
@@ -295,11 +295,11 @@ class DatabaseSeeder extends Seeder {
 
         foreach ($studies as $value) {
             DB::table('studies')->insert([
-                'user_id'=>$value['user_id'],
-                'place_name'=>$value['place_name'],
-                'time_start'=>$value['time_start'],
-                'time_stop'=>$value['time_stop'],
-                'group'=>$value['group'],
+                'user_id'=> $value['user_id'],
+                'place_name'=> $value['place_name'],
+                'time_start'=> date('Y-m-d', strtotime($value['time_start'])),
+                'time_stop'=> date('Y-m-d', strtotime($value['time_stop'])),
+                'group'=> $value['group'],
             ]);
         }
         //направление(факультет), специальность(кафедра)
@@ -367,7 +367,7 @@ class DatabaseSeeder extends Seeder {
                 'user_id' => $value['user_id'],
                 'responsibility_event_id'=> $value['responsibility_event_id'],
                 'status_id'=> $value['status_id'],
-                'datetime'=> $value['datetime'],
+                'datetime'=> date('Y-m-d h:i:s', strtotime($value['datetime'])),
             ]);
         }
 
