@@ -174,6 +174,26 @@ class DatabaseSeeder extends Seeder {
             ]);
         }
 
+        $addreses = [
+            ['user_id'=>'1','country'=>'Россия','city'=>'Челябинск','street'=>'Ленина, 63','house'=>'5','ext'=>'','flat'=>'10'],
+            ['user_id'=>'2','country'=>'Казахстан','city'=>'Астана','street'=>'Кузнецова, 13','house'=>'1','ext'=>'','flat'=>'4'],
+            ['user_id'=>'3','country'=>'Россия','city'=>'Тюмень','street'=>'Шестеренко, 1','house'=>'34','ext'=>'а','flat'=>'5'],
+            ['user_id'=>'4','country'=>'Россия','city'=>'Чебаркуль','street'=>'Перельван, 3','house'=>'4','ext'=>'','flat'=>'9'],
+            ['user_id'=>'5','country'=>'Россия','city'=>'Копейск','street'=>'Гонечная, 14','house'=>'2','ext'=>'2','flat'=>'23']
+        ];
+
+        foreach ($addreses as $value) {
+            DB::table('addreses')->insert([
+                'user_id' => $value['user_id'],
+                'country'=>$value['country'],
+                'city'=>$value['city'],
+                'street'=>$value['street'],
+                'house'=>$value['house'],
+                'ext'=>$value['ext'],
+                'flat'=>$value['flat']
+            ]);
+        }
+
         $phones = [
             ['user_id'=>'1','phone'=>'89251454317'],
             ['user_id'=>'2','phone'=>'89015452351'],
