@@ -46,8 +46,9 @@
                                     <a href="/adminpanel/{{ $link['link'] }}">{{ $link['name'] }}</a>
                                 </li>
                             @endforeach
-                            {{--<li><a href="#">Somelink</a></li>--}}
-                            
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="active"><a href="./">{{Auth::user()->role()}} <span class="sr-only">(current)</span></a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->

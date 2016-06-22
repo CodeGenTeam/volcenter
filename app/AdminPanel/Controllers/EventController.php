@@ -2,6 +2,7 @@
 
 namespace App\AdminPanel\Controllers;
 
+use App\Models\Application;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\UploadedFile;
@@ -9,6 +10,7 @@ use App\Models\Event;
 use App\Models\Event_type;
 use Illuminate\Support\Facades\Response;
 use File;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class EventController extends Controller
 {
@@ -81,4 +83,13 @@ class EventController extends Controller
 			return view('admin_panel.events.index', ['events' => Event::all()]);
 		}
 	}
+	public function show(Event $event)
+	{
+        //$applications = $event->getMotivation();
+        //$application = new \App\Models\Application;
+        $item = [['id'=>1,'name'=>'Пешков Владимир Александрович'],['id'=>2,'name'=>'Пешков Владимир Александрович']];
+        $applications = json_decode(json_encode($item));
+		return View('admin_panel.events.applications',compact('applications','event'));
+	}
+
 }

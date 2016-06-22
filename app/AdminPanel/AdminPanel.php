@@ -31,7 +31,7 @@ class AdminPanel {
             'id' => 'motivations',
             'name' => 'Мотивации',
             'link' => 'motivations'
-        ],
+        ]
     ];
 
     public function routes() {
@@ -39,8 +39,8 @@ class AdminPanel {
             return view('admin_panel.index');
         });
         // заменить загрузку изображений и раскидать на функции
-        Route::resource('/adminpanel/events', '\\' . EventController::class . '@index');
-
+        Route::get('/adminpanel/events', '\\' . EventController::class . '@index');
+        Route::get('/adminpanel/events/{event}', '\\' . EventController::class . '@show');
         Route::get('/adminpanel/event_types', '\\' . EventTypeController::class . '@index');
         Route::get('/adminpanel/users', '\\' . UserController::class . '@index');
         Route::get('/adminpanel/motivations', '\\' . MotivationController::class . '@index');
