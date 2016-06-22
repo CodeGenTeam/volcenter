@@ -34,7 +34,7 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default" style="border: 0px;">
                 <div class="panel-heading" >
-                    <h3 class="panel-title">Направления работ <span class="glyphicon glyphicon-wrench"></span></h3>
+                    <h3 class="panel-title">Направления работ <span class="glyphicon glyphicon-user"></span></h3>
                 </div>
                 <ul class="list-group">
                 <span style="display: none;">{{ $i=0 }}</span>

@@ -1,12 +1,10 @@
 ID мероприятия: {{$event->id}}<br />
 Начало мероприиятия: {{$event->event_start}}<br />
-Окончание мероприятия: {{$event->event_end}}<br />
+Окончание мероприятия: {{$event->event_stop}}<br />
 Название: {{$event->name}}<br />
 Картинка: {{$event->image}}<br />
 Описание мероприятия: {{$event->descr}}<br />
 Адрес мероприятия: {{$event->address}}<br />
-Начало регистрации: {{$event->event_start_register_user}}<br />
-Окончание регистрации: {{$event->event_stop_register_user}}<br />
 Тип направления: {{$event->geteventtype->name}}<br/>
 <br/>
 Направления:
