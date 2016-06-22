@@ -31,7 +31,12 @@ class AdminPanel {
             'id' => 'motivations',
             'name' => 'Мотивации',
             'link' => 'motivations'
-        ]
+        ],
+        [
+            'id' => 'applications',
+            'name' => 'Заявки',
+            'link' => 'applications'
+        ],
     ];
 
     public function routes() {
@@ -45,8 +50,8 @@ class AdminPanel {
         Route::get('/adminpanel/users', '\\' . UserController::class . '@index');
         Route::get('/adminpanel/motivations', '\\' . MotivationController::class . '@index');
 
-        Route::get('/adminpanel/applications/{event}', '\\' . ApplicationController::class . '@index')->where(['event' => '\d+']);
-        Route::get('/adminpanel/applications/approve', '\\' . ApplicationController::class . '@approve');
+        Route::get('/adminpanel/events/{event}/applications', '\\' . ApplicationController::class . '@index')->where(['event' => '\d+']);
+        //Route::get('/adminpanel/applications/approve', '\\' . ApplicationController::class . '@approve');
     }
 
     public function getLinks() {
