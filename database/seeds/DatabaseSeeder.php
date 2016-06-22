@@ -147,17 +147,209 @@ class DatabaseSeeder extends Seeder {
             Status::where(['id' => $id, 'name' => $name])->firstOrCreate(['id' => $id, 'name' => $name]);
         }
         foreach (
-            [1 => 'Подал заявку', 2 => 'Отменил заявку', 3 => 'Принято администратором',
-             4 => 'Отклонено администратором', 5 => 'Принял участие в мероприятии', 6 => 'Не пришёл на мероприятие'] as
-            $id => $name
-        ) {
-            Status::where(['id' => $id, 'name' => $name])->firstOrCreate(['id' => $id, 'name' => $name]);
-        }
-        foreach (
             [1 => 'user', 2 => 'moderator', 3 => 'admin'] as
             $id => $name
         ) {
             Role::where(['id' => $id, 'name' => $name])->firstOrCreate(['id' => $id, 'name' => $name]);
         }
+
+        $users = [
+            ['login'=>'gek','email'=>'gek@volcenter.ru','firstname'=>'Александр','lastname'=>'Шишкин','middlename'=>'Александрович','birthday'=>'03.06.1998','password'=>bcrypt('123456'),'role_id'=>'1'],
+            ['login'=>'ss2','email'=>'ss2@volcenter.ru','firstname'=>'Виктор','lastname'=>'Пишкин','middlename'=>'Вкиторович','birthday'=>'05.03.1999','password'=>bcrypt('123456'),'role_id'=>'1'],
+            ['login'=>'fas3','email'=>'fas3@volcenter.ru','firstname'=>'Иван','lastname'=>'Кигич','middlename'=>'Петрович','birthday'=>'02.06.2001','password'=>bcrypt('123456'),'role_id'=>'1'],
+            ['login'=>'2rss','email'=>'2rss@volcenter.ru','firstname'=>'Григорий','lastname'=>'Шестин','middlename'=>'Векторович','birthday'=>'12.03.1991','password'=>bcrypt('123456'),'role_id'=>'2'],
+            ['login'=>'svcw','email'=>'svcw@volcenter.ru','firstname'=>'Александр','lastname'=>'Бледин','middlename'=>'Владиславович','birthday'=>'21.03.1980','password'=>bcrypt('123456'),'role_id'=>'3'],
+        ];
+
+        foreach ($users as $value) {
+            DB::table('users')->insert([
+                'login' => $value['login'],
+                'email'=> $value['email'],
+                'firstname'=> $value['firstname'],
+                'lastname'=> $value['lastname'],
+                'middlename'=> $value['middlename'],
+                'birthday'=> $value['birthday'],
+                'password'=> $value['password'],
+                'role_id'=> $value['role_id']
+            ]);
+        }
+
+        $phones = [
+            ['user_id'=>'1','phone'=>'89251454317'],
+            ['user_id'=>'2','phone'=>'89015452351'],
+            ['user_id'=>'3','phone'=>'89351432857'],
+            ['user_id'=>'4','phone'=>'89151152357'],
+            ['user_id'=>'5','phone'=>'89231447357'],
+        ];
+
+        foreach ($phones as $value) {
+            DB::table('phones')->insert([
+                'user_id' => $value['user_id'],
+                'phone'=>$value['phone']
+            ]);
+        }
+
+        $profile_types = [
+            ['name'=>'Вконтакте'],
+            ['name'=>'Skype'],
+        ];
+
+        foreach ($profile_types as $value) {
+            DB::table('profile_types')->insert([
+                'name' => $value['name'],
+            ]);
+        }
+
+        $profiles = [
+            ['user_id'=>'1','profile_type_id'=>'1','link'=>'321244'],
+            ['user_id'=>'1','profile_type_id'=>'2','link'=>'kds3'],
+            ['user_id'=>'2','profile_type_id'=>'1','link'=>'321144'],
+            ['user_id'=>'2','profile_type_id'=>'2','link'=>'dfs4'],
+            ['user_id'=>'3','profile_type_id'=>'1','link'=>'2544'],
+            ['user_id'=>'3','profile_type_id'=>'2','link'=>'dfsfrew'],
+            ['user_id'=>'4','profile_type_id'=>'1','link'=>'3244'],
+            ['user_id'=>'4','profile_type_id'=>'2','link'=>'2dsaeq'],
+            ['user_id'=>'5','profile_type_id'=>'1','link'=>'341144'],
+            ['user_id'=>'5','profile_type_id'=>'2','link'=>'fds4s'],
+        ];
+
+        foreach ($profiles as $value) {
+            DB::table('profiles')->insert([
+                'user_id' => $value['user_id'],
+                'profile_type_id' => $value['profile_type_id'],
+                'link' => $value['link'],
+            ]);
+        }
+
+        $languages = [
+            ['lang_name'=>'Французский'],
+            ['lang_name'=>'Английский'],
+            ['lang_name'=>'Немецкий'],
+            ['lang_name'=>'Испанский'],
+            ['lang_name'=>'Китайский'],
+        ];
+
+        foreach ($languages as $value) {
+            DB::table('languages')->insert([
+                'lang_name' => $value['lang_name']
+            ]);
+        }
+
+        $level_languages = [
+            ['name'=>'Начальный'],
+            ['name'=>'Ниже среднего'],
+            ['name'=>'Средний'],
+            ['name'=>'Выше среднего'],
+            ['name'=>'Продвинутый'],
+        ];
+
+        foreach ($level_languages as $value) {
+            DB::table('level_languages')->insert([
+                'name' => $value['name']
+            ]);
+        }
+
+        $language_levels = [
+            ['user_id'=>'1','language_id'=>'2','level_language_id'=>'2'],
+            ['user_id'=>'2','language_id'=>'2','level_language_id'=>'1'],
+            ['user_id'=>'3','language_id'=>'2','level_language_id'=>'3'],
+            ['user_id'=>'4','language_id'=>'2','level_language_id'=>'4'],
+            ['user_id'=>'5','language_id'=>'2','level_language_id'=>'5'],
+        ];
+
+        foreach ($language_levels as $value) {
+            DB::table('language_levels')->insert([
+                'user_id'=>$value['user_id'],
+                'language_id'=>$value['language_id'],
+                'level_language_id'=>$value['level_language_id']
+            ]);
+        }
+
+        $studies = [
+            ['user_id'=>'1','place_name'=>'ЮУрГУ','time_start'=>'2012','time_stop'=>'2016','group'=>'Э-105'],
+            ['user_id'=>'2','place_name'=>'ЧГПУ','time_start'=>'2012','time_stop'=>'2016','group'=>'Л-225'],
+            ['user_id'=>'3','place_name'=>'СОШ №2','time_start'=>'2012','time_stop'=>'2016','group'=>'8а'],
+            ['user_id'=>'4','place_name'=>'СОШ №120','time_start'=>'2012','time_stop'=>'2016','group'=>'9в'],
+            ['user_id'=>'5','place_name'=>'Колледж права и экономики','time_start'=>'2012','time_stop'=>'2016','group'=>'Э-203'],
+        ];
+
+        foreach ($studies as $value) {
+            DB::table('studies')->insert([
+                'user_id'=>$value['user_id'],
+                'place_name'=>$value['place_name'],
+                'time_start'=>$value['time_start'],
+                'time_stop'=>$value['time_stop'],
+                'group'=>$value['group'],
+            ]);
+        }
+        //направление(факультет), специальность(кафедра)
+        $study_university = [
+            ['study_id'=>'1','faculty'=>'Энергетический','chair'=>'Высокой энергии'],
+            ['study_id'=>'2','faculty'=>'Лингвистика','chair'=>'Перевод и переводоведение'],
+            ['study_id'=>'5','faculty'=>'Экономическое','chair'=>'Экономика и бухгалтерский учет'],
+        ];
+
+        foreach ($study_university as $value) {
+            DB::table('study_universities')->insert([
+                'study_id'=>$value['study_id'],
+                'faculty'=>$value['faculty'],
+                'chair'=>$value['chair'],
+            ]);
+        }
+
+        $applications = [
+            //подал и отменил
+            ['user_id'=>'2','responsibility_event_id'=>'3','status_id'=>'1','datetime'=>'03.02.2016 18:00:03'],
+            ['user_id'=>'2','responsibility_event_id'=>'3','status_id'=>'2','datetime'=>'03.02.2016 20:00:03'],
+            //подал и отменил
+            ['user_id'=>'1','responsibility_event_id'=>'1','status_id'=>'1','datetime'=>'03.02.2016 18:00:03'],
+            ['user_id'=>'1','responsibility_event_id'=>'1','status_id'=>'2','datetime'=>'03.02.2016 19:00:03'],
+            //подал
+            ['user_id'=>'1','responsibility_event_id'=>'2','status_id'=>'1','datetime'=>'03.02.2016 19:01:03'],
+            //подал
+            ['user_id'=>'2','responsibility_event_id'=>'2','status_id'=>'1','datetime'=>'03.02.2016 20:00:05'],
+            // подал и подтвердил админ
+            ['user_id'=>'3','responsibility_event_id'=>'1','status_id'=>'1','datetime'=>'03.02.2016 20:02:08'],
+            ['user_id'=>'3','responsibility_event_id'=>'1','status_id'=>'3','datetime'=>'03.02.2016 20:03:03'],
+            // подал и подтвердил админ
+            ['user_id'=>'4','responsibility_event_id'=>'2','status_id'=>'1','datetime'=>'03.02.2016 21:00:03'],
+            ['user_id'=>'4','responsibility_event_id'=>'2','status_id'=>'3','datetime'=>'03.02.2016 21:01:17'],
+            // подал и отклонил админ
+            ['user_id'=>'3','responsibility_event_id'=>'5','status_id'=>'1','datetime'=>'03.02.2016 22:00:03'],
+            ['user_id'=>'3','responsibility_event_id'=>'5','status_id'=>'4','datetime'=>'03.02.2016 22:01:03'],
+            // подал и отклонил админ
+            ['user_id'=>'4','responsibility_event_id'=>'7','status_id'=>'1','datetime'=>'03.02.2016 22:11:03'],
+            ['user_id'=>'4','responsibility_event_id'=>'7','status_id'=>'4','datetime'=>'03.02.2016 22:13:03'],
+            // подал, принял админ, принял участие
+            ['user_id'=>'5','responsibility_event_id'=>'8','status_id'=>'1','datetime'=>'04.02.2016 14:01:03'],
+            ['user_id'=>'5','responsibility_event_id'=>'8','status_id'=>'3','datetime'=>'04.02.2016 14:11:03'],
+            ['user_id'=>'5','responsibility_event_id'=>'8','status_id'=>'5','datetime'=>'04.02.2016 14:13:03'],
+            // подал, принял админ, принял участие
+            ['user_id'=>'1','responsibility_event_id'=>'9','status_id'=>'1','datetime'=>'04.03.2016 14:01:03'],
+            ['user_id'=>'1','responsibility_event_id'=>'9','status_id'=>'3','datetime'=>'04.03.2016 14:11:03'],
+            ['user_id'=>'1','responsibility_event_id'=>'9','status_id'=>'5','datetime'=>'04.03.2016 14:13:03'],
+            // подал, принял админ, принял участие
+            ['user_id'=>'4','responsibility_event_id'=>'7','status_id'=>'1','datetime'=>'04.03.2016 14:01:03'],
+            ['user_id'=>'4','responsibility_event_id'=>'7','status_id'=>'3','datetime'=>'04.03.2016 14:11:03'],
+            ['user_id'=>'4','responsibility_event_id'=>'7','status_id'=>'5','datetime'=>'04.03.2016 14:13:03'],
+            // подал, принял админ, не пришел
+            ['user_id'=>'1','responsibility_event_id'=>'4','status_id'=>'1','datetime'=>'05.03.2016 14:01:03'],
+            ['user_id'=>'1','responsibility_event_id'=>'4','status_id'=>'3','datetime'=>'05.03.2016 14:11:03'],
+            ['user_id'=>'1','responsibility_event_id'=>'4','status_id'=>'6','datetime'=>'05.03.2016 14:13:03'],
+            // подал, принял админ, не пришел
+            ['user_id'=>'4','responsibility_event_id'=>'2','status_id'=>'1','datetime'=>'06.03.2016 14:01:03'],
+            ['user_id'=>'4','responsibility_event_id'=>'2','status_id'=>'3','datetime'=>'06.03.2016 14:11:03'],
+            ['user_id'=>'4','responsibility_event_id'=>'2','status_id'=>'6','datetime'=>'06.03.2016 14:13:03'],
+        ];
+
+        foreach ($applications as $value) {
+            DB::table('applications')->insert([
+                'user_id' => $value['user_id'],
+                'responsibility_event_id'=> $value['responsibility_event_id'],
+                'status_id'=> $value['status_id'],
+                'datetime'=> $value['datetime'],
+            ]);
+        }
+
     }
 }
