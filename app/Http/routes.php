@@ -63,7 +63,7 @@ Route::resource('/user/status', 'StatusController', ['only' => ['index', 'create
 // ProfileController
 // error
 //Route::resource('/user/{user}', 'ProfileController@show');
-Route::resource('/user/profile', 'ProfileTypeController', ['only' => ['index', 'create', 'update', 'destroy']]);
+Route::get('/user/profile/{user}', 'UserController@show');
 
 Route::get('/', 'IndexController@index');
 Route::get('/about', 'IndexController@about');

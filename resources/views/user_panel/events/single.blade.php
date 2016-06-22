@@ -39,6 +39,7 @@
                 <ul class="list-group">
                 <span style="display: none;">{{ $i=0 }}</span>
                     @foreach($event->getResponsibility as $responsibility)
+
                         <div class="panel panel-default panel-heading" style="margin-bottom: 0px"><span class="badge" style="float: left;margin-right:10px">{{$responsibility->count}}</span>
                             @if(Auth::check())
                                 <!--<button class="btn btn-primary" style="float:right;" data-toggle="modal" data-target="#myModal">Подать заявку</button>-->

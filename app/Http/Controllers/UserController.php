@@ -91,4 +91,14 @@ class UserController extends Controller
             'filename'  => $file_name,
         ]);
     }
+    public function show(User $user)
+    {
+        //$users = User::with(array('profiles'))->get();
+        //dd($users);
+        //$users = User::with(array('profiles' => function ($query) {
+       //     $query->where('users.id', '=', 1);
+       // }))->get();
+        $user->load('profiles.getProfileType','study.getStudyUniversity','language.getLanguage');
+        return view('user_panel/user/profile', ['user'=>$user]);
+    }
 }

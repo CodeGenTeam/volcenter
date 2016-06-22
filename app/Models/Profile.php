@@ -15,6 +15,6 @@ class Profile extends Model
     }
     public function getProfileType()
     {
-        return $this->belongsToMany(Profile_type::class);
+        return $this->hasOne(Profile_type::class,'id','profile_type_id');
     }
 }

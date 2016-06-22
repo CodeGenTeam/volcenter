@@ -13,17 +13,17 @@ class User extends Auth {
     public function applications() {
         return $this->hasMany(Application::class);
     }
-
+//, 'profiles.getProfileType'
     public function profiles() {
-        return $this->hasMany(Profile::class);
+        return $this->hasMany(Profile::class,'user_id');
     }
 
     public function addreses() {
         return $this->hasMany(Address::class);
     }
 
-    public function language_level() {
-        return $this->hasMany(Language_level::class);
+    public function language() {
+        return $this->hasMany(Language_level::class,'user_id');
     }
 
     public function study() {

@@ -13,10 +13,10 @@ class ProfileController extends Controller
 
     private $upgradeableUserFields = ['link', 'profile_type_id'];
 
-    public function show(User $user)
+    public function show($profile)
     {
-        if (is_null($user)) return back();
-
+        //if (is_null($id)) return back();
+        $user = User::find(1);
         return view('user_panel/user/profile', ['user' => $user]);
     }
 

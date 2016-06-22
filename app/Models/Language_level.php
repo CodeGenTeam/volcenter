@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Language_level extends Model
 {
-    protected $fillable = ['user_id','language_id','mark'];
-    protected $hidden = ['id','user_id','language_id'];
+    protected $fillable = ['user_id','language_id','level_language_id'];
+    protected $hidden = ['id','user_id','language_id','level_language_id'];
     public $timestamps = false;
     public function getUser()
     {
@@ -15,6 +15,10 @@ class Language_level extends Model
     }
     public function getLanguage()
     {
-        return $this->belongsToMany(Language::class);
+        return $this->hasOne(Language::class,'id');
+    }
+    public function getLevel()
+    {
+        return $this->hasOne(Level_language::class,'id');
     }
 }
