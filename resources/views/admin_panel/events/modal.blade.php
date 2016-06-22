@@ -61,8 +61,8 @@
                     <div class="col-sm-6">
                         <label class="col-sm-4 control-label" for="name">Окончание</label>
                         <div class="col-sm-8">
-                            <div class='input-group date' id='event_end'>
-                                <input type='text' class="form-control" name="event_end" value="{{ $event->event_stop }}" />
+                            <div class='input-group date' id='event_stop'>
+                                <input type='text' class="form-control" name="event_stop" value="{{ $event->event_stop }}" />
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -91,7 +91,7 @@
 </div>
 <script type="text/javascript">
     $(function () {
-        $('#event_start, #event_end, #event_stop_register_user').datetimepicker({
+        $('#event_start, #event_stop').datetimepicker({
             format: 'YYYY-MM-DD HH:mm:ss'
         });
         var $input = $("#image");

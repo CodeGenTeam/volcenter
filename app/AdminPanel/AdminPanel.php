@@ -35,7 +35,9 @@ class AdminPanel {
     ];
 
     public function routes() {
-        Route::get('/adminpanel', function () { return view('admin_panel.index'); });
+        Route::get('/adminpanel', function () { 
+            return view('admin_panel.index');
+        });
         // заменить загрузку изображений и раскидать на функции
         Route::resource('/adminpanel/events', '\\' . EventController::class . '@index');
 

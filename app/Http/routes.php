@@ -17,6 +17,9 @@ Route::resource('/api/event_type', 'API\APIEventTypeController');
 // EventTypeController
 Route::resource('/event_type', 'EventTypeController');
 
+// Admin panel routes.
+APanel::routes();
+
 // UserController
 Route::get('/user/save_img','UserController@saveimage');
 Route::post('/user/save_img','UserController@saveimage');
@@ -61,8 +64,6 @@ Route::resource('/user/status', 'StatusController', ['only' => ['index', 'create
 Route::resource('/user/{user}', 'ProfileController@show');
 Route::resource('/user/profile', 'ProfileTypeController', ['only' => ['index', 'create', 'update', 'destroy']]);
 
-// Admin panel
-APanel::routes();
 Route::get('/', 'IndexController@index');
 Route::get('/about', 'IndexController@about');
 Route::get('/how_it_works', 'IndexController@works');

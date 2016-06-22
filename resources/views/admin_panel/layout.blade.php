@@ -47,6 +47,7 @@
                                 </li>
                             @endforeach
                             {{--<li><a href="#">Somelink</a></li>--}}
+                            
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
