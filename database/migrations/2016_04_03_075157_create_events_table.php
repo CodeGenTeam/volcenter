@@ -18,9 +18,9 @@ class CreateEventsTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->increments('id');
             $table->string('name'); // название мероприятия
-            $table->text('descr')->nullable(); // описание мероприятия
-            $table->string('address')->nullable(); // где пройдет мероприятие
-            $table->string('image')->nullable(); // Фотография мероприятия
+            $table->text('descr'); // описание мероприятия
+            $table->string('address'); // где пройдет мероприятие
+            $table->string('image'); // Фотография мероприятия
             $table->timestamp('event_start'); // дата и время начала
             $table->timestamp('event_stop'); // дата и время окончания
             $table->integer('event_type')->unsigned(); // тип мероприятия

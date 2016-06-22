@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-
+    <link rel="stylesheet" type="text/css" href="/admin_panel_bin/css/fileinput.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/admin_panel_bin/css/notie.css"/>
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
@@ -26,7 +27,7 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 
     <script type="text/javascript" src="/user_panel_bin/js/jquery.flexslider-min.js"></script>
-
+    <script type="text/javascript" src="/admin_panel_bin/js/fileinput.min.js"></script>
     <style>
         body {
             font-family: 'Open Sans';
@@ -59,16 +60,16 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li><a href="{{ url('/home') }}">На главную</a></li>
+                <li><a href="{{ url('/') }}">На главную</a></li>
             </ul>
             <ul class="nav navbar-nav">
                 <li><a href="{{ url('/events') }}">Мероприятия</a></li>
             </ul>
             <ul class="nav navbar-nav">
-                <li><a href="{{ url('/top') }}">Об организации</a></li>
+                <li><a href="{{ url('/about') }}">Об организации</a></li>
             </ul>
             <ul class="nav navbar-nav">
-                <li><a href="{{ url('/top') }}">Как пользоваться</a></li>
+                <li><a href="{{ url('/how_it_works') }}">Как пользоваться</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -111,5 +112,6 @@
         <p>&copy; CodeGenTeam. All rights reserved.</p>
     </div>
 </footer>
+<script type="text/javascript" src="/admin_panel_bin/js/notie.min.js"></script>
 </body>
 </html>

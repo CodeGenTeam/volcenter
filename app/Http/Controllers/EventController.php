@@ -6,12 +6,13 @@ use App\Models\Event;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use File;
 
 class EventController extends Controller
 {
 
     private $upgradeableUserFields = ['name', 'descr', 'address', 'event_start', 'event_end', 'event_type'];
-
+    private $page = '\user_panel_bin\images\users';
     public function index()
     {
         return Response::json(Event::all());

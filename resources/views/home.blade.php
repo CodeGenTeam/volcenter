@@ -36,7 +36,7 @@
         </div>
         <div class="row">
             <div class="col-md-2 col-md-offset-5">
-                <p class="text-center"><a href="/register"><button type="button" class="btn btn-primary">Зарегестрироваться</button></a></p>
+                <p class="text-center"><a href="/register"><button type="button" class="btn btn-primary">Зарегистрироваться</button></a></p>
             </div>
         </div>
         <br>

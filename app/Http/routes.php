@@ -18,10 +18,12 @@ Route::resource('/api/event_type', 'API\APIEventTypeController');
 Route::resource('/event_type', 'EventTypeController');
 
 // UserController
+Route::get('/user/save_img','UserController@saveimage');
+Route::post('/user/save_img','UserController@saveimage');
+Route::get('/user/remove_img','UserController@removeimage');
 Route::get('/settings', 'UserController@edit');
 Route::put('/user/{user}', 'UserController@update');
 Route::resource('/user', 'UserController');
-Route::get('/top', 'UserController@top');
 
 // Auth
 Route::get('login', 'Auth\AuthController@showLoginForm');
@@ -61,4 +63,6 @@ Route::resource('/user/profile', 'ProfileTypeController', ['only' => ['index', '
 
 // Admin panel
 APanel::routes();
-Route::get('/home', 'IndexController@index');
+Route::get('/', 'IndexController@index');
+Route::get('/about', 'IndexController@about');
+Route::get('/how_it_works', 'IndexController@works');

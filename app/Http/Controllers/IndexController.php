@@ -27,4 +27,12 @@ class IndexController extends Controller
         }
         return view('home', ['events' => $events]);
     }
+	public function about()
+	{
+		return view('about');
+	}
+	public function works()
+	{
+		return view('works');
+	}
 }

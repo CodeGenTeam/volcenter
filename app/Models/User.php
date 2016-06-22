@@ -8,7 +8,7 @@ class User extends Auth {
 
     public $timestamps = false;
     protected $hidden = ['password', 'id','role_id'];
-    protected $fillable = ['login', 'email', 'password', 'firstname', 'lastname', 'middlename', 'birthday','role_id'];
+    protected $fillable = ['login', 'email', 'password', 'firstname', 'lastname', 'middlename', 'birthday','role_id','image'];
 
     public function applications() {
         return $this->hasMany(Application::class);

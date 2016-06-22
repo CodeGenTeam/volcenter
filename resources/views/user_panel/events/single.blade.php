@@ -26,7 +26,7 @@
     </div>
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <p class="lead text-center">@if($event->descr){!! nl2br(e($event->descr)) !!}@elseОтсутствует@endif</p>
+            <p class="text-center">@if($event->descr){!! nl2br(e($event->descr)) !!}@elseОтсутствует@endif</p>
         </div>
     </div>
     @if($event->getResponsibility != "[]")
@@ -42,7 +42,7 @@
                         <div class="panel panel-default panel-heading" style="margin-bottom: 0px"><span class="badge" style="float: left;margin-right:10px">{{$responsibility->count}}</span>
                             @if(Auth::check())
                                 <!--<button class="btn btn-primary" style="float:right;" data-toggle="modal" data-target="#myModal">Подать заявку</button>-->
-                                @if($i++)
+                                @if($i++==0)
                                 <button class="btn btn-danger" style="float:right;" data-toggle="modal" data-target="#deModal">Отменить заявку</button>
                                 @endif
                             @endif
@@ -78,7 +78,7 @@
     </div>
     <div class="row">
         <div class="col-md-2 col-md-offset-5">
-            <p class="text-center"><a href="/register"><button type="button" class="btn btn-primary">Зарегестрироваться</button></a></p>
+            <p class="text-center"><a href="/register"><button type="button" class="btn btn-primary">Зарегистрироваться</button></a></p>
         </div>
     </div>
     <br>
