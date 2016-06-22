@@ -18,7 +18,7 @@
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="https://bootswatch.com/sandstone/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker.css"/>
-    <link rel="stylesheet" href="user_panel_bin/css/flexslider.css">
+    <link rel="stylesheet" href="/user_panel_bin/css/flexslider.css">
     
     <script type="text/javascript" src="/admin_panel_bin/js/jQuery.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
