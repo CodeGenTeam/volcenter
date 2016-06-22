@@ -11,7 +11,7 @@ use File;
 class UserController extends Controller
 {
     private $upgradeableUserFields = ['email', 'firstname', 'lastname', 'middlename', 'birthday', 'password'];
-    private $page = '\user_panel_bin\images\users';
+    private $page = '/user_panel_bin/images/users';
     public function __construct()
     {
         // не пропустит, пока не авторизуемся
@@ -69,7 +69,7 @@ class UserController extends Controller
     {
         $img_path = base_path('public').$this->page;
         $old_img = $request->query('old_img');
-        File::delete($img_path.'\\'.$old_img);
+        File::delete($img_path.'/'.$old_img);
         $user = Auth::user();
         $user->update(['image'=>'']);
         return Response::json(['success' => true]);
@@ -83,7 +83,7 @@ class UserController extends Controller
         $user = Auth::user();
 
         $old_img = $user->image;
-        File::delete($img_path.'\\'.$old_img);
+        File::delete($img_path.'/'.$old_img);
 
         $user->update(['image'=>$file_name]);
         return Response::json([
