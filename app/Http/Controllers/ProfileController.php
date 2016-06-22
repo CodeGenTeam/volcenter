@@ -15,10 +15,9 @@ class ProfileController extends Controller
 
     public function show(User $user)
     {
-        if (is_null($user)) {
-            return ['success' => false, 'error' => 'user not found'];
-        }
-        return ['success' => true, 'profiles' => $user->profiles()];
+        if (is_null($user)) return back();
+
+        return view('user_panel/user/profile', ['user' => $user]);
     }
 
     public function create($user)

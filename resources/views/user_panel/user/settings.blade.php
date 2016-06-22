@@ -41,7 +41,9 @@
                                 <input type="hidden" name="image" value="{{ $user->image }}" />
                                 @if ($user->image)
                                     <image src="/user_panel_bin/images/users/{{ $user->image }}" width="200px" style="margin-top: 10px" />
-                                    <a href="#" id="delete_img">Удалить</a>
+                                    <button id="delete_img" type="button" tabindex="500" title="Удалить фотографию" class="btn btn-default fileinput-remove fileinput-remove-button" style="display: block;margin: 0 auto;margin-top: 10px;">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
                                 @endif
                             </div>
 
@@ -76,7 +78,9 @@
 
                         <label for="study-end">Конец обучения</label>
                         <input type="text" class="form-control" id="study-end" value="2016">
-                            </div>
+                        <button class="btn btn-primary pull-right" style="margin-top: 5px;">Добавить учебное заведение</button>
+                        </div>
+
 
                         <div class="one-block">
                         <label for="birthday">Языки</label>
@@ -157,7 +161,9 @@
             $("#file_uploaded").html(
                     "<input type='hidden' name='image' value='" + data.jqXHR.responseJSON.filename + "'/>" +
                     " <image src='/user_panel_bin/images/users/" + data.jqXHR.responseJSON.filename + "' width='200px' style='margin-top: 10px'> " +
-                    " <a href='#' id='delete_img'>Удалить</a>"
+                    " <button id='delete_img' type='button' tabindex='500' title='Удалить фотографию' class='btn btn-default fileinput-remove fileinput-remove-button' style='display: block;margin: 0 auto;margin-top: 10px;'>" + 
+                                    "<i class='glyphicon glyphicon-remove'></i>" + 
+                                "</button>"
             );
             deleteEventImg();
         });

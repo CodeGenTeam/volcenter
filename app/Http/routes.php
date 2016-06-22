@@ -58,7 +58,7 @@ Route::delete('/application/{application}', 'ApplicationController@delete')->whe
 Route::resource('/user/status', 'StatusController', ['only' => ['index', 'create', 'update', 'destroy']]);
 
 // ProfileController
-Route::resource('/user/{user}/profile', 'ProfileController', ['only' => ['show', 'create', 'update', 'destroy']]);
+Route::resource('/user/{user}', 'ProfileController@show');
 Route::resource('/user/profile', 'ProfileTypeController', ['only' => ['index', 'create', 'update', 'destroy']]);
 
 // Admin panel
