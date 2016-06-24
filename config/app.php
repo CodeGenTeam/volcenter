@@ -204,8 +204,8 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-        'Ret'       => App\Http\Facades\Ret::class,
-        'APanel'    => App\Http\Facades\APanel::class
+        'Result'    => App\Http\Facades\Result::class,
+        'Admin'     => App\Http\Facades\Admin::class
     ],
 
 ];

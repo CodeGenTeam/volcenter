@@ -41,7 +41,7 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="admin-nav-collapse">
                         <ul class="nav navbar-nav">
-                            @foreach (APanel::getLinks() as $link)
+                            @foreach (Admin::getLinks() as $link)
                                 <li{!! isset($pageId) && $pageId == $link['id'] ? ' class="active"' : '' !!}>
                                     <a href="/adminpanel/{{ $link['link'] }}">{{ $link['name'] }}</a>
                                 </li>

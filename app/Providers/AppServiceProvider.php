@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Http\ReturnUtil;
-use App\Http\AdminPanel;
+use App\Http\Facades\Admin;
+use App\Http\Facades\Result;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(ReturnUtil::class, function () { return new ReturnUtil(); });
-        $this->app->singleton(AdminPanel::class, function () {return new AdminPanel();});
+        $this->app->singleton(Result::class, function () { return new Result(); });
+        $this->app->singleton(Admin::class, function () {return new Admin();});
     }
 }

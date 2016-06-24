@@ -2,13 +2,12 @@
 namespace App\Http\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use App\Http\ReturnUtil;
+use App\Http\Services\Result as ResultClass;
 
-class Ret extends Facade
+class Result extends Facade
 {
-
     protected static function getFacadeAccessor()
     {
-        return ReturnUtil::class;
+        return ResultClass::class;
     }
 }

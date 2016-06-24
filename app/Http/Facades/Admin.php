@@ -3,11 +3,11 @@
 namespace App\Http\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use App\Http\AdminPanel;
+use App\Http\Services\Admin as AdminClass;
 
-class APanel extends Facade {
+class Admin extends Facade {
 
     protected static function getFacadeAccessor() {
-        return AdminPanel::class;
+        return AdminClass::class;
     }
 }

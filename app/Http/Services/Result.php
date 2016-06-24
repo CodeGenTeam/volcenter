@@ -1,9 +1,9 @@
 <?php
-namespace App\Http;
+namespace App\Http\Services;
 
 use Response;
 
-class ReturnUtil
+class Result
 {
     
     public function ret($assert, $data = null, $dataOnFail = null)

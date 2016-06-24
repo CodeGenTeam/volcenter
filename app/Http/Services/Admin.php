@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http;
+namespace App\Http\Services;
 
-class AdminPanel {
+class Admin {
 
     private $links = [
         [
