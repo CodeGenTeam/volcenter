@@ -31,8 +31,7 @@ class UserController extends Controller
         if (is_null($user)) {
             return abort(401);
         }
-        dd($request->all());
-        $user->update(request($request->all()));
+        $user->update($request->all());
         return back();
     }
 
@@ -73,7 +72,6 @@ class UserController extends Controller
         $file_name = md5(time().$file->getClientOriginalName()).'.'.$file->getClientOriginalExtension();
         $file->move($img_path, $file_name);
         $user = Auth::user();
-
         $old_img = $user->image;
         File::delete($img_path.'/'.$old_img);
 

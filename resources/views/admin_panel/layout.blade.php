@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="/admin_panel_bin/css/fileinput.min.css"/>
 
         <script type="text/javascript" src="/admin_panel_bin/js/jQuery.js"></script>
+        <script src="/app.js"></script>
         <script type="text/javascript" src="/admin_panel_bin/js/bootstrap.js"></script>
         <script type="text/javascript" src="/admin_panel_bin/js/material.js"></script>
         <script type="text/javascript" src="/admin_panel_bin/js/ripples.js"></script>

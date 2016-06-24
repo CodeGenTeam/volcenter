@@ -5,6 +5,7 @@
 <div class="container">
         <div class="col-md-10 col-md-offset-1">
             <form class="form-horizontal" role="form" id="item-form" method="POST" action="/user/{{ $user->id }}">
+                {{-- csrf для form --}}
                 {{ csrf_field() }}
             	{{ method_field('PATCH') }}
                     <div class="col-md-6">

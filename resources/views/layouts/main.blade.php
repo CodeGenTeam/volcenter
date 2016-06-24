@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{-- Для ajax csrf --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>Laravel</title>
 
@@ -21,6 +23,7 @@
     <link rel="stylesheet" href="/user_panel_bin/css/flexslider.css">
     
     <script type="text/javascript" src="/admin_panel_bin/js/jQuery.js"></script>
+    <script src="/app.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
