@@ -39,7 +39,6 @@
                 <ul class="list-group">
                 <span style="display: none;">{{ $i=0 }}</span>
                     @foreach($event->getResponsibility as $responsibility)
-
                         <div class="panel panel-default panel-heading" style="margin-bottom: 0px"><span class="badge" style="float: left;margin-right:10px">{{$responsibility->count}}</span>
                             @if(Auth::check())
 

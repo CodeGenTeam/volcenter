@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use File;
+use Session;
 
 class UserController extends Controller
 {
@@ -30,6 +31,7 @@ class UserController extends Controller
         if (is_null($user)) {
             return abort(401);
         }
+        dd($request->all());
         $user->update(request($request->all()));
         return back();
     }

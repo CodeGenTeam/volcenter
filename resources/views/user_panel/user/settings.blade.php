@@ -4,11 +4,10 @@
 
 <div class="container">
         <div class="col-md-10 col-md-offset-1">
-            <form class="form-horizontal" role="form" id="item-form" method="POST">
-            	{{ csrf_field() }}
+            <form class="form-horizontal" role="form" id="item-form" method="POST" action="/user/{{ $user->id }}">
+                {{ csrf_field() }}
             	{{ method_field('PATCH') }}
                     <div class="col-md-6">
-
                         <div class="one-block">
                     <label for="email">Email: </label>
                     <input type="email" name="email" class="form-control" id="email" placeholder="Email" value="{{ $user->email }}">
