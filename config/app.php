@@ -108,7 +108,7 @@ return [
     |
     */
 
-    'log' => env('APP_LOG', 'single'),
+    'log' => env('APP_LOG', 'daily'),
 
     /*
     |--------------------------------------------------------------------------
@@ -205,7 +205,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         'Ret'       => App\Http\Facades\Ret::class,
-        'APanel'    => App\AdminPanel\APanel::class
+        'APanel'    => App\Http\Facades\APanel::class
     ],
 
 ];

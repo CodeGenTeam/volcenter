@@ -1,6 +1,6 @@
 <?php
 
-namespace App\AdminPanel;
+namespace App\Http\Middleware;
 
 use Closure;
 use Auth;

@@ -15,7 +15,6 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'App\Http\Controllers';
-
     /**
      * Define your route model bindings, pattern filters, etc.
      *
@@ -24,8 +23,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        //
-
         parent::boot($router);
     }
 
@@ -38,8 +35,6 @@ class RouteServiceProvider extends ServiceProvider
     public function map(Router $router)
     {
         $this->mapWebRoutes($router);
-
-        //
     }
 
     /**
@@ -52,8 +47,15 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes(Router $router)
     {
-        $router->group(['namespace' => $this->namespace], function ($router) {
+        $router->group([
+            'namespace' => $this->namespace, 'middleware' => 'web',
+        ], function ($router) {
             require app_path('Http/routes.php');
+        });
+        $router->group([
+            'namespace' => $this->namespace, 'middleware' => 'admin',
+        ], function ($router) {
+            require app_path('Http/admin_routes.php');
         });
     }
 }

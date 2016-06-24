@@ -1,16 +1,13 @@
 <?php
 
-namespace App\AdminPanel\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Application;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\UploadedFile;
 use App\Models\Event;
 use App\Models\Event_type;
 use Illuminate\Support\Facades\Response;
 use File;
-use PhpParser\Node\Expr\Cast\Object_;
 
 class EventController extends Controller
 {

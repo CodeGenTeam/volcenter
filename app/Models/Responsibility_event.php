@@ -11,7 +11,7 @@ class Responsibility_event extends Model
     public $timestamps = false;
     public function getResponsibility()
     {
-        return $this->belongsToMany(Responsibility::class);
+        return $this->hasOne(Responsibility::class,'id','responsibility_id');
     }
     public function getEvent()
     {

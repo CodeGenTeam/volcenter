@@ -2,10 +2,9 @@
 
 namespace App\Providers;
 
-use App\AdminPanel\AdminPanel;
 use App\Http\ReturnUtil;
+use App\Http\AdminPanel;
 use Illuminate\Support\ServiceProvider;
-use DB;
 
 class AppServiceProvider extends ServiceProvider
 {

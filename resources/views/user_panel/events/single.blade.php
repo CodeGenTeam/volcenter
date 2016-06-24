@@ -29,7 +29,6 @@
             <p class="text-center">@if($event->descr){!! nl2br(e($event->descr)) !!}@elseОтсутствует@endif</p>
         </div>
     </div>
-    {{ dd($event) }}
     @if($event->getResponsibility != "[]")
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
@@ -43,9 +42,10 @@
 
                         <div class="panel panel-default panel-heading" style="margin-bottom: 0px"><span class="badge" style="float: left;margin-right:10px">{{$responsibility->count}}</span>
                             @if(Auth::check())
-                                <!--<button class="btn btn-primary" style="float:right;" data-toggle="modal" data-target="#myModal">Подать заявку</button>-->
+
+                                <button class="btn btn-primary" style="float:right;" data-toggle="modal" data-target="#myModal">Подать заявку</button>
                                 @if($i++==0)
-                                <button class="btn btn-danger" style="float:right;" data-toggle="modal" data-target="#deModal">Отменить заявку</button>
+                                    <!--<button class="btn btn-danger" style="float:right;" data-toggle="modal" data-target="#deModal">Отменить заявку</button>-->
                                 @endif
                             @endif
                             <h3 class="panel-title">{{$responsibility->position}}</h3>{{$responsibility->task}}</div>

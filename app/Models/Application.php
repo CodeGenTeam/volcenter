@@ -9,15 +9,11 @@ class Application extends Model {
     public $timestamps = false;
     protected $fillable = ['user_id', 'responsibility_event_id', 'status_id'];
 
-    public function getUser() {
-        return $this->hasOne(User::class, 'id', 'user_id');
-    }
-
     public function getEvent() {
-        return $this->belongsTo(Event::class);
+        return $this->hasMany(Event::class,'id');
     }
 
     public function getStatus() {
-        return $this->belongsTo(Status::class);
+        return $this->hasMany(Status::class,'status_id');
     }
 }

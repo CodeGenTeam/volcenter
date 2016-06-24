@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\Application;
 use App\Http\Requests;
-use App\Models\User;
+use App\Models\Event;
 use Illuminate\Http\Request;
 use Response;
 use Validator;
@@ -14,12 +15,10 @@ class ApplicationController extends Controller
 
     private $upgradeableUserFields = ['status_id'];
 
-    public function index(User $id)
+    public function index(Event $event)
     {
-        if (is_null($id)) {
-            return Response::json(['success' => false, 'error' => 'user not found']);
-        }
-        return Response::json(['success' => true, 'applications' => $id->applications()]);
+        $event->load('getRespon.getResponsibility');
+        return view('admin_panel.events.applications',['event'=>$event]);
     }
 
     public function initial_application(Event $event, Request $req)
@@ -27,9 +26,9 @@ class ApplicationController extends Controller
         $data = $req->all();
 
         $application = Application::where('responsibility_event_id', $data['responsibility_event_id'])->last();
-        if ($application) {
+        /*if ($application) {
            $application->getStatus
-        }
+        }*/
         /*
         if ($val->fails()) {
             return Response::json(['success' => false, 'error' => $val->errors()->all()]);

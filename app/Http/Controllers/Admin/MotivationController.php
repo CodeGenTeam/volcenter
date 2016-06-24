@@ -1,29 +1,29 @@
 <?php
 
-namespace App\AdminPanel\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Event_type;
 use Illuminate\Support\Facades\Response;
+use App\Models\Motivation;
 
-class EventTypeController extends Controller
+class MotivationController extends Controller
 {
 	public function index(Request $request)
 	{
 		if ($request->ajax()) {
 			switch ($request->query('action')) {
 				case 'delete_item':
-					Event_type::destroy($request->query('id'));
+					Motivation::destroy($request->query('id'));
 					return Response::json(['success' => true]);
 					break;
 				case 'save_item':
 					if ($id = $request->query('id')) {
-						$event_type = Event_type::findOrFail($id);
-						$event_type->update($request->all());
+						$motivation = Motivation::findOrFail($id);
+						$motivation->update($request->all());
 						$message = 'Обновлено';
 					} else {
-						Event_type::create($request->all());
+						Motivation::create($request->all());
 						$message = 'Сохранено';
 					}
 					return Response::json(['success' => true, 'message' => $message]);
@@ -31,22 +31,24 @@ class EventTypeController extends Controller
 					break;
 				case 'edit_item':
 					if ($id = $request->query('id')) {
-						$event_type = Event_type::find($request->query('id'));
+						$motivation = Motivation::find($request->query('id'));
 					} else {
-						$event_type = new Event_type();
+						$motivation = new Motivation();
 					}
 
-					return view('admin_panel.event_types.modal', ['event_type' => $event_type]);
+					return view('admin_panel.motivations.modal', [
+						'motivation' => $motivation,
+					]);
 					break;
 				case 'items_list':
-					return view('admin_panel.event_types.list', ['event_types' => Event_type::all()]);
+					return view('admin_panel.motivations.list', ['motivations' => Motivation::all()]);
 					break;
 				default:
 					return Response::json(['success' => false, 'error' => 'empty action']);
 					break;
 			}
 		} else {
-			return view('admin_panel.event_types.index', ['event_types' => Event_type::all()]);
+			return view('admin_panel.motivations.index', ['motivations' => Motivation::all()]);
 		}
 	}
 }

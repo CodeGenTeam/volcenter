@@ -14,14 +14,6 @@ class Kernel extends HttpKernel {
      * @var array
      */
     protected $middleware = [
-        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
-        \App\Http\Middleware\EncryptCookies::class,
-        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-        \Illuminate\Session\Middleware\StartSession::class,
-        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \App\Http\Middleware\VerifyCsrfToken::class,
-        \App\Http\Middleware\UserCheckMiddleware::class,
-        \App\AdminPanel\AdminPanelMiddleware::class,
     ];
 
     /**
@@ -31,8 +23,24 @@ class Kernel extends HttpKernel {
      */
     protected $middlewareGroups = [
         'web' => [
+            \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \App\Http\Middleware\VerifyCsrfToken::class,
+            \App\Http\Middleware\UserCheckMiddleware::class,
         ],
-//
+      'admin' =>[
+          \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+          \App\Http\Middleware\EncryptCookies::class,
+          \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+          \Illuminate\Session\Middleware\StartSession::class,
+          \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+          \App\Http\Middleware\VerifyCsrfToken::class,
+          \App\Http\Middleware\UserCheckMiddleware::class,
+          \App\Http\Middleware\AdminPanelMiddleware::class,
+        ],
         'api' => [
             'throttle:60,1',
         ],

@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
-use App\Models\Event;
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
-use File;
 
 class EventController extends Controller
 {
@@ -42,36 +40,6 @@ class EventController extends Controller
     public function create(Request $request)
     {
         $data = $request->all();
-
-       // $validator = Validator::make($data, [
-        //    'name' => 'required|max:255', 'descr' => 'required', 'address' => 'required',
-       //     //'type' => 'required|event_types,id'
-       // ]);
-
-        // TODO исправить 
-       // if ($validator->fails()) return Response::json(['success' => false, 'error' => $validator->errors()->all()]);
-       // $params = [
-       //     'name' => $data['name'], 'descr' => $data['descr'], 'event_type' => $data['type']
-        //];
-        /*$validator = Validator::make($data, [
-            'name' => 'required|max:255',
-            'descr' => 'required',
-            'address'=> 'required',
-            'type' => 'required|event_types,id',
-        ]);*/
-        // TODO исправить, add address
-       /* if ($validator->fails()) return Response::json(['success' => false, 'error' => $validator->errors()->all()]);*/
-        /*$params = [
-            'name' => $data['name'], 'descr' => $data['descr'], 'event_type' => $data['type'], 'address' => $data['address'],
-
-        ];
-        foreach (['event_start', 'event_end', 'address'] as $item) if (isset($data[$item]) && !is_null($data[$item])) {
-            $params['event_start'] = $data[$item];
-        }*/
-        
-        //$val = Validator::make($data, ['name' => 'required']);
-        //if ($val->fails()) return Response::json(['success' => false, 'error' => $val->errors()->all()]);
-
         Event::create([
             'name' => $data['name'],
             'descr' => $data['descr'],
@@ -81,9 +49,6 @@ class EventController extends Controller
             'event_end' => $data['event_end'],
         ]);
         return Response::json(['success' => true]);
-        
-        //if (is_null($event)) return ['success' => false, 'error' => 'null event'];
-        //else return ['success' => true, 'id' => 4];
     }
 
     public function update(Request $request, Event $id)
@@ -123,9 +88,4 @@ class EventController extends Controller
 
         return view('user_panel.events.list', ['events' => $events]);
     }
-
-    // public function viewAll() {
-    //     $data = $this->index();
-    //     return view('backend/events/viewAll', ['data' => $data]);
-    // }
 }
