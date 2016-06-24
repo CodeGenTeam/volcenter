@@ -7,7 +7,7 @@
     POST		/photo				store		photo.store
     GET			/photo/{photo}		show		photo.show
     GET			/photo/{photo}/edit	edit		photo.edit
-    PUT/PATCH	/photo/{photo}		update		photo.update
+    PUT/PATCH	/photo/{photo}		update		photo.update PUT - require all fields, PATCH - not all
     DELETE		/photo/{photo}		destroy		photo.destroy
  */
 
@@ -61,6 +61,6 @@ Route::post('/events/{event}/applications/create', 'ApplicationController@initia
 // Route::get('/application/{application}', 'ApplicationController@update')->where(['user' => '\d+', 'application' => '\d+']);
 // Route::delete('/application/{application}', 'ApplicationController@delete')->where(['application' => '\d+']);
 // StatusesController
-Route::resource('/user/status', 'StatusController', ['only' => ['index', 'create', 'update', 'destroy']]);
+//Route::resource('/user/status', 'StatusController', ['only' => ['index', 'create', 'update', 'destroy']]);
 //Route::resource('/user/{user}', 'ProfileController@show');
-Route::get('/user/profile/{user}', 'UserController@show');
+//Route::get('/user/profile/{user}', 'UserController@show');

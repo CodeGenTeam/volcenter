@@ -14,7 +14,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'App\Http\Controllers';
+    protected $namespace_user = 'App\Http\Controllers\User';
+    protected $namespace_admin = 'App\Http\Controllers\Admin';
     /**
      * Define your route model bindings, pattern filters, etc.
      *
@@ -48,12 +49,12 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes(Router $router)
     {
         $router->group([
-            'namespace' => $this->namespace, 'middleware' => 'web',
+            'namespace' => $this->namespace_user, 'middleware' => 'web',
         ], function ($router) {
             require app_path('Http/routes.php');
         });
         $router->group([
-            'namespace' => $this->namespace, 'middleware' => 'admin',
+            'namespace' => $this->namespace_admin, 'middleware' => 'admin',
         ], function ($router) {
             require app_path('Http/routes_admin.php');
         });

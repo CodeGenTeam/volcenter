@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use File;
+
 class UserController extends Controller
 {
     private $upgradeableUserFields = ['email', 'firstname', 'lastname', 'middlename', 'birthday', 'password'];
@@ -29,19 +30,7 @@ class UserController extends Controller
         if (is_null($user)) {
             return abort(401);
         }
-        // todo запилить разрешения
-        $updated = [];
-        foreach ($request->all() as $key => $value) {
-            if (in_array($key, $this->upgradeableUserFields)) {
-                try {
-                    $user->{$key} = $value;
-                    $user->save();
-                } finally {
-                    $updated[] = $key;
-                }
-            }
-        }
-
+        $user->update(request($request->all()));
         return back();
     }
 

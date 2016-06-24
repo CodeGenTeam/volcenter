@@ -4,9 +4,9 @@
 
 <div class="container">
         <div class="col-md-10 col-md-offset-1">
-            <form class="form-horizontal" role="form"  id="item-form">
+            <form class="form-horizontal" role="form" id="item-form" method="POST">
             	{{ csrf_field() }}
-            	{{ method_field('PUT') }}
+            	{{ method_field('PATCH') }}
                     <div class="col-md-6">
 
                         <div class="one-block">
@@ -15,23 +15,27 @@
                         </div>
                         <div class="one-block">
                     <label for="firstname">Имя: </label>
-                    <input type="text" name="firstname" class="form-control" id="firstname" placeholder="Имя" value="Степан">
+                    <input type="text" name="firstname" class="form-control" id="firstname" placeholder="Имя" value="{{$user->firstname}}">
                     <label for="lastname">Фамилия: </label>
-                    <input type="text" name="lastname" class="form-control" id="lastname" placeholder="Фамилия" value="Паламарчук">
+                    <input type="text" name="lastname" class="form-control" id="lastname" placeholder="Фамилия" value="{{$user->lastname}}">
                         <label for="middlename">Отчество: </label>
-                        <input type="text" name="middlename" class="form-control" id="middlename" placeholder="Отчество" value="Арсеньевич">
+                        <input type="text" name="middlename" class="form-control" id="middlename" placeholder="Отчество" value="{{$user->middlename}}">
                             </div>
                         <div class="one-block">
                         <label for="birthday">Дата рождения: </label>
-                        <input type="text" name="birthday" class="form-control" id="birthday" placeholder="Отчество" value="30-06-2000">
+                        <input type="text" name="birthday" class="form-control" id="birthday" placeholder="Дата рождения" value="{{$user->birthday->format('Y-m-d') }}">
                             </div>
+                        @if(!is_null($user->phones))
                         <div class="one-block">
-                        <label for="phone">Номер телефона: </label>
-                        <input type="text" name="phone" class="form-control" id="phone" placeholder="Номер телефона" value=" 89045563954">
-                            </div>
+                        <label for="phone">Телефон: </label>
+                            @foreach($user->phones as $phone)
+                                <input type="text" name="phone" class="form-control" id="phone" placeholder="Номер телефона" value="{{$phone->phone}}">
+                            @endforeach
+                        </div>
+                        @endif
                         <div class="one-block">
                             <label for="home_place">Адрес проживания: </label>
-                            <input type="text" name="home_place" class="form-control" id="home_place" placeholder="Адрес проживания" value="Ул. Ленина д. 56 кв. 6">
+                            <input type="text" name="home_place" class="form-control" id="home_place" placeholder="Адрес проживания" value="">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -105,16 +109,15 @@
                             <button class="btn btn-primary pull-right">Добавить язык</button>
                         </div>
                     </div>
-            </form>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary ">Обновить</button>
-                        <button type="submit" class="btn btn-danger">Удалить аккаунт</button>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary" value="update">Обновить</button>
+                            <button type="submit" class="btn btn-danger" value="remove">Удалить аккаунт</button>
+                        </div>
                     </div>
                 </div>
-
-            </div>
+            </form>
         </div>
 
     </div>
