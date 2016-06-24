@@ -22,8 +22,8 @@ class CreateStudiesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned(); // пользователь
             $table->string('place_name'); // название образов. учреждения
-            $table->timestamp('time_start'); // время начала
-            $table->timestamp('time_stop'); // время окончания
+            $table->date('time_start'); // время начала
+            $table->date('time_stop'); // время окончания
             $table->string('group'); // класс(школа) или группа(универ)
         });
     }

@@ -25,7 +25,8 @@ $fields = [
         ],
         [
                 'id' => 'birthday',
-                'descr' => 'Дата рождения'
+                'descr' => 'Дата рождения',
+                'type' => 'date',
         ],
         [
                 'id' => 'password',
@@ -92,7 +93,7 @@ $fields = [
     </div>
     <script>
         $('#birthday').datetimepicker({
-                format: 'DD-MM-YYYY',
+                format: 'YYYY-MM-DD',
             });
     </script>
 @endsection

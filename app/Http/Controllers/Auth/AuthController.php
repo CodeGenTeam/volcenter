@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Hash;
 
 class AuthController extends Controller
 {
@@ -30,7 +31,7 @@ class AuthController extends Controller
             'firstname' => 'required|Alpha',
             'lastname' => 'required|Alpha',
             'middlename' => 'required|Alpha',
-            'birthday'=> 'required|date|date_format:d-m-Y',
+            'birthday'=> 'required|date',
         ];
 
         $messages = [
@@ -48,7 +49,7 @@ class AuthController extends Controller
         return User::create([
             'login'      => $data['login'],
             'email'      => $data['email'],
-            'password'   => bcrypt($data['password']),
+            'password'   => Hash::make($data['password']),
             'firstname'  => $data['firstname'],
             'lastname'   => $data['lastname'],
             'middlename' => $data['middlename'],

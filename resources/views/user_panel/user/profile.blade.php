@@ -45,7 +45,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="text-center">
-                    <p>Дата рождения: {{ date('d.m.Y', strtotime($user->birthday)) }}</p>
+                    <p>Дата рождения: {{ $user->birthday->format('m-d-Y') }}</p>
                 </div>
             </div>
         </div>

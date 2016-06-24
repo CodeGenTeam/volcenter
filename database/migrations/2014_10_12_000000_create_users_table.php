@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('firstname'); // Имя
             $table->string('lastname'); // Фамилия
             $table->string('middlename'); // Отчество
-            $table->timestamp('birthday'); // др
+            $table->date('birthday'); // др
             $table->string('password');
             $table->string('image'); 
             $table->integer('role_id')->unsigned();

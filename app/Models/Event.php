@@ -8,7 +8,6 @@ class Event extends Model
 {
     public $timestamps = false;
     protected $fillable = ['id', 'event_start', 'event_stop', 'name', 'image', 'descr', 'address','event_type'];
-    protected $dates = ['event_start','event_stop'];
 
     public function getEventType()
     {

@@ -63,4 +63,4 @@ Route::post('/events/{event}/applications/create', 'ApplicationController@initia
 // StatusesController
 //Route::resource('/user/status', 'StatusController', ['only' => ['index', 'create', 'update', 'destroy']]);
 //Route::resource('/user/{user}', 'ProfileController@show');
-//Route::get('/user/profile/{user}', 'UserController@show');
+Route::get('/user/profile/{user}', 'UserController@show');
