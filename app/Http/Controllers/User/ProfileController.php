@@ -6,13 +6,42 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Models\Profile;
 use App\Models\User;
-use Request;
+use Illuminate\Http\Request;
 use Validator;
+use Auth;
 
 class ProfileController extends Controller
 {
 
     private $upgradeableUserFields = ['link', 'profile_type_id'];
+
+    public function store(Request $request)
+    { 
+        $profile_id = $request->get('id');
+        $profile_type_id =$request->get('profile_type_id');
+        $link = $request->get('link');
+        $id = Auth::user()->id;
+        if(Profile::where('id',$profile_id) && $profile_id!=null)
+        {
+            Profile::where('id',$profile_id)->update(['user_id' => $id,'profile_type_id'=>$profile_type_id,'link'=>$link]);
+            return ['message'=>$profile_id];
+        }else{
+            //add
+            Profile::create(['user_id'=>$id,'profile_type_id'=>$profile_type_id,'link'=>$link]);
+            return ['message'=>'success'];
+        }
+        return ['message'=>'failed'];
+    }
+
+    public function destroy(Request $request)
+    {
+        $profile_id = $request->get('id');
+        if(Profile::destroy($profile_id))
+        {
+            return ['message'=>'success'];
+        }
+        return ['message'=>'failed'];
+    }
 
     public function show($profile)
     {

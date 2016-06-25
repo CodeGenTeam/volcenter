@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Auth;
 class User extends Auth {
 
     public $timestamps = false;
-    protected $hidden = ['password', 'id','role_id'];
+    protected $hidden = ['password','role_id'];
     protected $fillable = ['login', 'email', 'password', 'firstname', 'lastname', 'middlename', 'birthday','role_id','image'];
     protected $dates = ['birthday'];
     
@@ -15,19 +15,25 @@ class User extends Auth {
     {
         return $this->belongsTo(Role::class)->first()->name;
     }
+
+    public function profiles() {
+        return $this->hasMany(Profile::class,'user_id');
+    }
     
+
     public function phones()
     {
-        return $this->hasMany(\App\Models\Phone::class);
+        return $this->hasMany(Phone::class,'user_id');
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class,'user_id');
     }
     // dry
 
     public function applications() {
         return $this->hasMany(Application::class);
-    }
-//, 'profiles.getProfileType'
-    public function profiles() {
-        return $this->hasMany(Profile::class,'user_id');
     }
     
     public function language() {

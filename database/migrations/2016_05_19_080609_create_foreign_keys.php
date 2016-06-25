@@ -32,7 +32,7 @@ class CreateForeignKeys extends Migration
             $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('level_language_id')->references('id')->on('level_languages')->onDelete('cascade')->onUpdate('cascade');
         });
-        Schema::table('addreses', function (Blueprint $table) {
+        Schema::table('addresses', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
         Schema::table('studies', function (Blueprint $table) {

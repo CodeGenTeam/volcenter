@@ -4,38 +4,89 @@
 
 <div class="container">
         <div class="col-md-10 col-md-offset-1">
-            <form class="form-horizontal" role="form" id="item-form" method="POST" action="/user/{{ $user->id }}">
-                {{-- csrf для form --}}
-                {{ csrf_field() }}
-            	{{ method_field('PATCH') }}
+            <div class="form-horizontal">
                     <div class="col-md-6">
                         <div class="one-block">
                     <label for="email">Email: </label>
                     <input type="email" name="email" class="form-control" id="email" placeholder="Email" value="{{ $user->email }}">
+                            @if ($errors->has('email'))
+                                <span class="help-block"><b>{{ $errors->first('email') }}</b></span>
+                            @endif
+                        </div>
+                        <div class="one-block">
+                            <label for="login">Login: </label>
+                            <input type="login" name="login" class="form-control" id="login" placeholder="Login" value="{{ $user->login }}">
+                            @if ($errors->has('login'))
+                                <span class="help-block"><b>{{ $errors->first('login') }}</b></span>
+                            @endif
                         </div>
                         <div class="one-block">
                     <label for="firstname">Имя: </label>
                     <input type="text" name="firstname" class="form-control" id="firstname" placeholder="Имя" value="{{$user->firstname}}">
+                            @if ($errors->has('firstname'))
+                                <span class="help-block"><b>{{ $errors->first('firstname') }}</b></span>
+                            @endif
                     <label for="lastname">Фамилия: </label>
                     <input type="text" name="lastname" class="form-control" id="lastname" placeholder="Фамилия" value="{{$user->lastname}}">
+                            @if ($errors->has('lastname'))
+                                <span class="help-block"><b>{{ $errors->first('lastname') }}</b></span>
+                            @endif
                         <label for="middlename">Отчество: </label>
                         <input type="text" name="middlename" class="form-control" id="middlename" placeholder="Отчество" value="{{$user->middlename}}">
+                            @if ($errors->has('middlename'))
+                                <span class="help-block"><b>{{ $errors->first('middlename') }}</b></span>
+                            @endif
                             </div>
                         <div class="one-block">
                         <label for="birthday">Дата рождения: </label>
-                        <input type="text" name="birthday" class="form-control" id="birthday" placeholder="Дата рождения" value="{{$user->birthday->format('Y-m-d') }}">
+                            <div class='input-group date'>
+                                <input type='text' class="form-control" name="birthday" id='birthday' value="{{$user->birthday->format('Y-m-d') }}">
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
                             </div>
-                        @if(!is_null($user->phones))
+                            @if ($errors->has('birthday'))
+                                <span class="help-block"><b>{{ $errors->first('birthday') }}</b></span>
+                            @endif
+                        </div>
                         <div class="one-block">
                         <label for="phone">Телефон: </label>
+                            @if(! is_null($user->phones))
                             @foreach($user->phones as $phone)
                                 <input type="text" name="phone" class="form-control" id="phone" placeholder="Номер телефона" value="{{$phone->phone}}">
                             @endforeach
+                            @else
+                                <input type="text" name="phone" class="form-control" id="phone" placeholder="Номер телефона">
+                            @endif
                         </div>
-                        @endif
                         <div class="one-block">
-                            <label for="home_place">Адрес проживания: </label>
-                            <input type="text" name="home_place" class="form-control" id="home_place" placeholder="Адрес проживания" value="">
+                            <label>Адрес проживания: </label>
+                            @if($user->addresses!='[]')
+                                @foreach($user->addresses as $address)
+                                    <input type="hidden" value="{{$address->id}}" id="address_id">
+                                    <input type="text" name="country" class="form-control" id="country" placeholder="Страна" value="{{$address->country}}">
+                                    <input type="text" name="city" class="form-control" id="city" placeholder="Город" value="{{$address->city}}">
+                                    <input type="text" name="street" class="form-control" id="street" placeholder="Улица" value="{{$address->street}}">
+                                    @if($address->house!=0)
+                                        <input type="text" name="house" class="form-control" id="house" placeholder="Дом" value="{{$address->house}}">
+                                    @else
+                                        <input type="text" name="house" class="form-control" id="house" placeholder="Дом">
+                                    @endif
+                                    <input type="text" name="ext" class="form-control" id="ext" placeholder="Дробь, буква" value="{{$address->ext}}">
+                                @if($address->flat!=0)
+                                        <input type="text" name="flat" class="form-control" id="flat" placeholder="Квартира" value="{{$address->flat}}">
+                                    @else
+                                        <input type="text" name="flat" class="form-control" id="flat" placeholder="Квартира">
+                                    @endif
+                                @endforeach
+                            @else
+                                <input type="text" name="country" class="form-control" id="country" placeholder="Страна">
+                                <input type="text" name="city" class="form-control" id="city" placeholder="Город">
+                                <input type="text" name="street" class="form-control" id="street" placeholder="Улица">
+                                <input type="text" name="house" class="form-control" id="house" placeholder="Дом">
+                                <input type="text" name="ext" class="form-control" id="ext" placeholder="Дробь, буква">
+                                <input type="text" name="flat" class="form-control" id="flat" placeholder="Квартира">
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -58,30 +109,62 @@
                             @endif--}}
                             <input id="image" type="file" multiple class="image file-loading" data-show-preview="false" data-show-upload="false">
                         </div>
-                        <div class="one-block">
-                            <div class="form-group">
-                                <h3>Профили</h3>
-                                <label class="control-label col-sm-3" for="skype">Skype</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="skype" placeholder="Профиль скайп" value="mrkeezy67">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-3" for="vk_profile">Вконтакте</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="vk_profile" placeholder="Профиль Вконтакте" value="vk.com/flaffen">
-                                </div>
-                            </div>
-                            </div>
+                        <div class="one-block" id="listprofile">
+                                    <h3>Профили</h3>
+                            @if(!is_null($user->profiles))
+                                    @foreach($user->profiles as $profile)
+                                <div class="form-group">
+                                    <div class="col-sm-5">
+                                        <input type="hidden" value="{{$profile->id}}" id="profile_id">
+                                    <select class="form-control" id="profile_list">
+                                        @foreach($profile_types as $profile_type)
+                                            @if($profile_type->id==$profile->getProfileType->id)
+                                                <option value="{{$profile_type->id}}" selected="selected">{{$profile_type->name}}</option>
+                                            @else
+
+                                                <option value="{{$profile_type->id}}">{{$profile_type->name}}</option>
+                                                @endif
+                                        @endforeach
+                                    </select>
+                                        </div>
+                                    <div class="col-sm-5" id="link_list">
+                                        <input type="text" class="form-control" value="{{$profile->link}}">
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <button type="button" tabindex="500" title="Сохранить" class="btn btn-default saveprofile" style="display: block;padding:5px;margin-top:5px">
+                                            <i class="glyphicon glyphicon-floppy-disk"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <button type="button" tabindex="500" title="Удалить" class="btn btn-default removeprofile" style="display: block;padding:5px;margin-top:5px">
+                                            <i class="glyphicon glyphicon-remove"></i>
+                                        </button>
+                                    </div>
+
+                                    </div>
+                                    @endforeach
+                            @endif
+                        </div>
+                        <button class="btn btn-primary pull-right" id="add_profile">Добавить профиль</button>
                         <div class="one-block">
                         <label for="study">Учебное заведение: </label>
                         <input type="text" name="study" class="form-control" id="study" placeholder="Адрес проживания" value="ЮУрГУ">
 
                         <label for="study-start">Начало обучения</label>
-                        <input type="text" class="form-control" id="study-start" value="2010">
+                            <div class='input-group date' id='study-start'>
+                                <input type='text' class="form-control" name="study-start" value="" id="study-start">
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                            </div>
 
                         <label for="study-end">Конец обучения</label>
-                        <input type="text" class="form-control" id="study-end" value="2016">
+                            <div class='input-group date' id='study-end'>
+                                <input type='text' class="form-control" name="study-end" value="" id="study-end">
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                            </div>
                         <button class="btn btn-primary pull-right" style="margin-top: 5px;">Добавить учебное заведение</button>
                         </div>
 
@@ -112,35 +195,27 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary" value="update">Обновить</button>
-                            <button type="submit" class="btn btn-danger" value="remove">Удалить аккаунт</button>
+                            <button type="submit" class="btn btn-primary" id="update" name="update">Обновить</button>
+                            <button type="submit" class="btn btn-danger" id="remove" name="remove">Удалить аккаунт</button>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
 
     </div>
 
-</div>
 <script>
-	$(document).on('focus', '#birthday', function() {
 		$('#birthday').datetimepicker({
 			'format': 'YYYY-MM-DD'
 		});
-	});
-
-    $(document).on('focus', '#study-start', function() {
         $('#study-start').datetimepicker({
             'format': 'YYYY-MM-DD'
         });
-    });
 
-    $(document).on('focus', '#study-end', function() {
         $('#study-end').datetimepicker({
             'format': 'YYYY-MM-DD'
         });
-    });
 </script>
 <script type="text/javascript">
     $(function () {
@@ -204,6 +279,108 @@
             'success': callback
         });
     }
+    load();
+    function load(){
+        $.get("/profile_types", function( data ) {
+            $profile_types_list = data;
+        });
+    }
+    $('body').on('click', '.saveprofile', function() {
+        var num = $('#listprofile .form-group .col-sm-1 .saveprofile').index(this);
+        var data = {
+            'id':$('#listprofile #profile_id').eq(num).val(),
+            'profile_type_id':$('#listprofile #profile_list').eq(num).val(),
+            'link':$('#link_list input').eq(num).val()
+        };
+        $.ajax({
+            type: "POST",
+            url: '/profiles',
+            data: data,
+            success: function( msg ) {
+                console.log(msg);
+            },
+            error: function(data) {
+                $('html').html(data.responseText);
+            },
+        });
+    });
+    $('body').on('click', '.removeprofile', function() {
+        var num = $('#listprofile .form-group .col-sm-1 .removeprofile').index(this);
+        var data = {'id':$('#listprofile #profile_id').eq(num).val()};
+        $.ajax({
+            type: "DELETE",
+            url: '/profiles',
+            data: data,
+            success: function( msg ) {
+                console.log(msg);
+            },
+            error: function(data) {
+                $('html').html(data.responseText);
+            },
+        });
+        $('#listprofile .form-group').eq(num).remove();
+    });
+
+    $("#add_profile").click(function () {
+        var html='<div class="form-group"><div class="col-sm-5">'
+        + '<select class="form-control" id="profile_list">';
+        for (var i = 0; i < $profile_types_list.length; i++) {
+            html = html +
+                    '<option value="' + $profile_types_list[i]['id'] + '">' + $profile_types_list[i]['name'] + '</option>'
+                    + '<div class="form-group">';
+        }
+        html = html + '</select></div>'
+        +'<div class="col-sm-5" id="link_list">'
+                +' <input type="text" class="form-control">'
+                        +'</div><div class="col-sm-1">'
+                        +'<button type="button" tabindex="500" title="Сохранить" class="btn btn-default saveprofile" style="display: block;padding:5px;margin-top:5px">'
+                        +'<i class="glyphicon glyphicon-floppy-disk"></i> </button>'
+                        +'</div><div class="col-sm-1">'
+                        +'<button type="button" tabindex="500" title="Удалить" class="btn btn-default removeprofile" style="display: block;padding:5px;margin-top:5px">'
+                        +'<i class="glyphicon glyphicon-remove"></i></button> </div>';
+        $('#listprofile').append(html);
+    });
+    $('#remove').click(function () {
+        $.ajax({
+            type: "DELETE",
+            url: '/user/'+'{{$user->id}}',
+            success: function( msg ) {
+                console.log(msg);
+            },
+            error: function(data) {
+                $('html').html(data.responseText);
+            },
+        });
+    });
+    $('#update').click(function () {
+        var data = {
+             email:$("#email").val(),
+             login:$("#login").val(),
+             firstname:$("#firstname").val(),
+             lastname:$("#lastname").val(),
+             middlename:$("#middlename").val(),
+             birthday:$("#birthday").val(),
+             phone:$("#phone").val(),
+             country:$("#country").val(),
+             city:$("#city").val(),
+             street:$("#street").val(),
+             house:$("#house").val(),
+             ext:$("#ext").val(),
+             flat:$("#flat").val(),
+             address_id:$('#address_id').val()
+        };
+        $.ajax({
+             type: "PATCH",
+             url: '/user/'+'{{$user->id}}',
+             data: data,
+             success: function( msg ) {
+                console.log(msg);
+             },
+             error: function(data) {
+                $('html').html(data.responseText);
+             }
+         });
+    });
 </script>
 <style>
     .one-block{

@@ -16,6 +16,8 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\EventController;
+use App\Http\Controllers\User\ProfileTypeController;
+use App\Http\Controllers\User\ProfileController;
 
 // IndexController
 Route::get('/', '\\' . IndexController::class . '@index');
@@ -27,8 +29,17 @@ Route::get('/user/save_img','\\' . UserController::class . '@saveimage');
 Route::post('/user/save_img','\\' . UserController::class . '@saveimage');
 Route::get('/user/remove_img','\\' . UserController::class . '@removeimage');
 Route::get('/settings', '\\' . UserController::class . '@edit');
-Route::put('/user/{user}', '\\' . UserController::class . '@update');
-Route::resource('/user', '\\' . UserController::class);
+Route::delete('/user/{user}', '\\' . UserController::class . '@destroy');
+Route::patch('/user/{user}', '\\' . UserController::class . '@update');
+//Route::resource('/user', '\\' . UserController::class);
+Route::get('/user/profile/{user}', 'UserController@show');
+
+// Profile_types
+Route::get('/profile_types', ['middleware' => 'ajax', 'uses' => '\\' . ProfileTypeController::class . '@index']);
+
+//Profiles
+Route::post('/profiles', ['middleware' => 'ajax', 'uses' => '\\' . ProfileController::class . '@store']);
+Route::delete('/profiles', ['middleware' => 'ajax', 'uses' => '\\' . ProfileController::class . '@destroy']);
 
 // AuthController
 Route::get('login', '\\' . AuthController::class .'@showLoginForm');
@@ -63,4 +74,3 @@ Route::post('/events/{event}/applications/create', 'ApplicationController@initia
 // StatusesController
 //Route::resource('/user/status', 'StatusController', ['only' => ['index', 'create', 'update', 'destroy']]);
 //Route::resource('/user/{user}', 'ProfileController@show');
-Route::get('/user/profile/{user}', 'UserController@show');

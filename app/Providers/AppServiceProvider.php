@@ -5,7 +5,7 @@ namespace App\Providers;
 use App\Http\Facades\Admin;
 use App\Http\Facades\Result;
 use Illuminate\Support\ServiceProvider;
-
+use DB;
 class AppServiceProvider extends ServiceProvider
 {
 

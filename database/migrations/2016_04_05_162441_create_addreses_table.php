@@ -9,7 +9,7 @@ use Illuminate\Database\Migrations\Migration;
  */
 class CreateAddresesTable extends Migration
 {
-    private $tableName = 'addreses';
+    private $tableName = 'addresses';
 
     /**
      * Run the migrations.

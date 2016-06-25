@@ -27,11 +27,10 @@ class AuthController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
             'password_confirmation' => 'required|min:6',
-            'birthday' => 'required|before:now|after:-14 years',
+            'birthday' => 'required|date|before:now|after:-14 years',
             'firstname' => 'required|Alpha',
             'lastname' => 'required|Alpha',
-            'middlename' => 'required|Alpha',
-            'birthday'=> 'required|date',
+            'middlename' => 'required|Alpha'
         ];
 
         $messages = [

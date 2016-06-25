@@ -4,16 +4,17 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use App\Models\Address;
+use App\Models\Profile_type;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use File;
-use Session;
+
 
 class UserController extends Controller
 {
-    private $upgradeableUserFields = ['email', 'firstname', 'lastname', 'middlename', 'birthday', 'password'];
     private $page = '/user_panel_bin/images/users';
     public function __construct()
     {
@@ -31,8 +32,16 @@ class UserController extends Controller
         if (is_null($user)) {
             return abort(401);
         }
-        $user->update($request->all());
-        return back();
+            $user->update($request->all());
+            $address_id = $request->get('address_id');
+            if(Address::where('id',$address_id) && $address_id!=null)
+            {
+                $address = Address::find($address_id);
+                $address->update($request->all());
+            }else $address = new Address($request->all());
+        return $address;
+            $user->addresses()->saveMany([$address]);
+            return Response::json(['sucess'=>true]);
     }
 
     public function destroy(User $user)
@@ -40,11 +49,8 @@ class UserController extends Controller
         if (is_null($user)) {
             return abort(401);
         }
-        /*if ($u != $request->user()) {
-            return ['success' => false, 'you haven\'t permission']; // todo запилить разрешения
-        } // если редачим не свой акк -- кидаем (пока)*/
         $user->delete();
-        return Response::json(['success' => true, 'user' => $user]);
+        return Response::json(['success' => true]);
     }
 
     public function edit()
@@ -53,7 +59,9 @@ class UserController extends Controller
         if (is_null($user)) {
             return abort(401);
         }
-        return view('user_panel.user.settings', ['user' => $user]);
+        $user->load('profiles.getProfileType')->load('phones')->load('addresses');
+        $profile_types = Profile_type::all();
+        return view('user_panel.user.settings', ['user' => $user,'profile_types'=>$profile_types]);
     }
 
     public function removeimage(Request $request)
