@@ -146,50 +146,105 @@
                             @endif
                         </div>
                         <button class="btn btn-primary pull-right" id="add_profile">Добавить профиль</button>
-                        <div class="one-block">
-                        <label for="study">Учебное заведение: </label>
-                        <input type="text" name="study" class="form-control" id="study" placeholder="Адрес проживания" value="ЮУрГУ">
 
-                        <label for="study-start">Начало обучения</label>
-                            <div class='input-group date' id='study-start'>
-                                <input type='text' class="form-control" name="study-start" value="" id="study-start">
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                </span>
-                            </div>
+                        <div class="one-block" id="list_education">
+                        <h3>Образование</h3>
+                            @foreach($user->study as $study)
+                                <div class="one-block">
+                                    <input type="hidden" value="{{$study->id}}" id="education_id">
+                                <label for="study">Учебное заведение: </label>
+                                <input type="text" name="study" class="form-control" id="study" placeholder="Название образ. учрежд." value="{{$study->place_name}}">
 
-                        <label for="study-end">Конец обучения</label>
-                            <div class='input-group date' id='study-end'>
-                                <input type='text' class="form-control" name="study-end" value="" id="study-end">
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                </span>
-                            </div>
-                        <button class="btn btn-primary pull-right" style="margin-top: 5px;">Добавить учебное заведение</button>
+                                <label for="study-start">Начало обучения</label>
+                                    <div class='input-group date'>
+                                        <input type='text' class="form-control" name="study-start" value="{{$study->time_start}}" id="study-start">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                <label for="study-end">Конец обучения</label>
+                                    <div class='input-group date'>
+                                        <input type='text' class="form-control" name="study-stop" value="{{$study->time_stop}}" id="study-stop">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                <label>Группа(класс)</label>
+                                    <input type='text' class="form-control" name="group" value="{{$study->group}}" id="group">
+                                @if($study->getStudyUniversity != null)
+                                @foreach($study->getStudyUniversity as $university)
+                                        <label>направление(факультет)</label>
+                                        <input type='text' class="form-control" name="faculty" value="{{$university->faculty}}" id="faculty">
+                                        <label>специальность(кафедра)</label>
+                                        <input type='text' class="form-control" name="chair" value="{{$university->chair}}" id="chair">
+                                @endforeach
+                                @endif
+                                    <div class="col-sm-1 pull-right">
+                                        <button type="button" tabindex="500" title="Удалить" class="btn btn-default removestudy" style="display: block;padding:5px;margin-top:5px">
+                                            <i class="glyphicon glyphicon-remove"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-1 pull-right">
+                                        <button type="button" tabindex="500" title="Сохранить" class="btn btn-default savestudy" style="display: block;padding:5px;margin-top:5px">
+                                            <i class="glyphicon glyphicon-floppy-disk"></i>
+                                        </button>
+                                    </div>
+                                    </div>
+                            @endforeach
                         </div>
-
+                        <div class="one-block">
+                            <div style="float: left;">
+                                <label><input type="radio" name="radio" checked="checked" value="1">Общеобразовательное</label><br />
+                                <label><input type="radio" name="radio" value="2">Высшее, професс.</label>
+                            </div>
+                            <button class="btn btn-primary pull-right" id="add_study" style="margin-top: 5px;">Добавить учебное заведение</button>
+                        </div>
 
                         <div class="one-block">
                         <label for="birthday">Языки</label>
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="list_language">
                             <tbody>
+                            @if($user->language)
+                            @foreach($user->language as $language)
                             <tr>
+                                <input type="hidden" value="{{$language->id}}" id="language_level_id">
                                 <td>
-                                    <select name="english-level" class="form-control">
-                                        <option value="low-intermediate">Английский</option>
-                                        <option value="intermediate">Испанский</option>
+                                    <select name="language" class="form-control" id="language">
+                                        @foreach($languages as $lang)
+                                            @if($lang->id==$language->language_id)
+                                                <option value="{{$lang->id}}" selected="selected">{{$lang->lang_name}}</option>
+                                            @else
+                                                <option value="{{$lang->id}}">{{$lang->lang_name}}</option>
+                                            @endif
+                                        @endforeach
                                     </select>
                                 </td>
                                 <td>
-                                    <select name="english-level" class="form-control">
-                                        <option value="low-intermediate">Low intermediate</option>
-                                        <option value="intermediate">Intermediate</option>
+                                    <select name="language_level" class="form-control" id="language_level">
+                                        @foreach($level_languages as $level_language)
+                                            @if($level_language->id==$language->level_language_id)
+                                                <option value="{{$level_language->id}}" selected="selected">{{$level_language->name}}</option>
+                                            @else
+                                                <option value="{{$level_language->id}}">{{$level_language->name}}</option>
+                                            @endif
+                                        @endforeach
                                     </select>
+                                </td>
+                                <td style="display: flex">
+                                    <button type="button" tabindex="500" title="Сохранить" class="btn btn-default savelang" style="display: block;padding:5px;margin-top:5px;margin-right: 5px;"><i class="glyphicon glyphicon-floppy-disk"></i></button>
+                                    <button type="button" tabindex="500" title="Удалить" class="btn btn-default removelang" style="display: block;padding:5px;margin-top:5px">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
                                 </td>
                             </tr>
+                            @endforeach
+                                @endif
                             </tbody>
                         </table>
-                            <button class="btn btn-primary pull-right">Добавить язык</button>
+
+                            <div class="one-block">
+                            <button class="btn btn-primary pull-right" id="addlang">Добавить язык</button>
+                                </div>
                         </div>
                     </div>
                 <div class="row">
@@ -206,16 +261,18 @@
     </div>
 
 <script>
-		$('#birthday').datetimepicker({
-			'format': 'YYYY-MM-DD'
-		});
-        $('#study-start').datetimepicker({
+    $('#birthday').datetimepicker({
+        'format': 'YYYY-MM-DD'
+    });
+    $('.date').datetimepicker({
+        'format': 'YYYY-MM-DD'
+    });
+    $('body').on('click', '.date', function() {
+        $(this).datetimepicker({
             'format': 'YYYY-MM-DD'
         });
+    });
 
-        $('#study-end').datetimepicker({
-            'format': 'YYYY-MM-DD'
-        });
 </script>
 <script type="text/javascript">
     $(function () {
@@ -285,6 +342,68 @@
             $profile_types_list = data;
         });
     }
+    $('#addlang').click(function(){
+        $.get("/languages", function( data ) {
+            $languages = data['languages'];
+            $level_languages = data['level_languages'];
+        }).then(function(){
+            $html = '<tr>'+
+             '<td><select name="language" class="form-control" id="language">';
+             for (var i = 0; i < $languages.length; i++) {
+             $html = $html +
+             '<option value="'+$languages[i]["id"]+'">'+ $languages[i]["lang_name"]+'</option>';
+             }
+             $html = $html + '</select></td><td><select name="language_level" class="form-control" id="language_level">';
+             for (var i = 0; i < $level_languages.length; i++) {
+             $html = $html + '<option value="'+$level_languages[i]["id"]+'">'+ $level_languages[i]["name"]+'</option>';
+             }
+             $html = $html + '</select> </td> <td style="display: flex">'+
+             '<button type="button" tabindex="500" title="Сохранить" class="btn btn-default savelang" style="display: block;padding:5px;margin-top:5px;margin-right: 5px;"><i class="glyphicon glyphicon-floppy-disk"></i></button>'+
+             '<button type="button" tabindex="500" title="Удалить" class="btn btn-default removelang" style="display: block;padding:5px;margin-top:5px">'+
+             '<i class="glyphicon glyphicon-remove"></i>'+
+             '</button></td></tr>'
+             $('#list_language tbody').append($html);
+        });
+    });
+    $('body').on('click', '.savelang', function() {
+        var num = $('#list_language tr .savelang').index(this);
+        var data = {
+            'id':$('#list_language #language_level_id').eq(num).val(),
+            'language_id':$('#list_language #language').eq(num).val(),
+            'level_language_id':$('#list_language #language_level').eq(num).val()
+        };
+        $.ajax({
+            type: "POST",
+            url: '/languages',
+            data: data,
+            success: function( msg ) {
+                console.log(msg);
+                if(msg['id']!=undefined)
+                    $('#list_language tr').eq(num).append('<input type="hidden" value="'+msg['id']+'" id="language_level_id">');
+            },
+            error: function(data) {
+                $('html').html(data.responseText);
+            }
+        });
+    });
+
+    $('body').on('click', '.removelang', function() {
+        var num = $('#list_language tr .removelang').index(this);
+        var data = {'id':$('#list_language #language_level_id').eq(num).val()};
+        $.ajax({
+            type: "DELETE",
+            url: '/languages',
+            data: data,
+            success: function( msg ) {
+                console.log(msg);
+            },
+            error: function(data) {
+                $('html').html(data.responseText);
+            },
+        });
+        $('#list_language tr').eq(num).remove();
+    });
+
     $('body').on('click', '.saveprofile', function() {
         var num = $('#listprofile .form-group .col-sm-1 .saveprofile').index(this);
         var data = {
@@ -297,7 +416,8 @@
             url: '/profiles',
             data: data,
             success: function( msg ) {
-                console.log(msg);
+                if(msg['id']!=undefined)
+                $('#listprofile .form-group').eq(num).append('<input type="hidden" value="'+msg['id']+'" id="profile_id">');
             },
             error: function(data) {
                 $('html').html(data.responseText);
@@ -319,6 +439,67 @@
             },
         });
         $('#listprofile .form-group').eq(num).remove();
+    });
+
+    $('body').on('click', '.removestudy', function() {
+        var num = $('#list_education .one-block .removestudy').index(this);
+        var data = {'id':$('#list_education .one-block #education_id').eq(num).val()};
+        $.ajax({
+            type: "DELETE",
+            url: '/studies',
+            data: data,
+            success: function( msg ) {
+                console.log(msg);
+            },
+            error: function(data) {
+                $('html').html(data.responseText);
+            },
+        });
+        $('#list_education .one-block').eq(num).remove();
+    });
+
+    $('body').on('click', '.savestudy', function() {
+        var num = $('#list_education .one-block .col-sm-1 .savestudy').index(this);
+        var data = {
+            'id':$('#list_education .one-block #education_id').eq(num).val(),
+            'place_name':$('#list_education .one-block #study').eq(num).val(),
+            'study_start':$('#list_education .one-block #study-start').eq(num).val(),
+            'study_stop':$('#list_education .one-block #study-stop').eq(num).val(),
+            'group':$('#list_education .one-block #group').eq(num).val(),
+            'faculty':$('#list_education .one-block #faculty').eq(num).val(),
+            'chair':$('#list_education .one-block #chair').eq(num).val()
+        };
+        $.ajax({
+            type: "POST",
+            url: '/studies/'+'{{$user->id}}',
+            data: data,
+            success: function( msg ) {
+                if(msg['id']!=undefined)
+                        //change
+                    $('#list_education .one-block').eq(num).append('<input type="hidden" value="'+msg['id']+'" id="profile_id">');
+            },
+            error: function(data) {
+                $('html').html(data.responseText);
+            },
+        });
+        /*var data = {
+            'id':$('#list_education #education_id').eq(num).val(),
+            'place_name':$('#list_education #study_start').eq(num).val(),
+            'time_start':'',
+            'time_stop':'',
+            'group':''
+        };
+        $.ajax({
+            type: "POST",
+            url: '/studies',
+            data: data,
+            success: function( msg ) {
+                console.log(msg);
+            },
+            error: function(data) {
+                $('html').html(data.responseText);
+            },
+        });*/
     });
 
     $("#add_profile").click(function () {
@@ -351,6 +532,44 @@
                 $('html').html(data.responseText);
             },
         });
+    });
+    $('#add_study').click(function () {
+        $html = '<div class="one-block"><label for="study">Учебное заведение: </label>'+
+        '<input type="text" name="study" class="form-control" id="study" placeholder="Название образ. учрежд." >' +
+        '<label for="study-start">Начало обучения</label>'+
+        '<div class="input-group date">'+
+        '<input type="text" class="form-control" name="study-start" id="study-start">' +
+        '<span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span> </span> </div>'+
+        '<label for="study-end">Конец обучения</label>'+
+        '<div class="input-group date">'+
+        '<input type="text" class="form-control" name="study-stop" id="study-stop">'+
+         '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span></div>'+
+         '<label>Группа(Класc)</label><input type="text" class="form-control" name="group" id="group">';
+
+        if($('input[type=radio]:checked').val()=='1')
+        {
+            $html = $html +
+                    '<div class="col-sm-1 pull-right">'+
+                    '<button type="button" tabindex="500" title="Удалить" class="btn btn-default removestudy" style="display: block;padding:5px;margin-top:5px">'+
+                    '<i class="glyphicon glyphicon-remove"></i></button></div><div class="col-sm-1 pull-right">'+
+                    '<button type="button" tabindex="500" title="Сохранить" class="btn btn-default savestudy" style="display: block;padding:5px;margin-top:5px">'+
+                    '<i class="glyphicon glyphicon-floppy-disk"></i></button></div></div>';
+            $('#list_education').append($html);
+        }
+        else
+        {
+            $html = $html + ' <label>направление(факультет)</label>'+
+                '<input type="text" class="form-control" name="faculty" id="faculty">'+
+                '<label>специальность(кафедра)</label>'+
+                '<input type="text" class="form-control" name="chair" id="chair">'+
+                '<div class="col-sm-1 pull-right">'+
+                '<button type="button" tabindex="500" title="Удалить" class="btn btn-default removestudy" style="display: block;padding:5px;margin-top:5px">'+
+                '<i class="glyphicon glyphicon-remove"></i></button></div><div class="col-sm-1 pull-right">'+
+                '<button type="button" tabindex="500" title="Сохранить" class="btn btn-default savestudy" style="display: block;padding:5px;margin-top:5px">'+
+                '<i class="glyphicon glyphicon-floppy-disk"></i></button></div></div>';
+            $('#list_education').append($html);
+        }
+        $('.date').click();
     });
     $('#update').click(function () {
         var data = {

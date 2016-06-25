@@ -8,7 +8,7 @@ class Study extends Model
 {
     public $timestamps = false;
     public $fillable = ['user_id','place_name','time_start','time_stop','group'];
-    public $hidden = ['id','user_id'];
+    public $hidden = ['user_id'];
     protected $dates = ['time_start','time_stop'];
     
     public function getUser()
@@ -17,6 +17,6 @@ class Study extends Model
     }
     public function getStudyUniversity()
     {
-        return $this->hasOne(Study_university::class,'id');
+        return $this->hasMany(Study_university::class);
     }
 }

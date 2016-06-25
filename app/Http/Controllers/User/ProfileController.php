@@ -27,10 +27,9 @@ class ProfileController extends Controller
             return ['message'=>$profile_id];
         }else{
             //add
-            Profile::create(['user_id'=>$id,'profile_type_id'=>$profile_type_id,'link'=>$link]);
-            return ['message'=>'success'];
+            $profile = Profile::create(['user_id'=>$id,'profile_type_id'=>$profile_type_id,'link'=>$link]);
+            return ['message'=>'success','id'=>$profile->id];
         }
-        return ['message'=>'failed'];
     }
 
     public function destroy(Request $request)

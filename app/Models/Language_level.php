@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Language_level extends Model
 {
     protected $fillable = ['user_id','language_id','level_language_id'];
-    protected $hidden = ['id','user_id','language_id','level_language_id'];
     public $timestamps = false;
     public function getUser()
     {

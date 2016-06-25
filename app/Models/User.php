@@ -30,17 +30,18 @@ class User extends Auth {
     {
         return $this->hasMany(Address::class,'user_id');
     }
+
+    public function study() {
+        return $this->hasMany(Study::class,'user_id');
+    }
+    
+    public function language() {
+        return $this->hasMany(Language_level::class);
+    }
+    
     // dry
 
     public function applications() {
         return $this->hasMany(Application::class);
-    }
-    
-    public function language() {
-        return $this->hasMany(Language_level::class,'user_id');
-    }
-
-    public function study() {
-        return $this->hasMany(Study::class);
     }
 }

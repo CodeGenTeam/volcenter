@@ -18,6 +18,8 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\EventController;
 use App\Http\Controllers\User\ProfileTypeController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\StudyController;
+use App\Http\Controllers\User\LanguageLevelController;
 
 // IndexController
 Route::get('/', '\\' . IndexController::class . '@index');
@@ -34,12 +36,21 @@ Route::patch('/user/{user}', '\\' . UserController::class . '@update');
 //Route::resource('/user', '\\' . UserController::class);
 Route::get('/user/profile/{user}', 'UserController@show');
 
+// StudyController
+Route::post('/studies/{user}', ['middleware' => 'ajax', 'uses' => '\\' . StudyController::class . '@store']);
+Route::delete('/studies', ['middleware' => 'ajax', 'uses' => '\\' . StudyController::class . '@destroy']);
+
 // Profile_types
 Route::get('/profile_types', ['middleware' => 'ajax', 'uses' => '\\' . ProfileTypeController::class . '@index']);
 
 //Profiles
 Route::post('/profiles', ['middleware' => 'ajax', 'uses' => '\\' . ProfileController::class . '@store']);
 Route::delete('/profiles', ['middleware' => 'ajax', 'uses' => '\\' . ProfileController::class . '@destroy']);
+
+// LanguageLevelController
+Route::post('/languages', ['middleware' => 'ajax', 'uses' => '\\' . LanguageLevelController::class . '@store']);
+Route::delete('/languages', ['middleware' => 'ajax', 'uses' => '\\' . LanguageLevelController::class . '@destroy']);
+Route::get('/languages', ['middleware' => 'ajax', 'uses' => '\\' . LanguageLevelController::class . '@language_level']);
 
 // AuthController
 Route::get('login', '\\' . AuthController::class .'@showLoginForm');

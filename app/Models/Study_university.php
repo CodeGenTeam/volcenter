@@ -3,14 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Study;
 
 class Study_university extends Model
 {
     public $timestamps = false;
     public $fillable = ['study_id','faculty','chair'];
     public $hidden = ['id','study_id'];
-    public function getStudy()
+    
+    public function university()
     {
-        return $this->belongsToMany(Study::class);
+        return $this->hasMany(Study::class,'id');
     }
 }

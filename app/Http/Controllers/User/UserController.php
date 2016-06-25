@@ -11,7 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use File;
-
+use App\Models\Level_language;
+use App\Models\Language;
 
 class UserController extends Controller
 {
@@ -39,7 +40,6 @@ class UserController extends Controller
                 $address = Address::find($address_id);
                 $address->update($request->all());
             }else $address = new Address($request->all());
-        return $address;
             $user->addresses()->saveMany([$address]);
             return Response::json(['sucess'=>true]);
     }
@@ -59,9 +59,11 @@ class UserController extends Controller
         if (is_null($user)) {
             return abort(401);
         }
-        $user->load('profiles.getProfileType')->load('phones')->load('addresses');
+        $user->load('profiles.getProfileType')->load('phones')->load('addresses')->load('study.getStudyUniversity')->load('language.getLanguage')->load('language.getLevel');
         $profile_types = Profile_type::all();
-        return view('user_panel.user.settings', ['user' => $user,'profile_types'=>$profile_types]);
+        $level_languages = Level_language::all();
+        $languages = Language::all();
+        return view('user_panel.user.settings', ['user' => $user,'profile_types'=>$profile_types,'level_languages'=>$level_languages,'languages'=>$languages]);
     }
 
     public function removeimage(Request $request)
@@ -91,11 +93,6 @@ class UserController extends Controller
     }
     public function show(User $user)
     {
-        //$users = User::with(array('profiles'))->get();
-        //dd($users);
-        //$users = User::with(array('profiles' => function ($query) {
-       //     $query->where('users.id', '=', 1);
-       // }))->get();
         $user->load('profiles.getProfileType','study.getStudyUniversity','language.getLanguage');
         return view('user_panel/user/profile', ['user'=>$user]);
     }
