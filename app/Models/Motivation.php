@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Motivation extends Model
 {
     public $timestamps = false;
-    protected $hidden = ['id'];
     protected $fillable = ['name'];
 
     public function getMotivationsEvents()

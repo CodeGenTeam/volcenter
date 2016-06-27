@@ -17,6 +17,6 @@ class Study extends Model
     }
     public function getStudyUniversity()
     {
-        return $this->hasMany(Study_university::class);
+        return $this->hasOne(Study_university::class);
     }
 }

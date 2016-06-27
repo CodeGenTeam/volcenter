@@ -55,7 +55,6 @@ App = {
     {
         $.fn.popelValidator.defaults.callbackAfterValidate = function() {
             App.ajax({action: 'save_item'}, function(data) {
-                console.log(data.success);
                 if (data.success) {
                     App.closeModal('item_modal');
                     notie.alert(1, data.message, 1);
@@ -71,6 +70,7 @@ App = {
     {
         $(".items-list").html('<img src="/admin_panel_bin/img/ajax-loader.gif" />');
         this.ajax({action: 'items_list'}, function(data) {
+            console.log(data);
             $(".items-list").html(data);
             App.itemListEvents();
         });

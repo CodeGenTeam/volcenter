@@ -80,13 +80,4 @@ class EventController extends Controller
 			return view('admin_panel.events.index', ['events' => Event::all()]);
 		}
 	}
-	public function show(Event $event)
-	{
-        //$applications = $event->getMotivation();
-        //$application = new \App\Models\Application;
-        $item = [['id'=>1,'name'=>'Пешков Владимир Александрович'],['id'=>2,'name'=>'Пешков Владимир Александрович']];
-        $applications = json_decode(json_encode($item));
-		return View('admin_panel.events.applications',compact('applications','event'));
-	}
-
 }

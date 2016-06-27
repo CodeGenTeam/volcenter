@@ -21,8 +21,9 @@
                 <span class="pull-right">
                     <a href="#" class="mdi-editor-mode-edit" id="edit"></a>
                     <a href="#" class="mdi-action-delete" id="delete"></a>
-                    <a href="#" class="mdi-action-favorite"></a>
+                    <a href="/adminpanel/events/{{$event->id}}/motivations" class="mdi-action-favorite"></a>
                     <a href="/adminpanel/events/{{$event->id}}/responsibilities" class="mdi-social-person"></a>
+                    <a href="/adminpanel/events/{{$event->id}}/applications" class="mdi-action-assignment"></a>
                 </span>
             </td>
         </tr>

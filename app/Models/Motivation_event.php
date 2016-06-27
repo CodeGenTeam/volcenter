@@ -7,12 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Motivation_event extends Model
 {
     protected $fillable = ['motivation_id', 'event_id'];
-    protected $hidden = ['id'];
     public $timestamps = false;
 
     public function getMotivation()
     {
-        return $this->belongsToMany(Motivation::class);
+        return $this->belongsTo(Motivation::class,'motivation_id');
     }
 
     public function getEvent()

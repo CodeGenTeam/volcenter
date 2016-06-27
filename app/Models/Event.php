@@ -18,6 +18,16 @@ class Event extends Model
     {
         return $this->belongsToMany(Motivation::class, 'motivation_events');
     }
+    
+    public function getMotivationEvent()
+    {
+        return $this->hasMany(Motivation_event::class);
+    }
+
+    public function getResponsibilityEvent()
+    {
+        return $this->hasMany(Responsibility_event::class);
+    }
 
     public function getResponsibility()
     {

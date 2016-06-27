@@ -39,15 +39,26 @@
                 <ul class="list-group">
                 <span style="display: none;">{{ $i=0 }}</span>
                     @foreach($event->getResponsibility as $responsibility)
-                        <div class="panel panel-default panel-heading" style="margin-bottom: 0px"><span class="badge" style="float: left;margin-right:10px">{{$responsibility->count}}</span>
+                        <div class="panel panel-default panel-heading" style="margin-bottom: 0px" data-responsibility-id="{{$responsibility->id}}">
+                            <span class="badge" style="float: left;margin-right:10px">{{$responsibility->count}}</span>
                             @if(Auth::check())
-
-                                <button class="btn btn-primary" style="float:right;" data-toggle="modal" data-target="#myModal">Подать заявку</button>
-                                @if($i++==0)
-                                    <!--<button class="btn btn-danger" style="float:right;" data-toggle="modal" data-target="#deModal">Отменить заявку</button>-->
+                                @if(Admin::responsibility($event,Auth::user())!=null)
+                                    @foreach(Admin::responsibility($event,Auth::user()) as $respon)
+                                        @if($respon['responsibility_event_id']==$responsibility['id'])
+                                            @if($respon['status_id']=='1')
+                                                <button class="btn btn-danger" style="float:right;" data-toggle="modal" data-target="#deModal">Отменить заявку</button>
+                                                @break;
+                                            @endif
+                                            @if($respon['status_id']=='1')@endif
+                                        @endif
+                                        <button class="btn btn-primary" style="float:right;" data-toggle="modal" data-target="#myModal">Подать заявку</button>
+                                    @endforeach
+                                    @else
+                                    <button class="btn btn-primary" style="float:right;" data-toggle="modal" data-target="#myModal">Подать заявку</button>
                                 @endif
                             @endif
-                            <h3 class="panel-title">{{$responsibility->position}}</h3>{{$responsibility->task}}</div>
+                            <h3 class="panel-title">{{$responsibility->position}}</h3>{{$responsibility->task}}
+                        </div>
                     @endforeach
                 </ul>
             </div>

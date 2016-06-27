@@ -53,11 +53,11 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="text-center">
-                        <h3>Профили</h3>
+                        @if($user->profiles!='[]')<h3>Профили</h3>@endif
                         @foreach($user->profiles as $profile)
                             <h5>{{$profile->getProfileType->name}}:</h5>
                             @if($profile->getProfileType->name=='Вконтакте')
-                                <a href="http://vk.com/id{{$profile->link}}">http://vk.com/id{{$profile->link}}</a><br />
+                                <a href="{{$profile->link}}">{{$profile->link}}</a><br />
                             @endif
                                 @if($profile->getProfileType->name=='Skype')
                                     {{$profile->link}}
@@ -72,7 +72,8 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="text-center">
-                    <h3>Учеба</h3>
+                    @if($user->study!='[]')
+                    <h3>Учеба</h3>@endif
                     @foreach($user->study as $study)
                         Название: {{$study->place_name}}<br />
                         @if($study->time_start!='0000-00-00 00:00:00')Начало обучения:{{$study->time_start}}<br />@endif
@@ -90,7 +91,8 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="text-center">
-                    <h3>Языки</h3>
+                    @if($user->study!='[]')
+                        <h3>Языки</h3>@endif
                     @foreach($user->language as $language)
                         Язык: {{$language->getLanguage->lang_name}}<br />
                         Уровень: {{$language->getLevel->name}}

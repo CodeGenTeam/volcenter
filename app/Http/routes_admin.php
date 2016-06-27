@@ -13,10 +13,11 @@
 
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\EventTypeController;
-use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\MotivationController;
 use App\Http\Controllers\Admin\ApplicationController;
 use App\Http\Controllers\Admin\ResponsibilityController;
+use App\Http\Controllers\Admin\MotivationEventController;
+use App\Http\Controllers\Admin\ResponsibilityEventController;
 
 Route::get('/adminpanel', function () {
     return view('admin_panel.index');
@@ -25,10 +26,12 @@ Route::get('/adminpanel', function () {
 Route::get('/adminpanel/events', '\\' . EventController::class . '@index');
 Route::get('/adminpanel/events/{event}', '\\' . EventController::class . '@show');
 Route::get('/adminpanel/event_types', '\\' . EventTypeController::class . '@index');
-Route::get('/adminpanel/users', '\\' . UserController::class . '@index');
 Route::get('/adminpanel/motivations', '\\' . MotivationController::class . '@index');
+Route::get('/adminpanel/responsibilities', '\\' . ResponsibilityController::class . '@index');
 
-Route::get('/adminpanel/events/{event}/responsibilities','\\'. ResponsibilityController::class.'@index');
+Route::get('/adminpanel/events/{event}/responsibilities','\\'. ResponsibilityEventController::class.'@index');
+Route::get('/adminpanel/events/{event}/motivations','\\'. MotivationEventController::class.'@index');
 
-Route::get('/adminpanel/events/{event}/applications', '\\' . ApplicationController::class . '@show')->where(['event' => '\d+']);
-Route::get('/adminpanel/applications/', '\\' . ApplicationController::class . '@index');
+Route::get('/adminpanel/events/{event}/applications', '\\' . ApplicationController::class . '@index');
+
+Route::post('/adminpanel/events/{event}/applications', ['middleware' => 'ajax', 'uses' => '\\' . ApplicationController::class . '@create']);

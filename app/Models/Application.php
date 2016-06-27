@@ -18,10 +18,20 @@ class Application extends Model {
             $model->datetime = $dt->now()->format('Y-m-d H:i:s');
             return true;
         });
+        static::updating(function($model) {
+            $dt = new \Carbon\Carbon();
+            $model->datetime = $dt->now()->format('Y-m-d H:i:s');
+            return true;
+        });
     }
 
-        public function getEvent() {
-        return $this->hasMany(Event::class,'id');
+    public function getResponsibilityEvent() {
+        return $this->hasMany(Responsibility_event::class,'id','responsibility_event_id');
+    }
+    
+    public function getUser()
+    {
+        return $this->hasMany(User::class,'id','user_id');
     }
 
     public function getStatus() {

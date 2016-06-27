@@ -15,7 +15,7 @@
             </h4>
         </div>
         <!-- Modal Body -->
-        <form id="item-form" class="form-horizontal" role="form" action="#" enctype="multipart/form-data" data-toggle="popel-validator">
+        <form id="item-form" class="form-horizontal" role="form" enctype="multipart/form-data" data-toggle="popel-validator">
             <div class="modal-body">
                 <input type="hidden" name="id" value="{{ $event->id }}">
                 <div class="form-group">
