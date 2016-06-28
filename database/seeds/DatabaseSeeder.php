@@ -183,7 +183,7 @@ class DatabaseSeeder extends Seeder {
         ];
 
         foreach ($addreses as $value) {
-            DB::table('addreses')->insert([
+            DB::table('addresses')->insert([
                 'user_id' => $value['user_id'],
                 'country'=>$value['country'],
                 'city'=>$value['city'],
