@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Models\Responsibility_event;
+use App\Models\Application;
+use Illuminate\Support\Facades\Auth;
+use DB;
 
 class EventController extends Controller
 {
@@ -78,8 +82,18 @@ class EventController extends Controller
         if (is_null($event)) {
             return ['success' => false, 'error' => 'event not found'];
         } else {
-            $event->load('getEventType')->load('getResponsibility')->load('getMotivation');
-            return view('user_panel.events.single', ['event' => $event]);
+            if(\Auth::check()) {
+                // ответственности только по определенному мероприятию
+                $responsibility_events_id = Responsibility_event::select('id')->where('event_id', $event->id)->get();
+                // выбрали заявки по определенным направлениям, которым = id мероприятия, сгрупировали по пользователю и выбрали последний статус
+                $applications = Application::whereIn('responsibility_event_id', $responsibility_events_id)->get()->where('user_id', Auth::user()->id)->last();
+                //$responsibility_last =
+                //  dd(Application::whereIn('responsibility_event_id', $responsibility_events_id)->groupBy('user_id','responsibility_event_id')->get());
+               // $count = $applications = Application::whereIn('id', $responsibility_last)->whereIn('status_id',[3,5,6])->get()->count();
+                //->whereIn('status_id',[3,5,6])
+            }else $applications=null;
+            $event->load('getEventType')->load('getResponsibility')->load('getMotivation')->load('getResponsibilityEvent.getResponsibility');
+            return view('user_panel.events.single', ['event' => $event,'applications'=>$applications]);
         }
     }
 

@@ -20,6 +20,7 @@ use App\Http\Controllers\User\ProfileTypeController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\StudyController;
 use App\Http\Controllers\User\LanguageLevelController;
+use App\Http\Controllers\User\ApplicationController;
 
 // IndexController
 Route::get('/', '\\' . IndexController::class . '@index');
@@ -74,9 +75,8 @@ Route::get('/event/{event}', '\\' . EventController::class . '@show')->where(['i
 Route::get('/event/list/{id}', '\\' . EventController::class . '@getList')->where(['id' => '\d+']);
 Route::get('/events', '\\' . EventController::class . '@all');
 
+Route::post('/event/{event}/applications', '\\' . ApplicationController::class .'@initial_application');
 
-// TO DO: DRY clean
-Route::post('/events/{event}/applications/create', 'ApplicationController@initial_application');
 // ApplicationsController
 // Route::get('/user/{user}/application', 'ApplicationController@index')->where(['user' => '\d+']);
 // Route::post('/user/{user?}/application/create', 'ApplicationController@create')->where(['user' => '\d+']);

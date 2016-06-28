@@ -71,10 +71,6 @@
             <ul class="nav navbar-nav">
                 <li><a href="{{ url('/about') }}">Об организации</a></li>
             </ul>
-            <ul class="nav navbar-nav">
-                <li><a href="{{ url('/how_it_works') }}">Как пользоваться</a></li>
-            </ul>
-
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->

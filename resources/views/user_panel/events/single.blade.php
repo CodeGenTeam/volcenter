@@ -36,30 +36,8 @@
                 <div class="panel-heading" >
                     <h3 class="panel-title">Направления работ <span class="glyphicon glyphicon-user"></span></h3>
                 </div>
-                <ul class="list-group">
-                <span style="display: none;">{{ $i=0 }}</span>
-                    @foreach($event->getResponsibility as $responsibility)
-                        <div class="panel panel-default panel-heading" style="margin-bottom: 0px" data-responsibility-id="{{$responsibility->id}}">
-                            <span class="badge" style="float: left;margin-right:10px">{{$responsibility->count}}</span>
-                            @if(Auth::check())
-                                @if(Admin::responsibility($event,Auth::user())!=null)
-                                    @foreach(Admin::responsibility($event,Auth::user()) as $respon)
-                                        @if($respon['responsibility_event_id']==$responsibility['id'])
-                                            @if($respon['status_id']=='1')
-                                                <button class="btn btn-danger" style="float:right;" data-toggle="modal" data-target="#deModal">Отменить заявку</button>
-                                                @break;
-                                            @endif
-                                            @if($respon['status_id']=='1')@endif
-                                        @endif
-                                        <button class="btn btn-primary" style="float:right;" data-toggle="modal" data-target="#myModal">Подать заявку</button>
-                                    @endforeach
-                                    @else
-                                    <button class="btn btn-primary" style="float:right;" data-toggle="modal" data-target="#myModal">Подать заявку</button>
-                                @endif
-                            @endif
-                            <h3 class="panel-title">{{$responsibility->position}}</h3>{{$responsibility->task}}
-                        </div>
-                    @endforeach
+                <ul class="list-group refresh">
+                    @include('user_panel.events.responsibility_single', ['applications' => $applications,'event'=>$event])
                 </ul>
             </div>
         </div>
@@ -106,14 +84,12 @@
     </div>
     @endif
 </div>
-<script>
-    function notie() {
-        alert('Заявка подана!');
-    }
 
-    $('#myModal').on('shown.bs.modal', function () {
-    });
+<script>
+    /*$('#myModal').on('shown.bs.modal', function () {
+     });*/
 </script>
+{{--
 <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -182,5 +158,5 @@
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+</div><!-- /.modal -->--}}
 @endsection

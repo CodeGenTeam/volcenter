@@ -50,7 +50,7 @@
                 </div>
             </div>
     @endforeach
-    @include('common.top')
+        {{--@include('common.top')--}}
 </div>
 
 @endsection

@@ -6,10 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Application;
 use App\Http\Requests;
 use App\Models\Event;
+use App\Models\Responsibility_event;
 use Illuminate\Http\Request;
 use Response;
 use Validator;
-
+use Auth;
 class ApplicationController extends Controller
 {
 
@@ -24,20 +25,13 @@ class ApplicationController extends Controller
     public function initial_application(Event $event, Request $req)
     {
         $data = $req->all();
-
-        $application = Application::where('responsibility_event_id', $data['responsibility_event_id'])->last();
-        /*if ($application) {
-           $application->getStatus
-        }*/
-        /*
-        if ($val->fails()) {
-            return Response::json(['success' => false, 'error' => $val->errors()->all()]);
-        }*/
         Application::create([
             'user_id' => $data['user_id'], 'responsibility_event_id' => $data['responsibility_event_id'], 'status_id' => $data['status_id']
         ]);
-        return Response::json(['success' => true]);
-        //return view('user_panel.events.applications.index');
+        $responsibility_events_id = Responsibility_event::select('id')->where('event_id', $event->id)->get();
+        // выбрали заявки по определенным направлениям, которым = id мероприятия, сгрупировали по пользователю и выбрали последний статус
+        $applications = Application::whereIn('responsibility_event_id', $responsibility_events_id)->get()->where('user_id', Auth::user()->id)->last();
+        return view('user_panel.events.responsibility_single', ['event' => $event,'applications' => $applications]);
     }
 
     public function update(Application $id, Request $request)

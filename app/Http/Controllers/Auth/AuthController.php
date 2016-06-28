@@ -27,14 +27,14 @@ class AuthController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
             'password_confirmation' => 'required|min:6',
-            'birthday' => 'required|date|before:now|after:-14 years',
+            'birthday' => 'required|date|before:now',
             'firstname' => 'required|Alpha',
             'lastname' => 'required|Alpha',
             'middlename' => 'required|Alpha'
         ];
 
         $messages = [
-            'before' => 'Вам должно быть минимум 14 лет!',
+            'before' => 'Ошибка с датой!',
             'confirmed' => 'Пароли не совпадают!',
         ];
 
