@@ -9,6 +9,7 @@ use App\Models\Event;
 use App\Models\Responsibility_event;
 use App\Models\Application;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 use DB;
 
 class EventController extends Controller

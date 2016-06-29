@@ -163,7 +163,7 @@ class DatabaseSeeder extends Seeder {
 
         foreach ($users as $value) {
             DB::table('users')->insert([
-                'login' => $value['login'],
+                'username' => $value['login'],
                 'email'=> $value['email'],
                 'firstname'=> $value['firstname'],
                 'lastname'=> $value['lastname'],
