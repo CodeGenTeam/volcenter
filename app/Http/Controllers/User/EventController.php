@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Responsibility_event;
@@ -99,7 +100,7 @@ class EventController extends Controller
 
     public function all()
     {
-        $events = Event::all();
+        $events = Event::where('event_stop', '>=', Carbon::now())->orderBy('event_start', 'desc')->get();
 
         return view('user_panel.events.list', ['events' => $events]);
     }
