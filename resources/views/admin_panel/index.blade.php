@@ -12,6 +12,36 @@
                     @endif
                 @endforeach
             </ul>
+            <small>Так же вы всегда можете вернуться на <a href="/">главную страницу проекта</a></small>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Мероприятий</div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <td>Всего</td>
+                                <td>{{ App\Models\Event::count() }}</td>
+                            </tr>
+                            <tr>
+                                <td>Прошло</td>
+                                <td>{{ App\Models\Event::where('event_stop', '<=', \Carbon\Carbon::now())->count() }}</td>
+                            </tr>
+                            <tr>
+                                <td>Предстоит</td>
+                                <td>{{ App\Models\Event::where('event_start', '>', \Carbon\Carbon::now())->count() }}</td>
+                            </tr>
+                            <tr>
+                                <td>Уже начаты</td>
+                                <td>{{ App\Models\Event::where('event_start', '<=', \Carbon\Carbon::now())->where('event_stop', '>', \Carbon\Carbon::now())->count() }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
