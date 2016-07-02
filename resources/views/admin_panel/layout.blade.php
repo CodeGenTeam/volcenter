@@ -49,7 +49,8 @@
                             @endforeach
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="active"><a href="./">{{Auth::user()->role()}} <span class="sr-only">(current)</span></a></li>
+                            <li><p class="navbar-text">{{Auth::user()->firstname}} <span
+                                            class="sr-only">Group: </span>({{Auth::user()->role()}})</p></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
