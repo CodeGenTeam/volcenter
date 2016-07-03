@@ -24,6 +24,7 @@
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker.css"/>
     <link rel="stylesheet" href="{{ asset('/user_panel_bin/css/flexslider.css') }}">
+    <link rel="stylesheet" href="{{ asset('/app.css') }}">
 
     <script type="text/javascript" src="{{ asset('/admin_panel_bin/js/jQuery.js') }}"></script>
     <script src="/app.js"></script>

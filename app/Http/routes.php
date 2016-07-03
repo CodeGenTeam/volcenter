@@ -11,16 +11,16 @@
     DELETE		/photo/{photo}		destroy		photo.destroy
  */
 
-use App\Http\Controllers\User\IndexController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\PasswordController;
-use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\User\EventController;
-use App\Http\Controllers\User\ProfileTypeController;
-use App\Http\Controllers\User\ProfileController;
-use App\Http\Controllers\User\StudyController;
-use App\Http\Controllers\User\LanguageLevelController;
 use App\Http\Controllers\User\ApplicationController;
+use App\Http\Controllers\User\EventController;
+use App\Http\Controllers\User\IndexController;
+use App\Http\Controllers\User\LanguageLevelController;
+use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\ProfileTypeController;
+use App\Http\Controllers\User\StudyController;
+use App\Http\Controllers\User\UserController;
 
 // IndexController
 Route::get('/', '\\' . IndexController::class . '@index');
@@ -29,16 +29,16 @@ Route::get('/about', '\\' . IndexController::class . '@about');
 Route::get('/how_it_works', '\\' . IndexController::class . '@works');
 
 // UserController
-Route::get('/user/save_img','\\' . UserController::class . '@saveimage');
-Route::post('/user/save_img','\\' . UserController::class . '@saveimage');
-Route::get('/user/remove_img','\\' . UserController::class . '@removeimage');
+Route::get('/user/save_img', '\\' . UserController::class . '@saveimage');
+Route::post('/user/save_img', '\\' . UserController::class . '@saveimage');
+Route::get('/user/remove_img', '\\' . UserController::class . '@removeimage');
 Route::get('/settings', '\\' . UserController::class . '@edit');
 Route::delete('/user/{user}', '\\' . UserController::class . '@destroy');
 Route::patch('/user/{user}', '\\' . UserController::class . '@update');
 //Route::resource('/user', '\\' . UserController::class);
 Route::get('/user/profile/{user}', 'UserController@show');
 
-Route::group(['middleware'=>'ajax'], function (){
+Route::group(['middleware' => 'ajax'], function () {
     Route::post('/studies/{user}', '\\' . StudyController::class . '@store');
 // StudyController
     Route::delete('/studies', '\\' . StudyController::class . '@destroy');
@@ -54,16 +54,16 @@ Route::group(['middleware'=>'ajax'], function (){
 });
 
 // AuthController
-Route::get('login', '\\' . AuthController::class .'@showLoginForm');
-Route::post('login', '\\' . AuthController::class .'@login');
-Route::get('logout', '\\' . AuthController::class .'@logout');
-Route::get('register', '\\' . AuthController::class .'@showRegistrationForm');
-Route::post('register', '\\' . AuthController::class .'@register');
+Route::get('login', '\\' . AuthController::class . '@showLoginForm');
+Route::post('login', '\\' . AuthController::class . '@login');
+Route::get('logout', '\\' . AuthController::class . '@logout');
+Route::get('register', '\\' . AuthController::class . '@showRegistrationForm');
+Route::post('register', '\\' . AuthController::class . '@register');
 
 // PasswordController
-Route::get('password/reset/{token?}', '\\'. PasswordController::class . '@showResetForm');
-Route::post('password/email', '\\'. PasswordController::class . '@sendResetLinkEmail');
-Route::post('password/reset', '\\'. PasswordController::class . '@reset');
+Route::get('password/reset/{token?}', '\\' . PasswordController::class . '@showResetForm');
+Route::post('password/email', '\\' . PasswordController::class . '@sendResetLinkEmail');
+Route::post('password/reset', '\\' . PasswordController::class . '@reset');
 
 // EventController
 Route::get('/event', '\\' . EventController::class . '@index');
@@ -75,7 +75,7 @@ Route::get('/event/{event}', '\\' . EventController::class . '@show');
 Route::get('/event/list/{id}', '\\' . EventController::class . '@getList');
 Route::get('/events', '\\' . EventController::class . '@all');
 
-Route::post('/event/{event}/applications', '\\' . ApplicationController::class .'@initial_application');
+Route::post('/event/{event}/applications', '\\' . ApplicationController::class . '@initial_application');
 
 // ApplicationsController
 // Route::get('/user/{user}/application', 'ApplicationController@index')->where(['user' => '\d+']);

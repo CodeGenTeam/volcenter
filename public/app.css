@@ -1,0 +1,53 @@
+div.cal {
+    display: block;
+}
+
+div.cal.panel div.panel-body {
+    padding: 0;
+}
+
+div.cal table.table {
+    margin-bottom: 0;
+}
+
+div.cal p.month-picker {
+    margin: 0;
+    padding: 5px 10px;
+}
+
+div.cal p.month-picker a {
+    color: #3e3f3a;
+}
+
+div.cal table.table thead {
+    border-bottom: 1px solid #dfd7ca;
+}
+
+div.cal table.table tr > td {
+    text-align: center;
+    border-top: none;
+}
+
+div.cal table.table tbody tr > td {
+    padding: 0;
+}
+
+div.cal table.table tbody tr > td span,
+div.cal table.table tbody tr > td a {
+    display: block;
+    padding: 7px;
+    margin: 1px;
+}
+
+div.cal table.table tbody tr > td a {
+    text-decoration: none;
+    color: #3e3f3a;
+    font-weight: bold;
+}
+
+/* Strip calendar */
+div.cal table.table thead tr > td:nth-child(even),
+div.cal table.table tbody tr:nth-child(odd) > td:nth-child(odd),
+div.cal table.table tbody tr:nth-child(even) > td:nth-child(even) {
+    background: rgba(223, 215, 202, 0.25);
+}

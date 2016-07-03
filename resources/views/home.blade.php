@@ -38,14 +38,13 @@
             </div>
             <br><br>
         @endif
-
+        <p class="lead text-center">Ближайшие мероприятия:</p>
         <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <p class="lead text-center">Ближайшие мероприятия:</p>
-            </div>
+            @foreach ($events as $event)
+                <div class="col-md-6 col-md-offset-3">
+                    @include('user_panel.events.event_card')
+                </div>
+            @endforeach
         </div>
-        @foreach ($events as $event)
-            @include('user_panel.events.event_card')
-        @endforeach
     </div>
 @endsection
