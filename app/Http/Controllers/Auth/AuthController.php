@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Models\User;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -23,7 +24,7 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         $rules = [
-            'login' => 'required|max:255',
+            'username' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
             'password_confirmation' => 'required|min:6',
@@ -46,7 +47,7 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'login'      => $data['login'],
+            'username'      => $data['username'],
             'email'      => $data['email'],
             'password'   => Hash::make($data['password']),
             'firstname'  => $data['firstname'],
@@ -55,5 +56,16 @@ class AuthController extends Controller
             'birthday'   => $data['birthday'],
             'role_id'    => 1
         ]);
+    }
+    // override withInput without password
+    protected function buildFailedValidationResponse(Request $request, array $errors)
+    {
+        if ($request->ajax() || $request->wantsJson()) {
+            return new JsonResponse($errors, 422);
+        }
+
+        return redirect()->to($this->getRedirectUrl())
+            ->withInput($request->except('password','password_confirmation'))
+            ->withErrors($errors, $this->errorBag());
     }
 }

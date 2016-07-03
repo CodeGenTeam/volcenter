@@ -7,7 +7,7 @@
     {{-- Для ajax csrf --}}
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
-    <title>Laravel</title>
+    <title>Волонтерский центр</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"
