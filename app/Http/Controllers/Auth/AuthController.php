@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Request;
-use Illuminate\Http\Request as Req;
+use Illuminate\Http\Request;
 use App\Models\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Hash;
-use Illuminate\Http\Exception\HttpResponseException;
 
 class AuthController extends Controller
 {
@@ -60,7 +58,7 @@ class AuthController extends Controller
         ]);
     }
     // override withInput without password
-    protected function buildFailedValidationResponse(Req $request, array $errors)
+    protected function buildFailedValidationResponse(Request $request, array $errors)
     {
         if ($request->ajax() || $request->wantsJson()) {
             return new JsonResponse($errors, 422);
