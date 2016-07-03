@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Models\Event;
+use Carbon\Carbon;
 
 class IndexController extends Controller
 {
@@ -21,7 +22,7 @@ class IndexController extends Controller
     public function index()
     {
     	$number = 3;
-        $events = Event::take($number)->orderBy('id', 'desc')->get();
+		$events = Event::take($number)->where('event_stop', '>=', Carbon::now())->orderBy('event_start', 'desc')->get();
         foreach ($events as $event) {
         	$event->load('getEventType');
         }
