@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+use Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class Admin extends Model
@@ -37,5 +38,15 @@ class Admin extends Model
     public function getLinks()
     {
         return $this->links;
+    }
+
+    public function isAdmin()
+    {
+        return Auth::check() && Auth::user()->role() == 'admin';
+    }
+
+    public function isModer()
+    {
+        return Auth::check() && Auth::user()->role() == 'moderator';
     }
 }
