@@ -5,14 +5,14 @@
                 <div class="panel-heading"><h2>{{ $event->name }}
                         @if($event->event_start != "0000-00-00 00:00:00")
                             <span class="badge pull-right">
-                                            @if ($event->event_stop <= \Carbon\Carbon::now())
+                                @if ($event->event_stop <= \Carbon\Carbon::now())
                                     Завернён
-                                @elseif ($event->event_start < \Carbon\Carbon::now())
+                                @elseif ($event->event_start > \Carbon\Carbon::now())
                                     Ещё не начат
                                 @else
                                     Начат
                                 @endif
-                                        </span>
+                            </span>
                         @endif
                     </h2></div>
             @endif
