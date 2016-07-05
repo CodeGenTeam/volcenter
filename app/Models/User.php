@@ -44,4 +44,8 @@ class User extends Auth {
     public function applications() {
         return $this->hasMany(Application::class);
     }
+
+    public function messages() {
+        return $this->hasMany(Message::class, 'receiver_id');
+    }
 }

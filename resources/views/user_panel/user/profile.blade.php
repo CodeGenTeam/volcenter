@@ -100,6 +100,24 @@
                 </div>
             </div>
         </div>
+
+        @if(Auth::user())
+            <form action="/user/profile/{{ $user->id }}/message/{{ Auth::user()->id }}" method="POST">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="text-center">
+                            <label for="title">Тема сообщения: </label>
+                            <input type="text" name="title" placeholder="Тема сообщения" id="title">
+
+                            <label for="content">Текст сообщения: </label>
+                            <textarea name="message_content" id="content"></textarea>
+
+                            <button class="btn btn-primary" type="submit">Написать личное сообщение</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        @endif
     </div>
 </div>
 @endsection

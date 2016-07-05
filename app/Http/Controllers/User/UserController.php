@@ -59,6 +59,12 @@ class UserController extends Controller
         if (is_null($user)) {
             return abort(401);
         }
+        $user->load('messages');
+        
+        foreach ($user->messages as $message) {
+            $message->sender = User::where('id', $message->sender_id)->first();
+        }
+        
         $user->load('profiles.getProfileType')->load('phones')->load('addresses')->load('study.getStudyUniversity')->load('language.getLanguage')->load('language.getLevel');
         $profile_types = Profile_type::all();
         $level_languages = Level_language::all();

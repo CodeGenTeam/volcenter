@@ -36,6 +36,7 @@ Route::delete('/user/{user}', '\\' . UserController::class . '@destroy');
 Route::patch('/user/{user}', '\\' . UserController::class . '@update');
 //Route::resource('/user', '\\' . UserController::class);
 Route::get('/user/profile/{user}', 'UserController@show');
+Route::post('/user/profile/{receiver}/message/{sender}', 'MessageController@create');
 
 // StudyController
 Route::post('/studies/{user}', ['middleware' => 'ajax', 'uses' => '\\' . StudyController::class . '@store']);

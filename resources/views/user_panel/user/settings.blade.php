@@ -172,12 +172,12 @@
                                 <label>Группа(класс)</label>
                                     <input type='text' class="form-control" name="group" value="{{$study->group}}" id="group">
                                 @if($study->getStudyUniversity != null)
-                                @foreach($study->getStudyUniversity as $university)
-                                        <label>направление(факультет)</label>
-                                        <input type='text' class="form-control" name="faculty" value="{{$university->faculty}}" id="faculty">
-                                        <label>специальность(кафедра)</label>
-                                        <input type='text' class="form-control" name="chair" value="{{$university->chair}}" id="chair">
-                                @endforeach
+                                {{--@foreach($study->getStudyUniversity as $university)--}}
+                                        {{--<label>направление(факультет)</label>--}}
+                                        {{--<input type='text' class="form-control" name="faculty" value="{{$university->faculty}}" id="faculty">--}}
+                                        {{--<label>специальность(кафедра)</label>--}}
+                                        {{--<input type='text' class="form-control" name="chair" value="{{$university->chair}}" id="chair">--}}
+                                {{--@endforeach--}}
                                 @endif
                                     <div class="col-sm-1 pull-right">
                                         <button type="button" tabindex="500" title="Удалить" class="btn btn-default removestudy" style="display: block;padding:5px;margin-top:5px">
@@ -255,6 +255,25 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="text-center">
+                            <h1>Личные сообщения:</h1>
+                            @if(empty($user->messages))
+                                <h2>Тут пока ничего нет.</h2>
+                            @else
+                                @foreach($user->messages as $message)
+                                    <h2>{{ $message->title }}</h2>
+                                    <p>{{ $message->content }}</p>
+                                    <p>От: <a href="/user/profile/{{ $message->sender->id }}">{{ $message->sender->firstname }} {{ $message->sender->lastname }}</a></p>
+                                    <hr>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 

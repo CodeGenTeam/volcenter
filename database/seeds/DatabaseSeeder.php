@@ -371,5 +371,24 @@ class DatabaseSeeder extends Seeder {
             ]);
         }
 
+        $messages = [
+            ['title' => 'Добро пожаловать на сайт!', 'content' => 'Привет! Добро пожаловать!', 'receiver_id' => '1', 'sender_id' => '5'],
+            ['title' => 'Добро пожаловать на сайт!', 'content' => 'Привет! Добро пожаловать!', 'receiver_id' => '2', 'sender_id' => '4'],
+            ['title' => 'Добро пожаловать на сайт!', 'content' => 'Привет! Добро пожаловать!', 'receiver_id' => '3', 'sender_id' => '4'],
+            ['title' => 'Добро пожаловать на сайт!', 'content' => 'Привет! Добро пожаловать!', 'receiver_id' => '4', 'sender_id' => '2'],
+            ['title' => 'Добро пожаловать на сайт!', 'content' => 'Привет! Добро пожаловать!', 'receiver_id' => '5', 'sender_id' => '1'],
+            ['title' => 'Второе сообщение', 'content' => 'Второе сообщение', 'receiver_id' => '1', 'sender_id' => '3'],
+            ['title' => 'Второе сообщение', 'content' => 'Второе сообщение', 'receiver_id' => '2', 'sender_id' => '1'],
+            ['title' => 'Второе сообщение', 'content' => 'Второе сообщение', 'receiver_id' => '3', 'sender_id' => '1'],
+        ];
+
+        foreach ($messages as $value) {
+            DB::table('messages')->insert([
+                'title' => $value['title'],
+                'content' => $value['content'],
+                'receiver_id' => $value['receiver_id'],
+                'sender_id' => $value['sender_id']
+            ]);
+        }
     }
 }
