@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use \App\Models\Status;
-use \App\Models\Role;
 
 class DatabaseSeeder extends Seeder {
 
@@ -12,7 +10,6 @@ class DatabaseSeeder extends Seeder {
      * @return void
      */
     public function run() {
-
         $type_names = ['Промо-акции', 'Спортивно-массовые', 'Социально-значимые'];
         foreach ($type_names as $value) {
             DB::table('event_types')->insert([
@@ -390,5 +387,25 @@ class DatabaseSeeder extends Seeder {
                 'sender_id' => $value['sender_id']
             ]);
         }
+
+		$this->call(EventTypesTableSeeder::class);
+        $this->call(EventsTableSeeder::class);
+		$this->call(MotivationsTableSeeder::class);
+        $this->call(ResponsibilitiesTableSeeder::class);
+        $this->call(ResponsibilityEventsTableSeeder::class);
+		$this->call(MotivationEventsTableSeeder::class);
+        $this->call(StatusesTableSeeder::class);
+        $this->call(RolesTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
+		$this->call(AddressesTableSeeder::class);
+        $this->call(PhonesTableSeeder::class);
+        $this->call(ProfileTypesTableSeeder::class);
+		$this->call(ProfilesTableSeeder::class);
+        $this->call(LanguagesTableSeeder::class);
+		$this->call(LevelLanguagesTableSeeder::class);
+		$this->call(LanguageLevelsTableSeeder::class);
+		$this->call(StudiesTableSeeder::class);
+		$this->call(StudyUniversitiesTableSeeder::class);
+		$this->call(ApplicationsTableSeeder::class);
     }
 }

@@ -3,7 +3,7 @@
 <?php
 $fields = [
         [
-                'id' => 'login',
+                'id' => 'username',
                 'descr' => 'Логин',
         ],
         [
@@ -56,16 +56,15 @@ $fields = [
                                     <label class="col-md-4 control-label">{{ $field['descr'] }}</label>
                                     <div class="col-md-6">
                                         @if ($field['id'] !== 'birthday')
-                                            <input type="{{ $field['type'] ?? 'text' }}" class="form-control"
-                                                   name="{{ $field['id'] }}"
-                                                   value="{{ old('name') }}">
-
+                                                <input type="{{ $field['type'] ?? 'text' }}" class="form-control"
+                                                       name="{{ $field['id'] }}"
+                                                       value="{{old($field['id'])}}">
                                             @if ($errors->has($field['id']))
                                                 <span class="help-block"><b>{{ $errors->first($field['id']) }}</b></span>
                                             @endif
                                         @else
                                             <div class='input-group date' id='{{ $field['id'] }}'>
-                                                <input type='text' class="form-control" name="{{ $field['id'] }}" value="{{ old('name') }}" id="{{ $field['id'] }}">
+                                                <input type='text' class="form-control" name="{{ $field['id'] }}" value="{{ old($field['id']) }}" id="{{ $field['id'] }}">
                                                 <span class="input-group-addon">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </span>

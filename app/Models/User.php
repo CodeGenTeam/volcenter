@@ -8,7 +8,7 @@ class User extends Auth {
 
     public $timestamps = false;
     protected $hidden = ['password','role_id'];
-    protected $fillable = ['login', 'email', 'password', 'firstname', 'lastname', 'middlename', 'birthday','role_id','image'];
+    protected $fillable = ['username', 'email', 'password', 'firstname', 'lastname', 'middlename', 'birthday','role_id','image'];
     protected $dates = ['birthday'];
     
     public function role()
