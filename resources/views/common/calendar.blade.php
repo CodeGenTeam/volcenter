@@ -20,11 +20,13 @@ $i = 0;
     <div class="panel-body">
         <p class="text-center month-picker">
                 <span class="pull-left">
-                    <a href="{!! date('?\m=m&\y=Y', mktime(0, 0, 0, $m - 1, 1, $y)) !!}"><i class="glyphicon glyphicon glyphicon-chevron-left"></i></a>
+                    <a href="{!! date('?\m=m&\y=Y', mktime(0, 0, 0, $m - 1, 1, $y)) !!}"><i
+                                class="glyphicon glyphicon glyphicon-chevron-left"></i></a>
                 </span>
             {{ $month_names[$m - 1] . " " . $y }}
             <span class="pull-right">
-                    <a href="{!! date('?\m=m&\y=Y', mktime(0, 0, 0, $m + 1, 1, $y)) !!}"><i class="glyphicon glyphicon glyphicon-chevron-right"></i></a>
+                    <a href="{!! date('?\m=m&\y=Y', mktime(0, 0, 0, $m + 1, 1, $y)) !!}"><i
+                                class="glyphicon glyphicon glyphicon-chevron-right"></i></a>
                 </span>
         </p>
         <table class="table">
@@ -47,7 +49,7 @@ $i = 0;
                         @if ($d < 1 || $d > $day_count)
                             <td><span>&nbsp;</span></td>
                         @else
-                            <td><a href="{{ url('') }}">{{ $d }}</a></td>
+                            <td><a href="?date={{ $y }}-{{ $m }}-{{ $d }}">{{ $d }}</a></td>
                         @endif
                         @if (!($i % 7))
                     </tr>

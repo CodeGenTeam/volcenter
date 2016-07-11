@@ -4,37 +4,37 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
+use App\Models\Application;
 use App\Models\Event;
 use App\Models\Responsibility_event;
-use App\Models\Application;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
-use DB;
 
 class EventController extends Controller
 {
 
     private $upgradeableUserFields = ['name', 'descr', 'address', 'event_start', 'event_end', 'event_type'];
     private $page = '\user_panel_bin\images\users';
+
     public function index()
     {
         return Response::json(Event::all());
     }
-    
+
     public function getList($id)
     {
         $number = 3;
-        return Response::json(Event::take($number)->skip((intval($id)-1) * $number)->get()->load('getEventType'));
+        return Response::json(Event::take($number)->skip((intval($id) - 1) * $number)->get()->load('getEventType'));
     }
-    
+
     public function getlast()
     {
         $number = 3;
         return Response::json(Event::take($number)->get()->load('getMotivation'));
     }
-    
+
     public function delete(Event $event)
     {
         if (is_null($event)) {
@@ -99,10 +99,10 @@ class EventController extends Controller
         }
     }
 
-    public function all()
+    public function all(Request $req)
     {
-        $events = Event::where('event_stop', '>=', Carbon::now())->orderBy('event_start', 'desc')->get();
-
-        return view('user_panel.events.list', ['events' => $events]);
+        $date = Carbon::parse($req->all()['date'] ?? 'now');
+        $events = Event::where('event_stop', '>=', $date)->orderBy('event_start', 'desc')->get();
+        return view('user_panel.events.list', ['events' => $events, 'date' => $date]);
     }
 }
