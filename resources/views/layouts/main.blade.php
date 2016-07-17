@@ -27,7 +27,8 @@
     <link rel="stylesheet" href="{{ asset('/app.css') }}">
 
     <script type="text/javascript" src="{{ asset('/admin_panel_bin/js/jQuery.js') }}"></script>
-    <script src="/app.js"></script>
+    <script type="text/javascript" src="{{ asset('/user_panel_bin/js/simplePagination.js') }}"></script>
+    <script src="{{ asset('/app.js') }}"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
@@ -38,7 +39,7 @@
     <script type="text/javascript" src="{{ asset('/admin_panel_bin/js/fileinput.min.js') }}"></script>
     <style>
         body {
-            font-family: 'Open Sans';
+            font-family: 'Open Sans', sans-serif;
         }
 
         .fa-btn {

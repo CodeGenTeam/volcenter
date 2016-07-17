@@ -3,48 +3,60 @@
 @section('content')
     <div class="container">
         @if (!Auth::check())
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <h1 class="text-center">Центр волонтёров Южного Урала</h1>
-                    <h2 class="text-center">Мы рады приветствовать вас!</h2>
+            <div class="jumbotron">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h1 class="text-center">Центр волонтёров Южного Урала<br>
+                            <small>Мы рады приветствовать вас!</small>
+                        </h1>
+                        <p class="text-primary text-justify">Волонтёрство (от лат. voluntarius — добровольный) — это
+                            широкий
+                            круг деятельности, включая традиционные формы взаимопомощи и самопомощи, официальное
+                            предоставление
+                            услуг и другие формы гражданского участия, которая осуществляется добровольно на благо
+                            широкой
+                            общественности без расчёта на денежное вознаграждение.
+                            <a href="https://ru.wikipedia.org/wiki/%D0%92%D0%BE%D0%BB%D0%BE%D0%BD%D1%82%D1%91%D1%80%D1%81%D1%82%D0%B2%D0%BE">
+                                <i class="glyphicon glyphicon-link text-primary" style="font-size: 50%"></i>
+                            </a>
+                        </p>
+                        <p class="lead text-justify">Хотите стать Волонтером? Вам следует пройти простую регистрацию,
+                            чтобы
+                            всегда быть в курсе текущих мероприятий и активно принимать в них участие.</p>
+                    </div>
+                    <div class="col-md-offset-3 col-md-6">
+                        <div class="btn-group btn-group-justified" role="group">
+                            <a href="{{ url('/register') }}" class="btn btn-lg btn-success">Зарегистрироваться</a>
+                            <a href="{{ url('/login') }}" class="btn btn-lg btn-success">Войти</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <br>
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <p class="lead text-center">Хотите стать Волонтером? Вам следует пройти простую регистрацию,
-                        чтобы всегда быть в курсе текущих мероприятий и активно принимать в них участие</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-2 col-md-offset-5">
-                    <p class="text-center"><a href="/register">
-                            <button type="button" class="btn btn-primary">Зарегистрироваться</button>
-                        </a></p>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <p class="lead text-center">Уже имеете учётную запись?</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-2 col-md-offset-5">
-                    <p class="text-center"><a href="/login">
-                            <button type="button" class="btn btn-primary">Войти</button>
-                        </a></p>
-                </div>
-            </div>
-            <br><br>
         @endif
-        <p class="lead text-center">Ближайшие мероприятия:</p>
         <div class="row">
-            @foreach ($events as $event)
-                <div class="col-md-6 col-md-offset-3">
-                    @include('user_panel.events.event_card')
+            @foreach ($news as $n)
+                <div class="col-md-8 col-md-offset-2">
+                    {{ $n->content }}
                 </div>
             @endforeach
+            <div class="col-md-8 col-md-offset-2">
+                <ul class="pagination" style="display: flex; justify-content: center"></ul>
+            </div>
         </div>
+        <script>
+            $(function () {
+                var count = {{ $count }};
+                if (count > 1)
+                    $('ul.pagination').pagination({
+                        items: count,
+                        itemsOnPage: {{ $perPage }},
+                        hrefTextPrefix: '/',
+                        currentPage: {{ $page }},
+                        prevText: 'Пред',
+                        nextText: 'След',
+                        selectOnClick: false
+                    });
+            });
+        </script>
     </div>
 @endsection

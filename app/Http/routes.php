@@ -23,7 +23,7 @@ use App\Http\Controllers\User\StudyController;
 use App\Http\Controllers\User\UserController;
 
 // IndexController
-Route::get('/', '\\' . IndexController::class . '@index');
+Route::get('/{page?}', '\\' . IndexController::class . '@index')->where(['page' => '\d{1,16}']);
 
 Route::get('/about', '\\' . IndexController::class . '@about');
 Route::get('/how_it_works', '\\' . IndexController::class . '@works');
