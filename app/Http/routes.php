@@ -78,6 +78,10 @@ Route::get('/events', '\\' . EventController::class . '@all');
 
 Route::post('/event/{event}/applications', '\\' . ApplicationController::class . '@initial_application');
 
+Route::get('/news/{news}', function (\App\Models\News $news) {
+    return view('user_panel.events.news', ['news' => $news]);
+})->where(['news' => '\d{1,16}']);
+
 // ApplicationsController
 // Route::get('/user/{user}/application', 'ApplicationController@index')->where(['user' => '\d+']);
 // Route::post('/user/{user?}/application/create', 'ApplicationController@create')->where(['user' => '\d+']);

@@ -27,8 +27,8 @@ class IndexController extends Controller
 
         $news = News::where('created_at', '<=', $date)->orderBy('created_at', 'desc');
         return view('home', [
-            'news' => $news->take($number)->skip($number * ($page - 1))->get(),
             'count' => $news->count(),
+            'news' => $news->take($number)->skip($number * ($page - 1))->get(),
             'perPage' => $number,
             'page' => $page,
         ]);

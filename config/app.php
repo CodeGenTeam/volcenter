@@ -159,6 +159,11 @@ return [
          * IDE Laravel helper
          */
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+
+        /*
+         * BB Code
+         */
+        \Golonka\BBCode\BBCodeParserServiceProvider::class,
     ],
 
     /*
@@ -205,7 +210,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         'Result'    => App\Http\Facades\Result::class,
-        'Admin'     => App\Http\Facades\Admin::class
+        'Admin'     => App\Http\Facades\Admin::class,
+        'BBCode'    => \Golonka\BBCode\Facades\BBCodeParser::class,
     ],
 
 ];

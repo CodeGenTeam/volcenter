@@ -35,11 +35,11 @@
         @endif
         <div class="row">
             @foreach ($news as $n)
-                <div class="col-md-8 col-md-offset-2">
-                    {{ $n->content }}
+                <div class="col-xs-12">
+                    @include('common.news_card')
                 </div>
             @endforeach
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-xs-12">
                 <ul class="pagination" style="display: flex; justify-content: center"></ul>
             </div>
         </div>
