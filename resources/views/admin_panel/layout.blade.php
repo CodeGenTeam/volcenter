@@ -11,6 +11,7 @@
 
         <script type="text/javascript" src="/admin_panel_bin/js/jQuery.js"></script>
         <script src="/app.js"></script>
+        <script src="/query.js"></script>
         <script type="text/javascript" src="/admin_panel_bin/js/bootstrap.js"></script>
         <script type="text/javascript" src="/admin_panel_bin/js/material.js"></script>
         <script type="text/javascript" src="/admin_panel_bin/js/ripples.js"></script>
