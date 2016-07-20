@@ -14,29 +14,29 @@
           integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ asset('/admin_panel_bin/css/fileinput.min.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('/admin_panel_bin/css/notie.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('/bin/css/fileinput.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('/bin/css/notie.css') }}"/>
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
+    {{-- <link href="{{ elixir('css/calendar.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="https://bootswatch.com/sandstone/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker.css"/>
-    <link rel="stylesheet" href="{{ asset('/user_panel_bin/css/flexslider.css') }}">
-    <link rel="stylesheet" href="{{ asset('/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('/bin/css/flexslider.css') }}">
+    <link rel="stylesheet" href="{{ asset('/bin/css/calendar.css') }}">
 
-    <script type="text/javascript" src="{{ asset('/admin_panel_bin/js/jQuery.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/user_panel_bin/js/simplePagination.js') }}"></script>
-    <script src="{{ asset('/app.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/bin/js/jQuery.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/bin/js/simplePagination.js') }}"></script>
+    <script src="{{ asset('/bin/js/app.js') }}"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 
-    <script type="text/javascript" src="{{ asset('/user_panel_bin/js/jquery.flexslider-min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/admin_panel_bin/js/fileinput.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/bin/js/jquery.flexslider-min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/bin/js/fileinput.min.js') }}"></script>
     <style>
         body {
             font-family: 'Open Sans', sans-serif;
@@ -123,6 +123,6 @@
         <p>&copy; CodeGenTeam. All rights reserved.</p>
     </div>
 </footer>
-<script type="text/javascript" src="/admin_panel_bin/js/notie.min.js"></script>
+<script type="text/javascript" src="{{ url('/bin/js/notie.min.js') }}"></script>
 </body>
 </html>

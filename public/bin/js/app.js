@@ -68,7 +68,7 @@ App = {
 
     loadItems: function() 
     {
-        $(".items-list").html('<img src="/admin_panel_bin/img/ajax-loader.gif" />');
+        $(".items-list").html('<img src="/bin/img/ajax-loader.gif" />');
         this.ajax({action: 'items_list'}, function(data) {
             console.log(data);
             $(".items-list").html(data);
@@ -117,4 +117,10 @@ App = {
 };
 $(function() {
     App.init();
+    $.ajaxPrefilter(function(options, originalOptions, xhr) { // this will run before each request
+        var token = $('meta[name="csrf-token"]').attr('content'); // or _token, whichever you are using
+        if (token) {
+            return xhr.setRequestHeader('X-CSRF-TOKEN', token); // adds directly to the XmlHttpRequest Object
+        }
+    });
 });
