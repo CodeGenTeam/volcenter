@@ -16,7 +16,7 @@ class EventController extends Controller
 {
 
     private $upgradeableUserFields = ['name', 'descr', 'address', 'event_start', 'event_end', 'event_type'];
-    private $page = '\user_panel_bin\images\users';
+    private $page = '\bin\img\users';
 
     public function index()
     {
@@ -95,7 +95,7 @@ class EventController extends Controller
                 //->whereIn('status_id',[3,5,6])
             }else $applications=null;
             $event->load('getEventType')->load('getResponsibility')->load('getMotivation')->load('getResponsibilityEvent.getResponsibility');
-            return view('user_panel.events.single', ['event' => $event,'applications'=>$applications]);
+            return view('events.single', ['event' => $event,'applications'=>$applications]);
         }
     }
 
@@ -103,6 +103,6 @@ class EventController extends Controller
     {
         $date = Carbon::parse($req->all()['date'] ?? 'now');
         $events = Event::where('event_stop', '>=', $date)->orderBy('event_start', 'desc')->get();
-        return view('user_panel.events.list', ['events' => $events, 'date' => $date]);
+        return view('events.list', ['events' => $events, 'date' => $date]);
     }
 }

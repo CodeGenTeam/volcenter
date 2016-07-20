@@ -16,7 +16,7 @@ use App\Models\Language;
 
 class UserController extends Controller
 {
-    private $page = '/user_panel_bin/images/users';
+    private $page = '/bin/img/users';
     public function __construct()
     {
         // не пропустит, пока не авторизуемся
@@ -69,7 +69,7 @@ class UserController extends Controller
         $profile_types = Profile_type::all();
         $level_languages = Level_language::all();
         $languages = Language::all();
-        return view('user_panel.user.settings', ['user' => $user,'profile_types'=>$profile_types,'level_languages'=>$level_languages,'languages'=>$languages]);
+        return view('user.settings', ['user' => $user,'profile_types'=>$profile_types,'level_languages'=>$level_languages,'languages'=>$languages]);
     }
 
     public function removeimage(Request $request)

@@ -14,7 +14,7 @@ class EventController extends Controller
 	public function index(Request $request)
 	{
 		if ($request->ajax()) {
-			$img_path = base_path('public').'/user_panel_bin/images/events';
+			$img_path = base_path('public').'/bin/img/events';
 			switch ($request->query('action')) {
 				case 'delete_item':
 					$event = Event::find($request->query('id'));

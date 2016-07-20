@@ -16,7 +16,7 @@
     @endif
     <div class="panel-body">
         @if ($event->image)
-            <img class="img-rounded" src="/user_panel_bin/images/events/{{ $event->image }}"
+            <img class="img-rounded" src="/bin/img/events/{{ $event->image }}"
                  width="150px" style="float: left; margin-right: 10px">
         @endif
         <p class="text-muted">Тип мероприятия: {{ $event->geteventtype->name }}</p>

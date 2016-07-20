@@ -4,27 +4,27 @@
   <div class="flexslider">
     <ul class="slides">
       <li>
-        <img src="/user_panel_bin/images/no-image.png" />
+        <img src="/bin/img/no-image.png" />
         <p class="flex-caption">Вася Пупкин <br><b>100 Баллов</b></p>
       </li>
       <li>
-        <img src="/user_panel_bin/images/no-image.png" />
+        <img src="/bin/img/no-image.png" />
         <p class="flex-caption">Илья Квасов <br><b>90 Баллов</b></p>
       </li>
       <li>
-        <img src="/user_panel_bin/images/no-image.png" />
+        <img src="/bin/img/no-image.png" />
         <p class="flex-caption">Вася Сосидж <br><b>80 Баллов</b></p>
       </li>
       <li>
-        <img src="/user_panel_bin/images/no-image.png" />
+        <img src="/bin/img/no-image.png" />
         <p class="flex-caption"> Саша Кофе <br><b>70 Баллов</b></p>
       </li>
       <li>
-        <img src="/user_panel_bin/images/no-image.png" />
+        <img src="/bin/img/no-image.png" />
         <p class="flex-caption"> Стёпа Триночи <br><b>60 Баллов</b></p>
       </li>
       <li>
-        <img src="/user_panel_bin/images/no-image.png" />
+        <img src="/bin/img/no-image.png" />
         <p class="flex-caption">Лёша Мозговзрыв <br><b>10 Баллов</b></p>
       </li>
     </ul>

@@ -73,7 +73,7 @@
                 <div class="form-group col-sm-12" id="file_uploaded" style="text-align: center;">
                     <input type="hidden" name="image" value="{{ $event->image }}" />
                     @if ($event->image)
-                        <image src="/user_panel_bin/images/events/{{ $event->image }}" width="200px" style="margin-top: 10px" />
+                        <image src="/bin/img/events/{{ $event->image }}" width="200px" style="margin-top: 10px" />
                         <a href="#" id="delete_img">Удалить</a>
                     @endif
                 </div>
@@ -112,7 +112,7 @@
         }).on('filebatchuploadsuccess', function(event, data, previewId, index) {
             $("#file_uploaded").html(
                 "<input type='hidden' name='image' value='" + data.jqXHR.responseJSON.filename + "'/>" +
-                " <image src='/user_panel_bin/images/events/" + data.jqXHR.responseJSON.filename + "' width='200px' style='margin-top: 10px'> " +
+                " <image src='/bin/img/events/" + data.jqXHR.responseJSON.filename + "' width='200px' style='margin-top: 10px'> " +
                 " <a href='#' id='delete_img'>Удалить</a>"
             );
             deleteEventImg();

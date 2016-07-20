@@ -31,7 +31,7 @@ class ApplicationController extends Controller
         $responsibility_events_id = Responsibility_event::select('id')->where('event_id', $event->id)->get();
         // выбрали заявки по определенным направлениям, которым = id мероприятия, сгрупировали по пользователю и выбрали последний статус
         $applications = Application::whereIn('responsibility_event_id', $responsibility_events_id)->get()->where('user_id', Auth::user()->id)->last();
-        return view('user_panel.events.responsibility_single', ['event' => $event,'applications' => $applications]);
+        return view('events.responsibility_single', ['event' => $event,'applications' => $applications]);
     }
 
     public function update(Application $id, Request $request)

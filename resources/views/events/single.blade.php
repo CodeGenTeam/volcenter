@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <h1 class="text-center">Мероприятие<br />@if($event->name) {{ $event->name }}@elseНазвание отсутствует@endif</h1>
-            @if ($event->image)<img class="img-rounded img-responsive center-block" src="/user_panel_bin/images/events/{{ $event->image }}" width="250px">@else<p class="lead text-center">Нет изображения</p>@endif
+            @if ($event->image)<img class="img-rounded img-responsive center-block" src="/bin/img/events/{{ $event->image }}" width="250px">@else<p class="lead text-center">Нет изображения</p>@endif
         </div>
     </div>
     <div class="row">

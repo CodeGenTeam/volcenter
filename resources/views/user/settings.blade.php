@@ -95,7 +95,7 @@
                             <div class="form-group col-sm-12" id="file_uploaded" style="text-align: center;">
                                 <input type="hidden" name="image" value="{{ $user->image }}" />
                                 @if ($user->image)
-                                    <image src="/user_panel_bin/images/users/{{ $user->image }}" width="200px" style="margin-top: 10px" />
+                                    <image src="/bin/img/users/{{ $user->image }}" width="200px" style="margin-top: 10px" />
                                     <button id="delete_img" type="button" tabindex="500" title="Удалить фотографию" class="btn btn-default fileinput-remove fileinput-remove-button" style="display: block;margin: 0 auto;margin-top: 10px;">
                                     <i class="glyphicon glyphicon-remove"></i>
                                     </button>
@@ -304,7 +304,7 @@
             uploadAsync: false,
             showUpload: false, // hide upload button
             showRemove: false, // hide remove button
-            //defaultPreviewContent: '<img src="/user_panel_bin/images/no-image.png" alt="Your Avatar" style="width:160px"><h6 class="text-muted">Click to select</h6>',
+            //defaultPreviewContent: '<img src="/bin/img/no-image.png" alt="Your Avatar" style="width:160px"><h6 class="text-muted">Click to select</h6>',
         }).on("filebatchselected", function(event, files) {
             $input.fileinput("upload");
             var old_img = $("form#item-form [name=image]").val();
@@ -314,7 +314,7 @@
         }).on('filebatchuploadsuccess', function(event, data, previewId, index) {
             $("#file_uploaded").html(
                     "<input type='hidden' name='image' value='" + data.jqXHR.responseJSON.filename + "'/>" +
-                    " <image src='/user_panel_bin/images/users/" + data.jqXHR.responseJSON.filename + "' width='200px' style='margin-top: 10px'> " +
+                    " <image src='/bin/img/users/" + data.jqXHR.responseJSON.filename + "' width='200px' style='margin-top: 10px'> " +
                     " <button id='delete_img' type='button' tabindex='500' title='Удалить фотографию' class='btn btn-default fileinput-remove fileinput-remove-button' style='display: block;margin: 0 auto;margin-top: 10px;'>" + 
                                     "<i class='glyphicon glyphicon-remove'></i>" + 
                                 "</button>"

@@ -46,7 +46,7 @@ class ProfileController extends Controller
     {
         //if (is_null($id)) return back();
         $user = User::find(1);
-        return view('user_panel/user/profile', ['user' => $user]);
+        return view('user.profile', ['user' => $user]);
     }
 
     public function create($user)

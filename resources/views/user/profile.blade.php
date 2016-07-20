@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="text-center">
-                        <img src="/user_panel_bin/images/users/{{ $user->image }}" alt="">
+                        <img src="/bin/img/users/{{ $user->image }}" alt="">
                     </div>
                 </div>
             </div>
