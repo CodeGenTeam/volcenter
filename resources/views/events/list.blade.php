@@ -11,7 +11,7 @@
             @endif
             <div class="col-xs-12 col-md-6 col-md-offset-3">
                 @foreach ($events as $event)
-                    @include('user_panel.events.event_card')
+                    @include('events.event_card')
                 @endforeach
             </div>
             <div class="visible-lg col-lg-3">

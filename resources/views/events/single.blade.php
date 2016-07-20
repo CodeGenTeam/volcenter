@@ -37,7 +37,7 @@
                     <h3 class="panel-title">Направления работ <span class="glyphicon glyphicon-user"></span></h3>
                 </div>
                 <ul class="list-group refresh">
-                    @include('user_panel.events.responsibility_single', ['applications' => $applications,'event'=>$event])
+                    @include('events.responsibility_single', ['applications' => $applications,'event'=>$event])
                 </ul>
             </div>
         </div>
