@@ -18,3 +18,7 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 </IfModule>
+
+<IfModule mod_dir.c>
+    DirectoryIndex index.php index.html index.cgi index.pl index.php index.xhtml index.htm
+</IfModule>

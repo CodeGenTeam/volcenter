@@ -24,7 +24,6 @@ class IndexController extends Controller
     {
         $number = 10;
         $date = Carbon::parse($req->all()['date'] ?? 'now');
-
         $news = News::where('created_at', '<=', $date)->orderBy('created_at', 'desc');
         return view('home', [
             'count' => $news->count(),
