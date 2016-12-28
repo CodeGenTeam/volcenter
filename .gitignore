@@ -1,10 +1,7 @@
-vendor/
-node_modules/
-.phpstorm.meta.php
-*.iml
-.idea/
+vendor
+node_modules
+.idea
 .env
 _ide_helper.php
 composer.lock
-public/libs
-public/phpmyadmin
+storage

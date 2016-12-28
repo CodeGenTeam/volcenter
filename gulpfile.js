@@ -17,7 +17,6 @@ gulp.task('stop', function() {
 gulp.task('browser-sync',function() {
 	
 	browserSync.use({
-    	plugin() {},
     	hooks: {
     		'client:js': autoClose, // <-- important part 
     	},
